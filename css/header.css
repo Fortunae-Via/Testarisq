@@ -1,3 +1,4 @@
+
 *{
     
     margin: 0;
@@ -15,13 +16,14 @@
     margin-left: 1%
 
 }
+body{
+    background-color: #383838;
+}
 nav{
     min-height: 10vh;
     display: flex;
     align-items: center;
     width: 90%;
-    
-   
 }
 
 nav li a{
@@ -44,17 +46,33 @@ nav li :hover{
 }
 
 /* partie mon compte*/
-
+#didi{
+    position: relative;
+    padding-top: 40px;
+    border-top: 3px solid #ededed;
+}
 #sect{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);    
+    
+    border-radius: 1.5% 1.5%;
+    background-color: #fefefe;
+    padding: 2% 7% 2% 7%;
 }
 
 h3{
-    text-align: center;
-    padding: 8%;
-    overflow: hidden;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
+    color: white;
+}
 
+@media only screen and (max-width:800px) {
+ body {
+ background-color:red;
+ color:white
+ }
 }
