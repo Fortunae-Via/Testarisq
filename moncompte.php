@@ -2,21 +2,14 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="style/moncompte_style.php" />
 	<title>Header test</title>
 </head>
 <body>
-	<header class="main-head">
-		<nav>
-			<img id="logo" src="img/logo_testarisq.png"/>
-			<ul>
-				<li><a href="accueil.html">ACCUEIL</a></li>
-				<li><a href="moncompte.html">COMPTE</a></li>
-				<li><a href="faq.html">FAQ</a></li>
-				<li><a href="quisommesnous.html">QUI-SOMMES NOUS ?</a></li>
-			</ul>
-		</nav>
-	</header>
+
+	<!-- Header -->
+	<?php include("php/header.php"); ?>
+	
 	<h3>	Votre Profil    </h3>
 	<section id = "sect">
 		<p>Nom de famille: </p><br>
