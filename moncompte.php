@@ -2,8 +2,8 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-    <link rel="stylesheet" href="style/moncompte_style.php" />
-	<title>Header test</title>
+    <link rel="stylesheet" href="style/MonCompte_style.php" />
+	<title>TESTARISQ - Mon Compte</title>
 </head>
 <body>
 
