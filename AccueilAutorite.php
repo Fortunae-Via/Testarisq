@@ -4,16 +4,22 @@
 <head>
 <title>TESTARISQ - Accueil</title> 
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/AccueilAutorite.css"/>
+<link rel="stylesheet" type="text/css" href="style/AccueilAutorite_style.php"/>
 </head>
 
 <body>
 
-	<header></header>
+	<!-- Header -->
+	<?php include("php/header.php"); ?>
 	
 	<div class="divpage">
 
-		<h2 class="bienvenue">Bienvenue Utilisateur !</h2> <!--À remplacer avec Personne_Prénom -->
+		<h2 class="bienvenue">
+			<?php
+			$Personne_Prenom = 'Utilisateur' ;
+			echo 'Bienvenue ' . $Personne_Prenom . ' !';
+			?>
+		</h2>
 
 		<div class="heurelieu">
 

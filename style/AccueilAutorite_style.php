@@ -1,15 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+<?php header("Content-type: text/css"); ?>
 
-body {
-	background-color: #383838;
-	font-family: 'Nunito Sans', sans-serif;
-}
 
-.divpage{
-	width: 80%;
-	margin : auto;}
+/* Style commun à toutes les pages */
+<?php include("style_commun.php"); ?>
+
 
 .bienvenue{
+	margin-top: 2em;
 	color: white; 
 	text-align: center;
 	font-weight: 300;
