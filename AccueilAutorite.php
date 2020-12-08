@@ -23,19 +23,25 @@
 
 		<div class="heurelieu">
 
-			<h1 class="heure">
-				<script type="text/javascript">
-				var currentTime = new Date()
-				var hours = currentTime.getHours()
-				var minutes = currentTime.getMinutes()
-				if (minutes < 10){
-				minutes = "0" + minutes
-				}
-				document.write(hours + ":" + minutes + " ")
-				</script>
+			<h1 id="heure"> <!-- On charge puis affiche l'heure avec du JS, donc actualisé en temps réel -->
+
+				--:--	<!--texte affiché par défaut, avant d'être remplacé par l'heure-->
+
+				<SCRIPT type=text/javascript>
+					function afficher_heure() {
+						var heure_actuelle = new Date();
+						var heures = heure_actuelle.getHours();
+						var minutes = heure_actuelle.getMinutes();
+				        if (heures < 10) {heures = "0" + heures ;}
+				        if (minutes < 10) {minutes = "0" + minutes ;}
+				        document.getElementById("heure").innerHTML = heures +':'+ minutes; //on remplace le placeholder par l'heure mise en forme
+				    } 
+					window.setInterval("afficher_heure()",1000); //On actualise toutes les secondes
+				</SCRIPT>
+				
 			</h1>
 
-			<h1 classe="lieu">Issy-Les-Moulineaux</h1>
+			<h1 id="lieu">Issy-Les-Moulineaux</h1>
 
 		</div>
 
