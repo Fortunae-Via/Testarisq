@@ -23,25 +23,37 @@
 
 		<div class="heurelieu">
 
-			<h1 id="heure"> <!-- On charge puis affiche l'heure avec du JS, donc actualisé en temps réel -->
+			<h1 id="heure">
 
-				--:--	<!--texte affiché par défaut, avant d'être remplacé par l'heure-->
+			<?php
+			date_default_timezone_set("Europe/Paris");
+			echo date('H') . ':' . date('i') ;
+			/* heure donnée par le PHP affichée en premier, avant d'être remplacée par l'heure actualisée chargée par le JS */
+			?>
 
-				<SCRIPT type=text/javascript>
-					function afficher_heure() {
-						var heure_actuelle = new Date();
-						var heures = heure_actuelle.getHours();
-						var minutes = heure_actuelle.getMinutes();
-				        if (heures < 10) {heures = "0" + heures ;}
-				        if (minutes < 10) {minutes = "0" + minutes ;}
-				        document.getElementById("heure").innerHTML = heures +':'+ minutes; //on remplace le placeholder par l'heure mise en forme
-				    } 
-					window.setInterval("afficher_heure()",1000); //On actualise toutes les secondes
-				</SCRIPT>
-				
 			</h1>
+			
 
-			<h1 id="lieu">Issy-Les-Moulineaux</h1>
+			<h1 id="lieu">
+
+			<!--localisation par défaut, déterminée à partir de l'adresse ip-->
+			<!--
+			<?php
+			try {
+				if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) { //Si l'utilisateur utilise un proxy
+				    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+				} 
+				else {
+				    $ip = $_SERVER['REMOTE_ADDR'];
+				}
+				$details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
+				echo $details->city;
+			} 
+			catch (Exception $e) {}
+			?>
+			La partie PHP fonctionnera sur un vrai serveur mais ne fonctionne pas en local-->
+
+			</h1>
 
 		</div>
 
@@ -91,6 +103,9 @@
 		</div>
 
 	</div>
+
+
+	<script type="text/javascript" src="js/AccueilAutorite.js"></script> 
 
 </body>
 
