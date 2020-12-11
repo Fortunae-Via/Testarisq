@@ -15,6 +15,7 @@ window.setInterval("afficher_heure()",1000); //On actualise toutes les secondes
 
 function afficher_coordonnees(pos) {
   var coordonnees = pos.coords;
+  console.log(coordonnees)
   var latitude = coordonnees.latitude;
   var longitude = coordonnees.longitude;
   var url_coords = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+ latitude + "&lon=" + longitude; //On écrit l'url personalisée en fonction des coordonnées
@@ -41,7 +42,16 @@ function afficher_coordonnees(pos) {
       if (erreur != null) {
         console.error(erreur);
       } else {
-        var ville = donnees_recuperees['address'].city
+        if (!(typeof donnees_recuperees['address'].city === 'undefined')) {
+          var ville = donnees_recuperees['address'].city
+        }
+        else if (!(typeof donnees_recuperees['address'].town === 'undefined')) {
+          var ville = donnees_recuperees['address'].town
+        }
+        else if (!(typeof donnees_recuperees['address'].municipality === 'undefined')) {
+          var ville = donnees_recuperees['address'].municipality
+        }
+        else {console.log("erreur ville")}
         document.getElementById("lieu").innerHTML = ville
       }
   });
