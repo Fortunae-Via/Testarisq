@@ -1,3 +1,25 @@
+/************ Modes test / recherche ************/
+
+var test = true
+BlocTest = document.getElementById('bloctest');
+BlocRecherche = document.getElementById('blocrecherche');
+
+
+function BasculerMode()
+{
+  test= !test    /** On change de mode**/
+  console.log(test)
+if (test == true) {
+  BlocTest.style.display = 'block';
+  BlocRecherche.style.display = 'none';
+}
+else {
+  BlocTest.style.display = 'none';
+  BlocRecherche.style.display = 'block';
+}
+}
+
+
 /************ Actualisation de l'heure ************/
 function afficher_heure() {
 	var heure_actuelle = new Date();
@@ -42,19 +64,32 @@ function afficher_coordonnees(pos) {
       if (erreur != null) {
         console.error(erreur);
       } else {
+         /** On affiche la ville s'il est trouvable, sinon on devient de plus en plus général**/
         if (!(typeof donnees_recuperees['address'].city === 'undefined')) {
-          var ville = donnees_recuperees['address'].city
+          var localisation = donnees_recuperees['address'].city;
         }
         else if (!(typeof donnees_recuperees['address'].town === 'undefined')) {
-          var ville = donnees_recuperees['address'].town
+          var localisation = donnees_recuperees['address'].town;
         }
         else if (!(typeof donnees_recuperees['address'].municipality === 'undefined')) {
-          var ville = donnees_recuperees['address'].municipality
+          var localisation = donnees_recuperees['address'].municipality;
         }
-        else {console.log("erreur ville")}
-        document.getElementById("lieu").innerHTML = ville
+        else if (!(typeof donnees_recuperees['address'].county === 'undefined')) {
+          var localisation = donnees_recuperees['address'].county;
+        }
+        else {console.log("erreur ville")};
+        document.getElementById("lieu").innerHTML = localisation;
       }
   });
 }
-
 navigator.geolocation.getCurrentPosition(afficher_coordonnees);
+
+
+
+
+
+
+
+
+
+

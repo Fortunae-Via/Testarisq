@@ -44,15 +44,34 @@
 	text-align: center;
 }
 
-.modes header a {
+/* On enlève tout le style par défaut des boutons */
+button {
+    display: inline-block;
+    border: none;
+    text-decoration: none;
+    background: none;
+   	font: inherit;
+    cursor: pointer;
+    text-align: center;
+}
+button:hover,button:focus {
+    background: none;
+    outline: none
+}
+button:active {
+    transform: scale(0.99);
+}
+/* On enlève tout le style par défaut des boutons */
+
+
+.modes header button {
 	font-size: 1.2rem;
 	font-weight: 700;
 	text-transform: uppercase;
-	text-decoration: none;
 	color: black;
 }
 
-.modes header a img {
+.modes header button img {
 	width:1rem;
 	padding-left: 0.5rem;
 	position: relative;
@@ -74,10 +93,11 @@
 	border-radius: 0.25rem;
 	background-color: #DDD;
 	width: 100%;
+	margin-bottom:0.5rem;
 }
 
-.champ {
-	margin-bottom:1rem;
+.champ input {
+	margin-bottom:0.5rem;
 }
 
 .bouton{
@@ -95,13 +115,12 @@
 	box-sizing: border-box;
 	padding: 0.5rem 2rem;
 	margin: 1.5rem 0;
+	cursor: pointer;
 }
 
-/*
 .mode.recherche {
 	display: none;
 }
-*/
 
 
 

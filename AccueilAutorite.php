@@ -59,18 +59,21 @@
 
 		<div class="modes">
 
+
 			<!-- Panneau pour lancer le test -->
 
-			<div class="mode test"> 
+			<div class="mode test" id="bloctest"> 
 
 				<header>
-					<a href="#">Mode Test<img class="switch_button" src="img/switch_button.png" alt="switch_button" href="#"/></a>
+					<button onClick="BasculerMode()">Mode Test<img class="switch_button" src="img/switch_button.png" alt="switch_button" href="#" /></button>
 				</header>
 
 				<form> 
 					<div class="champ">
 						<label for="identifiant">Identifiant du conducteur :</label><br>
 						<input type="text" id="identifiant" name="identifiant"><br>
+						<label for="idboitier">Numéro du boîtier test :</label><br>
+						<input type="text" id="idboitier" name="idboitier"><br>
 					</div>
 					<div class="bouton">
 						<input type="submit" value="Démarrer le test"><br>
@@ -81,10 +84,10 @@
 
 			<!-- Panneau pour lancer une recherche -->
 
-			<div class="mode recherche">
+			<div class="mode recherche" id ="blocrecherche">
 
 				<header>
-					<a href="#">Mode Recherche<img class="switch_button" src="img/switch_button.png" alt="switch_button" href="#"/></a>
+					<button onClick="BasculerMode()">Mode Recherche<img class="switch_button" src="img/switch_button.png" alt="switch_button" href="#"/></button>
 				</header>
 
 				<form> 
