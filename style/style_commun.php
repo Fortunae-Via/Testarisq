@@ -10,9 +10,5 @@ body {
 	box-sizing: border-box;
 }
 
-.divpage{
-	width: 80%;
-	margin : auto;}
-
 /* Style du header */
 <?php include("header_style.php"); ?>

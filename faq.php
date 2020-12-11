@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>TESTARISQ - Faq</title> 
+<title>TESTARISQ - F.A.Q.</title> 
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="style/faq_style.php"/>
 </head>
@@ -11,49 +11,57 @@
     <!-- Header -->
     <?php include("php/header.php"); ?>
 
-    <div class="topnav">
-        <p1><b>Les questions reviennent souvent:</b></p1>
-    </div>
-    <div class="q1">
-        <div class="dropdown">
-            <span><p><b>Première Question?</b></p></span>
-            <div class="dropdown-content">
-                <p>Le concept de feuille de style est présent dès l'origine du World Wide Web :</p>
-                <p> le premier navigateur web WorldWideWeb permet de mettre en forme les documents </p>
-                <p>à l'aide de ce qui serait aujourd'hui considéré comme une « feuille de style utilisateur ».</p>
-                <p>De même, les navigateurs Viola en 1992 et Harmony en 1993 recourent à </p>
-                <p>un mécanisme similaire permettant de déterminer le rendu des polices de caractères, des couleurs ou de l'alignement du texte.</p>
+    <div class="div_page">
+
+        <header>
+            <p1><b>Les questions qui reviennent souvent :</b></p1>
+        </header>
+
+        <div class="bloc_questions">
+            <div class="question 1">
+                <div onClick="AfficherQuestion(q1)" class="bandeau_question">
+                    <button onClick="AfficherQuestion(q1)">
+                        <img class="expand_button" src="img/expand.png" alt="expand_button"/>
+                    </button>
+                    <h2>Première Question ?</h2>
+                </div>
+                <p class="dropdown-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed malesuada massa, at accumsan justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse tempor est erat, bibendum pretium sapien efficitur id. Curabitur nec quam nec enim semper euismod. Fusce cursus vulputate fringilla.<br>
+                    Vivamus nec facilisis ex, egestas luctus arcu. Mauris vitae porttitor sem. Nam semper turpis at molestie scelerisque.
+                </p>
+            </div>
+            <div class="question 2">
+                <div onClick="AfficherQuestion(q2)" class="bandeau_question">
+                    <button onClick="AfficherQuestion(q2)">
+                        <img class="expand_button" src="img/expand.png" alt="expand_button"/>
+                    </button>
+                    <h2>Deuxième Question ?</h2>
+                </div>
+                <p class="dropdown-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed malesuada massa, at accumsan justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse tempor est erat, bibendum pretium sapien efficitur id. Curabitur nec quam nec enim semper euismod. Fusce cursus vulputate fringilla.<br>
+                    Vivamus nec facilisis ex, egestas luctus arcu. Mauris vitae porttitor sem. Nam semper turpis at molestie scelerisque.
+                </p>
+            </div>
+            <div class="question 3">
+                <div onClick="AfficherQuestion(q3)" class="bandeau_question">
+                    <button onClick="AfficherQuestion(q3)">
+                        <img class="expand_button" src="img/expand.png" alt="expand_button"/>
+                    </button>
+                    <h2>Troisième Question ?</h2>
+                </div>
+                <p class="dropdown-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed malesuada massa, at accumsan justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse tempor est erat, bibendum pretium sapien efficitur id. Curabitur nec quam nec enim semper euismod. Fusce cursus vulputate fringilla.<br>
+                    Vivamus nec facilisis ex, egestas luctus arcu. Mauris vitae porttitor sem. Nam semper turpis at molestie scelerisque.
+                </p>
             </div>
         </div>
-    </div>
-    <div class="q1">
-        <div class="dropdown">
-            <span><p><b>Demière Question?</b></p></span>
-            <div class="dropdown-content">
-                <p>Le concept de feuille de style est présent dès l'origine du World Wide Web :</p>
-                <p> le premier navigateur web WorldWideWeb permet de mettre en forme les documents </p>
-                <p>à l'aide de ce qui serait aujourd'hui considéré comme une « feuille de style utilisateur ».</p>
-                <p>De même, les navigateurs Viola en 1992 et Harmony en 1993 recourent à </p>
-                <p>un mécanisme similaire permettant de déterminer le rendu des polices de caractères, des couleurs ou de l'alignement du texte.</p> 
-            </div>
-        </div>
-    </div>
-    <div class="q1">
-        <div class="dropdown">
-            <span><p><b>Troisième Question?</b></p></span>
-            <div class="dropdown-content">
-                <p>Le concept de feuille de style est présent dès l'origine du World Wide Web :</p>
-                <p> le premier navigateur web WorldWideWeb permet de mettre en forme les documents </p>
-                <p>à l'aide de ce qui serait aujourd'hui considéré comme une « feuille de style utilisateur ».</p>
-                <p>De même, les navigateurs Viola en 1992 et Harmony en 1993 recourent à </p>
-                <p>un mécanisme similaire permettant de déterminer le rendu des polices de caractères, des couleurs ou de l'alignement du texte.</p>
-            </div>
-        </div>
-    </div>
-    <div class="topnav">
-        <p1>Vous ne trouvez pas de réponse à votre question?</p1>
-        <br>
-        <p1>Posez là directement à un administrateur via<a href="#site d'un administrateur"><p2> ce formulaire</p2></a></p1>
+
+        <footer>
+            <p1>Vous ne trouvez pas de réponse à votre question?</p1>
+            <br>
+            <p1>Posez là directement à un administrateur via <a href="#site d'un administrateur"><p2>ce formulaire</p2></a></p1>
+        </footer>
+
     </div>
 
 </body>

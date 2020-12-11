@@ -4,9 +4,13 @@
 /* Style commun à toutes les pages */
 <?php include("style_commun.php"); ?>
 
+.divpage{
+	width: 80%;
+	margin : auto;
+}
 
 .bienvenue{
-	margin-top: 2em;
+	margin-top: 2rem;
 	color: white; 
 	text-align: center;
 	font-weight: 300;

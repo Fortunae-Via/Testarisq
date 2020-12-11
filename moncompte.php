@@ -10,20 +10,24 @@
 	<!-- Header -->
 	<?php include("php/header.php"); ?>
 	
-	<h3>	Votre Profil    </h3>
-	<section id = "sect">
-		<p>Nom de famille: </p><br>
-		<p>Nom d'usage: </p><br>
-		<p>Prénoms: </p><br>
-		<p>Né(e) le: </p><br>
-		<p>Identifiant unique: </p><br>
-		<p>Adresse: </p><br>
-		<p>Téléphone portable: </p><br>
-		<p>Courriel: </p><br><br>
-		<p>Un renseignement incorrect ? Signalez-le <a href="mailto:tanguy.robilliard@gmail.com">ici</a> à un administrateur.</p>
-
-
-	</section>
+	<div class="div_page">
+		<header>
+            <h2>Votre profil :</h2>
+        </header>
+		<section id = "sect">
+			<div class="infos">
+				<p>Nom de famille :<span class="user_info">Dupont</span></p>
+				<p>Nom d'usage :<span class="user_info"></span></p>
+				<p>Prénoms :<span class="user_info">Jean, Jacques, Paul</span></p>
+				<p>Né(e) le :<span class="user_info">01/01/2000</span></p>
+				<p>Identifiant unique :<span class="user_info">180634300210</span></p>
+				<p>Adresse :<span class="user_info">28 Rue Notre Dame des Champs, 75006 Paris</span></p>
+				<p>Téléphone portable :<span class="user_info">0607080910</span></p>
+				<p>Courriel :<span class="user_info">jean.dupont@isep.fr</span></p>
+			</div>
+			<p class="bottom">Un renseignement incorrect ? Signalez-le <a href="mailto:tanguy.robilliard@gmail.com">ici</a> à un administrateur.</p>
+		</section>
+	</div>
 	
 </body>
 </html>

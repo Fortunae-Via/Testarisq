@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="style/accueilcitoyen_style.php" />
-        <title>Accueil Citoyen</title>
+        <link rel="stylesheet" href="style/AccueilCitoyen_style.php" />
+        <title>TESTARISQ - Accueil</title>
     </head>
 
 
@@ -12,19 +12,32 @@
 
 <body>
 
-	<h1 class='Bienvenue'>Bienvenue Utilisateur !</h1>
+  <div class="div_page">
 
-    		<div class="Test1">
-    			<header>Vos derniers résultats : Test du <a href="#" class='bouton1'>date</header></p>     <!--Rajouter les graphiques des résultats -->
-    		</div>
+    <h2 class="bienvenue">
+      <?php
+      $Personne_Prenom = 'Utilisateur' ;
+      echo 'Bienvenue ' . $Personne_Prenom . ' !';
+      ?>
+    </h2>
 
-    		<div class="Test2">
-          		<header class='contenant1'><a href="#" class='bouton2'>Test du xx/xx/20xx</a></header>
-          	</div>
+    <section>
+      <div class="Test1">
+        <header>
+          <p>Vos derniers résultats : Test du <a href="#" class='bouton1'>xx/xx/20xx</a></p>
+        </header>
+        <a href="#"><img src="img/graphs.png" alt="GraphiquesDernierTest"/></a>
+      </div>
 
-          	<div class='Test3'>
-          		<header class='contenant2'><a href="#" class='bouton3'>Test du xx/xx/20xx</a></header>
-        	</div>
-</section>
+    	<div class="Test2">
+        <a href="#" class='bouton2'>Test du xx/xx/20xx</a>
+      </div>
+
+      <div class='Test3'>
+        <a href="#" class='bouton3'>Test du xx/xx/20xx</a>
+      </div>
+    </section>
+    
+  </div>
 
 </body>

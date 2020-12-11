@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>TESTARISQ - Quisommesnous</title> 
+<title>TESTARISQ - Qui sommes-nous ?</title> 
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="style/quisommesnous_style.php"/>
 </head>
@@ -11,19 +11,23 @@
 
 	<!-- Header -->
     <?php include("php/header.php"); ?>
-    <div class="topnav">
-        <p1><b>Qui Sommes-Nous?</b></p1>
-    </div>
-    <div class="content">
-        <img id="image" src="img/FV x IM.png">
-        <p>L’ingénieur biomédical a ensuite besoin de compétences plus spécifiques que lui apportent la formation de l’Isep avec le parcours Numérique et Santé.
-        Sa principale compétence est de savoir résoudre des problèmes scientifiques et techniques pluridisciplinaires sous contraintes dans le domaine des TIC. Cette compétence tant fondamentale pour un ingénieur l’est aussi dans le domaine de la santé. Il est amené à résoudre des problèmes de toutes sortes, tant dans le choix d’une nouvel appareil à ajouter à l’infrastructure d’un hôpital que dans l’intégration de celui-ci à l’écosystème existant. S’il travaille dans la recherche ou dans l’industrie, la création et le développement de nouveaux produits ne peut se faire sans son apport pour modéliser le problème et arriver ensuite à une solution.
-        </p>
-        <br>
-        <br>
-        <div class="foot">
-            <p>Vous pouvez trouver nos CGV<a href="SiteCGV"> ici</a> et les mentions lécales<a href="SiteMENTION"> ici</a></p> 
+
+    <div class="div_page">
+
+        <header>
+            <p1><b>Qui sommes-nous ?</b></p1>
+        </header>
+
+        <div class="content">
+            <img src="img/FVxIM.png" alt="FortunaeVia&InfiniteMeasures">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum at ligula nec eros luctus porta at id elit. Duis lacus ligula, rutrum eu facilisis ut, tincidunt eu urna. Sed et condimentum magna, fringilla interdum eros. Curabitur id velit in odio tincidunt rhoncus ut ut enim.<br>
+            Aenean libero augue, pharetra id arcu sed, viverra lacinia lorem. Mauris placerat, massa ac scelerisque iaculis, neque augue imperdiet mi, vitae molestie libero lacus ut ante. Suspendisse faucibus quam et consequat ornare. Donec eleifend, ex ac luctus aliquet, nisl lectus iaculis est, nec porta nunc metus non nibh. Cras varius sodales dolor congue imperdiet.<br>
+            Vestibulum risus massa, elementum vitae nulla vel, fermentum vehicula elit. Phasellus semper mauris aliquet iaculis sodales. Cras viverra nibh eu accumsan sagittis. Fusce vitae scelerisque mauris. Vivamus at dui finibus, consectetur nunc eu, sollicitudin risus.<br>
+            Aliquam erat volutpat. Sed venenatis nisl nec feugiat porttitor. Integer consequat nibh vel consectetur tempus. Nunc luctus est in magna sollicitudin, nec convallis nulla congue. Nulla eu tellus dolor. In ut consectetur ipsum. Ut finibus mauris dignissim, gravida dolor convallis, blandit nisi.
+            </p>
+            <p class="liens">Vous pouvez trouver nos CGV <a href="#">ici</a> et les mentions légales <a href="#">ici</a>.</p>
         </div>
+
     </div>
 </body>
 

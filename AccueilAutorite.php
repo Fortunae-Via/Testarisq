@@ -65,7 +65,7 @@
 			<div class="mode test" id="bloctest"> 
 
 				<header>
-					<button onClick="BasculerMode()">Mode Test<img class="switch_button" src="img/switch_button.png" alt="switch_button" href="#" /></button>
+					<button onClick="BasculerMode()">Mode Test<img class="switch_button" src="img/switch_button.png" alt="switch_button"/></button>
 				</header>
 
 				<form> 
@@ -87,7 +87,7 @@
 			<div class="mode recherche" id ="blocrecherche">
 
 				<header>
-					<button onClick="BasculerMode()">Mode Recherche<img class="switch_button" src="img/switch_button.png" alt="switch_button" href="#"/></button>
+					<button onClick="BasculerMode()">Mode Recherche<img class="switch_button" src="img/switch_button.png" alt="switch_button"/></button>
 				</header>
 
 				<form> 
