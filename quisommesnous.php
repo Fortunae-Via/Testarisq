@@ -11,7 +11,6 @@
 
 	<!-- Header -->
     <?php include("php/header.php"); ?>
-    <hr>
     <div class="topnav">
         <p1><b>Qui Sommes-Nous?</b></p1>
     </div>
