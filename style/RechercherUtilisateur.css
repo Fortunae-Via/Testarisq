@@ -1,0 +1,94 @@
+@font-face{
+	font-family:ihm-font-regular;
+	src:url('NunitoSans-Regular.ttf');
+}
+@font-face{
+	font-family:ihm-font-light;
+	src:url('NunitoSans-Light.ttf');
+}
+@font-face{
+	font-family:ihm-font-bold;
+	src:url('NunitoSans-Bold.ttf');
+}
+/**@import url('https://fonts.google.com/specimen/Nunito+Sans');**/
+body{
+	background-color: #212121 ;
+}
+
+h3{
+	margin-left:3%;
+	font-family:ihm-font-bold;
+}
+
+label{
+	margin-left:3%;
+	font-family:ihm-font-bold;
+}
+
+#test_number{
+	width:10%;
+}
+
+button{
+	margin-right:1%;
+	margin-bottom:1%;
+	font-family:ihm-font-light;
+	border-radius:0.25rem;
+	background-color:white;
+	box-sizing:border-box;
+	padding:0.25rem 0.25rem;
+
+}
+
+button:hover{
+	background-color:#B8B8B8 ;
+}
+
+select{
+	background-color: #B8B8B8;
+	box-sizing: border-box;
+	border:none;
+	padding: 0.5rem 0.5rem;
+	font-family:ihm-font-bold;
+}
+
+input{
+	margin-right:1%;
+	margin-bottom:1%;
+	box-sizing:border-box;
+	padding:0.5rem;
+	border:none;
+	border-radius:0.25rem;
+	background-color:#DDD;
+	width:60%;
+}
+
+#id_name{
+	margin-left: 3%;
+	width:80%;
+}
+
+/*#add{
+	margin-left:35%;
+	font-size: 0.9rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	border: none;
+	border-radius: 0.25rem;
+	background-color: #B8B8B8;
+	box-sizing: border-box;
+	padding: 0.5rem 2rem;
+}*/
+
+section{
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius:10px;
+	border-top-right-radius: 10px;
+	border: 2px solid;
+	border-color:#000000;
+	background-color: #FFFFFF;
+	margin-right:25%;
+	margin-left:25%;
+	margin-top:5%;
+}
