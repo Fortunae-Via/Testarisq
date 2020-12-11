@@ -10,7 +10,7 @@
 <body>
     <!-- Header -->
     <?php include("php/header.php"); ?>
-    <hr>
+
     <div class="topnav">
         <p1><b>Les questions reviennent souvent:</b></p1>
     </div>
