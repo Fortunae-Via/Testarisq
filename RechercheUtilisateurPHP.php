@@ -64,7 +64,7 @@
 				<h3>Utilisateur :</h3>
 					<?php
 					try{
-						$bdd = new PDO('mysql:host=localhost; dbname=departement', 'root', '');
+						$bdd = new PDO('mysql:host=localhost; dbname=appbdd', 'root', '');
 					}catch(Exception $e){
 						die('Erreur : '. $e->getMessage());
 					}
@@ -72,7 +72,7 @@
 					$regex = '"^' . $_POST['id_name'] . '"';
 					$region = $bdd->query('SELECT * FROM Personne WHERE id REGEXP' . $regex);
 					while($display = $region->fetch()){
-						echo'<p>'. $display['name_1'] . $display['name_2'] . $dislay['surname'] . $display['nbr_test'] . '</p>';
+						echo'<p>'. $display['name_1'] . $display['name_2'] . $display['surname'] . $display['nbr_test'] . '</p>';
 					}
 					?>
 			</section>
