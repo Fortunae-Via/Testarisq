@@ -28,7 +28,9 @@
 }
 
 .Test1 img {
-	max-width: 100%
+	max-width: 100%;
+	display: block;
+	margin: auto;
 }
 
 .Test2 {
@@ -41,6 +43,7 @@
 
 .bouton2, .bouton3 {                   /*Tests les moins récents*/
 	display: inline-block;
+	box-sizing: border-box;
 	border-radius: 2rem;
 	padding: 0.5rem 1rem;
 	width: 100%;
