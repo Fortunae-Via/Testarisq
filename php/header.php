@@ -1,6 +1,6 @@
 <header class="main-head">
 	<nav>
-		<img id="logo_header" src="/img/logo_testarisq.png"/>
+		<img id="logo_header" src="img/logo_testarisq.png"/>
 		<ul>
 			<li><a href="accueil.php">ACCUEIL</a></li>
 			<li><a href="MonCompte.php">COMPTE</a></li>
