@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>TESTARISQ - Qui sommes-nous ?</title> 
+<title>TESTARISQ - Quisommesnous</title> 
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="style/quisommesnous_style.php"/>
 </head>
@@ -11,23 +11,23 @@
 
 	<!-- Header -->
     <?php include("php/header.php"); ?>
-
-    <div class="div_page">
-
-        <header>
-            <p1><b>Qui sommes-nous ?</b></p1>
-        </header>
-
-        <div class="content">
-            <img src="img/FVxIM.png" alt="FortunaeVia&InfiniteMeasures">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum at ligula nec eros luctus porta at id elit. Duis lacus ligula, rutrum eu facilisis ut, tincidunt eu urna. Sed et condimentum magna, fringilla interdum eros. Curabitur id velit in odio tincidunt rhoncus ut ut enim.<br>
-            Aenean libero augue, pharetra id arcu sed, viverra lacinia lorem. Mauris placerat, massa ac scelerisque iaculis, neque augue imperdiet mi, vitae molestie libero lacus ut ante. Suspendisse faucibus quam et consequat ornare. Donec eleifend, ex ac luctus aliquet, nisl lectus iaculis est, nec porta nunc metus non nibh. Cras varius sodales dolor congue imperdiet.<br>
-            Vestibulum risus massa, elementum vitae nulla vel, fermentum vehicula elit. Phasellus semper mauris aliquet iaculis sodales. Cras viverra nibh eu accumsan sagittis. Fusce vitae scelerisque mauris. Vivamus at dui finibus, consectetur nunc eu, sollicitudin risus.<br>
-            Aliquam erat volutpat. Sed venenatis nisl nec feugiat porttitor. Integer consequat nibh vel consectetur tempus. Nunc luctus est in magna sollicitudin, nec convallis nulla congue. Nulla eu tellus dolor. In ut consectetur ipsum. Ut finibus mauris dignissim, gravida dolor convallis, blandit nisi.
-            </p>
-            <p class="liens">Vous pouvez trouver nos CGV <a href="#">ici</a> et les mentions légales <a href="#">ici</a>.</p>
+    <hr>
+    <div class="topnav">
+        <p1><b>Qui Sommes-Nous?</b></p1>
+    </div>
+    <div class="content">
+        <img id="image" src="img/FV x IM.png">
+        <p>  Notre entreprise, qui se nomme Fortunae Via (pour “Voie de la Fortune”) a comme priorité de s’assurer de la fiabilité des conducteurs au volants, sur la voie routière. En effet il y a selon des statistiques livrées par l’INSERM, près de 5.000 décès par ans (sans compter les paralysies et handicap) dans un accident de voiture.</p>
+        <br>
+        <p>  Nous vous proposons donc notre produit nommé TESTARISQ™ qui aura pour but de s’assurer du fait que les conducteurs soient toujours alertes et concentrés au volant. Notre produit effectuera donc des tests d’attention afin d’attester du temps de réaction et de la gestion du stress des conducteurs.</p>   
+        <br>
+        <p>  Notre produit vise directement le Ministère de l'Intérieur. En lui vendant notre produit, il le fera directement utiliser par la police et les auto-écoles. Le test sera obligatoire et devra être fait par chaque auto-école à ses adhérents avant de passer le permis. Un site internet sera développé et chaque citoyen français ayant un permis ou allant avoir un permis se verra créé un compte TESTARISQ™ où seront stockées ses résultats. Ces données serviront de références pour chaque utilisateur et seront accessibles directement par la police et le personnel d’auto-école.
+        Les policiers auront à leur disposition des boîtiers fourni par Infinite Measures au Ministère de l’Intérieur et avec lesquels elle pourra effectuer ses contrôles et regarder les résultats directement sur l’application mise à leur disposition.</p>   
+        <br>
+        <br>
+        <div class="foot">
+            <p>Vous pouvez trouver nos CGV<a href="SiteCGV"> ici</a> et les mentions lécales<a href="SiteMENTION"> ici</a></p> 
         </div>
-
     </div>
 </body>
 
