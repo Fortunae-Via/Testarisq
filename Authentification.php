@@ -10,7 +10,7 @@
             <img src="img/logo_testarisq_circle.png" alt="logo_testarisq_circle"/>
             <button onclick="window.location.href='#formulaire'">Authentification</button>
             <div id="formulaire">
-                <form method="post" action="">
+                <form method="post" action="Accueil.php">
                     <label for="identifiant">Identifiant:</label><br/>
                     <input type="text" name="identifiant" required="required" id="identifiant"/><br/>
                     <label class="formulaire" for="mot de passe">Mot de passe:
