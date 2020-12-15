@@ -20,7 +20,7 @@
         </h2>
 
         <div class="Conteneur">
-            <div class='contenant1'><a href="#" class='bouton1'>Gestion des utilisateurs</a></div>
+            <div class='contenant1'><a href="GestionUtilisateurs.php" class='bouton1'>Gestion des utilisateurs</a></div>
             <div class='contenant2'><a href="#" class='bouton2'>Gestion de la F.A.Q.</a></div>
             <div class='contenant3'><a href="#" class='bouton3'>Test de Contrôle</a></div>
         </div>

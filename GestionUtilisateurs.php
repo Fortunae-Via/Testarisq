@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Testarisq - Ajouter Utilisateur</title>
-	<link rel="stylesheet" href="style/AjouterUtilisateur_style.php"/>
+	<link rel="stylesheet" href="style/GestionUtilisateurs_style.php"/>
 </head>
 <body>
 
