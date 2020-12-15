@@ -10,22 +10,6 @@
     margin-top: 2rem;
 }
 
-.bandeau {
-    padding: 0.5rem 1rem ;
-    padding-right: 0.4rem;
-    background-color: white;
-    border-bottom: 1px solid black;
-}
-
-.bandeau h2 {
-    font-size: 1.1rem;
-    margin:0;
-}
-
-.bandeau h2:hover {
-    color: #00A3B8;
-}
-
 /* On enlève tout le style par défaut des boutons */
 button {
     display: inline-block;
@@ -45,12 +29,44 @@ button:active {
 }
 /* On enlève tout le style par défaut des boutons */
 
-.bouton_dropdown {
-    float:right;
+
+.bandeau {
+	margin: 0;
+    padding: 0.5rem 1rem ;
+    padding-right: 0.4rem;
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
 }
 
-.bouton_dropdown img {
+.bandeau:hover {
+	background: white;
+}
+
+.bandeau:active {
+    color: black;
+    transform: none;
+}
+
+.bandeau h3 {
+    font-size: 1.1rem;
+    margin:0;
+}
+
+.bandeau h3:hover {
+    color: #00A3B8;
+}
+
+.fleche_expand {
     height: 0.6rem;
+}
+
+.fleche_expand_down {
+    height: 0.6rem;
+    transform: rotate(180deg);
 }
 
 .bloc {
@@ -58,19 +74,11 @@ button:active {
 }
 
 .dropdown-content {
-    display: none;
+    /**display: none;    paramètre passé dans le html pour fonctionner avec la fonction js**/
     background-color: white;
-    margin: 0;
+    margin:0;
     border-radius: 0 0 0.5rem 0.5rem;
-    padding: 1rem 1.5rem;
-}
-
-.bloc:hover .dropdown-content {
-    display: block;
-}
-
-#ajout .dropdown-content {
-	display: block;
+    padding: 1rem;
 }
 
 .ligne {

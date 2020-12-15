@@ -59,8 +59,13 @@ button:active {
     color: #00A3B8;
 }
 
-.bandeau_question img {
+.fleche_expand {
     height: 0.6rem;
+}
+
+.fleche_expand_down {
+    height: 0.6rem;
+    transform: rotate(180deg);
 }
 
 .question {

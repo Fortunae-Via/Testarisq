@@ -19,9 +19,9 @@
 
         <div class="bloc_questions">
             <div class="question 1">
-                <button class="bandeau_question" onClick="BasculerAffichage('rep1')">
+                <button class="bandeau_question" onClick=" BasculerAffichage('rep1'); BasculerClasse('fleche1','fleche_expand','fleche_expand_down') ">
                     <h3>Première Question ?</h3>
-                    <img class="expand_button" src="img/expand.png" alt="expand_button" style="transform: rotate(180deg);"/>
+                    <img id='fleche1' class="fleche_expand_down" src="img/expand.png" alt="fleche_expand"/>
                 </button>
                 <p id="rep1" class="dropdown-content" style="display: block;">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed malesuada massa, at accumsan justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse tempor est erat, bibendum pretium sapien efficitur id. Curabitur nec quam nec enim semper euismod. Fusce cursus vulputate fringilla.<br>
@@ -29,9 +29,9 @@
                 </p>
             </div>
             <div class="question 2">
-                <button class="bandeau_question" onClick="BasculerAffichage('rep2')">
+                <button class="bandeau_question" onClick=" BasculerAffichage('rep2'); BasculerClasse('fleche2','fleche_expand','fleche_expand_down') ">
                     <h3>Deuxième Question ?</h3>
-                    <img class="expand_button" src="img/expand.png" alt="expand_button"/>
+                    <img id='fleche2' class="fleche_expand" src="img/expand.png" alt="fleche_expand"/>
                 </button>
                 <p id="rep2" class="dropdown-content" style="display: none;">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed malesuada massa, at accumsan justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse tempor est erat, bibendum pretium sapien efficitur id. Curabitur nec quam nec enim semper euismod. Fusce cursus vulputate fringilla.<br>
@@ -39,9 +39,9 @@
                 </p>
             </div>
             <div class="question 3">
-                <button class="bandeau_question" onClick="BasculerAffichage('rep3')">
+                <button class="bandeau_question" onClick=" BasculerAffichage('rep3'); BasculerClasse('fleche3','fleche_expand','fleche_expand_down') ">
                     <h3>Troisième Question ?</h3>
-                    <img class="expand_button" src="img/expand.png" alt="expand_button"/>
+                    <img id='fleche3' class="fleche_expand" src="img/expand.png" alt="fleche_expand"/>
                 </button>
                 <p id="rep3" class="dropdown-content" style="display: none;">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed malesuada massa, at accumsan justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse tempor est erat, bibendum pretium sapien efficitur id. Curabitur nec quam nec enim semper euismod. Fusce cursus vulputate fringilla.<br>
@@ -58,7 +58,7 @@
 
     </div>
 
-    <script type="text/javascript" src="js/fonctions.js"></script>
+    <script type="text/javascript" src="js/fonctions_generiques.js"></script>
 
 </body>
 </html>

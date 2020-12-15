@@ -70,13 +70,11 @@
 	<div class="div_page">
 
 		<div id="ajout" class="bloc">
-            <div onClick="Afficher(ajout)" class="bandeau">
-                <button onClick="Afficher(ajout)" class="bouton_dropdown">
-                    <img class="expand_button" src="img/expand.png" alt="expand_button"/>
-                </button>
-                <h2>Ajouter un utilisateur</h2>
-            </div>
-            <div class="dropdown-content">
+            <button class="bandeau" onClick=" BasculerAffichage('dropdown1'); BasculerClasse('fleche1','fleche_expand','fleche_expand_down') ">
+                <h3>Ajouter un utilisateur</h3>
+                <img id='fleche1' class="fleche_expand_down" src="img/expand.png" alt="fleche_expand"/>
+            </button>
+            <div id='dropdown1' class="dropdown-content" style="display: block;">
 	            <form method="post">
 	            	<div class="ligne">
 	            		<div class="info">
@@ -160,13 +158,11 @@
         </div>
 
         <div id="recherche" class="bloc">
-            <div onClick="Afficher(recherche)" class="bandeau">
-                <button onClick="Afficher(recherche)" class="bouton_dropdown">
-                    <img class="expand_button" src="img/expand.png" alt="expand_button"/>
-                </button>
-                <h2>Rechercher un utilisateur</h2>
-            </div>
-            <div class="dropdown-content">
+            <button class="bandeau" onClick=" BasculerAffichage('dropdown2'); BasculerClasse('fleche2','fleche_expand','fleche_expand_down') ">
+                <h3>Rechercher un utilisateur</h3>
+                <img id='fleche2' class="fleche_expand" src="img/expand.png" alt="fleche_expand"/>
+            </button>
+            <div id='dropdown2' class="dropdown-content" style="display: none;">
                 <p>Bloc recherche administrateur</p>
             </div>
         </div>
@@ -191,5 +187,8 @@
 	<?php
 	}
 	?>
+
+ 	<script type="text/javascript" src="js/fonctions_generiques.js"></script>
+
 </body>
 </html>

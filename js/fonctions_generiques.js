@@ -9,3 +9,14 @@ function BasculerAffichage(element)
   	}
 }
 
+function BasculerClasse(element, classe_1, classe_2)
+{
+	var ElementABasculer = document.getElementById(element);
+	if (ElementABasculer.className===classe_1) {
+		ElementABasculer.className=classe_2;
+  	}
+  	else {
+  		ElementABasculer.className=classe_1;
+  	}
+
+}
