@@ -15,7 +15,7 @@
     <div class="div_page">
 
         <header>
-            <p1><b>Qui sommes-nous ?</b></p1>
+            <h2>Qui sommes-nous ?</h2>
         </header>
 
         <div class="content">

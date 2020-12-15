@@ -107,8 +107,8 @@
 
 	</div>
 
-
-	<script type="text/javascript" src="js/AccueilAutorite.js"></script> 
+	<script type="text/javascript" src="js/fonctions.js"></script>
+	<script type="text/javascript" src="js/AccueilAutorite.js"></script>
 
 </body>
 

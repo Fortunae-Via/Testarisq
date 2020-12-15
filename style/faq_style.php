@@ -10,25 +10,12 @@
 
 .div_page header {
     margin: 2rem;
-    overflow: hidden;
     text-align: center;
+}
+
+.div_page header h2 {
     color: white;
     font-size: 1.2rem;
-}
-
-.bandeau_question {
-    padding: 0.5rem 1rem ;
-    padding-right: 0.4rem;
-    background-color: white;
-}
-
-.bandeau_question h2 {
-    font-size: 1.1rem;
-    margin:0;
-}
-
-.bandeau_question h2:hover {
-    color: #00A3B8;
 }
 
 /* On enlève tout le style par défaut des boutons */
@@ -40,21 +27,39 @@ button {
     font: inherit;
     cursor: pointer;
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 button:hover,button:focus {
-    background: none;
+    background: white;
     outline: none
 }
 button:active {
-    transform: scale(0.99);
+    color: black;
 }
 /* On enlève tout le style par défaut des boutons */
 
-button {
-    float:right;
+
+.bandeau_question {
+    padding: 0.5rem 1rem ;
+    padding-right: 0.4rem;
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-button img {
+.bandeau_question h3 {
+    font-size: 1.1rem;
+    margin:0;
+}
+
+.bandeau_question h3:hover {
+    color: #00A3B8;
+}
+
+.bandeau_question img {
     height: 0.6rem;
 }
 
@@ -63,16 +68,12 @@ button img {
 }
 
 .dropdown-content {
-    display: none;
+    /**display: none;    paramètre passé dans le html pour fonctionner avec la fonction js**/
     background-color: #DEDEDE;
     margin:0;
     border-radius: 0 0 0.5rem 0.5rem;
     padding: 1rem;
     text-align: justify;
-}
-
-.question:hover .dropdown-content {
-    display: block;
 }
 
 .div_page footer {

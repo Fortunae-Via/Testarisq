@@ -1,22 +1,9 @@
 /************ Modes test / recherche ************/
 
-var test = true
-BlocTest = document.getElementById('bloctest');
-BlocRecherche = document.getElementById('blocrecherche');
-
-
 function BasculerMode()
 {
-  test= !test    /** On change de mode**/
-  console.log(test)
-if (test == true) {
-  BlocTest.style.display = 'block';
-  BlocRecherche.style.display = 'none';
-}
-else {
-  BlocTest.style.display = 'none';
-  BlocRecherche.style.display = 'block';
-}
+  BasculerAffichage('bloctest');
+  BasculerAffichage('blocrecherche');
 }
 
 

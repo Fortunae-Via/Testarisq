@@ -11,8 +11,10 @@
 
 .div_page header {
     margin: 2rem;
-    overflow: hidden;
     text-align: center;
+}
+
+.div_page header h2 {
     color: white;
     font-size: 1.2rem;
 }
