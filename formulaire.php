@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>TESTARISQ-formulaire</title>
+<title>TESTARISQ - <?php echo $titre_onglet; ?></title>
 <link rel="stylesheet" type="text/css" href="style/style_formulaire.php"/>
    
 </head>
@@ -15,7 +15,7 @@
     <div class="div_page">
 
         <header>
-            <h2>Une question ?</h2>
+            <h2><?php echo $titre_page; ?></h2>
         </header>
 
         <section>
@@ -31,7 +31,8 @@
                     </div>
                     <div class="form-group">
                         <label for="subject">Sujet : *</label>
-                        <input type="text" id="subject" name="subject" required="required">
+                        <input type="text" id="subject" name="subject" required="required" 
+                        value="<?php echo $sujet_defaut; ?>" >
                     </div>
                     <div class="form-group">
                         <label for="message">Message : *</label>
