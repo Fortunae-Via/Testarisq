@@ -27,7 +27,7 @@
 				<p>Téléphone portable :<span class="user_info">0607080910</span></p>
 				<p>Courriel :<span class="user_info">jean.dupont@isep.fr</span></p>
 			</div>
-			<p class="bottom">Un renseignement incorrect ? Signalez-le <a href="mailto:tanguy.robilliard@gmail.com">ici</a> à un administrateur.</p>
+			<p class="bottom">Un renseignement incorrect ? Signalez-le <a href="InformationIncorrecte.php">ici</a> à un administrateur.</p>
 		</section>
 	</div>
 	
