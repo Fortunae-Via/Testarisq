@@ -9,9 +9,17 @@
     margin: 0;
     box-sizing: border-box;
 }
-body{
-    font-family: 'Montserrat';
+
+.div_page header {
+    margin: 2rem;
+    text-align: center;
 }
+
+.div_page header h2 {
+    color: white;
+    font-size: 1.2rem;
+}
+
 section{
     display: flex;
     align-items: center;
@@ -19,47 +27,50 @@ section{
     flex-direction: column;
 }
 .container{
-    width: 90%;
-    max-width: 500px;
-    margin:80px;
-    padding: 20px;
-    box-shadow: 0px 0px 20px #00000010;
+    width: 50%;
+    padding: 2rem;
+    box-shadow: 0 0 1.5rem #00000010;
     background-color: white;
-    border-radius: 8px;
-    margin-bottom: 60px;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
 }
 .form-group{
-    width: 100%;
-    margin-bottom: 20px;
-    font-size: 20px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
-.form-group input,
+.form-group input, .form-group textarea {
+    box-sizing:border-box;
+    padding:0.5rem;
+    border:none;
+    border-radius:0.25rem;
+    background-color:#DDD;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    width: 100%;
+}
+
 .form-group textarea{
-    width: 100%;
-    padding: 5px;
-    font-size: 18px;
-    border:1px solid rgba(128,128,128, 0.199);
-    margin-top: 5px;
-}
-textarea{
     resize: vertical;
 }
 button[type="submit"]{
-    width: 100%;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
     border: none;
     outline: none;
-    padding: 20px;
-    font-size: 24px;
-    border-radius: 8px;
-    font-family: 'Montserrat';
-    color: rgb(27, 166, 247);
-    text-align: center;
+    border-radius: 0.25rem;
+    background-color: #B8B8B8;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1.75rem;
+    width: 100%;
     cursor: pointer;
-    margin-top: 10px;
     transition: .3s ease background-color;
 }
 button[type="submit"]:hover{
-    background-color: rgb(214, 226, 236);
+    background-color: #00A3B8;
 }
 #status{
     width: 90%;

@@ -11,29 +11,38 @@
 <body>
     <!-- Header -->
     <?php include("php/header.php"); ?>
-    <section>
-        <div class="container">
-            <form class="contact-form" action="php/contactform.php" method="post">
-                <div class="form-group">
-                    <label for="name">Prénom et Nom</label>
-                    <input type="text" id="name" name="name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Votre E-mail</label>
-                    <input type="email" id="email" name="email">
-                </div>
-                <div class="form-group">
-                    <label for="subject">Sujet</label>
-                    <input type="text" id="subject" name="subject">
-                <div class="form-group">
-                    <label for="massage">Message</label>
-                    <textarea name="massage" id="massage" cols="30" rows="10"></textarea>
-                </div>
-                <button type="submit">Envoyer</button>   
-            </form>
-        </div>
-    </section>
+
+    <div class="div_page">
+
+        <header>
+            <h2>Une question ?</h2>
+        </header>
+
+        <section>
+            <div class="container">
+                <form class="contact-form" action="php/contactform.php" method="post">
+                    <div class="form-group">
+                        <label for="name">Prénom et Nom : *</label>
+                        <input type="text" id="name" name="name" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Votre E-mail : *</label>
+                        <input type="email" id="email" name="email" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Sujet : *</label>
+                        <input type="text" id="subject" name="subject" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message : *</label>
+                        <textarea name="message" id="message" cols="30" rows="10" required="required"></textarea>
+                    </div>
+                    <button type="submit">Envoyer</button>   
+                </form>
+            </div>
+        </section>
         
+    </div>
 
 </body>
 </html>
