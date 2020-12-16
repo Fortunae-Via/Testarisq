@@ -16,6 +16,10 @@
     align-items: center;
 }
 
+.main-head nav img, .main-head nav img li{
+    margin: 0.75rem 0;
+}
+
 .main-head nav ul{
     margin-right: 1em;
     display: flex;
