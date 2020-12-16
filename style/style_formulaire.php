@@ -15,7 +15,6 @@ body{
 section{
     height: 100vh;
     width: 100%;
-    background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,12 +23,12 @@ section{
 .container{
     width: 90%;
     max-width: 500px;
-    margin:0 auto;
+    margin:80px;
     padding: 20px;
     box-shadow: 0px 0px 20px #00000010;
     background-color: white;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 .form-group{
     width: 100%;
