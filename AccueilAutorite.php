@@ -62,7 +62,7 @@
 
 			<!-- Panneau pour lancer le test -->
 
-			<div class="mode test" id="bloctest"> 
+			<div class="mode test" id="bloctest" style="display: block;"> 
 
 				<header>
 					<button onClick="BasculerMode()">Mode Test<img class="switch_button" src="img/switch_button.png" alt="switch_button"/></button>
@@ -84,7 +84,7 @@
 
 			<!-- Panneau pour lancer une recherche -->
 
-			<div class="mode recherche" id ="blocrecherche">
+			<div class="mode recherche" id ="blocrecherche" style="display: none;">
 
 				<header>
 					<button onClick="BasculerMode()">Mode Recherche<img class="switch_button" src="img/switch_button.png" alt="switch_button"/></button>

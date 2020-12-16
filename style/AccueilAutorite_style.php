@@ -122,9 +122,4 @@ button:active {
 	cursor: pointer;
 }
 
-.mode.recherche {
-	display: none;
-}
-
-
 
