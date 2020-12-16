@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TESTARISQ-formulaire</title>
-<link rel="stylesheet" type="text/css" href="style_formulaire.php"/>
+<link rel="stylesheet" type="text/css" href="style/style_formulaire.php"/>
    
 </head>
 
