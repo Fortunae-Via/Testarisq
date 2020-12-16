@@ -82,7 +82,7 @@ button:active {
 }
 
 .div_page footer {
-    margin-top: 2rem;
+    margin: 2rem 0;
     text-align: center;
     color: white;
 }

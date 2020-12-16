@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<title>Testarisq - Ajouter Utilisateur</title>
+	<title>Testarisq - Gestion Utilisateurs</title>
 	<link rel="stylesheet" href="style/GestionUtilisateurs_style.php"/>
 </head>
 <body>
