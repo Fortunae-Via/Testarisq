@@ -13,7 +13,7 @@
     <?php include("php/header.php"); ?>
     <section>
         <div class="container">
-            <form class="contact-form" action="contactform.php" method="post">
+            <form class="contact-form" action="php/contactform.php" method="post">
                 <div class="form-group">
                     <label for="name">Prénom et Nom</label>
                     <input type="text" id="name" name="name">
