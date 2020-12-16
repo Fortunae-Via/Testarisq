@@ -3,7 +3,9 @@
 <head>
 	<title>TESTARISQ - Recherche Utilisateur</title>
 	<meta charset="ytf-8"/>
-	<link rel="stylesheet" href="style/RechercheUtilisateur_style.php"/>
+	<link rel="stylesheet" href="style/style_commun.css" />
+    <link rel="stylesheet" href="style/header.css" />
+    <link rel="stylesheet" href="style/RechercheUtilisateur.css" />
 </head>
 <body>
 

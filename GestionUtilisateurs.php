@@ -3,7 +3,9 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Testarisq - Gestion Utilisateurs</title>
-	<link rel="stylesheet" href="style/GestionUtilisateurs_style.php"/>
+	<link rel="stylesheet" href="style/style_commun.css" />
+    <link rel="stylesheet" href="style/header.css" />
+    <link rel="stylesheet" href="style/GestionUtilisateurs.css" />
 </head>
 <body>
 

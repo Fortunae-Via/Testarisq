@@ -1,9 +1,3 @@
-<?php header("Content-type: text/css"); ?>
-
-
-/* Style commun à toutes les pages */
-<?php include("style_commun.php"); ?>
-
 .divpage{
 	width: 80%;
 	margin : auto;

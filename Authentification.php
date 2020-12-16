@@ -3,7 +3,9 @@
     <head>
         <title>TESTARISQ</title>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="style/Authentification_style.php"/>
+        <link rel="stylesheet" href="style/style_commun.css" />
+        <link rel="stylesheet" href="style/header.css" />
+        <link rel="stylesheet" href="style/Authentification.css" />
     </head>
     <body>
         <div class="div_page">

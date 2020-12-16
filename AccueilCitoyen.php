@@ -2,7 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="style/AccueilCitoyen_style.php" />
+        <link rel="stylesheet" href="style/style_commun.css" />
+        <link rel="stylesheet" href="style/header.css" />
+        <link rel="stylesheet" href="style/AccueilCitoyen.css" />
         <title>TESTARISQ - Accueil</title>
     </head>
 

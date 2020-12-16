@@ -4,7 +4,9 @@
 <head>
 <title>TESTARISQ - Accueil</title> 
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="style/AccueilAutorite_style.php"/>
+<link rel="stylesheet" href="style/style_commun.css" />
+<link rel="stylesheet" href="style/header.css" />
+<link rel="stylesheet" href="style/AccueilAutorite.css" />
 </head>
 
 <body>

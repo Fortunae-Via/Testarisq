@@ -4,7 +4,9 @@
 <head>
 <title>TESTARISQ - F.A.Q.</title> 
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="style/faq_style.php"/>
+<link rel="stylesheet" href="style/style_commun.css" />
+<link rel="stylesheet" href="style/header.css" />
+<link rel="stylesheet" href="style/faq.css" />
 </head>
 
 <body>

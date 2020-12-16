@@ -2,7 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-    <link rel="stylesheet" href="style/MonCompte_style.php" />
+    <link rel="stylesheet" href="style/style_commun.css" />
+    <link rel="stylesheet" href="style/header.css" />
+    <link rel="stylesheet" href="style/MonCompte.css" />
 	<title>TESTARISQ - Mon Compte</title>
 </head>
 <body>

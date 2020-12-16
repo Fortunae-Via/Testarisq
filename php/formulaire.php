@@ -4,7 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <title>TESTARISQ - <?php echo $titre_onglet; ?></title>
-<link rel="stylesheet" type="text/css" href="style/style_formulaire.php"/>
+<link rel="stylesheet" href="style/style_commun.css" />
+<link rel="stylesheet" href="style/header.css" />
+<link rel="stylesheet" href="style/formulaire.css" />
    
 </head>
 
