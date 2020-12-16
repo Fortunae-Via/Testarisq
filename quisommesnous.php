@@ -28,7 +28,7 @@
             <br>
             Le produit : Nous vous proposons donc notre produit nommé TESTARISQ™ qui aura pour but de s’assurer du fait que les conducteurs soient toujours alertes et concentrés au volant. Notre produit effectuera donc des tests d’attention afin d’attester du temps de réaction et de la gestion du stress des conducteurs.
             </p>
-            <p class="liens">Vous pouvez trouver nos CGV <a href="#">ici</a> et les mentions légales <a href="#">ici</a>.</p>
+            <p class="liens">Vous pouvez trouver nos CGU <a href="#">ici</a> et les mentions légales <a href="#">ici</a>.</p>
         </div>
 
     </div>
