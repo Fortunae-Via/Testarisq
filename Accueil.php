@@ -79,6 +79,12 @@ else if (isset($_POST['identifiant']) AND isset($_POST['mdp'])) {
 
 		}
 
+		else if (BonneCombinaison($bdd,$IDCompte,$MDP)) { //Si l'utilisateur rentre l'identifiant sans CIT mais que les données coincident 
+			$_SESSION['NIR'] = $IDCompte;
+			$_SESSION['TypeCompte'] = 'CIT';
+			include 'vues/AccueilCitoyen.php';
+		}
+
 		else {
 			//Combinaison incorrecte
 			$mdp_incorrect=true;

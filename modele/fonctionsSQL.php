@@ -21,5 +21,13 @@ function ListeComptes($bdd,$NIR)
 	return $comptes;
 }
 
+function InfosPersonne($bdd,$NIR)
+{
+	$requete = $bdd->prepare("SELECT * FROM Personne WHERE NIR = ? ");
+	$requete->execute(array($NIR));
+	$InfosPersonne = $requete->fetch();
+	return $InfosPersonne;
+}
+
 
 ?>
