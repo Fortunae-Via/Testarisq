@@ -2,7 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-    <link rel="stylesheet" href="style/resultat_test_style.php" />
+    <link rel="stylesheet" href="style/style_commun.css" />
+    <link rel="stylesheet" href="style/header.css" />
+    <link rel="stylesheet" href="style/resultat_test.css" />
 	<title>TESTARISQ - Mes résultats</title>
 </head>
 <body>
@@ -10,10 +12,9 @@
 	<!-- Header -->
 	<?php include("php/header.php"); ?>
 
-	<h1>Résultat : Félicitations, vous êtes apte à conduire !</h1>
-	
 	<div class="div_page">
 		<header>
+			<h1>Résultat : Félicitations, vous êtes apte à conduire !</h1>
             <h2>TEST DU 01/10/2020 </br>
             Détail de vos résultats :</h2>
         </header>
