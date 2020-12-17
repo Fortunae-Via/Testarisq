@@ -25,7 +25,7 @@
             <p>Nonobstant les dispositions ci-dessus, s'il existe un autre contrat de licence utilisateur final pour tout logiciel de ce produit (y compris, mais sans s'y limiter, le contrat de licence publique générale GNU et le contrat de licence publique générale Wide / Library), il sera soumis aux exigences du contrat de licence utilisateur final supplémentaire. Dans ce cadre, ce contrat de licence utilisateur final remplace les termes de cet accord (ci-après dénommé «logiciel exclu»).</p>
             
          
-            <p class="liens">Vous pouvez trouver Qui-sommes-nous<a href="quisommesnous.php"> ici</a> et les mentions lécales<a href="#"> ici</a></p> 
+            <p class="liens">Vous pouvez trouver Qui-sommes-nous<a href="quisommesnous.php"> ici</a> et les mentions lécales<a href="lesmentionslegales.php"> ici</a></p> 
         </div>
     </div>
 </body>
