@@ -22,32 +22,39 @@
         <div class="bloc_questions">
             <div class="question 1">
                 <button class="bandeau_question" onClick=" BasculerAffichage('rep1'); BasculerClasse('fleche1','fleche_expand','fleche_expand_down') ">
-                    <h3>Première Question ?</h3>
+                    <h3>Pourquoi n'ai-je pas reçu les résultats de mes tests ?</h3>
                     <img id='fleche1' class="fleche_expand_down" src="img/expand.png" alt="fleche_expand"/>
                 </button>
                 <p id="rep1" class="dropdown-content" style="display: block;">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed malesuada massa, at accumsan justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse tempor est erat, bibendum pretium sapien efficitur id. Curabitur nec quam nec enim semper euismod. Fusce cursus vulputate fringilla.<br>
-                    Vivamus nec facilisis ex, egestas luctus arcu. Mauris vitae porttitor sem. Nam semper turpis at molestie scelerisque.
+                    Bonjour, dans ce cas, il se peut que le résultat soit toujours en cours de traitement et qu'il n'ait pas été téléchargé. Veuillez patienter. Si vous ne recevez pas le message pendant une longue période, veuillez consulter notre service technique compétent:<br>
+                    Email:fortunae.via@fortunaevia.fr ; numéro de téléphone:0607080910 
                 </p>
             </div>
             <div class="question 2">
                 <button class="bandeau_question" onClick=" BasculerAffichage('rep2'); BasculerClasse('fleche2','fleche_expand','fleche_expand_down') ">
-                    <h3>Deuxième Question ?</h3>
+                    <h3>Comment vérifier mes résultats de tests antérieurs?</h3>
                     <img id='fleche2' class="fleche_expand" src="img/expand.png" alt="fleche_expand"/>
                 </button>
                 <p id="rep2" class="dropdown-content" style="display: none;">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed malesuada massa, at accumsan justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse tempor est erat, bibendum pretium sapien efficitur id. Curabitur nec quam nec enim semper euismod. Fusce cursus vulputate fringilla.<br>
-                    Vivamus nec facilisis ex, egestas luctus arcu. Mauris vitae porttitor sem. Nam semper turpis at molestie scelerisque.
+                   Vous pouvez vous connecter à «Mon compte» et rechercher «Enregistrements antérieurs» pour voir.
                 </p>
             </div>
             <div class="question 3">
                 <button class="bandeau_question" onClick=" BasculerAffichage('rep3'); BasculerClasse('fleche3','fleche_expand','fleche_expand_down') ">
-                    <h3>Troisième Question ?</h3>
+                    <h3>Que faire si j'oublie mon mot de passe?</h3>
                     <img id='fleche3' class="fleche_expand" src="img/expand.png" alt="fleche_expand"/>
                 </button>
                 <p id="rep3" class="dropdown-content" style="display: none;">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sed malesuada massa, at accumsan justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse tempor est erat, bibendum pretium sapien efficitur id. Curabitur nec quam nec enim semper euismod. Fusce cursus vulputate fringilla.<br>
-                    Vivamus nec facilisis ex, egestas luctus arcu. Mauris vitae porttitor sem. Nam semper turpis at molestie scelerisque.
+                    Si vous perdez votre mot de passe, vous pouvez suivre les étapes ci-dessous pour créer un nouveau mot de passe:<br>
+                    1. De notre site Web<br>
+                    Allez dans la section «Connexion»<br>
+                    Cliquez sur «Mot de passe oublié? »<br>
+                    Entrez votre adresse e-mail et cliquez sur «Confirmer»<br>
+                    2.Depuis notre site Web mobile / application mobile<br>
+                    Cliquez sur «Mon compte»<br>
+                    Entrez votre profil<br>
+                    Cliquez sur «Mot de passe oublié? »<br>
+                    Vous recevrez un email automatisé vous permettant de créer un nouveau mot de passe
                 </p>
             </div>
         </div>
