@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="style/style_commun.css" />
 <link rel="stylesheet" href="style/header.css" />
-<link rel="stylesheet" href="style/quisommesnous.css" />
+<link rel="stylesheet" href="style/infos.css" />
 </head>
 
 <body>
@@ -30,7 +30,7 @@
             <br>
             Le produit : Nous vous proposons donc notre produit nommé TESTARISQ™ qui aura pour but de s’assurer du fait que les conducteurs soient toujours alertes et concentrés au volant. Notre produit effectuera donc des tests d’attention afin d’attester du temps de réaction et de la gestion du stress des conducteurs.
             </p>
-            <p class="liens">Vous pouvez trouver nos CGU <a href="CGU.php">ici</a> et les mentions légales <a href="lesmentionslegales.php">ici</a>.</p>
+            <p class="liens">Vous pouvez trouver nos CGU <a href="CGU.php">ici</a> et les mentions légales <a href="MentionsLegales.php">ici</a>.</p>
         </div>
 
     </div>
