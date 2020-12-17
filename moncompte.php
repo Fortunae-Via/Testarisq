@@ -2,7 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-    <link rel="stylesheet" href="style/MonCompte_style.php" />
+    <link rel="stylesheet" href="style/moncompte.css" />
+    <link rel="stylesheet" href="style/style_commun.css" />
+    <link rel="stylesheet" href="style/header.css" />
 	<title>TESTARISQ - Mon Compte</title>
 </head>
 <body>
@@ -19,36 +21,42 @@
 
 				<?php 
 				try
-		{
-		// On se connecte à MySQL
-		$bdd = new PDO('mysql:host=localhost;dbname=bdd_testarisq;charset=utf8', 'root', '');
-		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+				{
+					// On se connecte à MySQL
+					$bdd = new PDO('mysql:host=localhost;dbname=bdd_testarisq;charset=utf8', 'root', '');
+					
 		
-		}
-		catch(Exception $e)
-		{
-			
-		// En cas d'erreur, on affiche un message et on arrête tout
-     	   die('Erreur : '.$e->getMessage());
-		}
-				/*$req = $bdd->prepare("INSERT INTO 'nom de la bdd' SET username = ?, password = ?, email = ?");
-				 --> dans la page register */
+				}
+				catch(Exception $e)
+				{
+					die('Erreur : '.$e->getMessage());
+				}
+				
 				session_start();
-				$user = $bdd->query('select * from personne'); 
+				$nir = $_SESSION['NIR'];
+				$user = $bdd->query("SELECT * FROM personne INNER JOIN compte ON compte.Personne_NIR = personne.NIR WHERE Id = '{$nir}'"); 
 				while ($data = $user->fetch())
-					{$prenom1 = $data['Premier prénom'];
-			$prenom2 = $data['Deuxième Prénom'];
-			$prenom3 = $data['Troisième Prénom'];}
-				?>
-				<p>Nom de famille :<span class="user_info">Dupont <?= $prenom1 ?> <?= $prenom2 ?> <?= $prenom3 ?></span></p>
-				<p>Nom d'usage :<span class="user_info"></span></p>
-				<p>Prénoms :<span class="user_info">Jean, Jacques, Paul</span></p>
-				<p>Né(e) le :<span class="user_info">01/01/2000</span></p>
-				<p>Identifiant unique :<span class="user_info">180634300210</span></p>
-				<p>Adresse :<span class="user_info">28 Rue Notre Dame des Champs, 75006 Paris</span></p>
-				<p>Téléphone portable :<span class="user_info">0607080910</span></p>
-				<p>Courriel :<span class="user_info">jean.dupont@isep.fr</span></p>
+				{
+					$nomFamille = $data['NomDeFamille'];
+					$nomUsage = $data['NomDUsage'];
+					$prenom1 = $data['Prenom1'];			
+					$prenom2 = $data['Prenom2'];			
+					$prenom3 = $data['Prenom3'];
+					$date = $data['DateNaissance'];
+					$mail = $data['Courriel'];
+					$tel = $data['Portable'];
+					$adresse = $data['Adresse_Id'];
+
+				}
+		?>
+				<p>Nom de famille :<span class="user_info"><?= $nomFamille ?></span></p>
+				<p>Nom d'usage :<span class="user_info"><?= $nomUsage ?></span></p>
+				<p>Prénoms :<span class="user_info"><?= $prenom1 .', '. $prenom2 .', '. $prenom3 ?></span></p>
+				<p>Né(e) le :<span class="user_info"><?= $date ?></span></p>
+				<p>Identifiant unique :<span class="user_info"><?= $nir ?></span></p>
+				<p>Adresse :<span class="user_info"><?= $adresse ?></span></p>
+				<p>Téléphone portable :<span class="user_info"><?= $tel ?></span></p>
+				<p>Courriel :<span class="user_info"><?= $mail ?></span></p>
 			</div>
 			<p class="bottom">Un renseignement incorrect ? Signalez-le <a href="mailto:tanguy.robilliard@gmail.com">ici</a> à un administrateur.</p>
 		</section>
