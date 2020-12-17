@@ -32,17 +32,17 @@
         <section>
             <div class="Test1">
                 <header>
-                    <p>Vos derniers résultats : Test du <a href="#" class='bouton1'>xx/xx/20xx</a></p>
+                    <p>Vos derniers résultats : Test du <a href="resultat_test_3.php" class='bouton1'>10/12/2020</a></p>
                 </header>
                 <a href="#"><img src="img/graphs.png" alt="GraphiquesDernierTest"/></a>
             </div>
 
         	<div class="Test2">
-                <a href="#" class='bouton2'>Test du xx/xx/20xx</a>
+                <a href="resultat_test_2.php" class='bouton2'>Test du 14/11/2020</a>
             </div>
 
             <div class='Test3'>
-                <a href="#" class='bouton3'>Test du xx/xx/20xx</a>
+                <a href="resultat_test_1.php" class='bouton3'>Test du 01/10/2020</a>
             </div>
         </section>
     
