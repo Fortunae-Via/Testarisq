@@ -28,7 +28,7 @@
            
             <p>Fortunae Via vous accorde une licence pour utiliser ce logiciel au lieu de le vendre. Ce logiciel est soumis aux lois sur les droits d'auteur et autres lois sur la propriété intellectuelle et traités internationaux.</p>
             
-            <h2>droits d'auteur</h2>
+            <h2>Droits d'auteur</h2>
             
             <p>Tous les droits liés à ce logiciel (y compris, mais sans s'y limiter, les images, photos, animations, vidéos, audios, musique, textes et applets contenus dans ce logiciel) sont la propriété de Fortunae Via ou d'un ou plusieurs fournisseurs tiers.</p>
             
