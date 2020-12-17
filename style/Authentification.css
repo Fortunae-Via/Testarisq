@@ -46,8 +46,19 @@ button:active {
     width: 20rem;
     background:white;
     padding: 1rem;
-    padding-top: 2rem; 
     border-radius:1rem;
+}
+
+#formulaire h3{
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    color: #006B83;
+}
+
+#formulaire form {
+    margin-top: 1rem;
 }
 
 #formulaire label {
