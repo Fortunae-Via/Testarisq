@@ -26,8 +26,10 @@
                     <img id='fleche1' class="fleche_expand_down" src="img/expand.png" alt="fleche_expand"/>
                 </button>
                 <p id="rep1" class="dropdown-content" style="display: block;">
-                    Bonjour, dans ce cas, il se peut que le résultat soit toujours en cours de traitement et qu'il n'ait pas été téléchargé. Veuillez patienter. Si vous ne recevez pas le message pendant une longue période, veuillez consulter notre service technique compétent:<br>
-                    Email:fortunae.via@fortunaevia.fr ; numéro de téléphone:0607080910 
+                    Bonjour, dans ce cas, il se peut que le résultat soit toujours en cours de traitement et qu'il n'ait pas été téléchargé. Veuillez patienter. <br>
+                    Si vous ne recevez pas le message pendant une longue période, veuillez consulter notre service technique compétent:<br>
+                    Email:fortunae.via@fortunaevia.fr ;<br> 
+                    numéro de téléphone:0607080910 
                 </p>
             </div>
             <div class="question 2">
