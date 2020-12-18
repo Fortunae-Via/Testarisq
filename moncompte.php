@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +25,7 @@
 				try
 				{
 					// On se connecte à MySQL
-					$bdd = new PDO('mysql:host=localhost;dbname=bdd_testarisq;charset=utf8', 'root', '');
+					require 'modele/connexionbdd.php';
 					
 		
 				}
@@ -32,7 +34,6 @@
 					die('Erreur : '.$e->getMessage());
 				}
 				
-				session_start();
 				$nir = $_SESSION['NIR'];
 				$user = $bdd->query("SELECT * FROM personne INNER JOIN compte ON compte.Personne_NIR = personne.NIR WHERE Id = '{$nir}'"); 
 				while ($data = $user->fetch())
