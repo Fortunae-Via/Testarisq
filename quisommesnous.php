@@ -22,13 +22,14 @@
 
         <div class="content">
             <img src="img/FVxIM.png" alt="FortunaeVia&InfiniteMeasures">
-            <p>2 entreprises<br>
+            <h3>Nos deux entreprises :</h3>
+            <p>
+            Fortunae Via (pour “Voie de la Fortune”) a comme priorité de s’assurer de la fiabilité des conducteurs au volants, sur la voie routière.<br>
             <br>
-            Fortunae Via : Notre entreprise, qui se nomme Fortunae Via (pour “Voie de la Fortune”) a comme priorité de s’assurer de la fiabilité des conducteurs au volants, sur la voie routière. En effet il y a selon des statistiques livrées par l’INSERM, près de 5.000 décès par ans (sans compter les paralysies et handicap) dans un accident de voiture.<br>
-            <br>
-            Infinite Measures :<br>
-            <br>
-            Le produit : Nous vous proposons donc notre produit nommé TESTARISQ™ qui aura pour but de s’assurer du fait que les conducteurs soient toujours alertes et concentrés au volant. Notre produit effectuera donc des tests d’attention afin d’attester du temps de réaction et de la gestion du stress des conducteurs.
+            Infinite Measures fournit des solutions ayant pour but de garantir la fiabilité des pilotes, au travers de divers tests psychotechniques.</p>
+            <h3>Le produit:</h3>
+            <p>
+            Nous vous proposons donc notre produit nommé TESTARISQ™ qui aura pour but de s’assurer du fait que les conducteurs soient toujours alertes et concentrés au volant. Notre produit effectuera donc des tests d’attention afin d’attester du temps de réaction et de la gestion du stress des conducteurs.
             </p>
             <p class="liens">Vous pouvez trouver nos CGU <a href="CGU.php">ici</a> et les mentions légales <a href="MentionsLegales.php">ici</a>.</p>
         </div>
