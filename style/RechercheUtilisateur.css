@@ -85,6 +85,15 @@ select{
 	width:10%;
 }
 
+table{
+	background-color:#DDD;
+	border:1px solid black;
+}
+
+th{
+	border:1px solid black;
+}
+
 /*#add{
 	margin-left:35%;
 	font-size: 0.9rem;
