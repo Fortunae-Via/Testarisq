@@ -26,38 +26,59 @@
 				{
 					// On se connecte à MySQL
 					require 'modele/connexionbdd.php';
-					
+					require 'modele/fonctionsSQL.php';
 		
 				}
 				catch(Exception $e)
 				{
 					die('Erreur : '.$e->getMessage());
 				}
-				
-				$nir = $_SESSION['NIR'];
-				$user = $bdd->query("SELECT * FROM personne INNER JOIN compte ON compte.Personne_NIR = personne.NIR WHERE Id = '{$nir}'"); 
-				while ($data = $user->fetch())
-				{
-					$nomFamille = $data['NomDeFamille'];
-					$nomUsage = $data['NomDUsage'];
-					$prenom1 = $data['Prenom1'];			
-					$prenom2 = $data['Prenom2'];			
-					$prenom3 = $data['Prenom3'];
-					$date = $data['DateNaissance'];
-					$mail = $data['Courriel'];
-					$tel = $data['Portable'];
-					$adresse = $data['Adresse_Id'];
 
-				}
-		?>
-				<p>Nom de famille :<span class="user_info"><?= $nomFamille ?></span></p>
-				<p>Nom d'usage :<span class="user_info"><?= $nomUsage ?></span></p>
-				<p>Prénoms :<span class="user_info"><?= $prenom1 .', '. $prenom2 .', '. $prenom3 ?></span></p>
-				<p>Né(e) le :<span class="user_info"><?= $date ?></span></p>
-				<p>Identifiant unique :<span class="user_info"><?= $nir ?></span></p>
-				<p>Adresse :<span class="user_info"><?= $adresse ?></span></p>
-				<p>Téléphone portable :<span class="user_info"><?= $tel ?></span></p>
-				<p>Courriel :<span class="user_info"><?= $mail ?></span></p>
+                $Infos=$_SESSION['Infos'];
+                $Adresse=InfosAdresse($bdd,$Infos['Adresse_Id']);
+
+				?>
+
+				<p>Nom de famille :
+					<span class="user_info">
+						<?= $Infos['NomDeFamille']; ?>
+					</span>
+				</p>
+				<p>Nom d'usage :
+					<span class="user_info">
+						<?= $Infos['NomDUsage']; ?>
+					</span>
+				</p>
+				<p>Prénoms :
+					<span class="user_info">
+						<?= $Infos['Prenom1'] .', '. $Infos['Prenom2'] .', '. $Infos['Prenom3'] ?>
+					</span>
+				</p>
+				<p>Né(e) le :
+					<span class="user_info">
+						<?= $Infos['DateNaissance'] ?>	
+					</span>
+				</p>
+				<p>NIR :
+					<span class="user_info">
+						<?= $NIR = $Infos['NIR']; ?>
+					</span>
+				</p>
+				<p>Adresse :
+					<span class="user_info">
+						<?= $Adresse['NumeroRue'] .' '. $Adresse['Rue'] .', '. $Adresse['CodePostal'] .' '. $Adresse['Ville'] .', '. $Adresse['Region'] .', '. $Adresse['Pays']?>
+					</span>
+				</p>
+				<p>Téléphone portable :
+					<span class="user_info">
+						<?= $Infos['Portable']; ?>
+					</span>
+				</p>
+				<p>Courriel :
+					<span class="user_info">
+						<?= $Infos['Courriel'] ?>
+					</span>
+				</p>
 			</div>
 			<p class="bottom">Un renseignement incorrect ? Signalez-le <a href="mailto:tanguy.robilliard@gmail.com">ici</a> à un administrateur.</p>
 		</section>

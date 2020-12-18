@@ -18,14 +18,15 @@
 
 		<h2 class="bienvenue">
 			<?php
-                //Si on a déjà noté le Prénom1 dans la session
-                if (isset($_SESSION['Prenom1'])) {
-                    $Prenom1=$_SESSION['Prenom1'];
+                //Si on a déjà noté les infos dans la session
+                if (isset($_SESSION['Info'])) {
+                    $Prenom1=$_SESSION['Info']['Prenom1'];
                 }
                 else {
                     $Infos=InfosPersonne($bdd,$_SESSION['NIR']);
+                    $_SESSION['Infos'] = $Infos;
                     $Prenom1=$Infos['Prenom1'];
-                    $_SESSION['Prenom1'] = $Prenom1;
+                    
                 }
                 echo 'Bienvenue ' . $Prenom1 . ' !';
             ?>
