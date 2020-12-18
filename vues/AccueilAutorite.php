@@ -19,8 +19,8 @@
 		<h2 class="bienvenue">
 			<?php
                 //Si on a déjà noté les infos dans la session
-                if (isset($_SESSION['Info'])) {
-                    $Prenom1=$_SESSION['Info']['Prenom1'];
+                if (isset($_SESSION['Infos'])) {
+                    $Prenom1=$_SESSION['Infos']['Prenom1'];
                 }
                 else {
                     $Infos=InfosPersonne($bdd,$_SESSION['NIR']);
