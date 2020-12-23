@@ -80,7 +80,7 @@
 					</span>
 				</p>
 			</div>
-			<p class="bottom">Un renseignement incorrect ? Signalez-le <a href="mailto:tanguy.robilliard@gmail.com">ici</a> à un administrateur.</p>
+			<p class="bottom">Un renseignement incorrect ? Signalez-le <a href="InformationIncorrecte.php">ici</a> à un administrateur.</p>
 		</section>
 	</div>
 	

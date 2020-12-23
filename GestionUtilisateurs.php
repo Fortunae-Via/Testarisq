@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8"/>
-		<title>Testarisq - Gestion Utilisateurs</title>
-		<link rel="stylesheet" href="style/GestionUtilisateurs_style.php"/>
-	</head>
-	<body>
+<head>
+	<title>TESTARISQ - Gestion des utilisateur</title>
+	<meta charset="ytf-8"/>
+	<link rel="stylesheet" href="style/style_commun.css" />
+    <link rel="stylesheet" href="style/header.css" />
+    <link rel="stylesheet" href="style/GestionUtilisateurs.css" />
+</head>
+<body>
 
 		<?php
 		if(isset($_POST['account']) && isset($_POST['id']) && isset($_POST['name_1']) && isset($_POST['name_2']) && isset($_POST['surname']) && isset($_POST['day']) && isset($_POST['month']) && isset($_POST['year']) && isset($_POST['sex']) && isset($_POST['mail']) && isset($_POST['address']) && isset($_POST['phone'])){

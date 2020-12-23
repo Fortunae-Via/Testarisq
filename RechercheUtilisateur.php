@@ -3,7 +3,9 @@
 <head>
 	<title>TESTARISQ - Recherche Utilisateur</title>
 	<meta charset="ytf-8"/>
-	<link rel="stylesheet" href="style/RechercheUtilisateur_style.php"/>
+	<link rel="stylesheet" href="style/style_commun.css" />
+    <link rel="stylesheet" href="style/header.css" />
+    <link rel="stylesheet" href="style/RechercheUtilisateur.css" />
 </head>
 <body>
 
@@ -37,7 +39,7 @@
 							<option selected hidden>Région</option>
 							<?php
 							try{
-								$bdd = new PDO('mysql:host=localhost; dbname=departement', 'root', '');
+								$bdd = new PDO('mysql:host=localhost; dbname=departement', 'root', 'root');
 							}catch(Exception $e){
 								die('Erreur : '. $e->getMessage());
 							}
@@ -65,7 +67,7 @@
 				<h3>Utilisateur :</h3>
 					<?php
 					try{
-						$bdd = new PDO('mysql:host=localhost; dbname=app2', 'root', '');
+						require 'modele/connexionbdd.php';
 					}catch(Exception $e){
 						die('Erreur : '. $e->getMessage());
 					}
