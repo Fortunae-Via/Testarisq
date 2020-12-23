@@ -8,7 +8,7 @@
 	color: white; 
 	text-align: center;
 	font-weight: 300;
-	font-size: 1rem
+	font-size: 1.4rem
 }
 
 .heurelieu{
@@ -78,13 +78,13 @@ button:active {
 
 .modes form label {
 	font-weight: 600;
-	font-size: 0.9rem;
+	font-size: 1.1rem;
 	display : inline-block;
 	margin-bottom: 0.25rem;
 }
 
 .modes form input[type="text"] {
-	font-size: 0.75rem;
+	font-size: 1rem;
 	box-sizing: border-box;
 	padding: 0.5rem;
 	border: none;
@@ -104,7 +104,7 @@ button:active {
 
 .modes form input[type="submit"] {
 	font-family: 'Nunito Sans', sans-serif;
-	font-size: 0.9rem;
+	font-size: 1.1rem;
 	font-weight: 700;
 	text-transform: uppercase;
 	border: none;

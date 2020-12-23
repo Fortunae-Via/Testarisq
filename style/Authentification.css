@@ -73,6 +73,7 @@ button:active {
     padding: 0.25rem;
     width: 100%;
     margin-bottom: 1rem;
+    font-size: 1.25rem;
 }
 
 #formulaire button {
@@ -86,4 +87,5 @@ button:active {
     font-weight: 700;
     text-transform: uppercase;
     padding: 0.5rem 1rem;
+    font-size: 1.25rem;
 }
