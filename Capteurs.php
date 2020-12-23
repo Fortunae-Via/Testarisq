@@ -1,3 +1,13 @@
+<?php 
+
+session_start(); 
+// Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
+if (!(isset($_SESSION['NIR']))) {
+  header('Location: Accueil.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
