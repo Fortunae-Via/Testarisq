@@ -29,6 +29,7 @@ else if (isset($_POST['identifiant']) AND isset($_POST['mdp'])) {
 		if (BonneCombinaison($bdd,$NIR,$MDP)) {	//L'utilisateur existe et a fourni le bon mot de passe
 
 			$_SESSION['NIR'] = $NIR;	//On note le NIR en session
+            $_SESSION['Infos'] = InfosPersonne($bdd,$NIR);	//On note les infos de l'utilisateur en session
 
 			if (in_array($TypeCompteDemande,ListeComptes($bdd,$NIR))){	//S'il a bien le compte qu'il demande
 
@@ -46,6 +47,7 @@ else if (isset($_POST['identifiant']) AND isset($_POST['mdp'])) {
 
 		else if (BonneCombinaison($bdd,$IDCompte,$MDP)) { //Si l'utilisateur rentre l'identifiant sans CIT mais que les données coincident 
 			$_SESSION['NIR'] = $IDCompte;
+			$_SESSION['Infos'] = InfosPersonne($bdd,$IDCompte);
 			$_SESSION['TypeCompte'] = 'CIT';
 			AffichageAccueil('CIT');  
 		}

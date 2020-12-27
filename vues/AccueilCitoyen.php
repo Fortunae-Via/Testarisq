@@ -16,16 +16,7 @@
     <div class="div_page">
         <h2 class="bienvenue">
             <?php
-                //Si on a déjà noté les infos dans la session
-                if (isset($_SESSION['Infos'])) {
-                    $Prenom1=$_SESSION['Infos']['Prenom1'];
-                }
-                else {
-                    $Infos=InfosPersonne($bdd,$_SESSION['NIR']);
-                    $_SESSION['Infos'] = $Infos;
-                    $Prenom1=$Infos['Prenom1'];
-                    
-                }
+                $Prenom1=$_SESSION['Infos']['Prenom1'];
                 echo 'Bienvenue ' . $Prenom1 . ' !';
             ?>
         </h2>
