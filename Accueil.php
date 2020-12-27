@@ -8,14 +8,21 @@ require 'modele/FonctionAffichageAccueil.php';
 //Si on est déja connectés
 if (isset($_SESSION['TypeCompte'])) {
 
-	AffichageAccueil($_SESSION['TypeCompte']); 
+	$TypeCompte=$_SESSION['TypeCompte'];
+	AffichageAccueil($TypeCompte); 
+
+	// Dans le cas ou on revient d'un lancement de test raté depuis l'Accueil Autorité
+	if ( ($TypeCompte=='AUE' OR $TypeCompte=='POL') AND (isset($_SESSION['ErreurLancementTest'])) ) {
+		unset($_SESSION['ErreurLancementTest']);
+	}
+
 } 
 
 
 //Si on vient de soumettre le formulaire 
 else if (isset($_POST['identifiant']) AND isset($_POST['mdp'])) { 
 
-	if (strlen($_POST['identifiant'])>3 AND $_POST['mdp'] !== "") {
+	if (strlen($_POST['identifiant'])>3 AND strlen($_POST['identifiant'])<17 AND $_POST['mdp'] !== "") {
 
 		//On récupère l'identifiant et le mdp donné
 		$IDCompte = $_POST['identifiant'];
@@ -73,6 +80,3 @@ else {
 	$mdp_incorrect=false;
 	require 'vues/Authentification.php';
 }
-
-
-?>

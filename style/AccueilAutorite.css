@@ -116,4 +116,11 @@ button:active {
 	cursor: pointer;
 }
 
+#bloctest h3{
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    color: #006B83;
+}
 

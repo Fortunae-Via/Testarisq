@@ -27,6 +27,8 @@ function afficher_coordonnees(pos) {
   console.log(coordonnees)
   var latitude = coordonnees.latitude;
   var longitude = coordonnees.longitude;
+  document.getElementById("LatitudeTest").value = coordonnees.latitude;
+  document.getElementById("LongitudeTest").value = coordonnees.longitude; //On note dans le form les coordonnées
   var url_coords = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+ latitude + "&lon=" + longitude; //On écrit l'url personalisée en fonction des coordonnées
 
   /** Fonction pour récuperer du JSON **/
@@ -69,6 +71,7 @@ function afficher_coordonnees(pos) {
       }
   });
 }
+
 navigator.geolocation.getCurrentPosition(afficher_coordonnees);
 
 

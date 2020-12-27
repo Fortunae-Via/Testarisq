@@ -70,12 +70,21 @@
 					<button onClick="BasculerMode()">Mode Test<img class="switch_button" src="img/switch_button.png" alt="switch_button"/></button>
 				</header>
 
-				<form> 
+				<?php
+                    if (isset($_SESSION['ErreurLancementTest'])) {
+                    	$affichage = '<h3>' . $_SESSION['ErreurLancementTest'] . '</h3>';
+                		echo $affichage;
+                    }
+                ?>
+
+				<form method="post" action="modele/NouveauTest.php"> 
 					<div class="champ">
-						<label for="identifiant">Identifiant du conducteur :</label><br>
-						<input type="text" id="identifiant" name="identifiant"><br>
-						<label for="idboitier">Numéro du boîtier test :</label><br>
-						<input type="text" id="idboitier" name="idboitier"><br>
+						<label for="NIRConducteur">NIR du conducteur :</label><br>
+						<input type="text" id="NIRConducteur" name="NIRConducteur"><br>
+						<label for="IdBoitier">Numéro du boîtier test :</label><br>
+						<input type="text" id="IdBoitier" name="IdBoitier"><br>
+						<input type="hidden" name="LatitudeTest" id="LatitudeTest" value=""/>
+						<input type="hidden" name="LongitudeTest" id="LongitudeTest" value=""/>
 					</div>
 					<div class="bouton">
 						<input type="submit" value="Démarrer le test"><br>
@@ -94,7 +103,7 @@
 
 				<form method="post" action="RechercheUtilisateur.php"> 
 					<div class="champ">
-						<label for="recherche">Identifiant ou nom du conducteur :</label><br>
+						<label for="recherche">NIR ou nom du conducteur :</label><br>
 						<input type="text" id="recherche" name="recherche"><br>
 					</div>
 					<div class="bouton">
