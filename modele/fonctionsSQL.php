@@ -36,5 +36,3 @@ function InfosAdresse($bdd,$id)
 	$InfosAdresse = $requete->fetch();
 	return $InfosAdresse;
 }
-
-?>

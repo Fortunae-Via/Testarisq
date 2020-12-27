@@ -3,28 +3,12 @@
 //On démarre la session
 session_start();
 
+require 'modele/FonctionAffichageAccueil.php'; 
 
 //Si on est déja connectés
 if (isset($_SESSION['TypeCompte'])) {
 
-	switch($_SESSION['TypeCompte']) {
-
-		case 'CIT':		//Citoyen
-			include 'vues/AccueilCitoyen.php'; 
-			break;
-
-		case 'AUE':		//Auto-école
-			include 'vues/AccueilAutorite.php'; 
-			break;
-
-		case 'POL':		//Police
-			include 'vues/AccueilAutorite.php'; 
-			break;
-
-		case 'ADM':		//Admin
-			include 'vues/AccueilAdministrateur.php'; 
-			break;
-	}
+	AffichageAccueil($_SESSION['TypeCompte']); 
 } 
 
 
@@ -39,8 +23,8 @@ else if (isset($_POST['identifiant']) AND isset($_POST['mdp'])) {
 		$NIR = substr($IDCompte, 0, -3); //On enlève les trois caractères à la fin indiquant le type de compte
 		$TypeCompteDemande = substr($IDCompte, -3);
 		
-		require 'modele/connexionbdd.php';  //Connexion à la base de données
-		require 'modele/fonctionsSQL.php';		//On récupère les fonctions
+		require 'modele/connexionbdd.php';
+		require 'modele/fonctionsSQL.php';
 
 		if (BonneCombinaison($bdd,$NIR,$MDP)) {	//L'utilisateur existe et a fourni le bon mot de passe
 
@@ -48,33 +32,14 @@ else if (isset($_POST['identifiant']) AND isset($_POST['mdp'])) {
 
 			if (in_array($TypeCompteDemande,ListeComptes($bdd,$NIR))){	//S'il a bien le compte qu'il demande
 
-			$_SESSION['TypeCompte'] = $TypeCompteDemande;
-
-				switch($TypeCompteDemande) {
-
-					case 'CIT':		//Citoyen
-						include 'vues/AccueilCitoyen.php'; 
-						break;
-
-					case 'AUE':		//Auto-école
-						include 'vues/AccueilAutorite.php'; 
-						break;
-
-					case 'POL':		//Police
-						include 'vues/AccueilAutorite.php'; 
-						break;
-
-					case 'ADM':		//Admin
-						include 'vues/AccueilAdministrateur.php'; 
-						break;
-
-				}
+				$_SESSION['TypeCompte'] = $TypeCompteDemande;
+				AffichageAccueil($TypeCompteDemande); 
 
 			}
 
 			else {	//S'il n'a pas précisé de type de compte ou qu'il demande l'accès à un compte qu'il n'a pas, on renvoie à l'accueil citoyen
 				$_SESSION['TypeCompte'] = 'CIT';
-				include 'vues/AccueilCitoyen.php'; 
+				AffichageAccueil('CIT');  
 			}
 
 		}
@@ -82,13 +47,13 @@ else if (isset($_POST['identifiant']) AND isset($_POST['mdp'])) {
 		else if (BonneCombinaison($bdd,$IDCompte,$MDP)) { //Si l'utilisateur rentre l'identifiant sans CIT mais que les données coincident 
 			$_SESSION['NIR'] = $IDCompte;
 			$_SESSION['TypeCompte'] = 'CIT';
-			include 'vues/AccueilCitoyen.php';
+			AffichageAccueil('CIT');  
 		}
 
 		else {
 			//Combinaison incorrecte
 			$mdp_incorrect=true;
-			include 'vues/Authentification.php';
+			require 'vues/Authentification.php';
 		}	
 
 	}
@@ -96,7 +61,7 @@ else if (isset($_POST['identifiant']) AND isset($_POST['mdp'])) {
 	else {
 		//Combinaison impossible (identifiant trop petit et/ou mot de passe vide)
 		$mdp_incorrect=true;
-		include 'vues/Authentification.php';
+		require 'vues/Authentification.php';
 	}
 
 }
@@ -104,7 +69,7 @@ else if (isset($_POST['identifiant']) AND isset($_POST['mdp'])) {
 
 else {
 	$mdp_incorrect=false;
-	include 'vues/Authentification.php';
+	require 'vues/Authentification.php';
 }
 
 

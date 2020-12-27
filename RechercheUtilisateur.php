@@ -76,11 +76,8 @@ if (!(isset($_SESSION['NIR']))) {
 
 				<h3>Utilisateur :</h3>
 					<?php
-					try{
-						require 'modele/connexionbdd.php';
-					}catch(Exception $e){
-						die('Erreur : '. $e->getMessage());
-					}
+					require 'modele/connexionbdd.php';
+
 					/**count() des test where id_personne = machin**/
 					$regex = '"^' . $_POST['id_name'] . '"';
 					$year = '"^'.$_POST['year'].'"';
