@@ -18,19 +18,13 @@ if ($BonNIRConducteur AND $BonBoitier) {
 
 	$Coordonnees = $Latitude . ';' . $Longitude;
 
-	// Création d'une nouvelle entrée dans la table Test
+	// On crée une nouvelle entrée dans la table Test et on récupère l'id du test créé
+	$IdTest = NouveauTest($bdd,$Coordonnees,$NIRConducteur,$IdBoitier);
 
-	$requete = $bdd->prepare("
-		INSERT INTO Test (DateDebut, Position, Personne_NIR, Boitier_Id) 
-		VALUES (CURDATE(), :position, :personne_nir, :boitier_id) 
-		");
-	$requete->execute(array(
-		'position' => $Coordonnees, 
-		'personne_nir' => $NIRConducteur, 
-		'boitier_id' => $IdBoitier
-	));
-	$IdTest = $bdd->lastInsertId();	//On récupère l'id du test créé
 	$_SESSION['IdTest'] = $IdTest;
+	$_SESSION['IdBoitier'] = $IdBoitier;
+	$_SESSION['NumeroTest'] = 1 ;
+	$_SESSION['EtapeTest'] = 1 ;
 	header('Location: ../Test.php');
 }
 

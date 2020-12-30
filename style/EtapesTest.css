@@ -1,0 +1,111 @@
+.main-head {
+	border-bottom: 2px white solid;
+	display: flex;
+	justify-content: center;
+}
+
+#logo_header{
+    max-width: 10em;
+    margin: 1rem;
+}
+
+.div_page {
+	width: 80%;
+	margin: auto;
+}
+
+.header_corps {
+	margin: 2rem 0;
+}
+
+
+.header_corps.etape1 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: white;
+}
+
+.header_corps.etape1 h1{
+	font-size: 3rem;
+	text-align: center;
+	margin: 0.5rem;
+}
+
+.header_corps.etape1 h2{
+	font-size: 2rem;
+	text-align: center;
+	margin: 0.5rem;
+}
+
+.header_corps.etapesuivantes {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header_corps.etapesuivantes h1, .header_corps.etapesuivantes h2{
+	font-size: 1.6rem;
+	color: white;
+	margin: 1.2rem 0;
+}
+
+
+.div_page h3{
+	font-size: 2rem;
+	color: white;
+	text-align: center;
+}
+
+
+.infostest {
+	border-radius: 0.5rem;
+    background-color: white;
+    padding: 1rem;
+    text-align: justify;
+    margin-bottom: 2rem;
+}
+
+#pfintest {
+	text-align: center;
+}
+
+#pfintest a {
+	text-decoration: none;
+	color: #00A3B8;
+}
+
+/* On enlève tout le style par défaut des boutons */
+button {
+    display: inline-block;
+    border: none;
+    text-decoration: none;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+    text-align: center;
+}
+button:hover,button:focus {
+    background: #B8B8B8;;
+    outline: none
+}
+button:active {
+    transform: scale(0.99);
+}
+/* On enlève tout le style par défaut des boutons */
+
+form button {
+    margin-top: 1rem;    
+    background-color: #B8B8B8;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+}
+
+

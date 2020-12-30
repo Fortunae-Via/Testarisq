@@ -20,7 +20,7 @@ if (isset($_SESSION['TypeCompte'])) {
 
 
 //Si on vient de soumettre le formulaire 
-else if (isset($_POST['identifiant']) AND isset($_POST['mdp'])) { 
+else if (isset($_POST['identifiant'],$_POST['mdp'])) { 
 
 	if (strlen($_POST['identifiant'])>3 AND strlen($_POST['identifiant'])<17 AND $_POST['mdp'] !== "") {
 
