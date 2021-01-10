@@ -9,7 +9,7 @@ $Latitude = $_POST['LatitudeTest'];
 $Longitude = $_POST['LongitudeTest']; 
 
 require '../modele/connexionbdd.php';
-require '../modele/fonctionsSQL.php';
+require '../modele/RequetesTest.php';
 
 $BonNIRConducteur = NIRExiste($bdd,$NIRConducteur);
 $BonBoitier = BoitierExiste($bdd,$IdBoitier);

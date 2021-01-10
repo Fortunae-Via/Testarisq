@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="div_page">
-            <img src="img/logo_testarisq_circle.png" alt="logo_testarisq_circle"/>
+            <img src="vues/img/logo_testarisq_circle.png" alt="logo_testarisq_circle"/>
             <button onclick="window.location.href='#formulaire'">Authentification</button>
             <div id="formulaire">
                 <?php

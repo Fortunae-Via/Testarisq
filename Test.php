@@ -9,8 +9,10 @@ $NumeroTest = $_SESSION['NumeroTest'] ;
 $EtapeTest = $_SESSION['EtapeTest'] ;
 
 require 'modele/connexionbdd.php';
-require 'modele/fonctionsSQL.php';
-require 'modele/FonctionsTest.php'; 
+require 'modele/RequetesGenerales.php';
+require 'modele/RequetesTest.php';
+
+require 'controleurs/FonctionsTest.php'; 
 
 
 //Si on a fini le test
@@ -71,15 +73,15 @@ else {
 	switch($EtapeTest) {
 
 		case 1 :		// Étape 1 
-			require 'modele/Etape1.php';
+			require 'controleurs/Etape1.php';
 			break;
 
 		case 2 :		// Étape 2
-			require 'modele/Etapes23.php';
+			require 'controleurs/Etapes23.php';
 			break;
 
 		case 3 :		// Étape 3
-			require 'modele/Etapes23.php';
+			require 'controleurs/Etapes23.php';
 			break;
 
 	}

@@ -11,14 +11,14 @@
 <body>
 
     <header class="main-head">
-        <img id="logo_header" src="img/logo_testarisq.png"/>
+        <img id="logo_header" src="vues/img/logo_testarisq.png"/>
     </header>
 
     <div class="div_page">
 
         <h3>Le test est terminé.</h3>
         <div class='infostest'>
-            <p id="pfintest">Cliquez <a href="modele/FinTest.php">ici</a> pour retourner à l'accueil.</p>
+            <p id="pfintest">Cliquez <a href="controleurs/FinTest.php">ici</a> pour retourner à l'accueil.</p>
         </div>
 
     </div>

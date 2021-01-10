@@ -108,7 +108,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 			}
 		}else{
 			//Header
-			include("php/header.php");
+			include("vues/Header.php");
 		?>
 			<div class="div_page">
 				<div id="ajout" class="bloc">

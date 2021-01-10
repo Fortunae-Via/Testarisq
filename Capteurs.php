@@ -20,7 +20,7 @@ if (!(isset($_SESSION['NIR']))) {
 <body>
 
 	<!-- Header -->
-	<?php include("php/header.php"); ?>
+	<?php include("vues/Header.php"); ?>
 
   <div class='conteneur'>
     <section id='boitier_1'>
@@ -53,7 +53,8 @@ if (!(isset($_SESSION['NIR']))) {
      </p>
   </form></p>
   <form method="post" action="traitement.php">
-     <p>
+     <p>?>
+
          <label for="capteur">Capteur 3 :</label>
          <select name="capteur" id="capteur">
            <option value="temperature">Température</option>

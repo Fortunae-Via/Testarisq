@@ -12,7 +12,7 @@
 
 <body>
     <!-- Header -->
-    <?php include("php/header.php"); ?>
+    <?php include("vues/Header.php"); ?>
 
     <div class="div_page">
 
@@ -22,7 +22,7 @@
 
         <section>
             <div class="container">
-                <form class="contact-form" action="php/contactform.php" method="post">
+                <form class="contact-form" action="controleurs/traitement_contact-form" method="post">
                     <div class="form-group">
                         <label for="name">Prénom et Nom : *</label>
                         <input type="text" id="name" name="name" required="required">

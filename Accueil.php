@@ -3,7 +3,7 @@
 //On démarre la session
 session_start();
 
-require 'modele/FonctionAffichageAccueil.php'; 
+require 'controleurs/FonctionAffichageAccueil.php'; 
 
 //Si on est déja connectés
 if (isset($_SESSION['TypeCompte'])) {
@@ -31,7 +31,8 @@ else if (isset($_POST['identifiant'],$_POST['mdp'])) {
 		$TypeCompteDemande = substr($IDCompte, -3);
 		
 		require 'modele/connexionbdd.php';
-		require 'modele/fonctionsSQL.php';
+		require 'modele/RequetesGenerales.php';
+		require 'modele/RequetesAccueil.php';
 
 		if (BonneCombinaison($bdd,$NIR,$MDP)) {	//L'utilisateur existe et a fourni le bon mot de passe
 

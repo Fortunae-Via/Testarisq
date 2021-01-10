@@ -7,7 +7,7 @@ if (!(isset($_SESSION['NIR']))) {
 }
 
 require 'modele/connexionbdd.php';
-require 'modele/fonctionsSQL.php';
+require 'modele/RequetesGenerales.php';
 
 // On récupère toutes ses informations
 $InfosUser=$_SESSION['Infos'];

@@ -20,7 +20,7 @@ if (!(isset($_SESSION['NIR']))) {
 <body>
 
 	<!-- Header -->
-	<?php include("php/header.php"); ?>
+	<?php include("vues/Header.php"); ?>
 
 	<div class="div_page">
 		<header>

@@ -24,7 +24,7 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 <body>
 
 	<!-- Header -->
-	<?php include("php/header.php"); ?>
+	<?php include("vues/Header.php"); ?>
 	
 	<div class="div_page">
 		<?php

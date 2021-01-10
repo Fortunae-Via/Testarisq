@@ -11,7 +11,7 @@
 <body>
 
     <header class="main-head">
-        <img id="logo_header" src="img/logo_testarisq.png"/>
+        <img id="logo_header" src="vues/img/logo_testarisq.png"/>
     </header>
 
     <div class="div_page">
@@ -62,7 +62,7 @@
 
         <footer>
 
-            <form method="post" action="modele/ChangementEtape.php"> 
+            <form method="post" action="controleurs/ChangementEtape.php"> 
                 <div>
                     <?php 
                         echo("<input type=\"hidden\" name=\"NumeroTest\" id=\"NumeroTest\" value=\"".$NumeroTest."\"/>\r");
@@ -87,7 +87,7 @@
                             case 3 :        // Étape 3
 
                                 if ($NumeroTest>=5) {
-                                    echo("Finir le test")
+                                    echo("Finir le test");
                                 }
                                 else {
                                     echo("Test suivant");

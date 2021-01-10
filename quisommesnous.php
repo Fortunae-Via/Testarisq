@@ -22,7 +22,7 @@ if (!(isset($_SESSION['NIR']))) {
 <body>
 
     <!-- Header -->
-    <?php include("php/header.php"); ?>
+    <?php include("vues/Header.php"); ?>
 
     <div class="div_page">
 
@@ -31,7 +31,7 @@ if (!(isset($_SESSION['NIR']))) {
         </header>
 
         <div class="content">
-            <img src="img/FVxIM.png" alt="FortunaeVia&InfiniteMeasures">
+            <img src="vues/img/FVxIM.png" alt="FortunaeVia&InfiniteMeasures">
             <h3>Nos deux entreprises :</h3>
             <p>
             Fortunae Via (pour “Voie de la Fortune”) a comme priorité de s’assurer de la fiabilité des conducteurs au volants, sur la voie routière.<br>
