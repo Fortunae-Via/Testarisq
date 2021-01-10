@@ -1,39 +1,37 @@
-<?php 
-
-session_start(); 
-// Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
-if (!(isset($_SESSION['NIR']))) {
-	header('Location: Accueil.php');
-}
-//S'il est connecté mais qu'il charge des pages non autorisées pour son type de compte on le renvoie à l'accueil
-else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {	
-	header('Location: Accueil.php');
-}
-
+<?php
+	// Section pour tester les versions light des autorité
+	// A supprimer
+	session_start();
+	$_SESSION['TypeCompte']='ADM';
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>TESTARISQ - Recherche Utilisateur</title>
-	<meta charset="ytf-8"/>
+	<meta charset="utf-8"/>
+	<!-- Appel du stylesheet commun à toutes les pages -->
 	<link rel="stylesheet" href="style/style_commun.css" />
-    <link rel="stylesheet" href="style/header.css" />
-    <link rel="stylesheet" href="style/RechercheUtilisateur.css" />
+	<!-- Appel du stylesheet particulier au header -->
+	<link rel="stylesheet" href="style/header.css" />
+	<link rel="stylesheet" href="style/RechercheUtilisateur.css"/>
 </head>
 <body>
 
-	<!-- Header -->
-	<?php include("vues/Header.php"); ?>
+	<!-- include Header -->
+	<?php include("php/header.php"); ?>
 	
+	<!-- Section principale de la page -->
 	<div class="div_page">
 		<?php
+		//On teste si des filtres sont sélectionnés ou si un utilisateur est recherché.
 		if(isset($_POST['id_name'])||isset($_POST['sexe'])||isset($_POST['region'])||isset($_POST['year'])||isset($_POST['test_number'])){
 		?>
+		<!-- Dans ce cas on laisse le formulaire affiché de manière à pouvoir refaire une recherche-->
 			<section>
-
 				<form method="post">
 
+					<!-- Barre de recherche input="id_name"-->
 					<h3>Identifiant ou nom du conducteur :</h3>
 					<div class="barre_recherche">
 						<input id="id_name" name="id_name"/>
@@ -42,6 +40,8 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 
 					<div class="fitres">
 						<label for="option">Filtrer par :</label>
+
+						<!-- Filtrer par sexe -->
 						<select name="sexe" size="1">
 							<option selected hidden>Sexe</option>
 							<option value="Homme">Homme</option>
@@ -49,15 +49,27 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 							<option value="Autre">Autre</option>
 							<option value="Non-précisé">Non-précisé</option>
 						</select>
+
+						<!-- Filtrer par region -->
 						<select name="region">
 							<option selected hidden>Région</option>
 							<?php
+							/**
+							Appel d'une base de donnée nommé departement qui contient 
+							une liste des noms des départements
+							de la France
+							**/
 							try{
-								$bdd = new PDO('mysql:host=localhost; dbname=departement', 'root', 'root');
+								$bdd = new PDO('mysql:host=localhost;dbname=departement;port=3308', 'root', '');
 							}catch(Exception $e){
 								die('Erreur : '. $e->getMessage());
 							}
 
+							/**
+							On Affiche les différents départements dans notre select en tant que option,
+							ainsi ils peuvent être selectionnés et envoyer par formulaire
+							sous $_POST['region']
+							**/
 							$region = $bdd->query('SELECT departement_nom FROM departement');
 							while($display = $region->fetch()){
 								echo'<option value="'. $display['departement_nom'] .'">'. $display['departement_nom'] .'</option>';
@@ -65,6 +77,14 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 							$region->closeCursor();
 							?>
 						</select>
+
+						<!-- Filtrer par Année (de Naissance) -->
+						<!--
+							On aurait pu penser à un filtrage par tranche d'âge
+							Pour l'instant le choix à été fait de garder le choix d'une année
+							précise. La base de donnée étant sensé recenser un nombre important
+							de citoyens.
+						-->
 						<select name="year">
 							<option selected hidden>Année</option>
 						<?php
@@ -73,30 +93,49 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 							}
 						?>
 						</select>
+
+						<!-- Filtre par nombre de test passés -->
 						<label for="test_number">Nombre de tests passés : </label><input id="test_number" name="test_number"/>	
 					</div>
 
 				</form>
 
+				<!-- Affichage des résultats d'un recherche -->
 				<h3>Utilisateur :</h3>
 					<?php
-					require 'modele/connexionbdd.php';
+					// Appel de la base de données du projet
+					try{
+						$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
+					}catch(Exception $e){
+						die('Erreur : '. $e->getMessage());
+					}
 
 					/**count() des test where id_personne = machin**/
+
+					/**
+						Definition des regex pour le nom rechercher et l'année de naissance.
+
+						L'utilisation de LIKE dans la requête SQL serait peut-être préférable ?
+						Cette partie est-elle vraiment nécessaire ?
+					**/
 					$regex = '"^' . $_POST['id_name'] . '"';
 					$year = '"^'.$_POST['year'].'"';
 					/*$adresse = '"^'.$_POST['region'].'"';*/
 
-					/*$recherche = $bdd->prepare('SELECT * FROM personne WHERE Sexe=? OR DateNaissance=? OR NIR=? OR NomDeFamille=? OR NomDUsage=? OR Prenom1=? OR Prenom2=? OR Prenom3=? /*WHERE Identifiant unique*/ /*REGEXP' /*. $regex);*/
-
-					/*$recherche = $bdd->query('SELECT * FROM personne WHERE Sexe="'. $_POST['sexe'] .'" OR DateNaissance REGEXP'. $year .' OR NIR REGEXP'. $regex . ' OR NomDeFamille REGEXP'. $regex . ' OR NomDUsage REGEXP'. $regex . ' OR Prenom1 REGEXP'. $regex . ' OR Prenom2 REGEXP'. $regex . ' OR Prenom3 REGEXP'. $regex . '');*/
-
+					/**
+						La requête SQL permet d'aller récuperer dans la base de donnée
+						les informations concernant des utilisateurs en fonction des différents
+						choix fait dans le formulaire (et donc les filtres).
+					
+						A faire : Proteger la requête avec prepare() et execute()
+					**/
 					$recherche = $bdd->query('SELECT * FROM personne JOIN adresse ON personne.Adresse_Id=adresse.Id WHERE personne.Sexe="'. $_POST['sexe'] .'" OR personne.DateNaissance REGEXP'. $year .' OR (personne.NIR OR personne.NomDeFamille OR personne.NomDUsage OR personne.Prenom1 OR personne.Prenom2 OR personne.Prenom3) REGEXP'. $regex .' OR adresse.Region="'. $_POST['region'] .'"');
-
-					/*$recherche->execute(array($_POST['sexe'], $year, $_POST['id_name'], $_POST['id_name'], $_POST['id_name'], $_POST['id_name'], $_POST['id_name'], $_POST['id_name']));*/
 					?>
+
+					<!-- L'Affichage des résultats se trouve sous forme de tableaux -->
 					<table>
 						<tr>
+							<!-- Nom des colonnes -->
 							<th>Id</th>
 							<th>Nom de famille</th>
 							<th>Nom d'usage</th>
@@ -107,23 +146,60 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 							<th>Téléphone</th>
 							<th>Adresse</th>
 							<th>Nombre de test<span style="font-size:11px;">(s)</span> passé<span style="font-size:11px;">(s)</span></th>
+							<?php
+							/**
+								Affichage des options de modification ou de suppression
+								d'un compte en fonction du type de compte de
+								la session de l'utilisateur.
+								C'est-à-dire que lorsqu'un administrateur est connecté
+								il a accès au options alors qu'un officier ou une auto-école non.
+							**/
+								if(isset($_SESSION['TypeCompte'])){
+									if($_SESSION['TypeCompte']=='ADM'){
+										echo'<th>Options</th>';
+									}
+								}
+							?>
 						</tr>
+
 					<?php
+					/**
+						Affichage des résultats d'une recherche.
+						On affiche les informations concernant un utilisateur
+						selon les filtres utilisés et donc la requête SQL executée
+						quelques lignes au-dessus.
+					**/
 					while($display = $recherche->fetch()){
-						echo'<tr><th>'. $display['NIR'] . '</th><th>' . $display['NomDeFamille'] . '</th><th>' . $display["NomDUsage"] . '</th><th>'. $display['Prenom1'] . ' '. $display['Prenom2'] . ' '. $display['Prenom3'] . '</th><th>'. $display['DateNaissance'] . '</th><th>'. $display['Sexe'] . '</th><th>'. $display['Courriel'] . '</th><th>'. $display['Portable'] . '</th><th>' . $display['NumeroRue'] . ' ' . $display['Rue'] . ' ' . $display['CodePostal'] . ' ' . $display['Ville'] . ' ' . $display['Region'] . ' ' . $display['Pays'] ./*$display['nbr_test'] .*/ '</th></tr>';
+						echo'<tr><th>'. $display['NIR'] . '</th><th>' . $display['NomDeFamille'] . '</th><th>' . $display["NomDUsage"] . '</th><th>'. $display['Prenom1'] . ' '. $display['Prenom2'] . ' '. $display['Prenom3'] . '</th><th>'. $display['DateNaissance'] . '</th><th>'. $display['Sexe'] . '</th><th>'. $display['Courriel'] . '</th><th>'. $display['Portable'] . '</th><th>' . $display['NumeroRue'] . ' ' . $display['Rue'] . ' ' . $display['CodePostal'] . ' ' . $display['Ville'] . ' ' . $display['Region'] . ' ' . $display['Pays'] . '</th><th>'./*$display['nbr_test'] .*/ '</th>';
+						/**
+							Affiche les boutons permettant la modification ou la suppression de l'utilisateur de la ligne correspondante
+							à partir d'un $_GET où l'on récupère le Identifiant (NIR) de l'utilisateur.
+							Cette partie est seulement accèssible aux administrateurs.
+						**/
+						if(isset($_SESSION['TypeCompte'])){
+							if($_SESSION['TypeCompte']=='ADM'){
+								echo'<th><a href="ModifierUtilisateur.php?NIR='. $display['NIR'] .'"><img src="img/modif.png"/></a><a href="SupprimerUtilisateur.php?NIR='. $display['NIR'] .'"><img src="img/suppr.png"/></a></th><tr>';
+							}
+						}
 					}
+					//Fermeture de la requête SQL
 					$recherche->closeCursor();
 					?>
 					</table>
+					<!-- Fin  du tableaux et de la section d'affichage des résultats -->
 			</section>
 
 		<?php
 		}else{
 		?>
+			<!--
+				Cas où aucun des filtres n'a été utilisé et qu'aucun utilisateur n'a été 
+				rechercher (cas par défaut, ie. arriver sur la page)
+			-->
+
+			<!-- Les commentaires ne varient pas entre les deux sections -->
 			<section>
-
 				<form method="post">
-
 					<h3>Identifiant ou nom du conducteur :</h3>
 					<div class="barre_recherche">
 						<input id="id_name" name="id_name"/>
@@ -139,11 +215,12 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 							<option value="Autre">Autre</option>
 							<option value="Non-precise">Non-précisé</option>
 						</select>
+
 						<select name="region">
 							<option selected hidden>Région</option>
 							<?php
 							try{
-								$bdd = new PDO('mysql:host=localhost; dbname=departement', 'root', '');
+								$bdd = new PDO('mysql:host=localhost; dbname=departement;port=3308', 'root', '');
 							}catch(Exception $e){
 								die('Erreur : '. $e->getMessage());
 							}
@@ -155,6 +232,7 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 							$region->closeCursor();
 							?>
 						</select>
+
 						<select name="year">
 							<option selected hidden>Année</option>
 						<?php
@@ -163,6 +241,7 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 							}
 						?>
 						</select>
+
 						<label for="test_number">Nombre de tests passés : </label><input id="test_number" name="test_number"/>	
 					</div>
 				</form>
@@ -180,6 +259,13 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 						<th>Téléphone</th>
 						<th>Adresse</th>
 						<th>Nombre de test<span style="font-size:11px;">(s)</span> passé<span style="font-size:11px;">(s)</span></th>
+						<?php
+							if(isset($_SESSION['TypeCompte'])){
+								if($_SESSION['TypeCompte']=='ADM'){
+									echo'<th>Options</th>';
+								}
+							}
+						?>
 					</tr>
 				</table>
 			</section>

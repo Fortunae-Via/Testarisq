@@ -1,33 +1,19 @@
-<?php 
-
-session_start(); 
-// Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
-if (!(isset($_SESSION['NIR']))) {
-	header('Location: Accueil.php');
-}
-//S'il est connecté mais qu'il charge des pages non autorisées pour son type de compte on le renvoie à l'accueil
-else if ( $_SESSION['TypeCompte']!='ADM' ) {	
-	header('Location: Accueil.php');
-}
-
-?>
-
 <!DOCTYPE html>
 <html>
-<head>
-	<title>TESTARISQ - Gestion des utilisateur</title>
-	<meta charset="ytf-8"/>
-	<link rel="stylesheet" href="style/style_commun.css" />
-    <link rel="stylesheet" href="style/header.css" />
-    <link rel="stylesheet" href="style/GestionUtilisateurs.css" />
-</head>
-<body>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Testarisq - Gestion Utilisateurs</title>
+		<link rel="stylesheet" href="style/style_commun.css" />
+		<link rel="stylesheet" href="style/header.css" />
+		<link rel="stylesheet" href="style/GestionUtilisateurs.css"/>
+	</head>
+	<body>
 
 		<?php
-		if(isset($_POST['account']) && isset($_POST['id']) && isset($_POST['name_1']) && isset($_POST['name_2']) && isset($_POST['surname']) && isset($_POST['day']) && isset($_POST['month']) && isset($_POST['year']) && isset($_POST['sex']) && isset($_POST['mail']) && isset($_POST['address']) && isset($_POST['phone'])){
+		if(isset($_POST['account']) && isset($_POST['id']) && isset($_POST['name_1']) && isset($_POST['name_2']) && isset($_POST['surname']) && isset($_POST['day']) && isset($_POST['month']) && isset($_POST['year']) && isset($_POST['sex']) && isset($_POST['mail']) && isset($_POST['numeroRue']) && isset($_POST['ville']) && isset($_POST['code']) && isset($_POST['region']) && isset($_POST['pays']) && isset($_POST['phone'])){
 		
 			try{
-				$bdd = new PDO('mysql:host=localhost; dbname=app2', 'root', '');
+				$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
 			}catch(Exception $e){
 				die('Erreur : '. $e->getMessage());
 			}
@@ -108,7 +94,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 			}
 		}else{
 			//Header
-			include("vues/Header.php");
+			include("php/header.php");
 		?>
 			<div class="div_page">
 				<div id="ajout" class="bloc">
@@ -153,9 +139,11 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-									<label for="surname">Prénoms :<strong> (séparés par une virgule)</strong></label>
+									<label for="surname">Prénoms :<!--<strong> (séparés par une virgule)</strong>--></label>
 	            				</div>
-								<input name="surname"/>
+								<input maxlength="12" id="surname" name="surname"/><br/>
+								<input maxlength="12" id="surname1" name="surname1"/><br/>
+								<input maxlength="12" id="surname2" name="surname2"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
@@ -192,7 +180,11 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 								<div class="info">
 	            					<label for="address">Adresse :</label>
 	            				</div>
-								<input name="address"/><br/>
+								<input maxlength="20" id="rue" name="rue"/>
+								<input maxlength="12" id="ville" name="ville"/><br/>
+								<input maxlength="6" id="code" name="code"/>
+								<input maxlength="12" id="region" name="region"/>
+								<input maxlength="10" id="pays" name="pays"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
