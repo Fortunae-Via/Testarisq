@@ -120,12 +120,14 @@ button:active {
 }
 
 .bloc_boutons input[type="radio"]:checked + label {
-    background-color:#B8B8B8;
+    color: white;
+    background-color: black;
     border-color: black;
 }
 
 .bloc_boutons button:hover, .bloc_boutons button:active {
-	background-color:#B8B8B8 ;
+	color: white;
+	background-color: black ;
 }
 
 input{
@@ -139,17 +141,34 @@ input{
 	width: 100%;
 }
 
-.inputs_birthdate  {
+.special_size_inputs  {
 	width: 100%;
 }
 
-.inputs_birthdate input[maxlength='2']{
+.special_size_inputs input[maxlength='2'] {
 	width: 2rem;
 }
 
-.inputs_birthdate input[maxlength='4']{
+.special_size_inputs input[maxlength='4'] {
 	width: 3rem;
 }
+
+.special_size_inputs input[maxlength='6'] {
+	width: 4rem;
+}
+
+.special_size_inputs input[maxlength='10'] {
+	width: 6rem;
+}
+
+.special_size_inputs input[maxlength='12'] {
+	width: 8rem;
+}
+
+.special_size_inputs input[maxlength='20'] {
+	width: 15rem;
+}
+
 
 .bloc_add {
 	display: flex;
