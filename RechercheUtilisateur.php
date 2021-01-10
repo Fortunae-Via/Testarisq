@@ -19,7 +19,7 @@
 <body>
 
 	<!-- include Header -->
-	<?php include("php/header.php"); ?>
+	<?php include("vues/Header.php"); ?>
 	
 	<!-- Section principale de la page -->
 	<div class="div_page">
@@ -35,7 +35,7 @@
 					<h3>Identifiant ou nom du conducteur :</h3>
 					<div class="barre_recherche">
 						<input id="id_name" name="id_name"/>
-						<button type="submit"><img class="search_icon" src="img/search_icon.png" alt="search_icon"/></button>
+						<button type="submit"><img class="search_icon" src="vues/img/search_icon.png" alt="search_icon"/></button>
 					</div>
 
 					<div class="fitres">
@@ -178,7 +178,7 @@
 						**/
 						if(isset($_SESSION['TypeCompte'])){
 							if($_SESSION['TypeCompte']=='ADM'){
-								echo'<th><a href="ModifierUtilisateur.php?NIR='. $display['NIR'] .'"><img src="img/modif.png"/></a><a href="SupprimerUtilisateur.php?NIR='. $display['NIR'] .'"><img src="img/suppr.png"/></a></th><tr>';
+								echo'<th><a href="ModifierUtilisateur.php?NIR='. $display['NIR'] .'"><img src="vues/img/modif.png"/></a><a href="SupprimerUtilisateur.php?NIR='. $display['NIR'] .'"><img src="vues/img/suppr.png"/></a></th><tr>';
 							}
 						}
 					}
@@ -203,7 +203,7 @@
 					<h3>Identifiant ou nom du conducteur :</h3>
 					<div class="barre_recherche">
 						<input id="id_name" name="id_name"/>
-						<button type="submit"><img class="search_icon" src="img/search_icon.png" alt="search_icon"/></button>
+						<button type="submit"><img class="search_icon" src="vues/img/search_icon.png" alt="search_icon"/></button>
 					</div>
 
 					<div class="fitres">
