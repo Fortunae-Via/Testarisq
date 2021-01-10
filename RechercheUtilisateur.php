@@ -59,11 +59,12 @@
 							une liste des noms des départements
 							de la France
 							**/
-							try{
+							/*try{
 								$bdd = new PDO('mysql:host=localhost;dbname=departement;port=3308', 'root', '');
 							}catch(Exception $e){
 								die('Erreur : '. $e->getMessage());
-							}
+							}*/
+							require("modele/cobdd_departement.php");
 
 							/**
 							On Affiche les différents départements dans notre select en tant que option,
@@ -111,8 +112,6 @@
 					}*/
 					require("modele/connexionbdd.php");
 
-					/**count() des test where id_personne = machin**/
-
 					/**
 						Definition des regex pour le nom rechercher et l'année de naissance.
 
@@ -121,14 +120,13 @@
 					**/
 					$regex = '"^' . $_POST['id_name'] . '"';
 					$year = '"^'.$_POST['year'].'"';
-					/*$adresse = '"^'.$_POST['region'].'"';*/
 
 					/**
 						La requête SQL permet d'aller récuperer dans la base de donnée
 						les informations concernant des utilisateurs en fonction des différents
 						choix fait dans le formulaire (et donc les filtres).
 					
-						A faire : Proteger la requête avec prepare() et execute()
+						A faire : Proteger la requête avec prepare() et execute(), Nombre de tests, utiliser LIKE à la place de REGEXP
 					**/
 					$recherche = $bdd->query('SELECT * FROM personne JOIN adresse ON personne.Adresse_Id=adresse.Id WHERE personne.Sexe="'. $_POST['sexe'] .'" OR personne.DateNaissance REGEXP'. $year .' OR (personne.NIR OR personne.NomDeFamille OR personne.NomDUsage OR personne.Prenom1 OR personne.Prenom2 OR personne.Prenom3) REGEXP'. $regex .' OR adresse.Region="'. $_POST['region'] .'"');
 					?>
@@ -220,11 +218,13 @@
 						<select name="region">
 							<option selected hidden>Région</option>
 							<?php
-							try{
+							/*try{
 								$bdd = new PDO('mysql:host=localhost; dbname=departement;port=3308', 'root', '');
 							}catch(Exception $e){
 								die('Erreur : '. $e->getMessage());
-							}
+							}*/
+							require("modele/cobdd_departement.php");
+
 
 							$region = $bdd->query('SELECT departement_nom FROM departement');
 							while($display = $region->fetch()){
