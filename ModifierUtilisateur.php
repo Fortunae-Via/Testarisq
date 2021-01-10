@@ -13,21 +13,38 @@
 	<body>
 		<?php
 			if(isset($_GET['NIR'])){
-				try{
+				/*try{
 					$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
 				}catch(Exception $e){
 					die('Erreur : '. $e->getMessage());
-				}
-				if(isset($_POST['account']) && isset($_POST['id']) && isset($_POST['name_1']) && isset($_POST['name_2']) && isset($_POST['surname']) && isset($_POST['day']) && isset($_POST['month']) && isset($_POST['year']) && isset($_POST['sex']) && isset($_POST['mail']) && isset($_POST['numeroRue']) && isset($_POST['ville']) && isset($_POST['code']) && isset($_POST['region']) && isset($_POST['pays']) && isset($_POST['phone'])){
+				}*/
+				require("modele/connexionbdd.php");
 
-					//UPDATE personne SET WHERE
+				if(isset($_POST['name_1']) && isset($_POST['name_2']) && isset($_POST['surname']) && isset($_POST['sex']) && isset($_POST['mail']) && isset($_POST['phone'])){
 
-				}else{
-					try{
+					/*try{
 						$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
 					}catch(Exception $e){
 						die('Erreur : '. $e->getMessage());
+					}*/
+					require("modele/connexionbdd.php");
+
+					$update = $bdd->prepare("UPDATE personne SET NomDeFamille=?, NomDUsage=?, Prenom1=?, Sexe=?, Courriel=?, Portable=? WHERE NIR=?");
+					$update->execute(array($_POST['name_1'], $_POST['name_2'], $_POST['surname'], $_POST['sex'], $_POST['mail'], $_POST['phone'], $_GET['NIR']));
+
+					$pass=1;
+					sleep(2);
+					if($pass){
+						header('Location: RechercheUtilisateur.php');
 					}
+
+				}else{
+					/*try{
+						$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
+					}catch(Exception $e){
+						die('Erreur : '. $e->getMessage());
+					}*/
+					require("modele/connexionbdd.php");
 					$placeholder = $bdd->prepare("SELECT * FROM personne WHERE NIR=?");
 					$placeholder->execute(array($_GET['NIR']));
 					while($display = $placeholder->fetch()){
@@ -60,7 +77,7 @@
            					<div id="dropdown1" class="dropdown-content" style="display: block;">
 	            				<form method="post">
 
-	            					<div class="ligne">
+	            					<!--<div class="ligne">
 	            						<div class="info">
 	            							<label for="account">Type de compte :</label>
 	            						</div>
@@ -74,14 +91,14 @@
 		            						<input type="radio" id="admin" name="account" value="4"<?php //if($TypeCompte=="ADM"){echo "checked";} ?>/>
 		            						<label for="admin">Administrateur</label>
 		            					</div>
-	            					</div>
+	            					</div>-->
 
-	            					<div class="ligne">
+	            					<!--<div class="ligne">
 	            						<div class="info">
 	            							<label for="id">Identifiant unique :</label>
 	            						</div>
 	            						<input name="id" placeholder=<?php echo $NIR; ?> />
-									</div>
+									</div>-->
 
 									<div class="ligne">
 										<div class="info">
@@ -99,7 +116,7 @@
 
 									<div class="ligne">
 										<div class="info">
-											<label for="surname">Prénoms :<!--<strong> (séparés par une virgule)</strong>--></label>
+											<label for="surname">Prénoms :<strong> (séparés par une virgule)</strong></label>
 	            						</div>
 										<input maxlength="12" id="surname" name="surname" placeholder=<?php echo $Prenom1; ?> /><br/>
 										<input maxlength="12" id="surname1" name="surname1" placeholder=<?php echo $Prenom2; ?> /><br/>

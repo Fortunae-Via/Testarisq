@@ -14,11 +14,13 @@
 			// Si on a bien récupérer l'identifiant d'un utilisateur à la page précédente Alors :
 			if(isset($_GET['NIR'])){
 				// Appel  de la base de donnée
-				try{
+				/*try{
 					$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
 				}catch(Exception $e){
 					die('Erreur : '. $e->getMessage());
-				}
+				}*/
+				require("modele/connexionbdd.php");
+
 
 				/**
 					Suppression de l'utilisateur où l'identifiant unique correspond avec la valeur

@@ -27,12 +27,12 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 		<?php
 		if(isset($_POST['account']) && isset($_POST['id']) && isset($_POST['name_1']) && isset($_POST['name_2']) && isset($_POST['surname']) && isset($_POST['day']) && isset($_POST['month']) && isset($_POST['year']) && isset($_POST['sex']) && isset($_POST['mail']) && isset($_POST['numeroRue']) && isset($_POST['ville']) && isset($_POST['code']) && isset($_POST['region']) && isset($_POST['pays']) && isset($_POST['phone'])){
 		
-			try{
+			/*try{
 				$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
 			}catch(Exception $e){
 				die('Erreur : '. $e->getMessage());
-			}
-
+			}*/
+			require("modele/connexionbdd.php");
 			
 			$add_personne = $bdd->prepare("INSERT INTO personne(NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance,Sexe, Courriel, Portable, Adresse_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			$nir=$_POST['id'];

@@ -104,11 +104,12 @@
 				<h3>Utilisateur :</h3>
 					<?php
 					// Appel de la base de données du projet
-					try{
+					/*try{
 						$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
 					}catch(Exception $e){
 						die('Erreur : '. $e->getMessage());
-					}
+					}*/
+					require("modele/connexionbdd.php");
 
 					/**count() des test where id_personne = machin**/
 
