@@ -25,7 +25,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	<body>
 
 		<?php
-		if(isset($_POST['type_compte']) && isset($_POST['id']) && isset($_POST['nom']) && isset($_POST['nom_usage']) && isset($_POST['prenom']) && isset($_POST['jour']) && isset($_POST['mois']) && isset($_POST['annee']) && isset($_POST['sexe']) && isset($_POST['mail']) && isset($_POST['numeroRue']) && isset($_POST['ville']) && isset($_POST['code']) && isset($_POST['region']) && isset($_POST['pays']) && isset($_POST['telephone'])){
+		if(isset($_POST['type_compte']) && isset($_POST['id']) && isset($_POST['nom']) && isset($_POST['nom_usage']) && isset($_POST['prenom']) && isset($_POST['jour']) && isset($_POST['mois']) && isset($_POST['annee']) && isset($_POST['sexe']) && isset($_POST['mail']) && isset($_POST['numeroRue']) && isset($_POST['rue']) && isset($_POST['ville']) && isset($_POST['code']) && isset($_POST['region']) && isset($_POST['pays']) && isset($_POST['telephone'])){
 		
 			/*try{
 				$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
@@ -35,23 +35,9 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 			require("modele/connexionbdd.php");
 
 
-			
-			/*$add_personne = $bdd->prepare("INSERT INTO personne(NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance,Sexe, Courriel, Portable, Adresse_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			$nir=$_POST['id'];
-			$mdp="mdp";
-			$ndf=$_POST['nom'];
-			$ndu=$_POST['nom_usage'];
-			$p1=$_POST['prenom'];
-			$p2=$_POST['prenom_2'];
-			$p3=$_POST['prenom_3'];
-			$date=NULL;
-			$sex=$_POST['sexe'];
-			$mail=$_POST['mail'];
-			$phone=$_POST['telephone'];
-			$adresse=NULL;
-			$add_personne->execute(array($nir, $mdp, $ndf, $ndu, $p1, $p2, $p3, $date, $sex, $mail, $phone, $adresse));*/
-
-			/*$add_personne = $bdd->prepare('INSERT INTO personne (NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, DateNaissance, Sexe, Courriel, Portable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+			$add_adresse = $bdd->prepare('INSERT INTO adresse (Id, NumeroRue, Rue, CodePostal, Ville, Region, Pays) VALUES (?, ?, ?, ?, ?, ?, ?)');
+			$add_adresse->execute(array($_POST['id'], $_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['region'], $_POST['pays']));
+			$add_adresse->closeCursor();
 
 			$caract="abcdefghijklmnopqrstuvwyxz0123456789@!:;,$/?*=+";
 			for($i=1; $i<=12; $i++){
@@ -62,52 +48,15 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 
 			$mdp=implode($mdp);
 
-			$birthdate=$_POST['day'] ."-". $_POST['month'] ."-". $_POST['year'];
-			$birthdate=implode($birthdate);
+			$DateNaissance = $_POST['annee']."-".$_POST['mois']."-".$_POST['jour'];
 
-			$add_personne->execute(array($_POST['id'], $mdp, $_POST['name_1'], $_POST['name_2'], $_POST['surname'], $birthdate, $_POST['sex'], $_POST['mail'], $_POST['phone']));
+			$add_personne = $bdd->prepare('INSERT INTO personne (NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance, Sexe, Courriel, Portable, Adresse_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+			$add_personne->execute(array($_POST['id'], $mdp, $_POST['nom'], $_POST['nom_usage'], $_POST['prenom'], $_POST['prenom_2'], $_POST['prenom_3'], $DateNaissance, $_POST['sexe'], $_POST['mail'], $_POST['telephone'], $_POST['id']));
+			$add_personne->closeCursor();
 
-			$add_personne->closeCursor();*/
-
-			/*$add=$bdd->prepare('INSERT INTO personne (NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance, Sexe, Courriel, Portable, Adresse_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)');
-			$add->execute(array($_POST['id']));
-			$add->closeCursor();*/
-
-			/*$add = $bdd->prepare('INSERT INTO personne (NIR, NomDeFamille, NomDUsage, Prenom1, Sexe, Courriel, Portable, Adresse_Id) VALUES (?, ?, ?, ?, ?, ?, ?, NULL)');
-			$add->execute(array($_POST['id'], $_POST['name_1'], $_POST['name_2'], $_POST['surname'], $_POST['sex'], $_POST['mail'], $_POST['phone']));
-			$add->closeCursor();*/
-
-			/*$add_compte = $bdd->prepare('INSERT INTO Compte (Id, TypeCompte_Type, Personne_NIR, AutoriteResponsable_Id) VALUES (?, ?, ?, ?)');
-
-			switch($_POST['account']){
-				case '1':
-					$add_compte->execute(array($_POST['id'], $mdp, 'Citoyen', $_POST['id']));
-					break;
-				case '2':
-					$id=''. $_POST['id'] .'POL';
-					$add_compte->execute(array($id, $mdp, 'Agent de Police', $_POST['id']));
-					break;
-				case '3':
-					$id=''. $_POST['id'] .'AE';
-					$add_compte->execute(array($id, $mdp, 'Auto-école', $_POST['id']));
-					break;
-				case '4':
-					$id=''. $_POST['id'] .'Admin';
-					$add_compte->execute(array($id, $mdp, 'Administrateur', $_POST['id']));
-					break;
-			}
-			$add_compte->closeCursor();*/
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			/*sleep(1);
-			if('1'){
-				if($_POST['type_compte']=='1'){
-					header('Location: AccueilAdministrateur.php');
-				}elseif($_POST['type_compte']=='2'||$_POST['type_compte']=='3'){
-					header('Location: AccueilAutorite.php');
-				}elseif($_POST['type_compte']=='4'){
-					header('Location: AccueilCitoyen.php');
-				}
-			}*/
+			$add_compte = $bdd->prepare('INSERT INTO compte (Id, TypeCompte_Type, Personne_NIR, AutoriteResponsable_Id) VALUES (?, ?, ?, ?)');
+			$add_compte->execute(array($_POST['id'], $_POST['type_compte'], $_POST['id'], NULL));
+			$add_compte->closeCursor();
 
 			sleep(1);
 				if('1'){
@@ -132,13 +81,13 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	            					<label for="type_compte">Type de compte<strong style="color:red;">*</strong> :</label>
 	            				</div>
 	            				<div class="bloc_boutons">
-		            				<input type="radio" id="citizen" name="type_compte" value="1"/>
+		            				<input type="radio" id="citizen" name="type_compte" value="CIT"/>
 		            				<label for="citizen">Citoyen</label>
-		            				<input type="radio" id="police" name="type_compte" value="2"/>
+		            				<input type="radio" id="police" name="type_compte" value="POL"/>
 		            				<label for="police">Agent de Police</label>
-		            				<input type="radio" id="school" name="type_compte" value="3"/>
+		            				<input type="radio" id="school" name="type_compte" value="AUE"/>
 		            				<label for="school">Auto-école</label>
-		            				<input type="radio" id="admin" name="type_compte" value="4"/>
+		            				<input type="radio" id="admin" name="type_compte" value="ADM"/>
 		            				<label for="admin">Administrateur</label>
 		            			</div>
 	            			</div>
