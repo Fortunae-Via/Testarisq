@@ -90,3 +90,11 @@ function ValeurRentree($bdd,$IdMesure)
 	}
 
 }
+
+function AfficherResultat($bdd,$Valeur) //Pour afficher les résultats sur la page résultat.php
+{
+	$requete = $bdd->prepare("SELECT Valeur FROM mesure INNER JOIN test ON (mesure.Test_ID = test.Id) ");
+	$requete->execute(array($Valeur));
+	$resultat = $requete->fetch();
+	return $Valeur;
+}
