@@ -142,25 +142,25 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	            			</div>
 	            			<div class="ligne">
 	            				<div class="info">
-	            					<label for="id">NIR* :</label>
+	            					<label for="id">NIR<strong style="color:red;">*</strong>  :</label>
 	            				</div>
 	            				<input name="id"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="nom">Nom de famille* :</label>
+	            					<label for="nom">Nom de famille<strong style="color:red;">*</strong>  :</label>
 	            				</div>
 								<input name="nom"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="nom_usage">Nom d'usage :</label>
+	            					<label for="nom_usage">Nom d'usage<strong style="color:red;">*</strong> :</label>
 	            				</div>
 								<input name="nom_usage"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
-									<label for="surname">Prénoms :<!--<strong> (séparés par une virgule)</strong>--></label>
+									<label for="surname">Prénoms<strong style="color:red;">*</strong> :<!--<strong> (séparés par une virgule)</strong>--></label>
 	            				</div>
 	            				<div class="special_size_inputs">
 									<input maxlength="12" id="prenom" name="prenom"/>
@@ -170,7 +170,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-									<label for="birthdate">Date de naissance* :</label>
+									<label for="birthdate">Date de naissance<strong style="color:red;">*</strong>  :</label>
 	            				</div>
 	            				<div class="special_size_inputs">
 	            					<p>
@@ -182,7 +182,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="sexe">Sexe* :</label>
+	            					<label for="sexe">Sexe<strong style="color:red;">*</strong>  :</label>
 	            				</div>
 	            				<div class="bloc_boutons">
 									<input type="radio" id="Homme" name="sexe" value="Homme"/>
@@ -197,13 +197,13 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="mail">Courriel* :</label>
+	            					<label for="mail">Courriel<strong style="color:red;">*</strong>  :</label>
 	            				</div>
 								<input name="mail" /><br/>
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="adresse">Adresse :</label>
+	            					<label for="adresse">Adresse<strong style="color:red;">*</strong>  :</label>
 	            				</div>
 	            				<div class="special_size_inputs">
 	            					<input maxlength="4" id="numeroRue" name="numeroRue"/>
@@ -216,7 +216,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label id="telephone" for="telephone">Téléphone portable :</label>
+	            					<label id="telephone" for="telephone">Téléphone portable<strong style="color:red;">*</strong>  :</label>
 	            				</div>
 	            				<div class="special_size_inputs">
 	            					<input maxlength="10" id="telephone" name="telephone"/><br/>
@@ -225,6 +225,8 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							<div class="bloc_add"> 
 								<button id="add" type="submit">Ajouter Utilisateur</button>
 							</div>
+
+							<strong style="color:red;"> (* obligatoire)</strong>
 						</form>
 					</div>
         		</div>
