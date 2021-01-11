@@ -76,7 +76,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
            			</button>
            			<div id="dropdown1" class="dropdown-content" style="display: block;">
 	            		<form method="post">
-	            			<div class="ligne">
+	            			<div class="ligne boutons">
 	            				<div class="info">
 	            					<label for="type_compte">Type de compte<strong style="color:red;">*</strong> :</label>
 	            				</div>
@@ -133,7 +133,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 									</p>
 								</div>
 							</div>
-							<div class="ligne">
+							<div class="ligne boutons">
 								<div class="info">
 	            					<label for="sexe">Sexe<strong style="color:red;">*</strong>  :</label>
 	            				</div>
