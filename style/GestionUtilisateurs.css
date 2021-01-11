@@ -15,7 +15,7 @@ button {
     text-align: center;
 }
 button:hover,button:focus {
-    background: none;
+    background: white;
     outline: none
 }
 button:active {
@@ -41,16 +41,17 @@ button:active {
 }
 
 .bandeau:active {
-    color: black;
+    color: white;
     transform: none;
 }
 
 .bandeau h3 {
     font-size: 1.1rem;
     margin:0;
+    color: black;
 }
 
-.bandeau h3:hover {
+.bandeau h3:hover, .bandeau h3:active {
     color: #00A3B8;
 }
 
@@ -80,6 +81,10 @@ button:active {
 	align-items: center;
 	margin-top: 0.5rem;
 	margin-bottom: 0.5rem;
+}
+
+.ligne p {
+	margin: 0;
 }
 
 .info{
