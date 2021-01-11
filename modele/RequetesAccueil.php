@@ -20,3 +20,11 @@ function ListeComptes($bdd,$NIR)
 	$comptes = $requete->fetch();
 	return $comptes;
 }
+
+function AfficherTest($bdd,$DateDebut)    //Pour afficher les tests dans l'ordre du plus récent sur la page AccueilCitoyen
+{
+	$requete = $bdd->prepare("SELECT DateDebut FROM test INNER JOIN personne ON (test.Personne_NIR = personne.NIR) ");
+	$requete->execute(array($DateDebut));
+	$resultat = $requete->fetch();
+	return $DateTest;
+}
