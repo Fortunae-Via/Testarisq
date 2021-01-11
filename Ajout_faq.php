@@ -25,7 +25,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 
 		<?php
 
-		include("php/header.php");
+		include("vues/Header.php");
 		if(isset($_POST['question']) && isset($_POST['reponse'])){
 		
 			try{

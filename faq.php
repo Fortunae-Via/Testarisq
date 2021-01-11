@@ -6,24 +6,7 @@ if (!(isset($_SESSION['NIR']))) {
     header('Location: Accueil.php');
 }
 
-
-
-        try
-        {
-        // On se connecte à MySQL
-        $bdd = new PDO('mysql:host=localhost;dbname=bdd_testarisq;charset=utf8', 'root', '');
-        /*$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);*/
-        
-        }
-        catch(Exception $e)
-        {
-            
-        // En cas d'erreur, on affiche un message et on arrête tout
-           die('Erreur : '.$e->getMessage());
-        }
-                /*$req = $bdd->prepare("INSERT INTO 'nom de la bdd' SET username = ?, password = ?, email = ?");
-                 --> dans la page register */
+require 'modele/connexionbdd.php';
 
 ?>
 
@@ -41,7 +24,7 @@ if (!(isset($_SESSION['NIR']))) {
 
 <body>
     <!-- Header -->
-    <?php include("php/header.php"); ?>
+    <?php include("vues/Header.php"); ?>
 
     <div class="div_page">
 
@@ -102,7 +85,7 @@ if (!(isset($_SESSION['NIR']))) {
                                     <div class=<?=$question?>>
                                         <button class="bandeau_question" onClick=" BasculerAffichage('<?=$rep?>'); BasculerClasse(<?=$fleche?>,'fleche_expand','fleche_expand_down') ">
                                             <h3><?=$key['Question']?></h3>
-                                            <img id=<?=$fleche?> class="fleche_expand" src="img/expand.png" alt="fleche_expand"/>
+                                            <img id=<?=$fleche?> class="fleche_expand" src="vues/img/expand.png" alt="fleche_expand"/>
                                         </button>
                                         <p id='<?=$rep?>' class="dropdown-content" style="display: none;">
                     <?=$key['Reponse']?>
