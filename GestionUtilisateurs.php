@@ -33,8 +33,10 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 				die('Erreur : '. $e->getMessage());
 			}*/
 			require("modele/connexionbdd.php");
+
+
 			
-			$add_personne = $bdd->prepare("INSERT INTO personne(NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance,Sexe, Courriel, Portable, Adresse_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			/*$add_personne = $bdd->prepare("INSERT INTO personne(NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance,Sexe, Courriel, Portable, Adresse_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			$nir=$_POST['id'];
 			$mdp="mdp";
 			$ndf=$_POST['nom'];
@@ -47,7 +49,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 			$mail=$_POST['mail'];
 			$phone=$_POST['telephone'];
 			$adresse=NULL;
-			$add_personne->execute(array($nir, $mdp, $ndf, $ndu, $p1, $p2, $p3, $date, $sex, $mail, $phone, $adresse));
+			$add_personne->execute(array($nir, $mdp, $ndf, $ndu, $p1, $p2, $p3, $date, $sex, $mail, $phone, $adresse));*/
 
 			/*$add_personne = $bdd->prepare('INSERT INTO personne (NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, DateNaissance, Sexe, Courriel, Portable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
@@ -127,7 +129,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	            		<form method="post">
 	            			<div class="ligne">
 	            				<div class="info">
-	            					<label for="type_compte">Type de compte* :</label>
+	            					<label for="type_compte">Type de compte<strong style="color:red;">*</strong> :</label>
 	            				</div>
 	            				<div class="bloc_boutons">
 		            				<input type="radio" id="citizen" name="type_compte" value="1"/>
@@ -142,35 +144,37 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	            			</div>
 	            			<div class="ligne">
 	            				<div class="info">
-	            					<label for="id">NIR<strong style="color:red;">*</strong>  :</label>
+	            					<label for="id">NIR<strong style="color:red;">*</strong> :</label>
 	            				</div>
-	            				<input name="id"/>
+	            				<input name="id" placeholder="00000000000" />
 							</div>
 							<div class="ligne">
 								<div class="info">
 	            					<label for="nom">Nom de famille<strong style="color:red;">*</strong>  :</label>
 	            				</div>
-								<input name="nom"/>
+								<input name="nom" placeholder="Nom"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
 	            					<label for="nom_usage">Nom d'usage<strong style="color:red;">*</strong> :</label>
 	            				</div>
-								<input name="nom_usage"/>
+								<input name="nom_usage" placeholder="Nom d'usage"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
-									<label for="surname">Prénoms<strong style="color:red;">*</strong> :<!--<strong> (séparés par une virgule)</strong>--></label>
+									<label for="surname">Prénoms<strong style="color:red;">*</strong> : <br/><strong> (séparés par une virgule)</strong></label>
 	            				</div>
 	            				<div class="special_size_inputs">
-									<input maxlength="12" id="prenom" name="prenom"/>
-									<input maxlength="12" id="prenom_2" name="prenom_2"/>
-									<input maxlength="12" id="prenom_3" name="prenom_3"/>
+	            					<p>
+										<input maxlength="12" id="prenom" name="prenom" placeholder="Prénom *"/>
+										<input maxlength="12" id="prenom_2" name="prenom_2" placeholder="2ème Prénom" />
+										<input maxlength="12" id="prenom_3" name="prenom_3" placeholder="3ème Prénom"/>
+									</p>
 								</div>
 							</div>
 							<div class="ligne">
 								<div class="info">
-									<label for="birthdate">Date de naissance<strong style="color:red;">*</strong>  :</label>
+									<label for="birthdate">Date de naissance<strong style="color:red;">*</strong> : <strong> (JJ/MM/AAAA)</strong></label>
 	            				</div>
 	            				<div class="special_size_inputs">
 	            					<p>
@@ -203,15 +207,26 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="adresse">Adresse<strong style="color:red;">*</strong>  :</label>
+	            					<label for="adresse">Adresse<strong style="color:red;">*</strong> :<br/><strong> (Numero de Rue, Rue, Ville, Code Postal, Region, Pays)</strong></label>
 	            				</div>
 	            				<div class="special_size_inputs">
-	            					<input maxlength="4" id="numeroRue" name="numeroRue"/>
+	            					<input maxlength="4" id="numeroRue" name="numeroRue" placeholder="xxx"/>
 									<input maxlength="20" id="rue" name="rue"/>
-									<input maxlength="12" id="ville" name="ville"/><br/>
-									<input maxlength="6" id="code" name="code"/>
-									<input maxlength="12" id="region" name="region"/>
-									<input maxlength="10" id="pays" name="pays"/>
+									<input maxlength="12" id="ville" name="ville" placeholder="Paris"/><br/>
+									<input maxlength="6" id="code" name="code" placeholder="750xx" />
+									<select name="region">
+										<?php
+											require("modele/connexionbdd.php");
+
+											$region = $bdd->query('SELECT Region FROM regionfr');
+											while($display = $region->fetch()){
+												echo'<option value="'. $display['Region'] .'">'. $display['Region'] .'</option>';
+											}
+											
+											$region->closeCursor();
+										?>
+									</select>
+									<input maxlength="10" id="pays" name="pays" value="France"/>
 								</div>
 							</div>
 							<div class="ligne">
@@ -219,7 +234,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	            					<label id="telephone" for="telephone">Téléphone portable<strong style="color:red;">*</strong>  :</label>
 	            				</div>
 	            				<div class="special_size_inputs">
-	            					<input maxlength="10" id="telephone" name="telephone"/><br/>
+	            					<input maxlength="10" id="telephone" name="telephone" placeholder="06xxxxxxxx" /><br/>
 	            				</div>
 							</div>
 							<div class="bloc_add"> 
