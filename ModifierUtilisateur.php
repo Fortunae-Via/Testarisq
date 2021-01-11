@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>TESTARISQ - Recherche Utilisateur</title>
+		<title>TESTARISQ - Modifier Utilisateur</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="style/style_commun.css" />
 		<!--
@@ -12,39 +12,36 @@
 	</head>
 	<body>
 		<?php
+			// On effectue la modification du profil utilisateur d'identifiant $_GET['NIR']
 			if(isset($_GET['NIR'])){
-				/*try{
-					$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
-				}catch(Exception $e){
-					die('Erreur : '. $e->getMessage());
-				}*/
+				// Appel à la base de donnée
 				require("modele/connexionbdd.php");
 
-				if(isset($_POST['name_1']) && isset($_POST['name_2']) && isset($_POST['surname']) && isset($_POST['sex']) && isset($_POST['mail']) && isset($_POST['phone'])){
+				// Si l'une (et une seule suffit) des données du profil est modifié Alors :
+				if(isset($_POST['nom']) || isset($_POST['nom_usage']) || isset($_POST['prenom']) || isset($_POST['prenom_2']) || isset($_POST['prenom_3']) || isset($_POST['sexe']) || isset($_POST['mail']) || isset($_POST['telephone']) || isset($_POST['numeroRue']) ||isset($_POST['rue']) || isset($_POST['ville']) || isset($_POST['code']) || isset($_POST['region']) || isset($_POST['pays'])){
 
-					/*try{
-						$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
-					}catch(Exception $e){
-						die('Erreur : '. $e->getMessage());
-					}*/
-					require("modele/connexionbdd.php");
+					// La base de donnée est Mise à Jour (UPDATE) avec les informations du formulaire
+					// Mise à Jour de la table "personne"
+					$update = $bdd->prepare("UPDATE personne SET NomDeFamille=?, NomDUsage=?, Prenom1=?, Prenom2=?, Prenom3=?, Sexe=?, Courriel=?, Portable=? WHERE NIR=?");
+					$update->execute(array($_POST['nom'], $_POST['nom_usage'], $_POST['prenom'], $_POST['prenom_2'], $_POST['prenom_3'], $_POST['sexe'], $_POST['mail'], $_POST['telephone'], $_GET['NIR']));
+					$update->closeCursor();
 
-					$update = $bdd->prepare("UPDATE personne SET NomDeFamille=?, NomDUsage=?, Prenom1=?, Sexe=?, Courriel=?, Portable=? WHERE NIR=?");
-					$update->execute(array($_POST['name_1'], $_POST['name_2'], $_POST['surname'], $_POST['sex'], $_POST['mail'], $_POST['phone'], $_GET['NIR']));
+					// Mise à Jour de la table "adresse"
+					$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=? WHERE Id=? ');
+					$update->execute(array($_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['pays'], $_GET['NIR']));
+					$update->closeCursor();
 
-					$pass=1;
-					sleep(2);
-					if($pass){
+
+					sleep(1);
+					if('1'){
+						// Redirection vers Rechercheutilisateur.php (la page précédente)
 						header('Location: RechercheUtilisateur.php');
 					}
 
 				}else{
-					/*try{
-						$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
-					}catch(Exception $e){
-						die('Erreur : '. $e->getMessage());
-					}*/
-					require("modele/connexionbdd.php");
+
+					// Récuperation des informations de l'utilisateur d'identifiant $_GET['NIR']
+					// Récupération des informations de la table personne
 					$placeholder = $bdd->prepare("SELECT * FROM personne WHERE NIR=?");
 					$placeholder->execute(array($_GET['NIR']));
 					while($display = $placeholder->fetch()){
@@ -58,6 +55,13 @@
 						$Sexe=$display['Sexe'];
 						$Courriel=$display['Courriel'];
 						$Portable=$display['Portable'];
+					}
+					$placeholder->closeCursor();
+
+					// Récupération des informations de la table adresse
+					$placeholder = $bdd->prepare("SELECT * FROM adresse WHERE Id=?");
+					$placeholder->execute(array($_GET['NIR']));
+					while($display = $placeholder->fetch()){
 						$NumeroRue=$display['NumeroRue'];
 						$Rue=$display['Rue'];
 						$CodePostal=$display['CodePostal'];
@@ -65,62 +69,44 @@
 						$Region=$display['Region'];
 						$Pays=$display['Pays'];
 					}
+					$placeholder->closeCursor();
 		?>
 					<div class="div_page">
 						<div id="ajout" class="bloc">
 
         				    <button class="bandeau" onClick=" BasculerAffichage('dropdown1'); BasculerClasse('fleche1','fleche_expand','fleche_expand_down') ">
+        				    	<!-- Affichage de l'identifiant, du nom de famille et du prenom de l'utilisateur à modifier -->
             			    	<h3>Modifier l'utilisateur N°<?php echo $NIR; ?> - (<?php echo $NomDeFamille ." ". $Prenom1; ?>) </h3>
-           	    				<img id="fleche1" class="fleche_expand_down" src="img/expand.png" alt="fleche_expand"/>
+           	    				<img id="fleche1" class="fleche_expand_down" src="vues/img/expand.png" alt="fleche_expand"/>
          		  			</button>
 
            					<div id="dropdown1" class="dropdown-content" style="display: block;">
 	            				<form method="post">
 
-	            					<!--<div class="ligne">
-	            						<div class="info">
-	            							<label for="account">Type de compte :</label>
-	            						</div>
-	            						<div class="bloc_boutons">
-		            						<input type="radio" id="citizen" name="account" value="1" <?php //if($TypeCompte=="CT"){echo "checked";} ?>/>
-		            						<label for="citizen">Citoyen</label>
-		            						<input type="radio" id="police" name="account" value="2" <?php //if($TypeCompte=="POL"){echo "checked";} ?>/>
-		            						<label for="police">Agent de Police</label>
-		            						<input type="radio" id="school" name="account" value="3" <?php //if($TypeCompte=="ATE"){echo "checked";} ?>/>
-		            						<label for="school">Auto-école</label>
-		            						<input type="radio" id="admin" name="account" value="4"<?php //if($TypeCompte=="ADM"){echo "checked";} ?>/>
-		            						<label for="admin">Administrateur</label>
-		            					</div>
-	            					</div>-->
-
-	            					<!--<div class="ligne">
-	            						<div class="info">
-	            							<label for="id">Identifiant unique :</label>
-	            						</div>
-	            						<input name="id" placeholder=<?php echo $NIR; ?> />
-									</div>-->
-
 									<div class="ligne">
 										<div class="info">
-	            							<label for="name_1">Nom de famille :</label>
+	            							<label for="nom">Nom de famille :</label>
 	            						</div>
-										<input name="name_1" placeholder=<?php echo $NomDeFamille; ?> />
+	            						<!-- Pré-remplissage du formulaire dans le cas où aucune modification n'est faite -->
+										<input name="nom" value=<?php echo $NomDeFamille; ?> />
 									</div>
 
 									<div class="ligne">
 										<div class="info">
-	            							<label for="name_2">Nom d'usage :</label>
+	            							<label for="nom_usage">Nom d'usage :</label>
 	            						</div>
-										<input name="name_2" placeholder=<?php echo $NomDUsage; ?> />
+										<input name="nom_usage" value=<?php echo $NomDUsage; ?> />
 									</div>
 
 									<div class="ligne">
 										<div class="info">
-											<label for="surname">Prénoms :<strong> (séparés par une virgule)</strong></label>
+											<label for="surname">Prénoms : <!--<strong> (séparés par une virgule)</strong>--></label>
 	            						</div>
-										<input maxlength="12" id="surname" name="surname" placeholder=<?php echo $Prenom1; ?> /><br/>
-										<input maxlength="12" id="surname1" name="surname1" placeholder=<?php echo $Prenom2; ?> /><br/>
-										<input maxlength="12" id="surname2" name="surname2" placeholder=<?php echo $Prenom3; ?> />
+	            						<div class="special_size_inputs">
+											<input maxlength="12" id="prenom" name="prenom" value=<?php echo $Prenom1; ?> />
+											<input maxlength="12" id="prenom_2" name="prenom_2" value=<?php echo $Prenom2; ?> />
+											<input maxlength="12" id="prenom_3" name="surname_3" value=<?php echo $Prenom3; ?> />
+										</div>
 									</div>
 
 									<div class="ligne">
@@ -128,10 +114,12 @@
 											<label for="birthdate">Date de naissance :</label>
 	        	    					</div>
 
-	   	    	    					<div class="inputs_birthdate">
-											<input maxlength="2" id="day" name="day"/>
-											<input maxlength="2" id="month" name="month"/>
-											<input maxlength="4" id="year" name="year"/>
+	   	    	    					<div class="special_size_inputs">
+											<p>
+												<input maxlength="2" id="jour" name="jour" placeholder="JJ"/>/
+												<input maxlength="4" id="mois" name="mois" placeholder="MM" />/
+												<input maxlength="6" id="annee" name="annee" placeholder="AAAA" />
+											<p>
 										</div>
 									</div>
 
@@ -142,13 +130,13 @@
 	    	        					<?php
 	    	        					?>
 	    	        					<div class="bloc_boutons">
-											<input type="radio" id="Homme" name="sex" value="Homme" <?php if($Sexe=="Homme"){echo "checked";} ?>/>
+											<input type="radio" id="Homme" name="sexe" value="Homme" <?php if($Sexe=="Homme"){echo "checked";} ?>/>
 											<label for="Homme">Homme</label>
-											<input type="radio" id="Femme" name="sex" value="Femme" <?php if($Sexe=="Femme"){echo "checked";} ?>/>
+											<input type="radio" id="Femme" name="sexe" value="Femme" <?php if($Sexe=="Femme"){echo "checked";} ?>/>
 											<label for="Femme">Femme</label>
-											<input type="radio" id="Autre" name="sex" value="Autre" <?php if($Sexe=="Autre"){echo "checked";} ?>/>
+											<input type="radio" id="Autre" name="sexe" value="Autre" <?php if($Sexe=="Autre"){echo "checked";} ?>/>
 											<label for="Autre">Autre</label>
-											<input type="radio" id="Non-precise" name="sex" value="Non-precise" <?php if($Sexe=="Non-precise"){echo "checked";} ?>/>
+											<input type="radio" id="Non-precise" name="sexe" value="Non-precise" <?php if($Sexe=="Non-precise"){echo "checked";} ?>/>
 											<label for="Non-precise">Non-précisé</label>
 		   		         				</div>	
 									</div>
@@ -157,25 +145,28 @@
 										<div class="info">
 	           		 						<label for="mail">Courriel :</label>
 	           		 					</div>
-										<input name="mail" /><br/>
+										<input name="mail" value=<?php echo $Courriel; ?> /><br/>
 									</div>
 
 									<div class="ligne">
 										<div class="info">
-	            							<label for="address">Adresse :</label>
+	            							<label for="adresse">Adresse :</label>
 	            						</div>
-										<input maxlength="20" id="rue" name="rue" placeholder=<?php echo $Rue; ?> />
-										<input maxlength="12" id="ville" name="ville" placeholder=<?php echo $Ville; ?> /><br/>
-										<input maxlength="6" id="code" name="code" placeholder=<?php echo $CodePostal; ?> />
-										<input maxlength="12" id="region" name="region" placeholder=<?php echo $Region; ?> />
-										<input maxlength="10" id="pays" name="pays" placeholder=<?php echo $Pays; ?> />
+	            						<div class="special_size_inputs">
+	            							<input maxlength="4" id="numeroRue" name="numeroRue" value=<?php echo $NumeroRue; ?> />
+											<input maxlength="20" id="rue" name="rue" value=<?php echo $Rue; ?> />
+											<input maxlength="12" id="ville" name="ville" value=<?php echo $Ville; ?> /><br/>
+											<input maxlength="6" id="code" name="code" value=<?php echo $CodePostal; ?> />
+											<input maxlength="12" id="region" name="region" value=<?php echo $Region; ?> />
+											<input maxlength="10" id="pays" name="pays" value=<?php echo $Pays; ?> />
+										</div>
 									</div>
 
 									<div class="ligne">
 										<div class="info">
-	            							<label id="phone" for="phone">Téléphone portable :</label>
+	            							<label id="telephone" for="telephone">Téléphone portable :</label>
 	            						</div>
-										<input id="phone" name="phone" placeholder=<?php echo $Portable; ?> /><br/>
+										<input id="telephone" name="telephone" value=<?php echo $Portable; ?> /><br/>
 									</div>
 
 									<div class="bloc_add"> 

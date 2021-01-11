@@ -25,7 +25,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	<body>
 
 		<?php
-		if(isset($_POST['account']) && isset($_POST['id']) && isset($_POST['name_1']) && isset($_POST['name_2']) && isset($_POST['surname']) && isset($_POST['day']) && isset($_POST['month']) && isset($_POST['year']) && isset($_POST['sex']) && isset($_POST['mail']) && isset($_POST['numeroRue']) && isset($_POST['ville']) && isset($_POST['code']) && isset($_POST['region']) && isset($_POST['pays']) && isset($_POST['phone'])){
+		if(isset($_POST['type_compte']) && isset($_POST['id']) && isset($_POST['nom']) && isset($_POST['nom_usage']) && isset($_POST['prenom']) && isset($_POST['jour']) && isset($_POST['mois']) && isset($_POST['annee']) && isset($_POST['sexe']) && isset($_POST['mail']) && isset($_POST['numeroRue']) && isset($_POST['ville']) && isset($_POST['code']) && isset($_POST['region']) && isset($_POST['pays']) && isset($_POST['telephone'])){
 		
 			/*try{
 				$bdd = new PDO('mysql:host=localhost; dbname=app2;port=3308', 'root', '');
@@ -37,15 +37,15 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 			$add_personne = $bdd->prepare("INSERT INTO personne(NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance,Sexe, Courriel, Portable, Adresse_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			$nir=$_POST['id'];
 			$mdp="mdp";
-			$ndf=$_POST['name_1'];
-			$ndu=$_POST['name_2'];
-			$p1=$_POST['surname'];
-			$p2=$_POST['surname1'];
-			$p3=$_POST['surname2'];
+			$ndf=$_POST['nom'];
+			$ndu=$_POST['nom_usage'];
+			$p1=$_POST['prenom'];
+			$p2=$_POST['prenom_2'];
+			$p3=$_POST['prenom_3'];
 			$date=NULL;
-			$sex=$_POST['sex'];
+			$sex=$_POST['sexe'];
 			$mail=$_POST['mail'];
-			$phone=$_POST['phone'];
+			$phone=$_POST['telephone'];
 			$adresse=NULL;
 			$add_personne->execute(array($nir, $mdp, $ndf, $ndu, $p1, $p2, $p3, $date, $sex, $mail, $phone, $adresse));
 
@@ -95,18 +95,24 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 					break;
 			}
 			$add_compte->closeCursor();*/
-
-			$pass=1;
-			sleep(2);
-			if($pass){
-				if($_POST['account']=='1'){
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			/*sleep(1);
+			if('1'){
+				if($_POST['type_compte']=='1'){
 					header('Location: AccueilAdministrateur.php');
-				}elseif($_POST['account']=='2'||$_POST['account']=='3'){
+				}elseif($_POST['type_compte']=='2'||$_POST['type_compte']=='3'){
 					header('Location: AccueilAutorite.php');
-				}elseif($_POST['account']=='4'){
+				}elseif($_POST['type_compte']=='4'){
 					header('Location: AccueilCitoyen.php');
 				}
+			}*/
+
+			sleep(1);
+				if('1'){
+					// Redirection vers Rechercheutilisateur.php (la page précédente)
+					header('Location: GestionUtilisateurs.php');
 			}
+
 		}else{
 			//Header
 			include("vues/Header.php");
@@ -121,16 +127,16 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	            		<form method="post">
 	            			<div class="ligne">
 	            				<div class="info">
-	            					<label for="account">Type de compte* :</label>
+	            					<label for="type_compte">Type de compte* :</label>
 	            				</div>
 	            				<div class="bloc_boutons">
-		            				<input type="radio" id="citizen" name="account" value="1"/>
+		            				<input type="radio" id="citizen" name="type_compte" value="1"/>
 		            				<label for="citizen">Citoyen</label>
-		            				<input type="radio" id="police" name="account" value="2"/>
+		            				<input type="radio" id="police" name="type_compte" value="2"/>
 		            				<label for="police">Agent de Police</label>
-		            				<input type="radio" id="school" name="account" value="3"/>
+		            				<input type="radio" id="school" name="type_compte" value="3"/>
 		            				<label for="school">Auto-école</label>
-		            				<input type="radio" id="admin" name="account" value="4"/>
+		            				<input type="radio" id="admin" name="type_compte" value="4"/>
 		            				<label for="admin">Administrateur</label>
 		            			</div>
 	            			</div>
@@ -142,24 +148,24 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="name_1">Nom de famille* :</label>
+	            					<label for="nom">Nom de famille* :</label>
 	            				</div>
-								<input name="name_1"/>
+								<input name="nom"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="name_2">Nom d'usage :</label>
+	            					<label for="nom_usage">Nom d'usage :</label>
 	            				</div>
-								<input name="name_2"/>
+								<input name="nom_usage"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
 									<label for="surname">Prénoms :<!--<strong> (séparés par une virgule)</strong>--></label>
 	            				</div>
 	            				<div class="special_size_inputs">
-									<input maxlength="12" id="surname" name="surname"/>
-									<input maxlength="12" id="surname1" name="surname1"/>
-									<input maxlength="12" id="surname2" name="surname2"/>
+									<input maxlength="12" id="prenom" name="prenom"/>
+									<input maxlength="12" id="prenom_2" name="prenom_2"/>
+									<input maxlength="12" id="prenom_3" name="prenom_3"/>
 								</div>
 							</div>
 							<div class="ligne">
@@ -167,23 +173,25 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 									<label for="birthdate">Date de naissance* :</label>
 	            				</div>
 	            				<div class="special_size_inputs">
-									<input maxlength="2" id="day" name="day"/>
-									<input maxlength="2" id="month" name="month"/>
-									<input maxlength="4" id="year" name="year"/>
+	            					<p>
+										<input maxlength="2" id="jour" name="jour" placeholder="JJ"/>/
+										<input maxlength="4" id="mois" name="mois" placeholder="MM" />/
+										<input maxlength="6" id="annee" name="annee" placeholder="AAAA" />
+									<p>
 								</div>
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="sex">Sexe* :</label>
+	            					<label for="sexe">Sexe* :</label>
 	            				</div>
 	            				<div class="bloc_boutons">
-									<input type="radio" id="Homme" name="sex" value="Homme"/>
+									<input type="radio" id="Homme" name="sexe" value="Homme"/>
 									<label for="Homme">Homme</label>
-									<input type="radio" id="Femme" name="sex" value="Femme"/>
+									<input type="radio" id="Femme" name="sexe" value="Femme"/>
 									<label for="Femme">Femme</label>
-									<input type="radio" id="Autre" name="sex" value="Autre"/>
+									<input type="radio" id="Autre" name="sexe" value="Autre"/>
 									<label for="Autre">Autre</label>
-									<input type="radio" id="Non-precise" name="sex" value="Non-precise" />
+									<input type="radio" id="Non-precise" name="sexe" value="Non-precise" />
 									<label for="Non-precise">Non-précisé</label>
 		            			</div>	
 							</div>
@@ -195,9 +203,10 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="address">Adresse :</label>
+	            					<label for="adresse">Adresse :</label>
 	            				</div>
 	            				<div class="special_size_inputs">
+	            					<input maxlength="4" id="numeroRue" name="numeroRue"/>
 									<input maxlength="20" id="rue" name="rue"/>
 									<input maxlength="12" id="ville" name="ville"/><br/>
 									<input maxlength="6" id="code" name="code"/>
@@ -207,10 +216,10 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label id="phone" for="phone">Téléphone portable :</label>
+	            					<label id="telephone" for="telephone">Téléphone portable :</label>
 	            				</div>
 	            				<div class="special_size_inputs">
-	            					<input maxlength="10" id="phone" name="phone"/><br/>
+	            					<input maxlength="10" id="telephone" name="telephone"/><br/>
 	            				</div>
 							</div>
 							<div class="bloc_add"> 

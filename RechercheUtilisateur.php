@@ -113,22 +113,18 @@
 					require("modele/connexionbdd.php");
 
 					/**
-						Definition des regex pour le nom rechercher et l'année de naissance.
-
-						L'utilisation de LIKE dans la requête SQL serait peut-être préférable ?
-						Cette partie est-elle vraiment nécessaire ?
+						Definition des regex pour le nom recherché.
 					**/
-					$regex = '"^' . $_POST['id_name'] . '"';
-					$year = '"^'.$_POST['year'].'"';
+					$regex = '"%' . $_POST['id_name'] . '%"';
 
 					/**
 						La requête SQL permet d'aller récuperer dans la base de donnée
 						les informations concernant des utilisateurs en fonction des différents
 						choix fait dans le formulaire (et donc les filtres).
 					
-						A faire : Proteger la requête avec prepare() et execute(), Nombre de tests, utiliser LIKE à la place de REGEXP
+						A faire : Nombre de tests
 					**/
-					$recherche = $bdd->query('SELECT * FROM personne JOIN adresse ON personne.Adresse_Id=adresse.Id WHERE personne.Sexe="'. $_POST['sexe'] .'" OR personne.DateNaissance REGEXP'. $year .' OR (personne.NIR OR personne.NomDeFamille OR personne.NomDUsage OR personne.Prenom1 OR personne.Prenom2 OR personne.Prenom3) REGEXP'. $regex .' OR adresse.Region="'. $_POST['region'] .'"');
+					$recherche = $bdd->query('SELECT * FROM personne INNER JOIN adresse ON personne.Adresse_Id=adresse.Id WHERE personne.Sexe="'. $_POST['sexe'] .'" OR personne.DateNaissance LIKE "'. $_POST['year'] .'%" OR personne.NIR LIKE '. $regex .' OR personne.NomDeFamille LIKE '. $regex .' OR adresse.Region="'. $_POST['region'] .'"');
 					?>
 
 					<!-- L'Affichage des résultats se trouve sous forme de tableaux -->
