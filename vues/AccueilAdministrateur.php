@@ -11,7 +11,7 @@
 <body>
 
     <!--Header-->
-    <?php include("php/header.php"); ?>
+    <?php include("vues/Header.php"); ?>
 
     <div class="div_page">
         <h2 class="bienvenue">
