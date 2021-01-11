@@ -64,16 +64,16 @@
 							}catch(Exception $e){
 								die('Erreur : '. $e->getMessage());
 							}*/
-							require("modele/cobdd_departement.php");
+							require("modele/connexionbdd.php");
 
 							/**
 							On Affiche les différents départements dans notre select en tant que option,
 							ainsi ils peuvent être selectionnés et envoyer par formulaire
 							sous $_POST['region']
 							**/
-							$region = $bdd->query('SELECT departement_nom FROM departement');
+							$region = $bdd->query('SELECT Region FROM regionfr');
 							while($display = $region->fetch()){
-								echo'<option value="'. $display['departement_nom'] .'">'. $display['departement_nom'] .'</option>';
+								echo'<option value="'. $display['Region'] .'">'. $display['Region'] .'</option>';
 							}
 							$region->closeCursor();
 							?>
@@ -219,12 +219,12 @@
 							}catch(Exception $e){
 								die('Erreur : '. $e->getMessage());
 							}*/
-							require("modele/cobdd_departement.php");
+							require("modele/connexionbdd.php");
 
 
-							$region = $bdd->query('SELECT departement_nom FROM departement');
+							$region = $bdd->query('SELECT Region FROM regionfr');
 							while($display = $region->fetch()){
-								echo'<option value="'. $display['departement_nom'] .'">'. $display['departement_nom'] .'</option>';
+								echo'<option value="'. $display['Region'] .'">'. $display['Region'] .'</option>';
 							}
 							$region->closeCursor();
 							?>

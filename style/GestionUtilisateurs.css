@@ -195,3 +195,12 @@ strong{
 	font-size:12px;
 	font-weight:normal;
 }
+
+select{
+	background-color: #DDD;
+	box-sizing: border-box;
+	border:none;
+	padding: 0.25rem;
+	font-size: 1rem;
+	font-weight: 200;
+}

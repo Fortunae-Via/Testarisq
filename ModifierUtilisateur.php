@@ -27,8 +27,8 @@
 					$update->closeCursor();
 
 					// Mise à Jour de la table "adresse"
-					$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=? WHERE Id=? ');
-					$update->execute(array($_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['pays'], $_GET['NIR']));
+					$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=?, Region=? WHERE Id=? ');
+					$update->execute(array($_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['pays'], $_POST['region'], $_GET['NIR']));
 					$update->closeCursor();
 
 
@@ -157,7 +157,23 @@
 											<input maxlength="20" id="rue" name="rue" value=<?php echo $Rue; ?> />
 											<input maxlength="12" id="ville" name="ville" value=<?php echo $Ville; ?> /><br/>
 											<input maxlength="6" id="code" name="code" value=<?php echo $CodePostal; ?> />
-											<input maxlength="12" id="region" name="region" value=<?php echo $Region; ?> />
+											<select name="region">
+											<?php
+												require("modele/connexionbdd.php");
+
+
+												$region = $bdd->query('SELECT Region FROM regionfr');
+												while($display = $region->fetch()){
+													if($display['Region']==$Region){
+														echo'<option selected value="'. $display['Region'] .'">'. $display['Region'] .'</option>';
+													}else{
+														echo'<option value="'. $display['Region'] .'">'. $display['Region'] .'</option>';
+													}
+												}
+												$region->closeCursor();
+											?>
+											</select>
+											<!--<input maxlength="12" id="region" name="region" value=<?php echo $Region; ?> />-->
 											<input maxlength="10" id="pays" name="pays" value=<?php echo $Pays; ?> />
 										</div>
 									</div>
