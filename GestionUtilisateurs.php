@@ -177,7 +177,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 										<input maxlength="2" id="jour" name="jour" placeholder="JJ"/>/
 										<input maxlength="4" id="mois" name="mois" placeholder="MM" />/
 										<input maxlength="6" id="annee" name="annee" placeholder="AAAA" />
-									<p>
+									</p>
 								</div>
 							</div>
 							<div class="ligne">
