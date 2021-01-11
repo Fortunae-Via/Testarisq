@@ -51,12 +51,16 @@
 						$Prenom1=$display['Prenom1'];
 						$Prenom2=$display['Prenom2'];
 						$Prenom3=$display['Prenom3'];
-						$DateNaissance=$display['DateNaissance'];
+						$DateNaissance[]=$display['DateNaissance'];
 						$Sexe=$display['Sexe'];
 						$Courriel=$display['Courriel'];
 						$Portable=$display['Portable'];
 					}
 					$placeholder->closeCursor();
+
+					$Annee=$DateNaissance[0][0].$DateNaissance[0][1].$DateNaissance[0][2].$DateNaissance[0][3];
+					$Mois=$DateNaissance[0][5].$DateNaissance[0][6];
+					$Jour=$DateNaissance[0][8].$DateNaissance[0][9];
 
 					// Récupération des informations de la table adresse
 					$placeholder = $bdd->prepare("SELECT * FROM adresse WHERE Id=?");
@@ -85,7 +89,7 @@
 
 									<div class="ligne">
 										<div class="info">
-	            							<label for="nom">Nom de famille :</label>
+	            							<label for="nom">Nom de famille<strong style="color:red;">*</strong> :</label>
 	            						</div>
 	            						<!-- Pré-remplissage du formulaire dans le cas où aucune modification n'est faite -->
 										<input name="nom" value=<?php echo $NomDeFamille; ?> />
@@ -93,39 +97,41 @@
 
 									<div class="ligne">
 										<div class="info">
-	            							<label for="nom_usage">Nom d'usage :</label>
+	            							<label for="nom_usage">Nom d'usage<strong style="color:red;">*</strong> :</label>
 	            						</div>
 										<input name="nom_usage" value=<?php echo $NomDUsage; ?> />
 									</div>
 
 									<div class="ligne">
 										<div class="info">
-											<label for="surname">Prénoms : <!--<strong> (séparés par une virgule)</strong>--></label>
+											<label for="surname">Prénoms<strong style="color:red;">*</strong> : <br/><strong> (séparés par une virgule)</strong></label>
 	            						</div>
 	            						<div class="special_size_inputs">
-											<input maxlength="12" id="prenom" name="prenom" value=<?php echo $Prenom1; ?> />
-											<input maxlength="12" id="prenom_2" name="prenom_2" value=<?php echo $Prenom2; ?> />
-											<input maxlength="12" id="prenom_3" name="surname_3" value=<?php echo $Prenom3; ?> />
-										</div>
-									</div>
-
-									<div class="ligne">
-										<div class="info">
-											<label for="birthdate">Date de naissance :</label>
-	        	    					</div>
-
-	   	    	    					<div class="special_size_inputs">
-											<p>
-												<input maxlength="2" id="jour" name="jour" placeholder="JJ"/>/
-												<input maxlength="4" id="mois" name="mois" placeholder="MM" />/
-												<input maxlength="6" id="annee" name="annee" placeholder="AAAA" />
+	            							<p>
+												<input maxlength="12" id="prenom" name="prenom" value=<?php echo $Prenom1; ?> />,
+												<input maxlength="12" id="prenom_2" name="prenom_2" value=<?php echo $Prenom2; ?> />,
+												<input maxlength="12" id="prenom_3" name="surname_3" value=<?php echo $Prenom3; ?> />
 											</p>
 										</div>
 									</div>
 
 									<div class="ligne">
 										<div class="info">
-	    	        						<label for="sex">Sexe :</label>
+											<label for="birthdate">Date de naissance<strong style="color:red;">*</strong> : <strong> (JJ/MM/AAAA)</strong></label>
+	        	    					</div>
+
+	   	    	    					<div class="special_size_inputs">
+											<p>
+												<input maxlength="2" id="jour" name="jour" value=<?php echo $Jour; ?> />/
+												<input maxlength="4" id="mois" name="mois" value=<?php echo $Mois; ?> />/
+												<input maxlength="6" id="annee" name="annee" value=<?php echo $Annee; ?> />
+											</p>
+										</div>
+									</div>
+
+									<div class="ligne">
+										<div class="info">
+	    	        						<label for="sex">Sexe<strong style="color:red;">*</strong> :</label>
 	    	        					</div>
 	    	        					<?php
 	    	        					?>
@@ -143,14 +149,14 @@
 
 									<div class="ligne">
 										<div class="info">
-	           		 						<label for="mail">Courriel :</label>
+	           		 						<label for="mail">Courriel<strong style="color:red;">*</strong> :</label>
 	           		 					</div>
 										<input name="mail" value=<?php echo $Courriel; ?> /><br/>
 									</div>
 
 									<div class="ligne">
 										<div class="info">
-	            							<label for="adresse">Adresse :</label>
+	            							<label for="adresse">Adresse<strong style="color:red;">*</strong> :<br/><strong> (Numero de Rue, Rue, Ville, Code Postal, Region, Pays)</strong></label>
 	            						</div>
 	            						<div class="special_size_inputs">
 	            							<input maxlength="4" id="numeroRue" name="numeroRue" value=<?php echo $NumeroRue; ?> />
@@ -180,7 +186,7 @@
 
 									<div class="ligne">
 										<div class="info">
-	            							<label id="telephone" for="telephone">Téléphone portable :</label>
+	            							<label id="telephone" for="telephone">Téléphone portable<strong style="color:red;">*</strong> :</label>
 	            						</div>
 										<input id="telephone" name="telephone" value=<?php echo $Portable; ?> /><br/>
 									</div>
@@ -189,6 +195,7 @@
 										<button id="add" type="submit">Modifier Utilisateur</button>
 									</div>
 
+									<strong style="color:red;"> (* obligatoire)</strong>
 								</form>
 							</div>
         				</div>
