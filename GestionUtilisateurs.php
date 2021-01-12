@@ -164,6 +164,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 									<input maxlength="12" id="ville" name="ville" placeholder="Paris"/><br/>
 									<input maxlength="6" id="code" name="code" placeholder="750xx" />
 									<select name="region">
+										<option selected hidden>Région</option>
 										<?php
 											require("modele/connexionbdd.php");
 

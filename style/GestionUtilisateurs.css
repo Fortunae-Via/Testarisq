@@ -132,7 +132,7 @@ button:active {
 	background-color: black ;
 }
 
-input{
+input, select{
 	box-sizing:border-box;
 	padding:0.5rem;
 	border:none;
@@ -171,6 +171,10 @@ input{
 	width: 15rem;
 }
 
+.special_size_inputs select {
+	width: 13rem;
+}
+
 
 .bloc_add {
 	display: flex;
@@ -196,13 +200,4 @@ input{
 strong{
 	font-size:12px;
 	font-weight:normal;
-}
-
-select{
-	background-color: #DDD;
-	box-sizing: border-box;
-	border:none;
-	padding: 0.25rem;
-	font-size: 1rem;
-	font-weight: 200;
 }
