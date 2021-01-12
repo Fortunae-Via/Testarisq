@@ -12,4 +12,4 @@ $titre_page="Une question ?";
 $sujet_defaut="Question sur l'utilisation";
 
 //On affiche la page
-require 'vues/Formulaire.php'
+require 'vues/Formulaire.php';
