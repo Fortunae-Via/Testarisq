@@ -43,3 +43,12 @@
 .main-head nav li :hover{
     color: #3388BB;
 }
+
+
+@media screen and (max-width: 615px)
+{
+    .main-head nav ul{
+    flex-direction: column;
+    align-items: flex-end;
+    }
+}
