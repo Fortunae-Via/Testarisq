@@ -95,13 +95,13 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	            				<div class="info">
 	            					<label for="id">NIR<strong style="color:red;">*</strong> :</label>
 	            				</div>
-	            				<input name="id" placeholder="xxxxxxxxxxxxx" />
+	            				<input name="id" placeholder="00000000000" />
 							</div>
 							<div class="ligne">
 								<div class="info">
 	            					<label for="nom">Nom de famille<strong style="color:red;">*</strong>  :</label>
 	            				</div>
-								<input name="nom" placeholder="Nom de famille"/>
+								<input name="nom" placeholder="Nom"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
@@ -111,11 +111,11 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-									<label for="surname">Prénoms<strong style="color:red;">*</strong> :</label>
+									<label for="surname">Prénoms<strong style="color:red;">*</strong> : <br/><strong> (séparés par une virgule)</strong></label>
 	            				</div>
 	            				<div class="special_size_inputs">
 	            					<p>
-										<input maxlength="12" id="prenom" name="prenom" placeholder="Prénom*"/>
+										<input maxlength="12" id="prenom" name="prenom" placeholder="Prénom *"/>
 										<input maxlength="12" id="prenom_2" name="prenom_2" placeholder="2ème Prénom" />
 										<input maxlength="12" id="prenom_3" name="prenom_3" placeholder="3ème Prénom"/>
 									</p>
@@ -123,12 +123,12 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							</div>
 							<div class="ligne">
 								<div class="info">
-									<label for="birthdate">Date de naissance<strong style="color:red;">*</strong> :</label>
+									<label for="birthdate">Date de naissance<strong style="color:red;">*</strong> : <strong> (JJ/MM/AAAA)</strong></label>
 	            				</div>
 	            				<div class="special_size_inputs">
 	            					<p>
-										<input maxlength="2" id="jour" name="jour" placeholder="JJ"/> /
-										<input maxlength="4" id="mois" name="mois" placeholder="MM" /> /
+										<input maxlength="2" id="jour" name="jour" placeholder="JJ"/>/
+										<input maxlength="4" id="mois" name="mois" placeholder="MM" />/
 										<input maxlength="6" id="annee" name="annee" placeholder="AAAA" />
 									</p>
 								</div>
@@ -152,19 +152,18 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 								<div class="info">
 	            					<label for="mail">Courriel<strong style="color:red;">*</strong>  :</label>
 	            				</div>
-								<input name="mail" placeholder="xx@xx.xx"/><br/>
+								<input name="mail" /><br/>
 							</div>
 							<div class="ligne">
 								<div class="info">
-	            					<label for="adresse">Adresse<strong style="color:red;">*</strong> :</label>
+	            					<label for="adresse">Adresse<strong style="color:red;">*</strong> :<br/><strong> (Numero de Rue, Rue, Ville, Code Postal, Region, Pays)</strong></label>
 	            				</div>
 	            				<div class="special_size_inputs">
-	            					<input maxlength="4" id="numeroRue" name="numeroRue" placeholder="N°"/>
-									<input maxlength="20" id="rue" name="rue" placeholder="Rue"/>
-									<input maxlength="12" id="ville" name="ville" placeholder="Ville"/><br/>
-									<input maxlength="6" id="code" name="code" placeholder="Code Postal" />
+	            					<input maxlength="4" id="numeroRue" name="numeroRue" placeholder="xxx"/>
+									<input maxlength="20" id="rue" name="rue"/>
+									<input maxlength="12" id="ville" name="ville" placeholder="Paris"/><br/>
+									<input maxlength="6" id="code" name="code" placeholder="750xx" />
 									<select name="region">
-										<option selected hidden>Région</option>
 										<?php
 											require("modele/connexionbdd.php");
 
@@ -184,7 +183,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	            					<label id="telephone" for="telephone">Téléphone portable<strong style="color:red;">*</strong>  :</label>
 	            				</div>
 	            				<div class="special_size_inputs">
-	            					<input maxlength="10" id="telephone" name="telephone" placeholder="xxxxxxxxxx" /><br/>
+	            					<input maxlength="10" id="telephone" name="telephone" placeholder="06xxxxxxxx" /><br/>
 	            				</div>
 							</div>
 							<div class="bloc_add"> 
@@ -200,11 +199,10 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
             	    	<h3>Rechercher un utilisateur</h3>
             	    	<img id="fleche2" class="fleche_expand" src="vues/img/expand.png" alt="fleche_expand"/>
            			</button>
-           			<div id="dropdown2" class="dropdown-content" style="display: none;">
-                		<p>Bloc recherche administrateur</p>
+           			<div id="dropdown2" class="dropdown-content" style="display: block;">
+                		<?php include("RechercheUtilisateur.php"); ?>
             		</div>
         		</div>
-				<section></section>
 			</div>
 		<?php
 		}
