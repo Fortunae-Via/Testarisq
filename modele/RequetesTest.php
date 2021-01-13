@@ -98,3 +98,13 @@ function AfficherResultat($bdd,$Valeur) //Pour afficher les résultats sur la pa
 	$resultat = $requete->fetch();
 	return $Valeur;
 }
+
+function AfficherTest($bdd,$DateDebut)
+{
+	$requete = $bdd->prepare("SELECT DateDebut, test.Id, personne.NIR FROM test INNER JOIN personne ON (test.Personne_NIR = personne.NIR AND personne.NIR = ?)");
+	$requete->execute(array($NIR));
+	while ($resultat = $requete->fetch())
+	{
+		echo 'Test du'.$resultat["DateDebut"]
+	}
+}

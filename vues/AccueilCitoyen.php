@@ -21,12 +21,12 @@
         <section>
             <div class="Test1">
                 <header>
-                    <p>Vos derniers résultats : Test du <a href="resultat_test_3.php" class='bouton1'>10/12/2020</a></p>
+                    <p>Vos derniers résultats : <?php AfficherTest($bdd,$DateDebut); ?></p>
                 </header>
                 <a href="#"><img src="vues/img/graphs.png" alt="GraphiquesDernierTest"/></a>
             </div>
 
-        	<div class="Test2">
+<!--        	<div class="Test2">
                 <a href="resultat_test_2.php" class='bouton2'>Test du 14/11/2020</a>
             </div>
 
@@ -35,6 +35,6 @@
             </div>
         </section>
     
-    </div>
+    </div> -->
 
 </body>
