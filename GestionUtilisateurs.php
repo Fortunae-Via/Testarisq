@@ -101,7 +101,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 								<div class="info">
 	            					<label for="nom">Nom de famille<strong style="color:red;">*</strong>  :</label>
 	            				</div>
-								<input name="nom" placeholder="Nom de famille"/>
+								<input name="nom" placeholder="Nom"/>
 							</div>
 							<div class="ligne">
 								<div class="info">
@@ -200,11 +200,10 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
             	    	<h3>Rechercher un utilisateur</h3>
             	    	<img id="fleche2" class="fleche_expand" src="vues/img/expand.png" alt="fleche_expand"/>
            			</button>
-           			<div id="dropdown2" class="dropdown-content" style="display: none;">
-                		<p>Bloc recherche administrateur</p>
+           			<div id="dropdown2" class="dropdown-content" style="display: block;">
+                		<?php include("RechercheUtilisateur.php"); ?>
             		</div>
         		</div>
-				<section></section>
 			</div>
 		<?php
 		}
