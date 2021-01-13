@@ -132,7 +132,7 @@ button:active {
 	background-color: black ;
 }
 
-input{
+input, select {
 	box-sizing:border-box;
 	padding:0.5rem;
 	border:none;
@@ -171,6 +171,9 @@ input{
 	width: 15rem;
 }
 
+.special_size_inputs select {
+ 	width: 13rem;
+ }
 
 .bloc_add {
 	display: flex;
@@ -235,27 +238,6 @@ input{
 	background-color:#DDD;
 	width:100%;
 }
-
-
-/* On enlève tout le style par défaut des boutons */
-button {
-    display: inline-block;
-    border: none;
-    text-decoration: none;
-    background: none;
-   	font: inherit;
-    cursor: pointer;
-    text-align: center;
-}
-button:hover,button:focus {
-    background: white;
-    outline: none
-}
-button:active {
-    transform: scale(0.99);
-}
-/* On enlève tout le style par défaut des boutons */
-
 
 button[type="submit"] {
 	float:right;
