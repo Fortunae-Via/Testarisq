@@ -1,6 +1,6 @@
 <?php
 
-function BonneCombinaison($bdd,$NIR,$mdp)
+function BonneCombinaison(PDO $bdd, string $NIR, string $mdp) : bool
 {
 	$requete = $bdd->prepare("SELECT * FROM Personne WHERE NIR = ? AND MotDePasse = ? ");
 	$requete->execute(array($NIR,$mdp));
@@ -13,7 +13,7 @@ function BonneCombinaison($bdd,$NIR,$mdp)
 	}
 }
 
-function ACompte($bdd,$NIR,$TypeCompteDemande)
+function ACompte(PDO $bdd, string $NIR, string $TypeCompteDemande) : bool
 {
 	$requete = $bdd->prepare("SELECT * FROM Compte WHERE Personne_NIR = ? AND TypeCompte_Type = ?");
 	$requete->execute(array($NIR,$TypeCompteDemande));

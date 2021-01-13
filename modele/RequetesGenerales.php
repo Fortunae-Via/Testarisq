@@ -1,7 +1,7 @@
 <?php
 
 
-function InfosPersonne($bdd,$NIR)
+function InfosPersonne(PDO $bdd, string $NIR): array
 {
 	$requete = $bdd->prepare("SELECT * FROM Personne WHERE NIR = ? ");
 	$requete->execute(array($NIR));
@@ -9,7 +9,7 @@ function InfosPersonne($bdd,$NIR)
 	return $InfosPersonne;
 }
 
-function InfosAdresse($bdd,$id)
+function InfosAdresse(PDO $bdd, int $id): array
 {
 	$requete = $bdd->prepare("SELECT * FROM Adresse WHERE Id = ? ");
 	$requete->execute(array($id));

@@ -1,6 +1,6 @@
 <?php
 
-function NIRExiste($bdd,$NIR)
+function NIRExiste(PDO $bdd, string $NIR) : bool
 {
 	$requete = $bdd->prepare("SELECT * FROM Personne WHERE NIR = ? ");
 	$requete->execute(array($NIR));
@@ -14,7 +14,7 @@ function NIRExiste($bdd,$NIR)
 
 }
 
-function BoitierExiste($bdd,$IdBoitier)
+function BoitierExiste(PDO $bdd, int $IdBoitier) : bool
 {
 	$requete = $bdd->prepare("SELECT * FROM Boitier WHERE Id = ? ");
 	$requete->execute(array($IdBoitier));
@@ -27,7 +27,8 @@ function BoitierExiste($bdd,$IdBoitier)
 	}
 }
 
-function NouveauTest($bdd,$Coordonnees,$NIRConducteur,$IdBoitier) {
+function NouveauTest(PDO $bdd, string $Coordonnees, string $NIRConducteur, int $IdBoitier) : int 
+{
 	$requete = $bdd->prepare("
 	INSERT INTO Test (DateDebut, Position, Personne_NIR, Boitier_Id) 
 	VALUES (CURDATE(), :position, :personne_nir, :boitier_id) 
@@ -41,7 +42,7 @@ function NouveauTest($bdd,$Coordonnees,$NIRConducteur,$IdBoitier) {
 	return ($IdInsert);
 }
 
-function IdCapteur($bdd,$IdBoitier,$IdTypeCapteur)
+function IdCapteur(PDO $bdd, int $IdBoitier, int $IdTypeCapteur) : int
 {
 	$requete = $bdd->prepare("SELECT Id FROM Capteur WHERE Boitier_Id = ? AND TypeCapteur_Id = ?");
 	$requete->execute(array($IdBoitier,$IdTypeCapteur));
@@ -49,7 +50,8 @@ function IdCapteur($bdd,$IdBoitier,$IdTypeCapteur)
 	return $IdCapteur['Id'];
 }
 
-function NouvelleMesure($bdd,$IdTest,$IdCapteur) {
+function NouvelleMesure(PDO $bdd, int $IdTest, int $IdCapteur) : int 
+{
 	$requete = $bdd->prepare("
 	INSERT INTO Mesure (DateHeure, Test_Id, Capteur_Id) 
 	VALUES (NOW(), :test_id, :capteur_id) 
