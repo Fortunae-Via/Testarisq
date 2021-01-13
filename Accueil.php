@@ -39,7 +39,7 @@ else if (isset($_POST['identifiant'],$_POST['mdp'])) {
 			$_SESSION['NIR'] = $NIR;	//On note le NIR en session
             $_SESSION['Infos'] = InfosPersonne($bdd,$NIR);	//On note les infos de l'utilisateur en session
 
-			if (in_array($TypeCompteDemande,ListeComptes($bdd,$NIR))){	//S'il a bien le compte qu'il demande
+			if (ACompte($bdd,$NIR,$TypeCompteDemande)){	//S'il a bien le compte qu'il demande
 
 				$_SESSION['TypeCompte'] = $TypeCompteDemande;
 				AffichageAccueil($TypeCompteDemande); 

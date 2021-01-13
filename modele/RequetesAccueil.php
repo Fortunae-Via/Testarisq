@@ -13,12 +13,17 @@ function BonneCombinaison($bdd,$NIR,$mdp)
 	}
 }
 
-function ListeComptes($bdd,$NIR)
+function ACompte($bdd,$NIR,$TypeCompteDemande)
 {
-	$requete = $bdd->prepare("SELECT TypeCompte_Type FROM Compte WHERE Personne_NIR = ? ");
-	$requete->execute(array($NIR));
-	$comptes = $requete->fetch();
-	return $comptes;
+	$requete = $bdd->prepare("SELECT * FROM Compte WHERE Personne_NIR = ? AND TypeCompte_Type = ?");
+	$requete->execute(array($NIR,$TypeCompteDemande));
+	$count = $requete->rowCount();
+	if($count!=0) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 function AfficherTest($bdd,$DateDebut)    //Pour afficher les tests dans l'ordre du plus récent sur la page AccueilCitoyen
