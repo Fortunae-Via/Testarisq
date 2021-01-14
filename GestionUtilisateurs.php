@@ -10,56 +10,82 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	header('Location: Accueil.php');
 }
 
-?>
 
+// Appel de la base de donnée bdd_testarisq
+require("modele/connexionbdd.php");
+//$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
+// Definition des fonctions de requête SQL
+require('modele/RequetesGestion.php');
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>TESTARISQ - Gestion des utilisateurs</title>
-	<meta charset="utf-8"/>
-	<link rel="stylesheet" href="style/style_commun.css" />
-    <link rel="stylesheet" href="style/header.css" />
-    <link rel="stylesheet" href="style/GestionUtilisateurs.css" />
-</head>
-	<body>
+//Si les informations minimales sont rentrées, un ajout à la bdd est possible
+if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['nom']))) && (!(empty($_POST['prenom']))) && (!(empty($_POST['jour']))) && (!(empty($_POST['mois']))) && (!(empty($_POST['annee']))) && (!(empty($_POST['sexe']))) && (!(empty($_POST['mail']))) ){
 
-		<?php
-		// Appel de la base de donnée bdd_testarisq
-		require("modele/connexionbdd.php");
-		// Definition des fonctions de requête SQL
-		require('modele/RequetesGestion.php');
+	$TypeCompte = $_POST['type_compte'];
+	$DonneesUtilisateur = array(
+		'id' => $_POST['id'],
+		'nom' => $_POST['nom'],
+		'prenom' => $_POST['prenom'],
+		'datenaissance' => $_POST['annee']."-".$_POST['mois']."-".$_POST['jour'],
+		'sexe' => $_POST['sexe'],
+		'mail' => $_POST['mail']
+	);
 
-		if(isset($_POST['type_compte']) && isset($_POST['id']) && isset($_POST['nom']) && isset($_POST['nom_usage']) && isset($_POST['prenom']) && isset($_POST['jour']) && isset($_POST['mois']) && isset($_POST['annee']) && isset($_POST['sexe']) && isset($_POST['mail']) && isset($_POST['numeroRue']) && isset($_POST['rue']) && isset($_POST['ville']) && isset($_POST['code']) && isset($_POST['region']) && isset($_POST['pays']) && isset($_POST['telephone'])){
-
-			$caract="abcdefghijklmnopqrstuvwyxz0123456789@!:;,$/?*=+";
-			for($i=1; $i<=12; $i++){
-				$nbr=strlen($caract);
-				$nbr=mt_rand(0, ($nbr-1));
-				$mdp[$i]=$caract[$nbr];
-			}
-			$mdp=implode($mdp);
-
-			$DateNaissance = $_POST['annee']."-".$_POST['mois']."-".$_POST['jour'];
-
-			Ajouter($bdd, $_POST['id'], $_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['region'], $_POST['pays'], $mdp, $_POST['nom'], $_POST['nom_usage'], $_POST['prenom'], $_POST['prenom_2'], $_POST['prenom_3'], $DateNaissance, $_POST['sexe'], $_POST['mail'], $_POST['telephone'], $_POST['type_compte']);
-
-			sleep(1);
-				if('1'){
-					// Redirection vers Rechercheutilisateur.php (la page précédente)
-					header('Location: GestionUtilisateurs.php');
-			}
-
-		}else{
-			// Inclusion du Header
-			include("vues/Header.php");
-
-			// Inclusion de la structure HTML
-			include("vues/VuesGestion.php");
+	// Pour les champs optionels, on note le champ s'il est rempli ou null sinon
+	$liste_verif=array('nom_usage','prenom_2','prenom_3', 'telephone');
+	foreach ($liste_verif as $champ) {
+		if (!(empty($_POST[$champ]))) {		//Si le champ a été rempli
+			$DonneesUtilisateur[$champ]=$_POST[$champ];
 		}
-		?>
- 		<script type="text/javascript" src="js/fonctions_generiques.js">
- 			
- 		</script>
-	</body>
-</html>
+		else {
+			$DonneesUtilisateur[$champ]='NULL';
+		}
+	}
+
+	// On crée le mot de passe de l'utilisateur
+	$caract="abcdefghijklmnopqrstuvwyxz0123456789@!:;,$/?*=+";
+	for($i=1; $i<=12; $i++){
+		$nbr=strlen($caract);
+		$nbr=mt_rand(0, ($nbr-1));
+		$mdp[$i]=$caract[$nbr];
+	}
+	$mdp=implode($mdp);
+	$DonneesUtilisateur['mdp']=$mdp;
+
+	// Pour l'adresse, on regarde si un des champs est rempli
+	if( (!(empty($_POST['numeroRue']))) OR (!(empty($_POST['rue']))) OR (!(empty($_POST['ville']))) OR (!(empty($_POST['code']))) OR (!(empty($_POST['pays']))) ){
+
+		$liste_verif_adresse=array('numeroRue','rue','ville','code','region','pays');
+		foreach ($liste_verif_adresse as $champ_adresse) {
+			if (!(empty($_POST[$champ_adresse]))) {		//Si le champ a été rempli
+				$InfosAdresse[$champ_adresse]=$_POST[$champ_adresse];
+			}
+			else {
+				$InfosAdresse[$champ_adresse]='NULL';
+			}
+		}
+
+		$Id_Adresse=AjouterAdresse($bdd, $InfosAdresse);
+		$DonneesUtilisateur['id_adresse']=$Id_Adresse;
+	}
+	else {
+		$DonneesUtilisateur['id_adresse']='NULL';
+	}
+	
+	AjouterPersonne($bdd, $DonneesUtilisateur);
+
+	if (in_array($TypeCompte, array('AUE','POL','ADM'))) {
+		AjouterCompte($bdd,$DonneesUtilisateur['id'],$TypeCompte);
+	}
+
+	sleep(1);
+		if('1'){
+			// Redirection vers Rechercheutilisateur.php (la page précédente)
+			header('Location: GestionUtilisateurs.php');
+	}
+
+}else{
+
+	// Affichage de la page
+	include("vues/GestionUtilisateurs.php");
+}
+?>
