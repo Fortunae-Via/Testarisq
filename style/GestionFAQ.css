@@ -19,10 +19,6 @@
 	margin-bottom: 3rem;
 }
 
-#bloc_ajout h3{
-	color: #006B83;
-}
-
 #bloc_ajout .ligne {
 	display: flex;
 	align-items: center;
