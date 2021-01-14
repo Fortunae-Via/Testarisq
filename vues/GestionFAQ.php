@@ -16,11 +16,9 @@
 
     <div class="div_page">
 
-        <header>
-            <h2>Gestion de la F.A.Q.</h2>
-        </header>
-
         <div class="bloc_questions">
+
+            <h2>Gestion de la F.A.Q. :</h2>
 
             <?php 
 
@@ -55,11 +53,14 @@
                         </div>      
                     
                         <div class="bloc_add"> 
-                            <button id="add" type="submit">Ajouter Question à la FAQ </button>
+                            <button id="add" type="submit">Ajouter à la F.A.Q. </button>
                         </div>
                     </form>
                 </div>
             </div>
+
+
+            <h2>F.A.Q. actuelle :</h2>
 
             <!-- Les questions de la FAQ -->
 
@@ -88,12 +89,6 @@
             ?>
 
         </div>
-
-        <footer>
-            <p1>Vous ne trouvez pas de réponse à votre question?</p1>
-            <br>
-            <p1>Posez là directement à un administrateur via <a href="PoserQuestion.php"><p2>ce formulaire</p2></a>.</p1>
-        </footer>
 
     </div>
 

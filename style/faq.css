@@ -3,12 +3,9 @@
     margin: auto;
 }
 
-.div_page header {
+.div_page header h2 {
     margin: 2rem;
     text-align: center;
-}
-
-.div_page header h2 {
     color: white;
     font-size: 1.4rem;
 }

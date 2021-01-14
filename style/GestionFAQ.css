@@ -1,3 +1,10 @@
+.bloc_questions h2 {
+    margin: 2rem;
+    text-align: center;
+    color: white;
+    font-size: 1.4rem;
+}
+
 #message_ajout {
     padding: 0.5rem 1rem ;
     background-color: white;
@@ -61,4 +68,8 @@
 	background-color: #B8B8B8;
 	box-sizing: border-box;
 	padding: 0.5rem 1.75rem;
+}
+
+.bloc_questions {
+	margin-bottom: 5rem;
 }
