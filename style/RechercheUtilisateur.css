@@ -1,0 +1,40 @@
+.div_page{
+    width: 80%;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+.div_page header h2 {
+    margin: 2rem;
+    text-align: center;
+    color: white;
+    font-size: 1.4rem;
+}
+
+/* On enlève tout le style par défaut des boutons */
+button {
+    display: inline-block;
+    border: none;
+    text-decoration: none;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+    text-align: center;
+}
+button:hover,button:focus {
+    background: white;
+    outline: none
+}
+button:active {
+    transform: scale(0.99);
+}
+/* On enlève tout le style par défaut des boutons */
+
+#recherche{
+	border-radius: 0.5rem;
+    background-color: white;
+    padding: 1rem;
+    text-align: justify;
+    margin-bottom: 2rem;
+}
+

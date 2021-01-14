@@ -1,4 +1,4 @@
-#dropdown2 select{
+#recherche form select{
 	background-color: #DDD;
 	box-sizing: border-box;
 	border:none;
@@ -7,7 +7,7 @@
 	font-weight: 200;
 }
 
-#dropdown2 section{
+#recherche form section{
 	border-radius: 0.5rem;
     background-color: white;
     padding: 1rem;
@@ -15,13 +15,13 @@
     margin-bottom: 2rem;
 }
 
-#dropdown2 h3{
+#recherche form h3{
 	font-weight: bold;
 	margin: 0;
 	margin-bottom: 0.5rem;
 }
 
-#dropdown2 input{
+#recherche form input{
 	box-sizing:border-box;
 	padding: 0.5rem;
 	border:none;
@@ -30,27 +30,27 @@
 	width:100%;
 }
 
-#dropdown2 button[type="submit"] {
+#recherche form button[type="submit"] {
 	float:right;
 }
 
-#dropdown2 button[type="submit"] img {
+#recherche form button[type="submit"] img {
 	width:1rem;
 	padding-left: 0.5rem;
 	position: relative;
 	bottom: 1.5rem;
 }
 
-#dropdown2 .barre_recherche {
+#recherche form .barre_recherche {
 	margin-bottom: 1rem;
 } 
 
-#dropdown2 label{
+#recherche form label{
 	font-weight: bold;
 	margin-right: 1rem;
 }
 
-#dropdown2 select{
+#recherche form select{
 	background-color: #B8B8B8;
 	box-sizing: border-box;
 	border:none;
@@ -59,19 +59,19 @@
 	font-weight: 200;
 }
 
-#dropdown2 .filtres {
+#recherche form .filtres {
 	margin-bottom: 1rem;
 }
 
-#dropdown2 #test_number{
+#recherche form #test_number{
 	width:10%;
 }
 
-#dropdown2 table{
+#recherche table{
 	background-color:#DDD;
 	border:1px solid black;
 }
 
-#dropdown2 th{
+#recherche th{
 	border:1px solid black;
 }

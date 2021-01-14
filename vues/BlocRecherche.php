@@ -80,6 +80,15 @@
 				echo'<th>Options</th>';
 			}
 		}
+
+		if(isset($_POST['id_name'])||isset($_POST['sexe'])||isset($_POST['region'])||isset($_POST['year'])||isset($_POST['test_number'])){
+			/**
+			Appel de la fonction Recherche permettant d'effectuer une recherche
+			selon le nom ou identifiant entré ou les filtres sélectionnés
+			**/
+			Rechercher($bdd, $_POST['sexe'], $_POST['year'], $regex, $_POST['region']);
+			// Fin du tableaux et de la section d'affichage des résultats
+		}
 		?>
 	</tr>
 </table>

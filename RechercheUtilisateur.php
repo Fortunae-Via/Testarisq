@@ -1,20 +1,25 @@
 <?php
+
+session_start(); 
+// Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
+if (!(isset($_SESSION['NIR']))) {
+	header('Location: Accueil.php');
+}
+//S'il est connecté mais qu'il charge des pages non autorisées pour son type de compte on le renvoie à l'accueil
+else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {	
+	header('Location: Accueil.php');
+}
+
 //On teste si des filtres sont sélectionnés ou si un utilisateur est recherché.
 if(isset($_POST['id_name'])||isset($_POST['sexe'])||isset($_POST['region'])||isset($_POST['year'])||isset($_POST['test_number'])){
 
 	// Dans ce cas on laisse le formulaire affiché de manière à pouvoir refaire une recherche
-	// Affichage de la structure HTML
-	include("vues/VuesRecherche.php");
 
 	// Definition du regex pour le nom recherché
 	$regex = '"%' . $_POST['id_name'] . '%"';
 
-	/**
-	Appel de la fonction Recherche permettant d'effectuer une recherche
-	selon le nom ou identifiant entré ou les filtres sélectionnés
-	**/
-	Rechercher($bdd, $_POST['sexe'], $_POST['year'], $regex, $_POST['region']);
-	// Fin du tableaux et de la section d'affichage des résultats
+	// Affichage de la structure HTML
+	include("vues/RechercheUtilisateur.php");
 
 }else{
 	/**
@@ -23,6 +28,6 @@ if(isset($_POST['id_name'])||isset($_POST['sexe'])||isset($_POST['region'])||iss
 	**/
 
 	// Affichage de la structure HTML
-	include("vues/VuesRecherche.php");
+	include("vues/RechercheUtilisateur.php");
 }
 ?>
