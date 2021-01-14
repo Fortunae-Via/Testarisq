@@ -1,5 +1,5 @@
 <form method="post">
-	<!-- Barre de recherche input="id_name"-->
+	<!-- Barre de recherche par nom ou identifiant -->
 	<h3>Identifiant ou nom du conducteur :</h3>
 	<div class="barre_recherche">
 		<input id="id_name" name="id_name"/>
@@ -23,10 +23,8 @@
 			<option selected hidden>Région</option>
 			<?php
 			/**
-				On affiche les différents départements dans notre select en tant que option,
-				ainsi ils peuvent être selectionnés et envoyer par formulaire
-				sous $_POST['region'].
-				On fait alors appel à la fonction Region() provenant de modele/RequêteRecherche
+			Appel à la fonction Region() provenant de modele/RequêteRecherche.php
+			permettant l'affichage des régions sélectionnables.
 			**/
 			Region($bdd);
 			?>
@@ -34,17 +32,17 @@
 
 		<!-- Filtrer par Année (de Naissance) -->
 		<!--
-			On aurait pu penser à un filtrage par tranche d'âge
-			Pour l'instant le choix à été fait de garder le choix d'une année
-			précise. La base de donnée étant sensé recenser un nombre important
-			de citoyens.
+		On aurait pu penser à un filtrage par tranche d'âge
+		Pour l'instant le choix à été fait de garder le choix d'une année
+		précise. La base de donnée étant sensé recenser un nombre important
+		de citoyens.
 		-->
 		<select name="year">
 			<option selected hidden>Année</option>
 				<?php
-					for($i=date("Y"); $i>=1900; $i--){
-						echo'<option value="'. $i .'">'. $i .'</option>';
-					}
+				for($i=date("Y"); $i>=1900; $i--){
+					echo'<option value="'. $i .'">'. $i .'</option>';
+				}
 				?>
 		</select>
 
@@ -70,17 +68,17 @@
 		<th>Adresse</th>
 		<th>Nombre de test<span style="font-size:11px;">(s)</span> passé<span style="font-size:11px;">(s)</span></th>
 		<?php
-			/**
-				Affichage des options de modification ou de suppression
-				d'un compte en fonction du type de compte de
-				la session de l'utilisateur.
-				C'est-à-dire que lorsqu'un administrateur est connecté
-				il a accès au options alors qu'un officier ou une auto-école non.
-			**/
-			if(isset($_SESSION['TypeCompte'])){
-				if($_SESSION['TypeCompte']=='ADM'){
-					echo'<th>Options</th>';
-				}
+		/**
+		Affichage des options de modification ou de suppression
+		d'un compte en fonction du type de compte de
+		la session de l'utilisateur.
+		C'est-à-dire que lorsqu'un administrateur est connecté,
+		il a accès aux options alors qu'un officier ou une auto-école non.
+		**/
+		if(isset($_SESSION['TypeCompte'])){
+			if($_SESSION['TypeCompte']=='ADM'){
+				echo'<th>Options</th>';
 			}
-			?>
+		}
+		?>
 	</tr>

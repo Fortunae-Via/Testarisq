@@ -3,7 +3,7 @@
 	<?php
 	// Appel de la base de donnée bdd_testarisq
 	require("modele/connexionbdd.php");
-	// Appel des fonctions de requête SQL
+	// Definition des fonctions de requête SQL
 	include('modele/RequetesRecherche.php');
 
 	//On teste si des filtres sont sélectionnés ou si un utilisateur est recherché.
@@ -11,31 +11,31 @@
 	?>
 	<!-- Dans ce cas on laisse le formulaire affiché de manière à pouvoir refaire une recherche-->
 		<section>
-			<?php 
-				include("vues/VuesRecherche.php");
+			<?php
+			// Affichage de la structure HTML
+			include("vues/VuesRecherche.php");
 
-				// Definition des regex pour le nom recherché.
-				$regex = '"%' . $_POST['id_name'] . '%"';
+			// Definition du regex pour le nom recherché
+			$regex = '"%' . $_POST['id_name'] . '%"';
 
-				/**
-					La requête SQL permet d'aller récuperer dans la base de donnée
-					les informations concernant des utilisateurs en fonction des différents
-					choix fait dans le formulaire (et donc les filtres).
-					
-					A faire : Nombre de tests
-				**/
-				$recherche = $bdd->query('SELECT * FROM personne INNER JOIN adresse ON personne.Adresse_Id=adresse.Id WHERE personne.Sexe="'. $_POST['sexe'] .'" OR personne.DateNaissance LIKE "'. $_POST['year'] .'%" OR personne.NIR LIKE '. $regex .' OR personne.NomDeFamille LIKE '. $regex .' OR adresse.Region="'. $_POST['region'] .'"');
-				/*$recherche = $bdd->query('SELECT *, COUNT(*) AS count_test FROM personne INNER JOIN adresse ON personne.Adresse_Id=adresse.Id INNER JOIN test ON personne.NIR=test.Personne_NIR WHERE personne.Sexe="'. $_POST['sexe'] .'" OR personne.DateNaissance LIKE "'. $_POST['year'] .'%" OR personne.NIR LIKE '. $regex .' OR personne.NomDeFamille LIKE '. $regex .' OR adresse.Region="'. $_POST['region'] .'"');*/
-				include("vues/RechercheTableau.php");
-			?>	
+			/**
+			Appel de la fonction Recherche permettant d'effectuer une recherche
+			selon le nom ou identifiant entré ou les filtres sélectionnés
+			**/
+			Recherche($bdd, $_POST['sexe'], $_POST['year'], $regex, $_POST['region']);
+			?>
+			</table>
+			<!-- Fin du tableaux et de la section d'affichage des résultats -->
 		</section>
 
 	<?php
 	}else{
 		/**
-			Cas où aucun des filtres n'a été utilisé et qu'aucun utilisateur n'a été 
-			rechercher (cas par défaut, ie. arriver sur la page)
+		Cas où aucun des filtres n'a été utilisé et qu'aucun utilisateur n'a été 
+		recherché (cas par défaut, ie. arrivé sur la page)
 		**/
+
+		// Affichage de la structure HTML
 		include("vues/VuesRecherche.php");
 	?>
 			</table>
