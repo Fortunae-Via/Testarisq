@@ -30,7 +30,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 		// Definition des fonctions de requête SQL
 		require('modele/RequetesGestion.php');
 
-		if(isset($_POST['type_compte']) && isset($_POST['id']) && isset($_POST['nom']) && isset($_POST['nom_usage']) && isset($_POST['prenom']) && isset($_POST['jour']) && isset($_POST['mois']) && isset($_POST['annee']) && isset($_POST['sexe']) && isset($_POST['mail']) && isset($_POST['numeroRue']) && isset($_POST['rue']) && isset($_POST['ville']) && isset($_POST['code']) && isset($_POST['region']) && isset($_POST['pays']) && isset($_POST['telephone'])){
+		if(isset($_POST['type_compte'], $_POST['id'], $_POST['nom'], $_POST['nom_usage'], $_POST['prenom'], $_POST['jour'], $_POST['mois'], $_POST['annee'], $_POST['sexe'], $_POST['mail'], $_POST['numeroRue'], $_POST['rue'], $_POST['ville'], $_POST['code'], $_POST['region'], $_POST['pays'], $_POST['telephone'])){
 
 			$caract="abcdefghijklmnopqrstuvwyxz0123456789@!:;,$/?*=+";
 			for($i=1; $i<=12; $i++){
