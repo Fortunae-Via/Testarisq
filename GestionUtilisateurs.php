@@ -9,43 +9,83 @@ if (!(isset($_SESSION['NIR']))) {
 else if ( $_SESSION['TypeCompte']!='ADM' ) {	
 	header('Location: Accueil.php');
 }
-		
+
+
 // Appel de la base de donnée bdd_testarisq
 require("modele/connexionbdd.php");
+//$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
 // Definition des fonctions de requête SQL
 require('modele/RequetesGestion.php');
 
-//Si tout les parties obligatoire du formulaire sont remplies Alors :
-if(isset($_POST['type_compte'], $_POST['id'], $_POST['nom'], $_POST['nom_usage'], $_POST['prenom'], $_POST['jour'], $_POST['mois'], $_POST['annee'], $_POST['sexe'], $_POST['mail'], $_POST['numeroRue'], $_POST['rue'], $_POST['ville'], $_POST['code'], $_POST['region'], $_POST['pays'], $_POST['telephone'])){
+//Si les informations minimales sont rentrées, un ajout à la bdd est possible
+if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['nom']))) && (!(empty($_POST['prenom']))) && (!(empty($_POST['jour']))) && (!(empty($_POST['mois']))) && (!(empty($_POST['annee']))) && (!(empty($_POST['sexe']))) && (!(empty($_POST['mail']))) ){
 
-	// Definition des caractères servant à la création d'un mot de passe
+	$TypeCompte = $_POST['type_compte'];
+	$DonneesUtilisateur = array(
+		'id' => $_POST['id'],
+		'nom' => $_POST['nom'],
+		'prenom' => $_POST['prenom'],
+		'datenaissance' => $_POST['annee']."-".$_POST['mois']."-".$_POST['jour'],
+		'sexe' => $_POST['sexe'],
+		'mail' => $_POST['mail']
+	);
+
+	// Pour les champs optionels, on note le champ s'il est rempli ou null sinon
+	$liste_verif=array('nom_usage','prenom_2','prenom_3', 'telephone');
+	foreach ($liste_verif as $champ) {
+		if (!(empty($_POST[$champ]))) {		//Si le champ a été rempli
+			$DonneesUtilisateur[$champ]=$_POST[$champ];
+		}
+		else {
+			$DonneesUtilisateur[$champ]='NULL';
+		}
+	}
+
+	// On crée le mot de passe de l'utilisateur
 	$caract="abcdefghijklmnopqrstuvwyxz0123456789@!:;,$/?*=+";
 	for($i=1; $i<=12; $i++){
 		$nbr=strlen($caract);
 		$nbr=mt_rand(0, ($nbr-1));
 		$mdp[$i]=$caract[$nbr];
 	}
-	// Conversion de la liste en un string
 	$mdp=implode($mdp);
+	$DonneesUtilisateur['mdp']=$mdp;
 
-	/**
-	Definition de la variable à partir des informations du formulaire
-	On passe du système (français) JJ/MM/AAAA du formulaire
-	au système (anglophone) AAAA-MM-JJ utilisé par la base de donnée
-	**/
-	$DateNaissance = $_POST['annee']."-".$_POST['mois']."-".$_POST['jour'];
+	// Pour l'adresse, on regarde si un des champs est rempli
+	if( (!(empty($_POST['numeroRue']))) OR (!(empty($_POST['rue']))) OR (!(empty($_POST['ville']))) OR (!(empty($_POST['code']))) OR (!(empty($_POST['pays']))) ){
 
-	// Appel de la fonction Ajouter permettant l'ajout d'un utilisateur
-	Ajouter($bdd, $_POST['id'], $_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['region'], $_POST['pays'], $mdp, $_POST['nom'], $_POST['nom_usage'], $_POST['prenom'], $_POST['prenom_2'], $_POST['prenom_3'], $DateNaissance, $_POST['sexe'], $_POST['mail'], $_POST['telephone'], $_POST['type_compte']);
+		$liste_verif_adresse=array('numeroRue','rue','ville','code','region','pays');
+		foreach ($liste_verif_adresse as $champ_adresse) {
+			if (!(empty($_POST[$champ_adresse]))) {		//Si le champ a été rempli
+				$InfosAdresse[$champ_adresse]=$_POST[$champ_adresse];
+			}
+			else {
+				$InfosAdresse[$champ_adresse]='NULL';
+			}
+		}
+
+		$Id_Adresse=AjouterAdresse($bdd, $InfosAdresse);
+		$DonneesUtilisateur['id_adresse']=$Id_Adresse;
+	}
+	else {
+		$DonneesUtilisateur['id_adresse']='NULL';
+	}
+	
+	AjouterPersonne($bdd, $DonneesUtilisateur);
+
+	if (in_array($TypeCompte, array('AUE','POL','ADM'))) {
+		AjouterCompte($bdd,$DonneesUtilisateur['id'],$TypeCompte);
+	}
 
 	sleep(1);
 		if('1'){
 			// Redirection vers Rechercheutilisateur.php (la page précédente)
 			header('Location: GestionUtilisateurs.php');
-		}
-
-	}else{
-		// Inclusion de la structure HTML
-		include("vues/VuesGestion.php");
 	}
+
+}else{
+
+	// Affichage de la page
+	include("vues/GestionUtilisateurs.php");
+}
 ?>

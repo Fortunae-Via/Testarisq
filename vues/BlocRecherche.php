@@ -6,7 +6,7 @@
 			<button type="submit"><img class="search_icon" src="vues/img/search_icon.png" alt="search_icon"/></button>
 	</div>
 
-	<div class="fitres">
+	<div class="filtres">
 		<label for="option">Filtrer par :</label>
 
 		<!-- Filtrer par sexe -->
@@ -80,5 +80,22 @@
 				echo'<th>Options</th>';
 			}
 		}
+
+		//On teste si des filtres sont sélectionnés ou si un utilisateur est recherché.
+		if(isset($_POST['id_name'])||isset($_POST['sexe'])||isset($_POST['region'])||isset($_POST['year'])||isset($_POST['test_number'])){
+
+			// Dans ce cas on laisse le formulaire affiché de manière à pouvoir refaire une recherche
+
+			// Definition du regex pour le nom recherché
+			$regex = '"%' . $_POST['id_name'] . '%"';
+			
+			/**
+			Appel de la fonction Recherche permettant d'effectuer une recherche
+			selon le nom ou identifiant entré ou les filtres sélectionnés
+			**/
+			Rechercher($bdd, $_POST['sexe'], $_POST['year'], $regex, $_POST['region']);
+			// Fin du tableau et de la section d'affichage des résultats
+		}
 		?>
 	</tr>
+</table>

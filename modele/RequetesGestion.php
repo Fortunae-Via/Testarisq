@@ -12,27 +12,44 @@ function Region($bdd){
 	$region->closeCursor();
 }
 
-function Ajouter($bdd, $NIR, $numeroRue, $rue, $code, $ville, $region, $pays, $mdp, $nom, $nom_usage, $prenom, $prenom_2, $prenom_3, $DateNaissance, $sexe, $mail, $telephone, $type_compte){
+function AjouterAdresse($bdd, $InfosAdresse){
+	$add_adresse = $bdd->prepare('
+		INSERT INTO adresse (NumeroRue, Rue, CodePostal, Ville, Region, Pays) 
+		VALUES (:numeroRue, :rue, :code, :ville, :region, :pays)');
+	$add_adresse->execute($InfosAdresse);
+	$IdInsert = $bdd->lastInsertId();	//On récupère l'id de l'adresse créée
+	return ($IdInsert);
+}
 
-	/**
-	On ajoute les informations dans la table adresse en premier car 
-	il nous faut une clé étragère existante pour ensuite complèter la table personne.
-	**/
-	$add_adresse = $bdd->prepare('INSERT INTO adresse (Id, NumeroRue, Rue, CodePostal, Ville, Region, Pays) VALUES (?, ?, ?, ?, ?, ?, ?)');
-	$add_adresse->execute(array($NIR, $numeroRue, $rue, $code, $ville, $region, $pays));
-	$add_adresse->closeCursor();
+//Ajoute une entrée Personne et un compte citoyen associé
+function AjouterPersonne($bdd, $DonneesUtilisateur){
+	$add_personne = $bdd->prepare('
+		INSERT INTO personne (NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance, Sexe, Courriel, Portable, Adresse_Id) 
+		VALUES (:id, :mdp, :nom, :nom_usage, :prenom, :prenom_2, :prenom_3, :datenaissance, :sexe, :mail, :telephone, :id_adresse)');
+	$add_personne->execute($DonneesUtilisateur);
 
-	// Ajout des informations à la table personne
-	$add_personne = $bdd->prepare('INSERT INTO personne (NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance, Sexe, Courriel, Portable, Adresse_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-	$add_personne->execute(array($NIR, $mdp, $nom, $nom_usage, $prenom, $prenom_2, $prenom_3, $DateNaissance, $sexe, $mail, $telephone, $NIR));
-	$add_personne->closeCursor();
+	$IdPersonne = $DonneesUtilisateur['id'];	
 
-	/** Ajout des inforamtions à la table compte qui nécessite une clé étragère 
-	existante pour personne (et autorité mais ici : NULL)
-	**/
-	$add_compte = $bdd->prepare('INSERT INTO compte (Id, TypeCompte_Type, Personne_NIR, AutoriteResponsable_Id) VALUES (?, ?, ?, ?)');
-	$add_compte->execute(array($NIR, $type_compte, $NIR, NULL));
-	$add_compte->closeCursor();
+	$add_compte = $bdd->prepare("
+		INSERT INTO compte (Id, TypeCompte_Type, Personne_NIR) 
+		VALUES (:id, 'CIT', :nir)");
+	$add_compte->execute(array(
+		'id' => $IdPersonne.'CIT',
+		'nir' => $IdPersonne
+		));
+}
+
+
+//Ajoute une entrée Compte
+function AjouterCompte($bdd, $NIR, $TypeCompte){
+	$add_compte = $bdd->prepare('
+		INSERT INTO compte (Id, TypeCompte_Type, Personne_NIR) 
+		VALUES (:id, :type_compte, :nir)');
+	$add_compte->execute(array(
+		'id' => $NIR.$TypeCompte,
+		'type_compte' => $TypeCompte,
+		'nir' => $NIR
+		));
 }
 
 function Rechercher($bdd, $sexe, $year, $regex, $region){
