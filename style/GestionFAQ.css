@@ -47,6 +47,7 @@
 
 #bloc_ajout textarea{
 	height: 10rem;
+	resize: none;
 }
 
 #bloc_ajout .bloc_add {
