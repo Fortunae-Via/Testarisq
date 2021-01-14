@@ -6,7 +6,7 @@
 			<button type="submit"><img class="search_icon" src="vues/img/search_icon.png" alt="search_icon"/></button>
 	</div>
 
-	<div class="fitres">
+	<div class="filtres">
 		<label for="option">Filtrer par :</label>
 
 		<!-- Filtrer par sexe -->

@@ -1,0 +1,77 @@
+#dropdown2 select{
+	background-color: #DDD;
+	box-sizing: border-box;
+	border:none;
+	padding: 0.25rem;
+	font-size: 1rem;
+	font-weight: 200;
+}
+
+#dropdown2 section{
+	border-radius: 0.5rem;
+    background-color: white;
+    padding: 1rem;
+    padding-bottom: 0.25rem;
+    margin-bottom: 2rem;
+}
+
+#dropdown2 h3{
+	font-weight: bold;
+	margin: 0;
+	margin-bottom: 0.5rem;
+}
+
+#dropdown2 input{
+	box-sizing:border-box;
+	padding: 0.5rem;
+	border:none;
+	border-radius:0.25rem;
+	background-color:#DDD;
+	width:100%;
+}
+
+#dropdown2 button[type="submit"] {
+	float:right;
+}
+
+#dropdown2 button[type="submit"] img {
+	width:1rem;
+	padding-left: 0.5rem;
+	position: relative;
+	bottom: 1.5rem;
+}
+
+#dropdown2 .barre_recherche {
+	margin-bottom: 1rem;
+} 
+
+#dropdown2 label{
+	font-weight: bold;
+	margin-right: 1rem;
+}
+
+#dropdown2 select{
+	background-color: #B8B8B8;
+	box-sizing: border-box;
+	border:none;
+	padding: 0.25rem;
+	font-size: 1rem;
+	font-weight: 200;
+}
+
+#dropdown2 .filtres {
+	margin-bottom: 1rem;
+}
+
+#dropdown2 #test_number{
+	width:10%;
+}
+
+#dropdown2 table{
+	background-color:#DDD;
+	border:1px solid black;
+}
+
+#dropdown2 th{
+	border:1px solid black;
+}

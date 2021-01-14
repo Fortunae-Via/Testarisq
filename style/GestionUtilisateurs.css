@@ -76,6 +76,9 @@ button:active {
     padding: 1rem;
 }
 
+
+/* ================= PARTIE AJOUT ================= */
+
 #ajout .indication {
 	margin: 0;
 	margin-bottom: 1rem;
@@ -203,4 +206,3 @@ button:active {
 	box-sizing: border-box;
 	padding: 0.5rem 1.75rem;
 }
-

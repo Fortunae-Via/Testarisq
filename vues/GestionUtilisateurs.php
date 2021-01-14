@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="style/style_commun.css" />
     <link rel="stylesheet" href="style/header.css" />
     <link rel="stylesheet" href="style/GestionUtilisateurs.css" />
+    <link rel="stylesheet" href="style/BlocRecherche.css" />
 </head>
 
 <body>
@@ -31,8 +32,8 @@
 				<h3>Rechercher un utilisateur</h3>
 				<img id="fleche2" class="fleche_expand" src="vues/img/expand.png" alt="fleche_expand"/>
 			</button>
-			<div id="dropdown2" class="dropdown-content" style="display: block;">
-				<?php include("RechercheUtilisateur.php"); ?>
+			<div id="dropdown2" class="dropdown-content" style="display: none;">
+				<?php include("vues/BlocRecherche.php"); ?>
 
 				</div>
 			</div>
