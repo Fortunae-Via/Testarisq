@@ -23,7 +23,7 @@
 
         <div class="Conteneur">
             <div class='contenant1'><a href="GestionUtilisateurs.php" class='bouton1'>Gestion des utilisateurs</a></div>
-            <div class='contenant2'><a href="Ajout_faq.php" class='bouton2'>Gestion de la F.A.Q.</a></div>
+            <div class='contenant2'><a href="GestionFAQ.php" class='bouton2'>Gestion de la F.A.Q.</a></div>
             <div class='contenant3'><a href="#" class='bouton3'>Gestion des boîtiers Testarisq</a></div>
             <div class='contenant4'><a href="#" class='bouton4'>Test de Contrôle</a></div>
         </div>
