@@ -10,6 +10,13 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 	header('Location: Accueil.php');
 }
 
+// Appel de la base de donnée bdd_testarisq
+require("modele/connexionbdd.php");
+//$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
+// Definition des fonctions de requête SQL
+require('modele/RequetesGestion.php');
+
+
 //On teste si des filtres sont sélectionnés ou si un utilisateur est recherché.
 if(isset($_POST['id_name'])||isset($_POST['sexe'])||isset($_POST['region'])||isset($_POST['year'])||isset($_POST['test_number'])){
 
