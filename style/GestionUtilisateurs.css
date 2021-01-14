@@ -199,6 +199,7 @@ input, select {
 strong{
 	font-size:12px;
 	font-weight:normal;
+	color: red;
 }
 
 select{

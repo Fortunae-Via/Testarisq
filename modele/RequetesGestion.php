@@ -12,8 +12,21 @@ function Region($bdd){
 	$region->closeCursor();
 }
 
+function Ajouter($bdd, $NIR, $numeroRue, $rue, $code, $ville, $region, $pays, $mdp, $nom, $nom_usage, $prenom, $prenom_2, $prenom_3, $DateNaissance, $sexe, $mail, $telephone, $type_compte){
+	$add_adresse = $bdd->prepare('INSERT INTO adresse (Id, NumeroRue, Rue, CodePostal, Ville, Region, Pays) VALUES (?, ?, ?, ?, ?, ?, ?)');
+	$add_adresse->execute(array($NIR, $numeroRue, $rue, $code, $ville, $region, $pays));
+	$add_adresse->closeCursor();
 
-function Recherche($bdd, $sexe, $year, $regex, $region){
+	$add_personne = $bdd->prepare('INSERT INTO personne (NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance, Sexe, Courriel, Portable, Adresse_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+	$add_personne->execute(array($NIR, $mdp, $nom, $nom_usage, $prenom, $prenom_2, $prenom_3, $DateNaissance, $sexe, $mail, $telephone, $NIR));
+	$add_personne->closeCursor();
+
+	$add_compte = $bdd->prepare('INSERT INTO compte (Id, TypeCompte_Type, Personne_NIR, AutoriteResponsable_Id) VALUES (?, ?, ?, ?)');
+	$add_compte->execute(array($NIR, $type_compte, $NIR, NULL));
+	$add_compte->closeCursor();
+}
+
+function Rechercher($bdd, $sexe, $year, $regex, $region){
 	/**
 	La requête SQL permet d'aller récuperer dans la base de donnée
 	les informations concernant des utilisateurs en fonction des différents
