@@ -22,7 +22,6 @@ button {
     text-align: center;
 }
 button:hover,button:focus {
-    background: white;
     outline: none
 }
 button:active {

@@ -3,7 +3,7 @@
 	<h3>Identifiant ou nom du conducteur :</h3>
 	<div class="barre_recherche">
 		<input id="id_name" name="id_name"/>
-			<button type="submit"><img class="search_icon" src="vues/img/search_icon.png" alt="search_icon"/></button>
+		<button type="submit"><img class="search_icon" src="vues/img/search_icon.png" alt="search_icon"/></button>
 	</div>
 
 	<div class="filtres">

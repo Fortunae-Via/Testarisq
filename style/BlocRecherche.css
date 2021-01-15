@@ -1,49 +1,48 @@
-#recherche form select{
-	background-color: #DDD;
-	box-sizing: border-box;
-	border:none;
-	padding: 0.25rem;
-	font-size: 1rem;
-	font-weight: 200;
-}
-
-#recherche form section{
-	border-radius: 0.5rem;
-    background-color: white;
-    padding: 1rem;
-    padding-bottom: 0.25rem;
-    margin-bottom: 2rem;
-}
-
 #recherche form h3{
 	font-weight: bold;
 	margin: 0;
 	margin-bottom: 0.5rem;
 }
 
-#recherche form input{
-	box-sizing:border-box;
-	padding: 0.5rem;
+#recherche .barre_recherche {
+	margin-bottom: 1rem;
 	border:none;
 	border-radius:0.25rem;
 	background-color:#DDD;
-	width:100%;
-}
-
-#recherche form button[type="submit"] {
-	float:right;
-}
-
-#recherche form button[type="submit"] img {
-	width:1rem;
-	padding-left: 0.5rem;
-	position: relative;
-	bottom: 1.5rem;
-}
-
-#recherche form .barre_recherche {
-	margin-bottom: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 } 
+
+#recherche .barre_recherche input{
+	box-sizing:border-box;
+	padding: 0.5rem;
+	border:none;
+	border-radius: 0.25rem 0 0 0.25rem;
+	background: none;
+	font-size: 1rem;
+
+	/* Firefox */
+	width: -moz-calc(100% - 2rem);
+	/* WebKit */
+	width: -webkit-calc(100% - 2rem);
+	/* Opera */
+	width: -o-calc(100% - 2rem);
+	/* Standard */
+	width: calc(100% - 2rem)
+}
+
+#recherche .barre_recherche button[type="submit"] {
+	width: 2rem;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#recherche .barre_recherche button[type="submit"] img {
+	height:1rem;
+}
 
 #recherche form label{
 	font-weight: bold;
