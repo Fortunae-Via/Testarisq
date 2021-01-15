@@ -75,6 +75,17 @@ button:active {
     padding: 1rem;
 }
 
+select {
+    -moz-appearance: none; /* Firefox */
+    -webkit-appearance: none; /* Safari and Chrome */
+    appearance: none;
+    background-image: url(../vues/img/expand.png);
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 0.8rem;
+    background-color: #C4C4C4;
+}
+
 
 /* ================= PARTIE AJOUT ================= */
 
@@ -154,7 +165,14 @@ button:active {
 	background-color:#DDD;
 	margin-top: 0.25rem;
 	margin-bottom: 0.25rem;
+}
+
+#ajout input {
 	width: 100%;
+}
+
+#ajout select{
+	padding-right: 1.75rem;
 }
 
 #ajout .special_size_inputs  {
@@ -184,10 +202,6 @@ button:active {
 #ajout .special_size_inputs input[maxlength='20'] {
 	width: 15rem;
 }
-
-#ajout .special_size_inputs select {
- 	width: 13rem;
- }
 
 #ajout .bloc_add {
 	display: flex;

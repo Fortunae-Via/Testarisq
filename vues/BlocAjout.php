@@ -22,7 +22,7 @@
 		<div class="info">
 			<label for="id">NIR<strong>*</strong> :</label>
 		</div>
-		<input type="number" name="id" placeholder="xxxxxxxxxxxxx" required/>
+		<input name="id" placeholder="xxxxxxxxxxxxx" required/>
 	</div>
 
 	<div class="ligne">
@@ -57,10 +57,37 @@
 			<label for="birthdate">Date de naissance<strong>*</strong> :</label>
 		</div>
 		<div class="special_size_inputs">
-			<p>
-				<input type="number" maxlength="2" id="jour" name="jour" placeholder="JJ" required/> /
-				<input type="number" maxlength="4" id="mois" name="mois" placeholder="MM" required /> /
-				<input type="number" maxlength="6" id="annee" name="annee" placeholder="AAAA" required/>
+			<p>	
+				<select name="jour">
+					<?php
+					for($i=1; $i<=31; $i++){
+						echo"<option value=\"". $i ."\">" . $i . "</option>";
+					}
+					?>
+				</select>
+				/
+				<select name="mois">
+					<option value="1">Jan.</option>
+					<option value="2">Fév.</option>
+					<option value="3">Mars</option>
+					<option value="4">Avril</option>
+					<option value="5">Mai</option>
+					<option value="6">Juin</option>
+					<option value="7">Juil.</option>
+					<option value="8">Août</option>
+					<option value="9">Sept.</option>
+					<option value="10">Oct.</option>
+					<option value="11">Nov.</option>
+					<option value="12">Déc.</option></select>
+				</select>
+				/
+				<select name="annee">
+					<?php
+					for($i=date("Y"); $i>=1900; $i--){
+						echo'<option value="'. $i .'">'. $i .'</option>';
+					}
+					?>
+				</select>
 			</p>
 		</div>
 	</div>
@@ -93,14 +120,15 @@
     		<label for="adresse">Adresse :</label>
     	</div>
     	<div class="special_size_inputs">
-    		<input type="number" maxlength="4" id="numeroRue" name="numeroRue" placeholder="N°"/>
+    		<input maxlength="4" id="numeroRue" name="numeroRue" placeholder="N°"/>
     		<input maxlength="20" id="rue" name="rue" placeholder="Rue"/>
     		<input maxlength="12" id="ville" name="ville" placeholder="Ville"/><br/>
-    		<input type="number" maxlength="6" id="code" name="code" placeholder="Code Postal" />
+    		<input maxlength="6" id="code" name="code" placeholder="Code Postal" />
     		<select name="region">
+    			<option value="">Région</option>
     			<?php Region($bdd); ?>
     		</select>
-    		<input maxlength="10" id="pays" name="pays" value="France"/>
+    		<input maxlength="10" id="pays" name="pays" placeholder="Pays"/>
     	</div>
     </div>
 

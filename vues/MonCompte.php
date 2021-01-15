@@ -24,36 +24,61 @@
 						<?= $InfosUser['NomDeFamille']; ?>
 					</span>
 				</p>
+
+				<?php 
+					if (!(empty($InfosUser['NomDUsage']))) {
+				?>
 				<p>Nom d'usage :
 					<span class="user_info">
 						<?= $InfosUser['NomDUsage']; ?>
 					</span>
 				</p>
-				<p>Prénoms :
+
+				<?php 
+					}
+				?>
+
+				<p>Prénom(s) :
 					<span class="user_info">
-						<?= $InfosUser['Prenom1'] .', '. $InfosUser['Prenom2'] .', '. $InfosUser['Prenom3'] ?>
+						<?= $Prenoms ?>
 					</span>
 				</p>
+
 				<p>Né(e) le :
 					<span class="user_info">
 						<?= $InfosUser['DateNaissance'] ?>	
 					</span>
 				</p>
+
 				<p>NIR :
 					<span class="user_info">
-						<?= $NIR = $InfosUser['NIR']; ?>
+						<?= $InfosUser['NIR']; ?>
 					</span>
 				</p>
+
+				<?php 
+					if (!(empty($InfosUser['Adresse_Id']))) {
+				?>
 				<p>Adresse :
 					<span class="user_info">
-						<?= $Adresse['NumeroRue'] .' '. $Adresse['Rue'] .', '. $Adresse['CodePostal'] .' '. $Adresse['Ville'] .', '. $Adresse['Region'] .', '. $Adresse['Pays']?>
+						<?= $Adresse?>
 					</span>
 				</p>
+
+				<?php 
+					}
+					if (!(empty($InfosUser['Portable']))) {
+				?>
+
 				<p>Téléphone portable :
 					<span class="user_info">
 						<?= $InfosUser['Portable']; ?>
 					</span>
 				</p>
+				<?php 
+					}
+				?>
+
 				<p>Courriel :
 					<span class="user_info">
 						<?= $InfosUser['Courriel'] ?>
