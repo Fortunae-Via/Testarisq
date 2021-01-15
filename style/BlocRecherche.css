@@ -2,7 +2,10 @@
 	font-weight: bold;
 	margin: 0;
 	margin-bottom: 0.5rem;
+	font-size: 1.1rem;
 }
+
+/* ====== Barre recherche ====== */
 
 #recherche .barre_recherche {
 	margin-bottom: 1rem;
@@ -44,33 +47,74 @@
 	height:1rem;
 }
 
-#recherche form label{
-	font-weight: bold;
-	margin-right: 1rem;
+
+/* ====== Filtres ====== */
+
+#recherche .filtres {
+	display: flex;
 }
 
-#recherche form select{
-	background-color: #B8B8B8;
+#recherche .filtres label{
+	font-weight: bold;
+	font-size: 1.1rem;
+	margin-right: 1rem;
+	min-width: 7rem;
+}
+
+#recherche .div_select_filtres {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#recherche .filtres select{
+	-moz-appearance: none; /* Firefox */
+    -webkit-appearance: none; /* Safari and Chrome */
+	appearance: none;
+	background-image: url(../vues/img/expand.png);
+	background-position: right 0.5rem center;
+	background-repeat: no-repeat;
+	background-size: 0.8rem;
+	background-color: #C4C4C4;
 	box-sizing: border-box;
 	border:none;
 	padding: 0.25rem;
+	padding-right: 1.75rem;
 	font-size: 1rem;
 	font-weight: 200;
+	margin:  0 0.5rem 0.5rem 0;
 }
 
 #recherche form .filtres {
 	margin-bottom: 1rem;
 }
 
-#recherche form #test_number{
-	width:10%;
+/* ====== Résultats ====== */
+
+#recherche h3{
+	font-weight: bold;
+	font-size: 1.1rem;
 }
 
 #recherche table{
-	background-color:#DDD;
-	border:1px solid black;
+	border: none;
+	border-spacing: 0;
+	font-size: 0.7rem;
 }
 
 #recherche th{
-	border:1px solid black;
+	text-align: center;
+	background-color: #888;
+}
+
+#recherche td{
+	border: none;
+	text-align: center;
+}
+
+#recherche tr:nth-child(odd) {
+	background-color: #DDD;
+}
+
+#recherche tr:nth-child(even) {
+	background-color: #C4C4C4;
 }
