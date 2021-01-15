@@ -48,6 +48,11 @@ if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(empty($_
 			$InfosAdresse[$champ_adresse]=$_POST[$champ_adresse];
 		}
 
+		if(empty($InfosAdresse['region'])) {
+			$InfosAdresse['region']=null;
+		}
+
+
 		$Id_Adresse=AjouterAdresse($bdd, $InfosAdresse);
 		$DonneesUtilisateur['id_adresse']=$Id_Adresse;
 	}
