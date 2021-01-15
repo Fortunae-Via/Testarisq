@@ -18,7 +18,20 @@ require('modele/RequetesGestion.php');
 
 
 //On teste si des filtres sont sélectionnés ou si un utilisateur est recherché.
-if(isset($_POST['id_name'])||isset($_POST['sexe'])||isset($_POST['region'])||isset($_POST['year'])||isset($_POST['test_number'])){
+if(isset($_POST['id_name'])){
+
+	$filtres=array();
+
+	//On remplit par des "" si on vient de l'accueil et que l'on n'a pas posté de filtre
+	$liste=array('sexe','region','year','test_number');
+	foreach ($liste as $filtre) {
+		if (isset($_POST[$filtre])) {
+			$filtres[$filtre]=$_POST[$filtre];
+		}
+		else {
+			$filtres[$filtre]="";
+		}
+	}
 
 	// Dans ce cas on laisse le formulaire affiché de manière à pouvoir refaire une recherche
 

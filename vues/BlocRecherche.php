@@ -2,7 +2,16 @@
 	<!-- Barre de recherche par nom ou identifiant -->
 	<h3>Identifiant ou nom du conducteur :</h3>
 	<div class="barre_recherche">
-		<input id="id_name" name="id_name"/>
+		<?php
+			if(isset($_POST['id_name'])){
+				echo "<input id=\"id_name\" name=\"id_name\" value=\"". $_POST['id_name'] ."\"/>";
+			}
+			else {
+				echo "<input id=\"id_name\" name=\"id_name\"/>";
+			}
+
+		?>
+		
 		<button type="submit"><img class="search_icon" src="vues/img/search_icon.png" alt="search_icon"/></button>
 	</div>
 
@@ -92,7 +101,7 @@
 		}
 
 		//On teste si des filtres sont sélectionnés ou si un utilisateur est recherché.
-		if(isset($_POST['id_name'])||isset($_POST['sexe'])||isset($_POST['region'])||isset($_POST['year'])||isset($_POST['test_number'])){
+		if(isset($_POST['id_name'])){
 
 			// Dans ce cas on laisse le formulaire affiché de manière à pouvoir refaire une recherche
 
@@ -103,7 +112,7 @@
 			Appel de la fonction Recherche permettant d'effectuer une recherche
 			selon le nom ou identifiant entré ou les filtres sélectionnés
 			**/
-			Rechercher($bdd, $_POST['sexe'], $_POST['year'], $regex, $_POST['region']);
+			Rechercher($bdd, $filtres['sexe'], $filtres['year'], $regex, $filtres['region']);
 			// Fin du tableau et de la section d'affichage des résultats
 		}
 		?>

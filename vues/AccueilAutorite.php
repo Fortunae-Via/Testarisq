@@ -61,9 +61,9 @@
 				<form method="post" action="controleurs/NouveauTest.php"> 
 					<div class="champ">
 						<label for="NIRConducteur">NIR du conducteur :</label><br>
-						<input type="text" id="NIRConducteur" name="NIRConducteur"><br>
+						<input type="text" id="NIRConducteur" name="NIRConducteur" required><br>
 						<label for="IdBoitier">Numéro du boîtier test :</label><br>
-						<input type="text" id="IdBoitier" name="IdBoitier"><br>
+						<input type="text" id="IdBoitier" name="IdBoitier" required><br>
 						<input type="hidden" name="LatitudeTest" id="LatitudeTest" value=""/>
 						<input type="hidden" name="LongitudeTest" id="LongitudeTest" value=""/>
 					</div>
@@ -84,8 +84,8 @@
 
 				<form method="post" action="RechercheUtilisateur.php"> 
 					<div class="champ">
-						<label for="recherche">NIR ou nom du conducteur :</label><br>
-						<input type="text" id="recherche" name="recherche"><br>
+						<label for="id_name">NIR ou nom du conducteur :</label><br>
+						<input type="text" id="recherche" name="id_name" required><br>
 					</div>
 					<div class="bouton">
 						<input type="submit" value="Chercher l'utilisateur"><br>
