@@ -22,7 +22,7 @@
 		<div class="info">
 			<label for="id">NIR<strong>*</strong> :</label>
 		</div>
-		<input name="id" placeholder="xxxxxxxxxxxxx" required/>
+		<input type="number" name="id" placeholder="xxxxxxxxxxxxx" required/>
 	</div>
 
 	<div class="ligne">
@@ -58,9 +58,9 @@
 		</div>
 		<div class="special_size_inputs">
 			<p>
-				<input maxlength="2" id="jour" name="jour" placeholder="JJ" required/> /
-				<input maxlength="4" id="mois" name="mois" placeholder="MM" required /> /
-				<input maxlength="6" id="annee" name="annee" placeholder="AAAA" required/>
+				<input type="number" maxlength="2" id="jour" name="jour" placeholder="JJ" required/> /
+				<input type="number" maxlength="4" id="mois" name="mois" placeholder="MM" required /> /
+				<input type="number" maxlength="6" id="annee" name="annee" placeholder="AAAA" required/>
 			</p>
 		</div>
 	</div>
@@ -85,7 +85,7 @@
     	<div class="info">
     		<label for="mail">Courriel<strong>*</strong>  :</label>
     	</div>
-    	<input name="mail" placeholder="xx@xx.xx" required/><br/>
+    	<input type="mail"name="mail" placeholder="xx@xx.xx" required/><br/>
     </div>
 
     <div class="ligne">
@@ -93,10 +93,10 @@
     		<label for="adresse">Adresse :</label>
     	</div>
     	<div class="special_size_inputs">
-    		<input maxlength="4" id="numeroRue" name="numeroRue" placeholder="N°"/>
+    		<input type="number" maxlength="4" id="numeroRue" name="numeroRue" placeholder="N°"/>
     		<input maxlength="20" id="rue" name="rue" placeholder="Rue"/>
     		<input maxlength="12" id="ville" name="ville" placeholder="Ville"/><br/>
-    		<input maxlength="6" id="code" name="code" placeholder="Code Postal" />
+    		<input type="number" maxlength="6" id="code" name="code" placeholder="Code Postal" />
     		<select name="region">
     			<?php Region($bdd); ?>
     		</select>
@@ -109,7 +109,7 @@
     		<label id="telephone" for="telephone">Téléphone portable :</label>
     	</div>
     	<div class="special_size_inputs">
-    		<input maxlength="10" id="telephone" name="telephone" placeholder="xxxxxxxxxx" /><br/>
+    		<input type="tel" maxlength="10" id="telephone" name="telephone" placeholder="xxxxxxxxxx" /><br/>
     	</div>
     </div>
 
