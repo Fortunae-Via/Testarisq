@@ -76,10 +76,10 @@
 <table>
 	<tr>
 		<!-- Nom des colonnes -->
-		<th>Id</th>
+		<th>NIR</th>
 		<th>Nom de famille</th>
 		<th>Nom d'usage</th>
-		<th>Prénom</th>
+		<th>Prénom(s)</th>
 		<th>Date de naissance</th>
 		<th>Sexe</th>
 		<th>Courriel</th>

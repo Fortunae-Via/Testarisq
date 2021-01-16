@@ -17,8 +17,34 @@ require("modele/connexionbdd.php");
 // Definition des fonctions de requête SQL
 require('modele/RequetesGestion.php');
 
+//Si on fait une recherche
+if(isset($_POST['id_name'])){
+
+	$filtres=array();
+
+	//On remplit par des "" si on vient de l'accueil et que l'on n'a pas posté de filtre
+	$liste=array('sexe','region','year','test_number');
+	foreach ($liste as $filtre) {
+		if (isset($_POST[$filtre])) {
+			$filtres[$filtre]=$_POST[$filtre];
+		}
+		else {
+			$filtres[$filtre]="";
+		}
+	}
+
+	// Dans ce cas on laisse le formulaire affiché de manière à pouvoir refaire une recherche
+
+	// Definition du regex pour le nom recherché
+	$regex = '"%' . $_POST['id_name'] . '%"';
+
+	//affichage de la page
+	require("vues/GestionUtilisateurs.php");
+
+}
+
 //Si les informations minimales sont rentrées, un ajout à la bdd est possible
-if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(empty($_POST['nom']))) && (!(empty($_POST['prenom']))) && (!(empty($_POST['jour']))) && (!(empty($_POST['mois']))) && (!(empty($_POST['annee']))) && (!(empty($_POST['sexe']))) && (!(empty($_POST['mail']))) ){
+else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(empty($_POST['nom']))) && (!(empty($_POST['prenom']))) && (!(empty($_POST['jour']))) && (!(empty($_POST['mois']))) && (!(empty($_POST['annee']))) && (!(empty($_POST['sexe']))) && (!(empty($_POST['mail']))) ){
 
 	// On récupère toutes les données du POST dans $DonneesUtilisateur
 	$TypeCompte = $_POST['type_compte'];
@@ -57,7 +83,7 @@ if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(empty($_
 		$DonneesUtilisateur['id_adresse']=$Id_Adresse;
 	}
 	else {
-		$DonneesUtilisateur['id_adresse']=null;
+		$DonneesUtilisateur['id_adresse']=0;
 	}
 	
 	AjouterPersonne($bdd, $DonneesUtilisateur);
@@ -71,8 +97,9 @@ if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(empty($_
 			// Redirection vers Rechercheutilisateur.php (la page précédente)
 			header('Location: GestionUtilisateurs.php');
 	}
+}
 
-}else{
+else{
 
 	// Affichage de la page
 	include("vues/GestionUtilisateurs.php");
