@@ -4,6 +4,12 @@
     margin-top: 2rem;
 }
 
+.div_page h4{
+	color: white;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
 /* On enlève tout le style par défaut des boutons */
 button {
     display: inline-block;

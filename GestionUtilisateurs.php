@@ -92,16 +92,19 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 		AjouterCompte($bdd,$DonneesUtilisateur['id'],$TypeCompte);
 	}
 
-	sleep(1);
-		if('1'){
-			// Redirection vers Rechercheutilisateur.php (la page précédente)
-			header('Location: GestionUtilisateurs.php');
-	}
+	sleep(0.2);
+	$_SESSION['MessageAjoutUtilisateur'] = "L'utilisateur a bien été ajouté";
+	header('Location: GestionUtilisateurs.php');
 }
 
 else{
 
 	// Affichage de la page
 	include("vues/GestionUtilisateurs.php");
+
+	//Dans le cas ou on revient d'un ajout, on supprime le message pour les prochaines fois
+	if (isset($_SESSION['MessageAjoutUtilisateur'])) {
+		unset($_SESSION['MessageAjoutUtilisateur']);
+	}
 }
 ?>

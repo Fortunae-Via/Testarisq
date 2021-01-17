@@ -22,6 +22,13 @@
 
 	<div class="div_page">
 
+		<?php 
+			if (isset($_SESSION['MessageAjoutUtilisateur'])) {
+				echo ("<h4>".$_SESSION['MessageAjoutUtilisateur']."</h4>");
+			}
+
+		?>
+
 		<div id="ajout" class="bloc">
 			<button class="bandeau" onClick=" BasculerAffichage('dropdown1'); BasculerClasse('fleche1','fleche_expand','fleche_expand_down') ">
 				<h3>Ajouter un utilisateur</h3>
