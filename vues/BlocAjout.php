@@ -34,7 +34,7 @@
 
 	<div class="ligne">
 		<div class="info">
-			<label for="nom_usage">Nom d'usage:</label>
+			<label for="nom_usage">Nom d'usage :</label>
 		</div>
 		<input name="nom_usage" placeholder="Nom d'usage"/>
 	</div>

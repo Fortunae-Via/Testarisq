@@ -10,7 +10,6 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	header('Location: Accueil.php');
 }
 
-
 // Appel de la base de donnée bdd_testarisq
 require("modele/connexionbdd.php");
 //$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
@@ -39,8 +38,8 @@ if(isset($_POST['id_name'])){
 	$regex = '"%' . $_POST['id_name'] . '%"';
 
 	//affichage de la page
+	$Recherche=true;
 	require("vues/GestionUtilisateurs.php");
-
 }
 
 //Si les informations minimales sont rentrées, un ajout à la bdd est possible
@@ -92,19 +91,29 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 		AjouterCompte($bdd,$DonneesUtilisateur['id'],$TypeCompte);
 	}
 
-	sleep(0.2);
-	$_SESSION['MessageAjoutUtilisateur'] = "L'utilisateur a bien été ajouté";
+	sleep(1);
+	$_SESSION['MessageModifsUtilisateur'] = "L'utilisateur a bien été ajouté";
+	$_SESSION['RechercheEnCours'] = true;
 	header('Location: GestionUtilisateurs.php');
 }
 
 else{
 
+	if (isset($_SESSION['RechercheEnCours'])) {
+		$Recherche=true;
+		unset($_SESSION['RechercheEnCours']);
+	}
+	else {
+		$Recherche = false;
+	}
+
 	// Affichage de la page
 	include("vues/GestionUtilisateurs.php");
 
-	//Dans le cas ou on revient d'un ajout, on supprime le message pour les prochaines fois
-	if (isset($_SESSION['MessageAjoutUtilisateur'])) {
-		unset($_SESSION['MessageAjoutUtilisateur']);
+	//Dans le cas ou on revient d'un ajout modif ou suppression, on supprime le message pour les prochaines fois
+	if (isset($_SESSION['MessageModifsUtilisateur'])) {
+		unset($_SESSION['MessageModifsUtilisateur']);
 	}
+
 }
 ?>

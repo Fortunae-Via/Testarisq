@@ -32,24 +32,53 @@
 		<div id="ajout" class="bloc">
 			<button class="bandeau" onClick=" BasculerAffichage('dropdown1'); BasculerClasse('fleche1','fleche_expand','fleche_expand_down') ">
 				<h3>Ajouter un utilisateur</h3>
-				<img id="fleche1" class="fleche_expand_down" src="vues/img/expand.png" alt="fleche_expand"/>
+				<?php 
+					if ($Recherche==true) {
+						echo("<img id=\"fleche1\" class=\"fleche_expand\" src=\"vues/img/expand.png\" alt=\"fleche_expand\"/>");
+					}
+					else {
+						echo("<img id=\"fleche1\" class=\"fleche_expand_down\" src=\"vues/img/expand.png\" alt=\"fleche_expand\"/>");
+					}
+				?>
 			</button>
 
-			<div id="dropdown1" class="dropdown-content" style="display: block;">
-				<?php require 'vues/BlocAjout.php'; ?>
+			<?php 
+				if ($Recherche==true) {
+					echo("<div id=\"dropdown1\" class=\"dropdown-content\" style=\"display: none;\">");
+				}
+				else {
+					echo("<div id=\"dropdown1\" class=\"dropdown-content\" style=\"display: block;\">");
+				}
+				
+				require 'vues/BlocAjout.php'; 
+			?>
 			</div>
 		</div>
 
 		<div id="recherche" class="bloc">
 			<button class="bandeau" onClick=" BasculerAffichage('dropdown2'); BasculerClasse('fleche2','fleche_expand','fleche_expand_down') ">
 				<h3>Rechercher un utilisateur</h3>
-				<img id="fleche2" class="fleche_expand" src="vues/img/expand.png" alt="fleche_expand"/>
+				<?php 
+					if ($Recherche==true) {
+						echo("<img id=\"fleche2\" class=\"fleche_expand_down\" src=\"vues/img/expand.png\" alt=\"fleche_expand\"/>");
+					}
+					else {
+						echo("<img id=\"fleche2\" class=\"fleche_expand\" src=\"vues/img/expand.png\" alt=\"fleche_expand\"/>");
+					}
+				?>
 			</button>
-			<div id="dropdown2" class="dropdown-content" style="display: none;">
-				<?php include("vues/BlocRecherche.php"); ?>
-
-				</div>
+			<?php 
+				if ($Recherche==true) {
+					echo("<div id=\"dropdown2\" class=\"dropdown-content\" style=\"display: block;\">");
+				}
+				else {
+					echo("<div id=\"dropdown2\" class=\"dropdown-content\" style=\"display: none;\">");
+				}
+				
+				require 'vues/BlocRecherche.php'; 
+			?>
 			</div>
+
 		</div>
 	</div>
 
