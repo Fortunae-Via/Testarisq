@@ -23,10 +23,9 @@
 	<div class="div_page">
 
 		<?php 
-			if (isset($_SESSION['MessageAjoutUtilisateur'])) {
-				echo ("<h4>".$_SESSION['MessageAjoutUtilisateur']."</h4>");
+			if (isset($_SESSION['MessageModifsUtilisateur'])) {
+				echo ("<h4>".$_SESSION['MessageModifsUtilisateur']."</h4>");
 			}
-
 		?>
 
 		<div id="ajout" class="bloc">

@@ -16,6 +16,7 @@ require("modele/connexionbdd.php");
 // Definition des fonctions de requête SQL
 require('modele/RequetesGestion.php');
 
+
 //Si on fait une recherche
 if(isset($_POST['id_name'])){
 
@@ -92,8 +93,7 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 	}
 
 	sleep(1);
-	$_SESSION['MessageModifsUtilisateur'] = "L'utilisateur a bien été ajouté";
-	$_SESSION['RechercheEnCours'] = true;
+	$_SESSION['MessageModifsUtilisateur'] = "L'utilisateur a bien été ajouté.";
 	header('Location: GestionUtilisateurs.php');
 }
 
@@ -108,7 +108,7 @@ else{
 	}
 
 	// Affichage de la page
-	include("vues/GestionUtilisateurs.php");
+	require("vues/GestionUtilisateurs.php");
 
 	//Dans le cas ou on revient d'un ajout modif ou suppression, on supprime le message pour les prochaines fois
 	if (isset($_SESSION['MessageModifsUtilisateur'])) {

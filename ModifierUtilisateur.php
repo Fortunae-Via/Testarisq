@@ -30,8 +30,11 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 	</head>
 	<body>
 		<?php
-			// On effectue la modification du profil utilisateur d'identifiant $_GET['NIR']
+			// On effectue la modification du profil utilisateur d'identifiant $_GET['NIR']$NIR
 			if(isset($_GET['NIR'])){
+
+				$NIR = $_GET['NIR'];
+
 				// Appel à la base de donnée
 				require("modele/connexionbdd.php");
 
@@ -43,26 +46,29 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 					// La base de donnée est Mise à Jour (UPDATE) avec les informations du formulaire
 					// Mise à Jour de la table "personne"
 					$update = $bdd->prepare("UPDATE personne SET NomDeFamille=?, NomDUsage=?, Prenom1=?, Prenom2=?, Prenom3=?, Sexe=?, Courriel=?, Portable=?, DateNaissance=? WHERE NIR=?");
-					$update->execute(array($_POST['nom'], $_POST['nom_usage'], $_POST['prenom'], $_POST['prenom_2'], $_POST['prenom_3'], $_POST['sexe'], $_POST['mail'], $_POST['telephone'], $DateNaissance, $_GET['NIR']));
+					$update->execute(array($_POST['nom'], $_POST['nom_usage'], $_POST['prenom'], $_POST['prenom_2'], $_POST['prenom_3'], $_POST['sexe'], $_POST['mail'], $_POST['telephone'], $DateNaissance, $NIR));
 					$update->closeCursor();
+
+					require("modele/RequetesGenerales.php");
+					$Id_Adresse=InfosPersonne($bdd, $NIR)['Adresse_Id'];
 
 					// Mise à Jour de la table "adresse"
 					$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=?, Region=? WHERE Id=? ');
-					$update->execute(array($_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['pays'], $_POST['region'], $_GET['NIR']));
+					$update->execute(array($_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['pays'], $_POST['region'], $Id_Adresse));
 					$update->closeCursor();
 
 
 					sleep(1);
-					$_SESSION['MessageModifsUtilisateur'] = "L'utilisateur a bien été ajouté";
+					$_SESSION['MessageModifsUtilisateur'] = "Les données de l'utilisateur ont bien été modifiées.";
 					$_SESSION['RechercheEnCours'] = true;
 					header('Location: GestionUtilisateurs.php');
 					
 
 				}else{
 
-					// Récuperation des informations de l'utilisateur d'identifiant $_GET['NIR']
+					// Récuperation des informations de l'utilisateur d'identifiant $NIR
 					require 'modele/RequetesGenerales.php';
-					$InfosPersosUser = InfosPersonne($bdd, $_GET['NIR']);
+					$InfosPersosUser = InfosPersonne($bdd, $NIR);
 					$AdresseUser = InfosAdresse($bdd, $InfosPersosUser['Adresse_Id']);
 
 					$MoisFR=array('Jan.','Fév.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov','Déc.');
@@ -132,7 +138,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 							<p>
 								<input maxlength="12" id="prenom" name="prenom" <?=$PreRemp['Prenom1']?> />
 								<input maxlength="12" id="prenom_2" name="prenom_2" <?=$PreRemp['Prenom2']?> />
-								<input maxlength="12" id="prenom_3" name="surname_3" <?=$PreRemp['Prenom3']?> />
+								<input maxlength="12" id="prenom_3" name="prenom_3" <?=$PreRemp['Prenom3']?> />
 							</p>
 						</div>
 					</div>
