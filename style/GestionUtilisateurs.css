@@ -185,27 +185,22 @@ select {
 	width: 100%;
 }
 
-#ajout .special_size_inputs input[maxlength='2'] {
-	width: 2rem;
-}
-
 #ajout .special_size_inputs input[maxlength='4'] {
 	width: 3rem;
 }
-
 #ajout .special_size_inputs input[maxlength='6'] {
 	width: 4rem;
 }
-
-#ajout .special_size_inputs input[maxlength='10'] {
+#ajout .special_size_inputs input[maxlength='25'] {
 	width: 6rem;
 }
-
-#ajout .special_size_inputs input[maxlength='12'] {
+#ajout .special_size_inputs input[maxlength='30'] {
+	width: 15rem;
+}
+#ajout .special_size_inputs input[maxlength='60'] {
 	width: 8rem;
 }
-
-#ajout .special_size_inputs input[maxlength='20'] {
+#ajout .special_size_inputs input[maxlength='100'] {
 	width: 15rem;
 }
 

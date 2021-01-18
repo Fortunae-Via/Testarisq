@@ -79,9 +79,9 @@
 		</div>
 		<div class="special_size_inputs">
 			<p>
-				<input maxlength="12" id="prenom" name="prenom" placeholder="Prénom*" required/>
-				<input maxlength="12" id="prenom_2" name="prenom_2" placeholder="2ème Prénom" />
-				<input maxlength="12" id="prenom_3" name="prenom_3" placeholder="3ème Prénom"/>
+				<input maxlength="30" id="prenom" name="prenom" placeholder="Prénom*" required/>
+				<input maxlength="30" id="prenom_2" name="prenom_2" placeholder="2ème Prénom" />
+				<input maxlength="30" id="prenom_3" name="prenom_3" placeholder="3ème Prénom"/>
 			</p>
 		</div>
 	</div>
@@ -155,14 +155,14 @@
     	</div>
     	<div class="special_size_inputs">
     		<input maxlength="4" id="numeroRue" name="numeroRue" placeholder="N°"/>
-    		<input maxlength="20" id="rue" name="rue" placeholder="Rue"/>
-    		<input maxlength="12" id="ville" name="ville" placeholder="Ville"/><br/>
-    		<input maxlength="6" id="code" name="code" placeholder="Code Postal" />
+    		<input maxlength="100" id="rue" name="rue" placeholder="Rue"/>
+    		<input maxlength="60" id="ville" name="ville" placeholder="Ville"/><br/>
+    		<input maxlength="25" id="code" name="code" placeholder="Code Postal" />
     		<select name="region">
     			<option value="">Région</option>
     			<?php Region($bdd); ?>
     		</select>
-    		<input maxlength="10" id="pays" name="pays" placeholder="Pays"/>
+    		<input maxlength="25" id="pays" name="pays" placeholder="Pays"/>
     	</div>
     </div>
 
@@ -171,7 +171,7 @@
     		<label id="telephone" for="telephone">Téléphone portable :</label>
     	</div>
     	<div class="special_size_inputs">
-    		<input type="tel" maxlength="10" id="telephone" name="telephone" placeholder="xxxxxxxxxx" /><br/>
+    		<input type="tel" maxlength="25" id="telephone" name="telephone" placeholder="xxxxxxxxxx" /><br/>
     	</div>
     </div>
 
