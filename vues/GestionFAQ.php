@@ -22,8 +22,8 @@
 
             <?php 
 
-                if ($MessageAjout == true){
-                    echo"<h3 id='message_ajout'>Le nouvel élément a bien été ajouté</h3>";
+                if ($MessageModif != false){
+                    echo"<h3 id='message_ajout'>".$MessageModif."</h3>";
                 }
 
             ?>
@@ -63,36 +63,18 @@
             <h2>F.A.Q. actuelle :</h2>
 
             <!-- Les questions de la FAQ -->
-
-            <?php
-
-                foreach ($faq as $key) {
-
-                    $id = $key['Id'];
-                    $rep = "rep".$id;
-                    $fleche = "fleche".$id;
-                    $classequestion = "class=\""."question ".$id."\"";
-            ?>
-                    
-                    <div <?=$classequestion?> >
-                        <button class="bandeau_question" onClick=" BasculerAffichage('<?=$rep?>'); BasculerClasse(<?=$fleche?>,'fleche_expand','fleche_expand_down') ">
-                            <h3><?=$key['Question']?></h3>
-                            <img id=<?=$fleche?> class="fleche_expand" src="vues/img/expand.png" alt="fleche_expand"/>
-                        </button>
-                        <p id='<?=$rep?>' class="dropdown-content" style="display: none;">
-                            <?=$key['Reponse']?>
-                        </p>
-                    </div>
-                                   
             <?php 
-                }
+            $Modifications = true;
+            require("vues/QuestionsFAQ.php");
             ?>
+
 
         </div>
 
     </div>
 
     <script type="text/javascript" src="js/fonctions_generiques.js"></script>
+    <script type="text/javascript" src="js/GestionFAQ.js"></script>
 
 </body>
 </html>

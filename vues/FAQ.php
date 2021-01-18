@@ -20,31 +20,10 @@
         </header>
 
         <div class="bloc_questions">
-
-            <?php
-
-                foreach ($faq as $key) {
-
-                    $id = $key['Id'];
-                    $rep = "rep".$id;
-                    $fleche = "fleche".$id;
-                    $classequestion = "class=\""."question ".$id."\"";
-            ?>
-                    
-                    <div <?=$classequestion?> >
-                        <button class="bandeau_question" onClick=" BasculerAffichage('<?=$rep?>'); BasculerClasse(<?=$fleche?>,'fleche_expand','fleche_expand_down') ">
-                            <h3><?=$key['Question']?></h3>
-                            <img id=<?=$fleche?> class="fleche_expand" src="vues/img/expand.png" alt="fleche_expand"/>
-                        </button>
-                        <p id='<?=$rep?>' class="dropdown-content" style="display: none;">
-                            <?=$key['Reponse']?>
-                        </p>
-                    </div>
-                                   
             <?php 
-                }
+            $Modifications = false;
+            require("vues/QuestionsFAQ.php");
             ?>
-
         </div>
 
         <footer>

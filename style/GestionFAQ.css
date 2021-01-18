@@ -33,7 +33,7 @@
 	margin-right: 0.5rem;
 }
 
-#bloc_ajout input, textarea
+input, textarea
 {
 	box-sizing:border-box;
 	padding:0.5rem;
@@ -43,11 +43,12 @@
 	margin-bottom: 0.25rem;
 	width: 100%;
 	font-family: 'Nunito Sans', sans-serif;
+	font-size: 1rem;
 }
 
-#bloc_ajout textarea{
+textarea{
 	height: 10rem;
-	resize: none;
+	resize: vertical;
 }
 
 #bloc_ajout .bloc_add {
@@ -70,3 +71,33 @@
 .bloc_questions {
 	margin-bottom: 5rem;
 }
+
+
+
+/* Partie modifs */
+
+.bloc_boutons {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    margin-top: 1rem;
+}
+
+.bloc_boutons button {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #B8B8B8;
+    box-sizing: border-box;
+    padding: 0.5rem 1.75rem;
+}
+
+.bloc_boutons #boutonsupp {
+	background-color: #FF9E9E;
+}
+
+
+
+
