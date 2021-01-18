@@ -54,9 +54,9 @@
 						</div>
 						<div class="special_size_inputs">
 							<p>
-								<input maxlength="12" id="prenom" name="prenom" <?=$PreRemp['Prenom1']?> />
-								<input maxlength="12" id="prenom_2" name="prenom_2" <?=$PreRemp['Prenom2']?> />
-								<input maxlength="12" id="prenom_3" name="prenom_3" <?=$PreRemp['Prenom3']?> />
+								<input maxlength="30" id="prenom" name="prenom" <?=$PreRemp['Prenom1']?> />
+								<input maxlength="30" id="prenom_2" name="prenom_2" <?=$PreRemp['Prenom2']?> />
+								<input maxlength="30" id="prenom_3" name="prenom_3" <?=$PreRemp['Prenom3']?> />
 							</p>	
 						</div>
 					</div>
@@ -126,7 +126,7 @@
 						<div class="info">
 		 					<label for="mail">Courriel<strong>*</strong> :</label>
 		 				</div>
-						<input name="mail" <?=$PreRemp['Courriel']?> /><br/>
+						<input type="mail" name="mail" <?=$PreRemp['Courriel']?> /><br/>
 					</div>
 
 					<div class="ligne">
@@ -135,15 +135,15 @@
 						</div>
 						<div class="special_size_inputs">
 							<input maxlength="4" id="numeroRue" name="numeroRue"<?=$PreRemp['NumeroRue']?> />
-							<input maxlength="20" id="rue" name="rue" <?=$PreRemp['Rue']?> />
-							<input maxlength="12" id="ville" name="ville" <?=$PreRemp['Ville']?> /><br/>
-							<input maxlength="6" id="code" name="code" <?=$PreRemp['CodePostal']?> />
+							<input maxlength="100" id="rue" name="rue" <?=$PreRemp['Rue']?> />
+							<input maxlength="60" id="ville" name="ville" <?=$PreRemp['Ville']?> /><br/>
+							<input maxlength="25" id="code" name="code" <?=$PreRemp['CodePostal']?> />
 							<select name="region">
 								<option value="">Région</option>
 								<?php Region($bdd); ?>
 							</select>
 							<!--<input maxlength="12" id="region" name="region" value=<?php echo $Region; ?> />-->
-							<input maxlength="10" id="pays" name="pays" <?=$PreRemp['Pays']?> />
+							<input maxlength="25" id="pays" name="pays" <?=$PreRemp['Pays']?> />
 						</div>
 					</div>
 
@@ -151,7 +151,7 @@
 						<div class="info">
 							<label id="telephone" for="telephone">Téléphone portable :</label>
 						</div>
-						<input id="telephone" name="telephone" <?=$PreRemp['Portable']?> /><br/>
+						<input type="tel" maxlength="25" id="telephone" name="telephone" <?=$PreRemp['Portable']?> /><br/>
 					</div>
 
 					<div class="bloc_add"> 
