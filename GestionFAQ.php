@@ -1,30 +1,43 @@
 <?php 
 
+session_start(); 
+// Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
+if (!(isset($_SESSION['NIR']))) {
+    header('Location: Accueil.php');
+} 
+
 //Partie traitement de l'ajout de question :
 if (isset($_POST['question']) && isset($_POST['reponse'])){
 		
 	require 'modele/connexionbdd.php';
+	require 'modele/RequetesFAQ.php';
 
-	$add_question = $bdd->prepare("INSERT INTO ElementFAQ(question, reponse) VALUES (?, ?)");
-	$question=$_POST['question'];
-	$reponse_at=strip_tags($_POST['reponse']);
-	$reponse = nl2br($reponse_at);
-	$add_question->execute(array($question, $reponse));
+	AjouterQuestion($bdd, $_POST['question'], isset($_POST['reponse']));
 
-	$message_ajout = true;
-	
+	$_SESSION['MessageAjoutFAQ'] = true ;
+	header('Location: GestionFAQ.php');
 }
 
 else {
-	$message_ajout = false;
+	if (isset($_SESSION['MessageAjoutFAQ'])) {
+		$MessageAjout = true;
+		unset($_SESSION['MessageAjoutFAQ']);
+	}
+	else {
+		$MessageAjout = false;
+	}
+
+	//On prépare la FAQ
+	require 'modele/connexionbdd.php';
+	require 'modele/RequetesFAQ.php';
+	$faq = RecupFAQ($bdd);
+
+	//On affiche la page
+	require 'vues/GestionFAQ.php';
 }
 
 
-//On prépare la FAQ
-require 'controleurs/FAQ.php';
 
-//On affiche la page
-require 'vues/GestionFAQ.php';
 
 
 

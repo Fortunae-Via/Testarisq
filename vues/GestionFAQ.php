@@ -22,7 +22,7 @@
 
             <?php 
 
-                if ($message_ajout == true){
+                if ($MessageAjout == true){
                     echo"<h3 id='message_ajout'>Le nouvel élément a bien été ajouté</h3>";
                 }
 
