@@ -18,6 +18,40 @@
 		</div>
 	</div>
 
+	<div>
+		<div class="ligne" id="ligneAutResAUE" style="display:none">
+			<div class="info">
+				<label for="aut_resAUE">Nom de l'autorité responsable :</label>
+			</div>
+			<div class="special_size_inputs">
+				<select name="aut_resAUE">
+					<option value="0" selected>Autorité responsable</option>
+					<?php
+					foreach ($ListeAutoritesResponsablesAUE as $AutResAUE) {
+						echo"<option value=\"". $AutResAUE['id'] ."\">" . $AutResAUE['nom'] . "</option>";
+					}
+					?>
+				</select>
+			</div>
+		</div>
+
+		<div class="ligne" id="ligneAutResPOL" style="display:none">
+			<div class="info">
+				<label for="aut_resPOL">Nom de l'autorité responsable :</label>
+			</div>
+			<div class="special_size_inputs">
+				<select name="aut_resPOL">
+					<option value="0" selected>Autorité responsable</option>
+					<?php
+					foreach ($ListeAutoritesResponsablesPOL as $AutResPOL) {
+						echo"<option value=\"". $AutResPOL['id'] ."\">" . $AutResPOL['nom'] . "</option>";
+					}
+					?>
+				</select>
+			</div>
+		</div>
+	</div>
+
 	<div class="ligne">
 		<div class="info">
 			<label for="id">NIR<strong>*</strong> :</label>

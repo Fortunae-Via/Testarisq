@@ -38,6 +38,9 @@ if(isset($_POST['id_name'])){
 	// Definition du regex pour le nom recherché
 	$regex = '"%' . $_POST['id_name'] . '%"';
 
+	$ListeAutoritesResponsablesAUE = ListeAutoritesResponsables($bdd,'AUE');
+	$ListeAutoritesResponsablesPOL = ListeAutoritesResponsables($bdd,'POL');
+
 	//affichage de la page
 	$Recherche=true;
 	require("vues/GestionUtilisateurs.php");
@@ -88,8 +91,24 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 	
 	AjouterPersonne($bdd, $DonneesUtilisateur);
 
-	if (in_array($TypeCompte, array('AUE','POL','ADM'))) {
-		AjouterCompte($bdd,$DonneesUtilisateur['id'],$TypeCompte);
+	if ($TypeCompte=='AUE') {
+		if ( isset($_POST['aut_resAUE']) && (!(empty($_POST['aut_resAUE']))) ) {
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE', $_POST['aut_resAUE']);
+		}
+		else {
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE');
+		}
+	}
+	else if ($TypeCompte=='POL') {
+		if ( isset($_POST['aut_resPOL']) && (!(empty($_POST['aut_resPOL']))) ) {
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL', $_POST['aut_resPOL']);
+		}
+		else {
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL');
+		}
+	}
+	else if ($TypeCompte=='ADM') {
+		AjouterCompte($bdd, $DonneesUtilisateur['id'], 'ADM');
 	}
 
 	sleep(1);
@@ -106,6 +125,9 @@ else{
 	else {
 		$Recherche = false;
 	}
+
+	$ListeAutoritesResponsablesAUE = ListeAutoritesResponsables($bdd,'AUE');
+	$ListeAutoritesResponsablesPOL = ListeAutoritesResponsables($bdd,'POL');
 
 	// Affichage de la page
 	require("vues/GestionUtilisateurs.php");

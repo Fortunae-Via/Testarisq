@@ -82,6 +82,7 @@
 	</div>
 
 	<script type="text/javascript" src="js/fonctions_generiques.js"></script>
+	<script type="text/javascript" src="js/GestionUtilisateurs.js"></script>
 
 </body>
 </html>

@@ -1,4 +1,11 @@
 <?php
+
+function ListeAutoritesResponsables(PDO $bdd, string $Type): array {
+	$query = $bdd->prepare("SELECT id, nom FROM AutoriteResponsable WHERE Type = ?");
+	$query->execute(array($Type));
+	return $query->fetchAll();
+}
+
 function Region($bdd){
 	/**
 	On affiche les différentes régions dans notre <select> en tant que <option>,
@@ -12,7 +19,7 @@ function Region($bdd){
 	$region->closeCursor();
 }
 
-function AjouterAdresse($bdd, $InfosAdresse){
+function AjouterAdresse(PDO $bdd, array $InfosAdresse): integer {
 	$add_adresse = $bdd->prepare('
 		INSERT INTO adresse (NumeroRue, Rue, CodePostal, Ville, Region, Pays) 
 		VALUES (:numeroRue, :rue, :code, :ville, :region, :pays)');
@@ -22,7 +29,7 @@ function AjouterAdresse($bdd, $InfosAdresse){
 }
 
 //Ajoute une entrée Personne et un compte citoyen associé
-function AjouterPersonne($bdd, $DonneesUtilisateur){
+function AjouterPersonne(PDO $bdd, array $DonneesUtilisateur){
 	$add_personne = $bdd->prepare('
 		INSERT INTO personne (NIR, MotDePasse, NomDeFamille, NomDUsage, Prenom1, Prenom2, Prenom3, DateNaissance, Sexe, Courriel, Portable, Adresse_Id) 
 		VALUES (:id, :mdp, :nom, :nom_usage, :prenom, :prenom_2, :prenom_3, :datenaissance, :sexe, :mail, :telephone, :id_adresse)');
@@ -41,15 +48,24 @@ function AjouterPersonne($bdd, $DonneesUtilisateur){
 
 
 //Ajoute une entrée Compte
-function AjouterCompte($bdd, $NIR, $TypeCompte){
-	$add_compte = $bdd->prepare('
-		INSERT INTO compte (Id, TypeCompte_Type, Personne_NIR) 
-		VALUES (:id, :type_compte, :nir)');
-	$add_compte->execute(array(
+function AjouterCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutRes = null){
+	if (empty($IdAutRes)) {
+		$add_compte = $bdd->prepare(' INSERT INTO compte (Id, TypeCompte_Type, Personne_NIR) VALUES (:id, :type_compte, :nir)');
+		$add_compte->execute(array(
 		'id' => $NIR.$TypeCompte,
 		'type_compte' => $TypeCompte,
 		'nir' => $NIR
 		));
+	}
+	else {
+		$add_compte = $bdd->prepare(' INSERT INTO compte (Id, TypeCompte_Type, Personne_NIR, AutoriteResponsable_Id) VALUES (:id, :type_compte, :nir, :aut_res_id)');
+		$add_compte->execute(array(
+		'id' => $NIR.$TypeCompte,
+		'type_compte' => $TypeCompte,
+		'nir' => $NIR,
+		'aut_res_id' => $IdAutRes
+		));	
+	}
 }
 
 function Rechercher($bdd, $sexe, $year, $regex, $region){
