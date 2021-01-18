@@ -7,7 +7,8 @@ if (isset($_POST['question']) && isset($_POST['reponse'])){
 
 	$add_question = $bdd->prepare("INSERT INTO ElementFAQ(question, reponse) VALUES (?, ?)");
 	$question=$_POST['question'];
-	$reponse=$_POST['reponse'];
+	$reponse_at=strip_tags($_POST['reponse']);
+	$reponse = nl2br($reponse_at);
 	$add_question->execute(array($question, $reponse));
 
 	$message_ajout = true;
