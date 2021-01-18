@@ -101,4 +101,19 @@ function Rechercher($bdd, $sexe, $year, $regex, $region){
 	//Fermeture de la requête SQL
 	$recherche->closeCursor();
 }
+
+function MiseAJour_personne($bdd, $nom, $nom_usage, $prenom, $prenom_2, $prenom_3, $sexe, $mail, $telephone, $DateNaissance, $NIR){
+	// La base de donnée est Mise à Jour (UPDATE) avec les informations du formulaire
+	// Mise à Jour de la table "personne"
+	$update = $bdd->prepare("UPDATE personne SET NomDeFamille=?, NomDUsage=?, Prenom1=?, Prenom2=?, Prenom3=?, Sexe=?, Courriel=?, Portable=?, DateNaissance=? WHERE NIR=?");
+	$update->execute(array($nom, $nom_usage, $prenom, $prenom_2, $prenom_3, $sexe, $mail, $telephone, $DateNaissance, $NIR));
+	$update->closeCursor();
+}
+
+function MiseAJour_adresse($bdd, $numeroRue, $rue, $code, $ville, $pays, $region, $id){
+	// Mise à Jour de la table "adresse"
+	$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=?, Region=? WHERE Id=?');
+	$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $region, $id));
+	$update->closeCursor();
+}
 ?>
