@@ -1,3 +1,4 @@
+<?php include'controleurs/send.php';?>
 <!DOCTYPE html>
 <html>
 
@@ -19,10 +20,10 @@
         <header>
             <h2><?php echo $titre_page; ?></h2>
         </header>
-
+          <?php echo $alert; ?>
         <section>
             <div class="container">
-                <form class="contact-form" action="controleurs/traitement_contact-form" method="post">
+                <form class="contact-form" action="controleurs/send.php" method="post">
                     <div class="form-group">
                         <label for="name">Prénom et Nom : *</label>
                         <input type="text" id="name" name="name" required="required">
@@ -46,6 +47,10 @@
         </section>
         
     </div>
-
+     <script type="text/javascript">
+    if(window.history.replaceState){
+        window.history.replaceState(null.null.window.location.href);
+    }
+    </script>
 </body>
 </html>
