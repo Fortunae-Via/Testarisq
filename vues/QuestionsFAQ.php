@@ -23,7 +23,7 @@
                 <?php if($Modifications == true) {?>
                 <div class="bloc_boutons">
                     <button id=<?=$bouton?> onClick="TransformerChamp('<?=$id?>')">Modifier</button>
-                    <form method="post" action="controleurs/SuppressionFAQ.php">
+                    <form method="post" onsubmit="return confirmation();" action="controleurs/SuppressionFAQ.php">
                         <input name="idsupp" value='<?=$id?>' type="hidden"/>
                         <button id="boutonsupp" type="submit">Supprimer</button>
                     </form>
