@@ -1,8 +1,19 @@
-<?php
+<?php 
+
+session_start(); 
+// Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
+if (!(isset($_SESSION['NIR']))) {
+	header('Location: Accueil.php');
+}
+//S'il est connecté mais qu'il charge des pages non autorisées pour son type de compte on le renvoie à l'accueil
+else if ( $_SESSION['TypeCompte']!='ADM' ) {	
+	header('Location: Accueil.php');
+}
+
 // Si on a bien récupérer l'identifiant d'un utilisateur à la page précédente Alors :
 if(isset($_GET['NIR'])){
 	// Appel  de la base de donnée
-	require("modele/connexionbdd.php");
+	require("../modele/connexionbdd.php");
 
 
 	/**
@@ -24,7 +35,9 @@ if(isset($_GET['NIR'])){
 		L'utilisateur est redirigé vers la page de recherche.
 		(Retour à la page précédente)
 		**/
-		header('Location: GestionUtilisateurs.php');
+		$_SESSION['MessageModifsUtilisateur'] = "L'utilisateur a bien été supprimé.";
+		$_SESSION['RechercheEnCours'] = true;
+		header('Location: ../GestionUtilisateurs.php');
 	}
 }
 ?>
