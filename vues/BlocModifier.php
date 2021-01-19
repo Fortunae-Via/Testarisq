@@ -35,6 +35,42 @@
 
 					<div class="ligne">	
 						<div class="info">
+							<label for="type_compte">Type de compte :</label>
+						</div>
+						<p class="type_compte"><?=$TypeCompteFR?></p>
+					</div>
+
+					<?php
+					if ($TypeCompte == 'AUE' OR $TypeCompte == 'POL') {
+					?>
+
+						<div class="ligne">
+							<div class="info">
+								<label for="aut_res">Nom de l'autorité responsable :</label>
+							</div>
+							<div class="special_size_inputs">
+								<select name="aut_res">
+									<option value="0">Autorité responsable</option>
+									<?php
+									foreach ($ListeAutoritesResponsables as $AutRes) {
+										if ($AutRes['id'] == $AutResUser) {
+											echo"<option value=\"". $AutRes['id'] ."\" selected>" . $AutRes['nom'] . "</option>";
+										}
+										else {
+											echo"<option value=\"". $AutRes['id'] ."\">" . $AutRes['nom'] . "</option>";
+										}
+									}
+									?>
+								</select>
+							</div>
+						</div>
+
+					<?php
+					}	
+					?>
+
+					<div class="ligne">	
+						<div class="info">
 							<label for="nom">Nom de famille<strong>*</strong> :</label>
 						</div>
 						<!-- Pré-remplissage du formulaire dans le cas où aucune modification n'est faite -->

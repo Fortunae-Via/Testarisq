@@ -14,6 +14,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 require("modele/connexionbdd.php");
 // Appel des fonctions
 require("modele/RequetesGestion.php");
+
 // On effectue la modification du profil utilisateur d'identifiant $_GET['NIR']$NIR
 if(isset($_GET['NIR'])){
 	$NIR = $_GET['NIR'];
@@ -30,40 +31,52 @@ if(isset($_GET['NIR'])){
 
 		MiseAJour_adresse($bdd, $_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['pays'], $_POST['region'], $Id_Adresse);
 
+		//Pour les changements de type de compte
+		if (isset($_POST['aut_res'],$_SESSION['TypeCompteUserModifEnCours'])) {
+			$TypeCompte=$_SESSION['TypeCompteUserModifEnCours'];
+			unset($_SESSION['TypeCompteUserModifEnCours']);
+
+			if ($TypeCompte=='AUE' OR $TypeCompte=='POL') {
+				ModifierAutResCompte($bdd, $NIR, $TypeCompte, $_POST['aut_res']);
+			}
+		}
+
 		sleep(true);
 		$_SESSION['MessageModifsUtilisateur'] = "Les données de l'utilisateur ont bien été modifiées.";
 		$_SESSION['RechercheEnCours'] = true;
 		header('Location: GestionUtilisateurs.php');
 					
-	}else{
+	}
+
+	else{
 		// Récuperation des informations de l'utilisateur d'identifiant $NIR
 		require 'modele/RequetesGenerales.php';
+		require 'controleurs/FonctionsGestionUtilisateurs.php';
+		require 'controleurs/FonctionsGenerales.php';
+
 		$InfosPersosUser = InfosPersonne($bdd, $NIR);
 		$AdresseUser = InfosAdresse($bdd, $InfosPersosUser['Adresse_Id']);
+		$TypeCompte = TypeComptePersonne($bdd, $NIR);
+		$TypeCompteFR = TypeComptePersonneFR($TypeCompte);
+
+		if ($TypeCompte == 'AUE') {
+			$ListeAutoritesResponsables = ListeAutoritesResponsables($bdd,'AUE');
+			$AutResUser = AutResCompte($bdd, $NIR, 'AUE');
+			$_SESSION['TypeCompteUserModifEnCours']='AUE';
+		}
+		else if ($TypeCompte == 'POL') {
+			$ListeAutoritesResponsables = ListeAutoritesResponsables($bdd,'POL');
+			$AutResUser = AutResCompte($bdd, $NIR, 'POL');
+			$_SESSION['TypeCompteUserModifEnCours']='POL';
+		} 
 
 		$MoisFR=array('Jan.','Fév.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov','Déc.');
 		$Annee=substr($InfosPersosUser['DateNaissance'], 0, 4); 
 		$Mois=intval(substr($InfosPersosUser['DateNaissance'], 5, 2)); //On récupère le mois et on convertit en int pour enlever l'éventuel 0 devant
 		$Jour=intval(substr($InfosPersosUser['DateNaissance'], 8, 2)); //pareil
+		
+		$PreRemp = CreatePreRemp($InfosPersosUser,$AdresseUser);
 
-		//Liste des placeholders pour les champs potentiellement vides
-		$Placeholders = array(
-			'NomDUsage' => "Nom d'usage",	'Prenom2' => "2ème Prénom",
-			'Prenom3' => "3ème Prénom",		'NumeroRue' => "N°",
-			'Rue' => "Rue",					'CodePostal' => "Code Postal",
-			'Ville' => "Ville",				'Pays' => "Pays",						
-			'Portable' => "xxxxxxxxxx");
-		//On crée tous les préremplissages, et si c'est vide on note juste le placeholder
-		$ListeChamps = array('NomDeFamille','NomDUsage','Prenom1','Prenom2','Prenom3','Courriel','NumeroRue','Rue','CodePostal','Ville','Pays','Portable');
-		$PreRemp = array_merge($InfosPersosUser,$AdresseUser);
-
-		foreach ($ListeChamps as $champ) {
-			if(empty($PreRemp[$champ])) { //donne if(empty($InfosPersosUser['NomDUsage'])) etc
-				$PreRemp[$champ]="placeholder=\"".$Placeholders[$champ]. "\"";
-			}else {
-				$PreRemp[$champ]="value=\"".$PreRemp[$champ]. "\"";
-			}
-		}
 		require("vues/BlocModifier.php");
 	}
 }

@@ -116,4 +116,26 @@ function MiseAJour_adresse($bdd, $numeroRue, $rue, $code, $ville, $pays, $region
 	$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $region, $id));
 	$update->closeCursor();
 }
-?>
+
+function ModifierAutResCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutRes){
+	if (empty($IdAutRes)) {
+		$update = $bdd->prepare('
+			UPDATE Compte 
+			SET AutoriteResponsable_Id = null
+			WHERE Personne_NIR = ? AND TypeCompte_Type = ?');
+		$update->execute(array($NIR, $TypeCompte));
+	}
+	else {
+		$update = $bdd->prepare('
+			UPDATE Compte 
+			SET AutoriteResponsable_Id = ?
+			WHERE Personne_NIR = ? AND TypeCompte_Type = ?');
+		$update->execute(array($IdAutRes, $NIR, $TypeCompte));
+	}
+}
+
+
+
+
+
+
