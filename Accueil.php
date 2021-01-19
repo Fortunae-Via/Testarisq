@@ -5,6 +5,13 @@ session_start();
 
 require 'controleurs/FonctionAffichageAccueil.php'; 
 
+//Sécurisation Input
+function securisation($donnees){
+                $donnees=trim($donnees);
+                $donnees=stripslashes($donnees);
+                $donnees=strip_tags($donnees);
+                return $donnees;}
+
 //Si on est déja connectés
 if (isset($_SESSION['TypeCompte'])) {
 
