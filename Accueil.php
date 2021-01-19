@@ -31,6 +31,7 @@ else if (isset($_POST['identifiant'],$_POST['mdp'])) {
 
 	if (strlen($_POST['identifiant'])>3 AND strlen($_POST['identifiant'])<17 AND $_POST['mdp'] !== "") {
 
+		require 'securisation_input.php'; 
 		//On récupère l'identifiant et le mdp donné
 		$IDCompte = securisation($_POST['identifiant']);
 		$MDP = securisation($_POST['mdp']);
