@@ -25,8 +25,8 @@ else if (isset($_POST['identifiant'],$_POST['mdp'])) {
 	if (strlen($_POST['identifiant'])>3 AND strlen($_POST['identifiant'])<17 AND $_POST['mdp'] !== "") {
 
 		//On récupère l'identifiant et le mdp donné
-		$IDCompte = $_POST['identifiant'];
-		$MDP = $_POST['mdp'];
+		$IDCompte = securisation($_POST['identifiant']);
+		$MDP = securisation($_POST['mdp']);
 		$NIR = substr($IDCompte, 0, -3); //On enlève les trois caractères à la fin indiquant le type de compte
 		$TypeCompteDemande = substr($IDCompte, -3);
 		
