@@ -1,11 +1,5 @@
 <?php
 
-function ListeAutoritesResponsables(PDO $bdd, string $Type): array {
-	$query = $bdd->prepare("SELECT id, nom FROM AutoriteResponsable WHERE Type = ?");
-	$query->execute(array($Type));
-	return $query->fetchAll();
-}
-
 function Region($bdd){
 	/**
 	On affiche les différentes régions dans notre <select> en tant que <option>,

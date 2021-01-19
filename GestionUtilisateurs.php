@@ -14,6 +14,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 require("modele/connexionbdd.php");
 //$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
 // Definition des fonctions de requête SQL
+require('modele/RequetesGenerales.php');
 require('modele/RequetesGestion.php');
 
 

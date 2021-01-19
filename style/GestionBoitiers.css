@@ -1,0 +1,157 @@
+.div_page{
+    width: 80%;
+    margin: auto;
+    margin-top: 2rem;
+}
+
+/* On enlève tout le style par défaut des boutons */
+button {
+    display: inline-block;
+    border: none;
+    text-decoration: none;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+    text-align: center;
+}
+button:hover,button:focus {
+    outline: none
+}
+button:active {
+    transform: scale(0.99);
+}
+/* On enlève tout le style par défaut des boutons */
+
+
+.bandeau {
+	margin: 0;
+    padding: 0.5rem 1rem ;
+    padding-right: 0.4rem;
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.bandeau:hover {
+	background: white;
+}
+
+.bandeau:active {
+    color: white;
+    transform: none;
+}
+
+.bandeau h3 {
+    font-size: 1.1rem;
+    margin:0;
+    color: black;
+}
+
+.bandeau h3:hover, .bandeau h3:active {
+    color: #00A3B8;
+}
+
+.fleche_expand_right {
+    height: 0.6rem;
+    transform: rotate(-90deg);
+}
+
+.bloc {
+    margin-bottom: 1rem;
+}
+
+.contenu {
+    /**display: none;    paramètre passé dans le html pour fonctionner avec la fonction js**/
+    background-color: white;
+    margin:0;
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding: 1rem;
+}
+
+select {
+    -moz-appearance: none; /* Firefox */
+    -webkit-appearance: none; /* Safari and Chrome */
+    appearance: none;
+    background-image: url(../vues/img/expand.png);
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 0.8rem;
+    background-color: #C4C4C4;
+}
+
+/* ====== Barre recherche ====== */
+
+#recherche .barre_recherche {
+	margin-bottom: 1rem;
+	border:none;
+	border-radius:0.25rem;
+	background-color:#DDD;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+} 
+
+#recherche .barre_recherche input{
+	box-sizing:border-box;
+	padding: 0.5rem;
+	border:none;
+	border-radius: 0.25rem 0 0 0.25rem;
+	background: none;
+	font-size: 1rem;
+
+	/* Firefox */
+	width: -moz-calc(100% - 2rem);
+	/* WebKit */
+	width: -webkit-calc(100% - 2rem);
+	/* Opera */
+	width: -o-calc(100% - 2rem);
+	/* Standard */
+	width: calc(100% - 2rem)
+}
+
+#recherche .barre_recherche button[type="submit"] {
+	width: 2rem;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#recherche .barre_recherche button[type="submit"] img {
+	height:1rem;
+}
+
+/* ====== Résultats ====== */
+
+#recherche h3{
+	font-weight: bold;
+	font-size: 1.1rem;
+}
+
+#recherche table{
+	border: none;
+	border-spacing: 0;
+	font-size: 0.7rem;
+	width: 100%;
+}
+
+#recherche th{
+	text-align: center;
+	background-color: #888;
+}
+
+#recherche td{
+	border: none;
+	text-align: center;
+}
+
+#recherche tr:nth-child(odd) {
+	background-color: #DDD;
+}
+
+#recherche tr:nth-child(even) {
+	background-color: #C4C4C4;
+}

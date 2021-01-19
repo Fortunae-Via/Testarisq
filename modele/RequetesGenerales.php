@@ -53,3 +53,9 @@ function AutResCompte(PDO $bdd, string $NIR, string $TypeCompte) : string
 		return $AutRes;
 	}
 }
+
+function ListeAutoritesResponsables(PDO $bdd, string $Type): array {
+	$query = $bdd->prepare("SELECT id, nom FROM AutoriteResponsable WHERE Type = ?");
+	$query->execute(array($Type));
+	return $query->fetchAll();
+}
