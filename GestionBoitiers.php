@@ -28,6 +28,15 @@ if( (isset($_POST['aut_res'])) ){
 	header('Location: GestionBoitiers.php');
 }
 
+else if( (isset($_POST['modif_aut_res'],$_POST['id_boitier'])) ){
+
+	ModifierAutResBoitier($bdd, $_POST['id_boitier'], $_POST['modif_aut_res']);
+
+	sleep(1);
+	$_SESSION['MessageModifBoitiers'] = "L'autorité responsable du boîtier a bien été modifiée." ;
+	header('Location: GestionBoitiers.php');
+}
+
 else{
 
 	//Préparation pour l'ajout

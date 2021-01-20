@@ -297,3 +297,26 @@ select {
 #recherche tr:nth-child(even) {
 	background-color: #C4C4C4;
 }
+
+#recherche select {
+    box-sizing:border-box;
+    padding:0.3rem;
+    border: none;
+    background-color: white;
+    border-radius:0.25rem;
+    background-color: none;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    padding-right: 1.75rem;
+    font-size: 0.7rem;
+}
+
+#recherche table button {
+    font-size: 0.7rem;
+    border: none;
+    background-color: white;
+    border-radius:0.25rem;
+    box-sizing: border-box;
+    padding: 0.25rem;
+    font-weight: 600;
+}

@@ -82,6 +82,7 @@
 
 	<script type="text/javascript" src="js/fonctions_generiques.js"></script>
 	<script type="text/javascript" src="js/AjoutBoitier.js"></script>
+	<script type="text/javascript" src="js/RechercheBoitier.js"></script>
 
 </body>
 </html>

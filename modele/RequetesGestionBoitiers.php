@@ -41,20 +41,20 @@ function RechercherBoitierBDD(PDO $bdd, string $regex) : array {
 	return $search->fetchAll();
 }
 
-function ModifierAutResCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutRes){
+function ModifierAutResBoitier(PDO $bdd, string $IdBoitier, string $IdAutRes) {
 	if (empty($IdAutRes)) {
 		$update = $bdd->prepare('
-			UPDATE Compte 
+			UPDATE Boitier 
 			SET AutoriteResponsable_Id = null
-			WHERE Personne_NIR = ? AND TypeCompte_Type = ?');
-		$update->execute(array($NIR, $TypeCompte));
+			WHERE Id = ?');
+		$update->execute(array($IdBoitier));
 	}
 	else {
 		$update = $bdd->prepare('
-			UPDATE Compte 
+			UPDATE Boitier 
 			SET AutoriteResponsable_Id = ?
-			WHERE Personne_NIR = ? AND TypeCompte_Type = ?');
-		$update->execute(array($IdAutRes, $NIR, $TypeCompte));
+			WHERE Id = ?');
+		$update->execute(array($IdAutRes, $IdBoitier));
 	}
 }
 
