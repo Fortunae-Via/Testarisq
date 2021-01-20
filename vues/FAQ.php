@@ -22,7 +22,7 @@
         <div class="bloc_questions">
             <?php 
             $Modifications = false;
-            require("vues/QuestionsFAQ.php");
+            require("vues/admin/QuestionsFAQ.php");
             ?>
         </div>
 

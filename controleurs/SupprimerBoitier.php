@@ -18,6 +18,6 @@ if(isset($_GET['IdBoitier'])){
 	SuppBoitier($bdd, $_GET['IdBoitier']);
 
 	$_SESSION['MessageModifBoitiers'] = "Le boîtier a bien été supprimé." ;
-	header('Location: ../GestionBoitiers.php');
+	header('Location: ../admin/GestionBoitiers.php');
 
 }

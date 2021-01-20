@@ -37,7 +37,7 @@ if(isset($_GET['NIR'])){
 		**/
 		$_SESSION['MessageModifsUtilisateur'] = "L'utilisateur a bien été supprimé.";
 		$_SESSION['RechercheEnCours'] = true;
-		header('Location: ../GestionUtilisateurs.php');
+		header('Location: ../admin/GestionUtilisateurs.php');
 	}
 }
 ?>

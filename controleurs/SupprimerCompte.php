@@ -35,7 +35,7 @@ if(isset($_GET['NIR'])){
 		**/
 		$_SESSION['MessageModifsUtilisateur'] = "Le compte \"pro\" de l'utilisateur a bien été supprimé.";
 		$_SESSION['RechercheEnCours'] = true;
-		header('Location: ../GestionUtilisateurs.php');
+		header('Location: ../admin/GestionUtilisateurs.php');
 	}
 }
 ?>

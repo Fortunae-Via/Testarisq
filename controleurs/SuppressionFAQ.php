@@ -18,6 +18,6 @@ if(isset($_POST['idsupp'])){
 	SuppQuestion($bdd, $_POST['idsupp']);
 
 	$_SESSION['MessageModifFAQ'] = "L'élément a bien été supprimé." ;
-	header('Location: ../GestionFAQ.php');
+	header('Location: ../admin/GestionFAQ.php');
 
 }
