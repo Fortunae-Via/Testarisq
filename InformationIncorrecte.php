@@ -12,4 +12,4 @@ $titre_page="Une information à faire changer ?";
 $sujet_defaut="Demande de modification d'information";
 
 //On affiche la page
-require 'vues/Formulaire.php'
+require 'vues/Formulaire.php';
