@@ -59,8 +59,3 @@ function UpdateQuestion(id) {
 	QuestionBandeau.innerText = ChampQuestion.value;
 
 }
-
-function confirmation() {
-	var confirmation = confirm("Voulez-vous vraiment supprimer cet élément ?");
-	return confirmation;
-}

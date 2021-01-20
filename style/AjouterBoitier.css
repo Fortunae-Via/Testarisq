@@ -4,10 +4,11 @@
     margin-top: 2rem;
 }
 
-.div_page h4{
-    color: white;
+.div_page header h2 {
+    margin: 2rem;
     text-align: center;
-    font-size: 1.1rem;
+    color: white;
+    font-size: 1.4rem;
 }
 
 /* On enlève tout le style par défaut des boutons */
@@ -28,57 +29,11 @@ button:active {
 }
 /* On enlève tout le style par défaut des boutons */
 
-
-.bandeau {
-	margin: 0;
-    padding: 0.5rem 1rem ;
-    padding-right: 0.4rem;
+#ajout{
+	border-radius: 0.5rem;
     background-color: white;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid black;
-}
-
-.bandeau:hover {
-	background: white;
-}
-
-.bandeau:active {
-    color: white;
-    transform: none;
-}
-
-.bandeau h3 {
-    font-size: 1.1rem;
-    margin:0;
-    color: black;
-}
-
-.bandeau h3:hover, .bandeau h3:active {
-    color: #00A3B8;
-}
-
-.fleche_expand {
-    height: 0.6rem;
-}
-
-.fleche_expand_down {
-    height: 0.6rem;
-    transform: rotate(180deg);
-}
-
-.bloc {
-    margin-bottom: 1rem;
-}
-
-.dropdown-content {
-    /**display: none;    paramètre passé dans le html pour fonctionner avec la fonction js**/
-    background-color: white;
-    margin:0;
-    border-radius: 0 0 0.5rem 0.5rem;
     padding: 1rem;
+    margin-bottom: 2rem;
 }
 
 select {
@@ -93,12 +48,6 @@ select {
 }
 
 /* ================= PARTIE AJOUT ================= */
-
-#ajout .indication {
-    margin: 0;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-}
 
 #ajout .ligne {
     display: flex;
@@ -187,113 +136,44 @@ select {
 }
 
 
-/* ========= Rajouts boitiiers ========= */
+/* =============================== */
 
-#ajout form h3 {
+#ajout .indication {
+    margin: 0;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+form h3 {
     margin : 0.5rem 0;
 }
 
-#ajout .partie {
+.partie {
     margin-bottom : 2rem;
 
 }
 
 /*  === Ligne AutRes === */
 
-#ajout #ligneAutRes {
+#ligneAutRes {
     display : flex;
     align-items: center;
     flex-wrap: wrap;
 }
 
-#ajout #ligneAutRes .nom {
+#ligneAutRes .nom {
     display : flex;
     align-items: center;
     justify-content: space-between;
     margin-right: 1rem;
 }
 
-#ajout #ligneAutRes .label_info{
+#ligneAutRes .label_info{
     display : block;
     min-width: 5rem;
 }
 /*  === Ligne AutRes === */
 
-#ajout .capteur p{
+.capteur p{
     margin-right: 2rem;
-}
-
-
-/* ====== Barre recherche ====== */
-
-#recherche .barre_recherche {
-	margin-bottom: 1rem;
-	border:none;
-	border-radius:0.25rem;
-	background-color:#DDD;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-} 
-
-#recherche .barre_recherche input{
-	box-sizing:border-box;
-	padding: 0.5rem;
-	border:none;
-	border-radius: 0.25rem 0 0 0.25rem;
-	background: none;
-	font-size: 1rem;
-
-	/* Firefox */
-	width: -moz-calc(100% - 2rem);
-	/* WebKit */
-	width: -webkit-calc(100% - 2rem);
-	/* Opera */
-	width: -o-calc(100% - 2rem);
-	/* Standard */
-	width: calc(100% - 2rem)
-}
-
-#recherche .barre_recherche button[type="submit"] {
-	width: 2rem;
-	padding: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-#recherche .barre_recherche button[type="submit"] img {
-	height:1rem;
-}
-
-/* ====== Résultats ====== */
-
-#recherche h3{
-	font-weight: bold;
-	font-size: 1.1rem;
-}
-
-#recherche table{
-	border: none;
-	border-spacing: 0;
-	font-size: 0.7rem;
-	width: 100%;
-}
-
-#recherche th{
-	text-align: center;
-	background-color: #888;
-}
-
-#recherche td{
-	border: none;
-	text-align: center;
-}
-
-#recherche tr:nth-child(odd) {
-	background-color: #DDD;
-}
-
-#recherche tr:nth-child(even) {
-	background-color: #C4C4C4;
 }
