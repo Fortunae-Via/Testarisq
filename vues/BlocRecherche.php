@@ -114,6 +114,8 @@
 			**/
 			Rechercher($bdd, $filtres['sexe'], $filtres['year'], $regex, $filtres['region']);
 			// Fin du tableau et de la section d'affichage des résultats
+		}else{
+			Afficher($bdd);
 		}
 		?>
 	</tr>

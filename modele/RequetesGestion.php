@@ -68,7 +68,7 @@ function Rechercher($bdd, $sexe, $year, $regex, $region){
 	les informations concernant des utilisateurs en fonction des différents
 	choix fait dans le formulaire (et donc les filtres).
 					
-	A faire : Nombre de tests
+	A faire : Nombre de tests, tester si il y a une adresse ou pas, ET/OU
 	**/
 	$recherche = $bdd->query('SELECT * FROM personne INNER JOIN adresse ON personne.Adresse_Id=adresse.Id WHERE personne.Sexe="'. $sexe .'" OR personne.DateNaissance LIKE "'. $year .'%" OR personne.NIR LIKE '. $regex .' OR personne.NomDeFamille LIKE '. $regex .' OR adresse.Region="'. $region .'"');
 	/*$recherche = $bdd->query('SELECT *, COUNT(*) AS count_test FROM personne INNER JOIN adresse ON personne.Adresse_Id=adresse.Id INNER JOIN test ON personne.NIR=test.Personne_NIR WHERE personne.Sexe="'. $_POST['sexe'] .'" OR personne.DateNaissance LIKE "'. $_POST['year'] .'%" OR personne.NIR LIKE '. $regex .' OR personne.NomDeFamille LIKE '. $regex .' OR adresse.Region="'. $_POST['region'] .'"');*/
@@ -86,6 +86,22 @@ function Rechercher($bdd, $sexe, $year, $regex, $region){
 		à partir d'un $_GET où l'on récupère le Identifiant (NIR) de l'utilisateur.
 		Cette partie est seulement accèssible aux administrateurs.
 		**/
+		if(isset($_SESSION['TypeCompte'])){
+			if($_SESSION['TypeCompte']=='ADM'){
+				echo'<td><a href="ModifierUtilisateur.php?NIR='. $display['NIR'] .'"><img src="vues/img/modif.png"/></a><a href="controleurs/SupprimerUtilisateur.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/suppr.png"/></a><a href="controleurs/SupprimerCompte.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/supprC.png"/></a></td></tr>';
+			}
+		}
+	}
+	//Fermeture de la requête SQL
+	$recherche->closeCursor();
+}
+
+function Afficher($bdd){
+	$recherche = $bdd->query('SELECT * FROM personne INNER JOIN adresse ON personne.Adresse_Id=adresse.Id');
+
+	while($display = $recherche->fetch()){
+		echo'<tr><td>'. $display['NIR'] . '</td><td>' . $display['NomDeFamille'] . '</td><td>' . $display["NomDUsage"] . '</td><td>'. $display['Prenom1'] . ' '. $display['Prenom2'] . ' '. $display['Prenom3'] . '</td><td>'. $display['DateNaissance'] . '</td><td>'. $display['Sexe'] . '</td><td>'. $display['Courriel'] . '</td><td>'. $display['Portable'] . '</td><td>' . $display['NumeroRue'] . ' ' . $display['Rue'] . ' ' . $display['CodePostal'] . ' ' . $display['Ville'] . ' ' . $display['Region'] . ' ' . $display['Pays'] . '</td><td>'. ' ' . '</td>';
+
 		if(isset($_SESSION['TypeCompte'])){
 			if($_SESSION['TypeCompte']=='ADM'){
 				echo'<td><a href="ModifierUtilisateur.php?NIR='. $display['NIR'] .'"><img src="vues/img/modif.png"/></a><a href="controleurs/SupprimerUtilisateur.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/suppr.png"/></a><a href="controleurs/SupprimerCompte.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/supprC.png"/></a></td></tr>';
