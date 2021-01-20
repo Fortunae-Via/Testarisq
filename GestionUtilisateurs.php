@@ -113,7 +113,7 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 	}
 
 	sleep(1);
-	$_SESSION['MessageModifsUtilisateur'] = "L'utilisateur a bien été ajouté.";
+	$_SESSION['MessageModifsUtilisateur'] = "L'utilisateur a bien été ajouté. Son mot de passe est ".$mdp." .";
 	header('Location: GestionUtilisateurs.php');
 }
 
