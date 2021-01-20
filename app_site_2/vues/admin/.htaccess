@@ -1,4 +1,0 @@
-AuthName "Page d'administration protégée"
-AuthType Basic
-AuthUserFile "E:\Wamp\www\app_site\app_site_2\vues\admin\.htpasswd"
-Require valid-user
