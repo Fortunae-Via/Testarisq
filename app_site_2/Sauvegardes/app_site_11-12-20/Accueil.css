@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+
+body{
+    background:#383838;
+    font-family: 'Nunito Sans',sans-serif;
+}
+.titre1{
+    font-family: 'Nunito Sans';
+    font-weight: bold; 
+    color:grey;
+    position:absolute;
+    right:350px;
+    top:220px;
+    border:white;
+    border-radius:15px;
+    padding:3px;
+    background:white;
+    border-width: thin; 
+}
+
+img{
+    
+    height:200px;
+    width:200px;
+    padding:10px;
+    margin:10px;
+    display:block;
+    position:absolute;
+    right:325px;
+    
+}
+
+p{
+    background:white;
+    width:140px;
+    height:150px;
+    padding:30px;
+    font-family:Nunito Sans;
+    border-radius:10px;
+    position:absolute;
+    top:320px;
+    right:343px;
+}
+
+.bouton{
+    padding:5px;
+    border-radius:10px;
+    position: absolute;
+    right: 43px;
+    font-family: Nunito Sans;
+    background: #D0D3E3;
+    border: solid #D0D3E3;
+}
+.bouton:hover{
+    border-color:black;
+}
+.formulaire{
+    font-family: Nunito Sans;
+}

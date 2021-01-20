@@ -1,0 +1,54 @@
+.main-head{
+    color: #ffffff;
+    border-bottom: 2px white solid;
+}
+
+#logo_header{
+    max-width: 10em;
+    margin-left: 1em;
+}
+
+.main-head nav{
+    min-height: 10vh;
+    display: flex;
+    align-items: center;
+}
+
+.main-head nav img, .main-head nav img li{
+    margin: 0.75rem 0;
+}
+
+.main-head nav ul{
+    margin-right: 0.5em;
+    display: flex;
+    flex: 1 1 40rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+}
+
+.main-head nav li{
+    margin: 0 0.75em;
+}
+
+.main-head nav li a{
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-size: 0.8em;
+}
+
+.main-head nav li :hover{
+    color: #3388BB;
+}
+
+
+@media screen and (max-width: 615px)
+{
+    .main-head nav ul{
+    flex-direction: column;
+    align-items: flex-end;
+    }
+}

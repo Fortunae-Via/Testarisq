@@ -1,0 +1,4 @@
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile "E:\Wamp\www\app_site\admin\.htpasswd"
+Require valid-user

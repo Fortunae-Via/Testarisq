@@ -1,0 +1,103 @@
+.bloc_questions h2 {
+    margin: 2rem;
+    text-align: center;
+    color: white;
+    font-size: 1.4rem;
+}
+
+#message_ajout {
+    padding: 0.5rem 1rem ;
+    background-color: white;
+    font-size: 1.1rem;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+    width: 50%;
+    border-radius: 0.5rem;
+}
+
+#bloc_ajout {
+	margin-bottom: 3rem;
+}
+
+#bloc_ajout .ligne {
+	display: flex;
+	align-items: center;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+#bloc_ajout .info{
+	display: block;
+	float: left;
+	width: 8rem;
+	margin-right: 0.5rem;
+}
+
+input, textarea
+{
+	box-sizing:border-box;
+	padding:0.5rem;
+	border:none;
+	border-radius:0.25rem;
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+	width: 100%;
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 1rem;
+}
+
+textarea{
+	height: 10rem;
+	resize: vertical;
+}
+
+#bloc_ajout .bloc_add {
+	display: flex;
+	justify-content: center;
+	margin-top: 1rem;
+}
+
+#bloc_ajout #add{
+	font-size: 0.9rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	border: none;
+	border-radius: 0.25rem;
+	background-color: #B8B8B8;
+	box-sizing: border-box;
+	padding: 0.5rem 1.75rem;
+}
+
+.bloc_questions {
+	margin-bottom: 5rem;
+}
+
+
+
+/* Partie modifs */
+
+.bloc_boutons {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    margin-top: 1rem;
+}
+
+.bloc_boutons button {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #B8B8B8;
+    box-sizing: border-box;
+    padding: 0.5rem 1.75rem;
+}
+
+.bloc_boutons #boutonsupp {
+	background-color: #FF9E9E;
+}
+
+
+
+
