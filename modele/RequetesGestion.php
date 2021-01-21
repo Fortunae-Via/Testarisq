@@ -6,7 +6,7 @@ function Region($bdd){
 	ainsi ils peuvent être selectionnés et envoyer par formulaire
 	sous $_POST['region'].
 	**/
-	$region = $bdd->query('SELECT Region FROM regionfr');
+	$region = $bdd->query('SELECT Region FROM RegionFR ORDER BY Region');
 	while($display = $region->fetch()){
 		echo'<option value="'. $display['Region'] .'">'. $display['Region'] .'</option>';
 	}

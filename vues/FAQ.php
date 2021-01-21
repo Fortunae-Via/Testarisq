@@ -26,6 +26,10 @@
             ?>
         </div>
 
+        <div class="nav_pages">
+            <?php AffichageNavigationPages ('FAQ.php', $PageAffichage, $PageMaximum);?>
+        </div>
+
         <footer>
             <p1>Vous ne trouvez pas de réponse à votre question?</p1>
             <br>

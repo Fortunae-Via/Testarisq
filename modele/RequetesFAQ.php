@@ -1,9 +1,10 @@
 <?php
 
 
-function RecupFAQ(PDO $bdd): array {
-	$query = "SELECT * FROM ElementFAQ";
-    return $bdd->query($query)->fetchAll();
+function RecupFAQ(PDO $bdd, int $page): array {
+	$offset = $page * 10 - 10;
+	$query = 'SELECT * FROM ElementFAQ LIMIT 10 OFFSET ' . $offset;
+	return $bdd->query($query)->fetchAll();
 }
 
 function AjouterQuestion(PDO $bdd, string $Question, string $Reponse) {

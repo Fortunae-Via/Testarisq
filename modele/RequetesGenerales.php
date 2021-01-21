@@ -1,5 +1,10 @@
 <?php
 
+function TailleTable(PDO $bdd, string $Table) : int {
+	$query = 'SELECT COUNT(*) as Taille FROM ' . $Table;
+	$result = $bdd->query($query)->fetch();
+	return $result['Taille'];
+}
 
 function InfosPersonne(PDO $bdd, string $NIR): array
 {
@@ -55,7 +60,7 @@ function AutResCompte(PDO $bdd, string $NIR, string $TypeCompte) : string
 }
 
 function ListeAutoritesResponsables(PDO $bdd, string $Type): array {
-	$query = $bdd->prepare("SELECT id, nom FROM AutoriteResponsable WHERE Type = ?");
+	$query = $bdd->prepare("SELECT id, nom FROM AutoriteResponsable WHERE Type = ? ORDER BY nom");
 	$query->execute(array($Type));
 	return $query->fetchAll();
 }

@@ -31,6 +31,9 @@ button:active {
 }
 /* On enlève tout le style par défaut des boutons */
 
+.bloc_questions {
+    margin-bottom : 2rem;
+}
 
 .bandeau_question {
     padding: 0.5rem 1rem ;
@@ -77,8 +80,47 @@ button:active {
     text-align: justify;
 }
 
+
+/* ===== Pagination ===== */
+.nav_pages{
+    padding: 0.25rem; 
+    width: fit-content;
+    margin: auto;
+}
+
+.nav_pages a {
+    border-radius: 2px;
+    background-color: white;
+    text-decoration: None;
+    color: black;
+    font-size: 1rem;
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    margin: 0 0.25rem;
+}
+
+.nav_pages a.active {
+    background-color: #00A3B8;
+    color: white;
+} 
+
+.nav_pages a:hover:not(.active) {
+    background-color: #9FD1DB;
+} 
+
+.nav_pages a.desac {
+    color: #D1D1D1;
+}
+
+.nav_pages a.desac:hover {
+    background-color: white;
+}
+
+/* ===== Pagination ===== */
+
+
 .div_page footer {
-    margin: 2rem 0;
+    margin: 3rem 0;
     text-align: center;
     color: white;
 }
@@ -87,3 +129,8 @@ button:active {
     text-decoration: none;
     color: #00A3B8;
 }
+
+
+
+
+
