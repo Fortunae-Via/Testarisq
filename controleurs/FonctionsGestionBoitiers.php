@@ -8,10 +8,10 @@ function RechercheBoitiers(PDO $bdd, string $regex){
 	$ListeBoitiers = RechercherBoitierBDD($bdd, $regex);
 
 	foreach ($ListeBoitiers as $Boitier) {
-		echo'<tr><td>'. $Boitier['IdBoitier'] . '</td><td>' . $Boitier['NomAutoriteResponsable'] . '</td>';
+		echo'<tr><td>'. $Boitier['IdBoitier'] . '</td><td id="NomAutRes'. $Boitier['IdBoitier'] .'">' . $Boitier['NomAutoriteResponsable'] . '</td>';
 
 		/** Affiche les boutons permettant la modification ou la suppression du boitier **/
-		echo'<td><a href="ModifierBoitier.php?IdBoitier='. $Boitier['IdBoitier'] .'"><img src="vues/img/modif.png"/></a><a href="controleurs/SupprimerBoitier.php?IdBoitier='. $Boitier['IdBoitier'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer ce boîtier ?\');"><img src="vues/img/suppr.png"/></a></td></tr>';
+		echo'<td id="OptionsAutRes'. $Boitier['IdBoitier'] .'"><a onclick="TransformerChamp('. $Boitier['IdBoitier'] .')"><img src="vues/img/edit.png" title="Modifier le boîtier"/></a><a href="controleurs/SupprimerBoitier.php?IdBoitier='. $Boitier['IdBoitier'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer ce boîtier ?\');"><img src="vues/img/remove.png" title="Supprimer le boîtier"/></a></td></tr>';
 	}
 }
 
