@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
     <head>
         <meta charset="utf-8" />
@@ -10,8 +10,14 @@
 
 <body>
 
-    <!--Header-->
-    <?php include("vues/Header.php"); ?>
+<?php
+
+require 'modele/connexionbdd.php';
+include('modele/RequetesTest.php');
+include("vues/Header.php");
+    if (isset ($_SESSION['NIR']))
+    {
+?>
 
     <div class="div_page">
         <h2 class="bienvenue">
@@ -19,22 +25,17 @@
         </h2>
 
         <section>
-            <div class="Test1">
+            <div class="Test">
                 <header>
-                    <p>Vos derniers résultats : <?php AfficherTest($bdd,$DateDebut); ?></p>
-                </header>
-                <a href="#"><img src="vues/img/graphs.png" alt="GraphiquesDernierTest"/></a>
-            </div>
-
-<!--        	<div class="Test2">
-                <a href="resultat_test_2.php" class='bouton2'>Test du 14/11/2020</a>
-            </div>
-
-            <div class='Test3'>
-                <a href="resultat_test_1.php" class='bouton3'>Test du 01/10/2020</a>
-            </div>
-        </section>
-    
-    </div> -->
-
+                    <h3 class='DernierResultat'><?php echo 'Vos derniers résultats : '; ?></h3><br>
+                    
+                        <?php 
+                        $requete = AfficherTest($bdd,$_SESSION['NIR']);
+                        while ($resultat = $requete->fetch())
+                        {
+                            echo '<p class="bouton"> Test du '.$resultat["DateDebut"].' : <a href="resultat_test_1.php?NIR='.$resultat["NIR"].'&Id_Resultat='.$resultat['Id'].'">Détail résultats </a></p></br></br></br>';
+                        }
+                        ?>
+                    
+    <?php }?>
 </body>
