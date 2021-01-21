@@ -10,14 +10,10 @@
 
 <body>
 
-<?php
-
-require 'modele/connexionbdd.php';
-include('modele/RequetesTest.php');
+<!--Header-->
+<?php 
 include("vues/Header.php");
-    if (isset ($_SESSION['NIR']))
-    {
-?>
+ ?>
 
     <div class="div_page">
         <h2 class="bienvenue">
@@ -30,12 +26,9 @@ include("vues/Header.php");
                     <h3 class='DernierResultat'><?php echo 'Vos derniers résultats : '; ?></h3><br>
                     
                         <?php 
-                        $requete = AfficherTest($bdd,$_SESSION['NIR']);
                         while ($resultat = $requete->fetch())
                         {
                             echo '<p class="bouton"> Test du '.$resultat["DateDebut"].' : <a href="resultat_test_1.php?NIR='.$resultat["NIR"].'&Id_Resultat='.$resultat['Id'].'">Détail résultats </a></p></br></br></br>';
                         }
                         ?>
-                    
-    <?php }?>
 </body>
