@@ -16,11 +16,13 @@ if(isset($_POST['submit'])){
   $message = $_POST['message'];
 
   try{
+    $mail->CharSet ="UTF-8";
+    $mail->SMTPDebug = 0;
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'jieming079@gmail.com'; // Gmail address which you want to use as SMTP server
-    $mail->Password = '142401Xjm20000709@'; // Gmail address Password
+    $mail->Username = 'youremailadress@gmail.com'; // Gmail address which you want to use as SMTP server
+    $mail->Password = 'yourpassword'; // Gmail address Password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = '587';
 
@@ -29,7 +31,7 @@ if(isset($_POST['submit'])){
 
     $mail->isHTML(true);
     $mail->Subject = 'Message Received (Contact Page)';
-    $mail->Body = "<h3>Name : $name <br>Email: $email <br>Message : $message</h3>";
+    $mail->Body = "<h3>Nom : $name <br>Email: $email <br>Message : $message</h3>";
 
     $mail->send();
     $alert = '<div class="alert-success">
