@@ -298,6 +298,14 @@ select {
 	background-color: #C4C4C4;
 }
 
+#recherche td a {
+    cursor: pointer;
+}
+
+#recherche td img {
+    height: 2rem;
+}
+
 #recherche select {
     box-sizing:border-box;
     padding:0.3rem;

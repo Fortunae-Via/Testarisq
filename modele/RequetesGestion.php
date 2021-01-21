@@ -88,7 +88,7 @@ function Rechercher($bdd, $sexe, $year, $regex, $region){
 		**/
 		if(isset($_SESSION['TypeCompte'])){
 			if($_SESSION['TypeCompte']=='ADM'){
-				echo'<td><a href="ModifierUtilisateur.php?NIR='. $display['NIR'] .'"><img src="vues/img/modif.png"/></a><a href="controleurs/SupprimerUtilisateur.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/suppr.png"/></a><a href="controleurs/SupprimerCompte.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/supprC.png"/></a></td></tr>';
+				echo'<td><a href="ModifierUtilisateur.php?NIR='. $display['NIR'] .'"><img src="vues/img/edit-user.png" title="Modifier l\'utilisateur"/></a><a href="controleurs/SupprimerUtilisateur.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/remove-user.png" title="Supprimer l\'utilisateur"/></a><a href="controleurs/SupprimerCompte.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/remove-account.png" title="Supprimer le compte pro de l\'utilisateur"/></a></td></tr>';
 			}
 		}
 	}
@@ -104,7 +104,7 @@ function Afficher($bdd){
 
 		if(isset($_SESSION['TypeCompte'])){
 			if($_SESSION['TypeCompte']=='ADM'){
-				echo'<td><a href="ModifierUtilisateur.php?NIR='. $display['NIR'] .'"><img src="vues/img/modif.png"/></a><a href="controleurs/SupprimerUtilisateur.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/suppr.png"/></a><a href="controleurs/SupprimerCompte.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/supprC.png"/></a></td></tr>';
+				echo'<td><a href="ModifierUtilisateur.php?NIR='. $display['NIR'] .'"><img src="vues/img/edit-user.png" title="Modifier l\'utilisateur"/></a><a href="controleurs/SupprimerUtilisateur.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/remove-user.png" title="Supprimer l\'utilisateur"/></a><a href="controleurs/SupprimerCompte.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/remove-account.png" title="Supprimer le compte pro de l\'utilisateur"/></a></td></tr>';
 			}
 		}
 	}

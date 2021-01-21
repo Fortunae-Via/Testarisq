@@ -110,3 +110,7 @@
 #recherche tr:nth-child(even) {
 	background-color: #C4C4C4;
 }
+
+#recherche td img {
+	height: 2rem;
+}
