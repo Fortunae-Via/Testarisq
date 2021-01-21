@@ -1,4 +1,4 @@
-<?php include'controleurs/send.php';?>
+<?php include'send.php';?>
 <!DOCTYPE html>
 <html>
 
@@ -23,7 +23,7 @@
           <?php echo $alert; ?>
         <section>
             <div class="container">
-                <form class="contact-form" action="controleurs/send.php" method="post">
+                <form class="contact-form" action="send.php" method="post">
                     <div class="form-group">
                         <label for="name">Prénom et Nom : *</label>
                         <input type="text" id="name" name="name" required="required">
