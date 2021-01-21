@@ -2,11 +2,14 @@
 
 session_start(); 
 // Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
+require 'modele/connexionbdd.php';
+include('modele/RequetesTest.php');
+include("vues/Header.php");
 if (!(isset($_SESSION['NIR']))) {
 	header('Location: Accueil.php');
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -19,25 +22,32 @@ if (!(isset($_SESSION['NIR']))) {
 </head>
 <body>
 
-	<!-- Header -->
-	<?php include("vues/Header.php"); ?>
-
 	<div class="div_page">
 		<header>
-			<h1>Résultat : Félicitations, vous êtes apte à conduire !</h1>
-            <h2>TEST DU 01/10/2020 </br>
-            Détail de vos résultats :</h2>
+			<h1>Résultat : <?php Apte($bdd,$_SESSION['NIR']) ?></h1>
+
+
+            <h2>Détail de vos résultats :</h2>
         </header>
-		<section id = "sect">
-			<div class="resultat">
-				<p>Test sonore :<span class="resultat_test">reconnaissance des sons dans un intervalle de 1 à 5 secondes.</span></p>
-				<p>Test visuel à une lumière en extérieur :<span class="resultat_test">reconnaissance des lumières dans un intervalle de 1 à 3 secondes.</span></p>
-				<p>Fréquence cardiaque :<span class="resultat_test">85 bpm</span></p>
-				<p>Température de la peau :<span class="resultat_test">36,7°C</span></p>
-				<p>Reproduction sonore :<span class="resultat_test">reproduction juste à +/- 10Hz</span></p>
-			</div>
-			<p class="bottom">Vous avez une question ? Posez-là <a href="mailto:tanguy.robilliard@gmail.com">ici</a> à un administrateur.</p>
-		</section>
+
+
+	
+
+		
+<section id = "sect">
+	<div class="resultat">
+
+		<p>Réactivité au son et aux lumières :<span class="resultat_test"></br>
+		<?php AfficherRéactivité($bdd,$_GET['Id_Resultat']); ?></span></p>
+
+		<p>Fréquence cardiaque :<span class="resultat_test"><?php AfficherFrequenceCard($bdd,$_GET['Id_Resultat']); ?> bpm.</span></p>
+
+		<p>Température de la peau :<span class="resultat_test"><?php AfficherTemperature($bdd,$_GET['Id_Resultat']); ?> °C.</span></p>
+
+		<p>Reproduction sonore :<span class="resultat_test">reproduction juste à +/- <?php AfficherTonalite($bdd,$_GET['Id_Resultat']); ?> Hz.</span></p>
+	</div>
+		<p class="bottom">Vous avez une question ? Posez-là <a href="mailto:tanguy.robilliard@gmail.com">ici</a> à un administrateur.</p>
+		</section> 
 	</div>
 	
 </body>
