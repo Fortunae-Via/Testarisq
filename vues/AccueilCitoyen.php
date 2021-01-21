@@ -24,18 +24,21 @@ include("vues/Header.php");
             <?php echo 'Bienvenue ' . $Prenom1 . ' !'; ?>
         </h2>
 
-        <section>
-            <div class="Test">
-                <header>
-                    <h3 class='DernierResultat'><?php echo 'Vos derniers résultats : '; ?></h3><br>
-                    
-                        <?php 
-                        $requete = AfficherTest($bdd,$_SESSION['NIR']);
-                        while ($resultat = $requete->fetch())
-                        {
-                            echo '<p class="bouton"> Test du '.$resultat["DateDebut"].' : <a href="resultat_test_1.php?NIR='.$resultat["NIR"].'&Id_Resultat='.$resultat['Id'].'">Détail résultats </a></p></br></br></br>';
-                        }
-                        ?>
-                    
+        <div>
+            <header>
+                <h3 class='DernierResultat'>Vos derniers résultats :</h3>
+            </header>
+                
+            <?php 
+            $requete = RequeteDerniersTestsPersonne($bdd,$_SESSION['NIR']);
+            while ($resultat = $requete->fetch())
+            {
+                echo '<a class="bouton" href="resultat_test_1.php?NIR='.$resultat["NIR"].'&Id_Resultat='.$resultat['Id'].'">Test du '.$resultat["DateDebut"].'</a>';
+            }
+            ?>
+        </div>
+    </div>
+            
     <?php }?>
 </body>
+</html>

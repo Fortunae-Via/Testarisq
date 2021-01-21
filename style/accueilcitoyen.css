@@ -5,34 +5,29 @@
 
 .bienvenue{
 	margin-top: 2rem;
-	margin-bottom: 2rem;
 	color: white; 
 	text-align: center;
 	font-weight: 300;
-	font-size: 1.9rem;
+	font-size: 1.4rem
+}
+
+.div_page header {
+	margin-bottom: 2rem;
 }
 
 .DernierResultat{ 
 	color: white;
 	margin:0;
-	font-weight: 200;
+	font-weight: 300;
 }
-
-.Test p, a {    /*premier test qui apparaît, changer date en vraie date du test*/
-	color: #003845;
-	margin:0;
-	font-weight: 200;
-}
-
 
 .bouton{                   /*Tests les moins récents*/
 	display: inline-block;
 	box-sizing: border-box;
 	border-radius: 2rem;
-	padding: 1rem 1rem;
+	padding: 0.5rem;
 	width: 100%;
-	margin-top: 10rem;
-	margin-bottom: 10rem;					/*Truc à changer si ça marche pas sur tout l'écran*/
+	margin-top: 1rem;						/*Truc à changer si ça marche pas sur tout l'écran*/		
 	background: white; 
 	color: #003845;
 	text-decoration:none;

@@ -93,11 +93,18 @@ function ValeurRentree($bdd,$IdMesure)
 
 }
 
-function AfficherTest($bdd,$NIR) //Rends les 3 derniers tests de la bdd
+function RequeteDerniersTestsPersonne($bdd,$NIR) //Rends les 3 derniers tests de la bdd
 {
-	$requete = $bdd->prepare("SELECT DateDebut, test.Id, personne.NIR FROM test INNER JOIN personne ON (test.Personne_NIR = personne.NIR AND personne.NIR = ?) ORDER BY DateDebut DESC LIMIT 0,3");
-            $requete->execute (array($_SESSION['NIR']));  //Mettre la boucle dans le cas où y a pas de test  
-            return $requete;                    	
+	$requete = $bdd->prepare("
+		SELECT DATE_FORMAT(DateDebut, '%d/%m/%Y') AS DateDebut, test.Id, personne.NIR 
+		FROM test 
+		INNER JOIN personne 
+		ON test.Personne_NIR = personne.NIR 
+		WHERE personne.NIR = ? 
+		ORDER BY DateDebut DESC 
+		LIMIT 0,3");
+    $requete->execute(array($NIR));  //Mettre la boucle dans le cas où y a pas de test  
+    return $requete;                    	
 }
 
 function DateTest($bdd,$NIR) //Affiche la date du test
@@ -124,7 +131,12 @@ function Apte($bdd,$NIR) //si 1 -> apte à conduire, sinon non
 //Afficher les résultats en fonction du type de capteur
 function AfficherRéactivité($bdd,$Id_Resultat)
 {
-$requete = $bdd->prepare("SELECT valeur FROM mesure INNER JOIN test ON (test.Id=mesure.Test_Id AND test.Id=?) WHERE Capteur_Id=1");
+$requete = $bdd->prepare("
+	SELECT valeur 
+	FROM mesure 
+	INNER JOIN test ON test.Id=mesure.Test_Id 
+	INNER JOIN Capteur ON Capteur.Id= Mesure.Capteur_Id
+	WHERE test.Id=? AND TypeCapteur_Id=1");
 	$requete->execute(array($Id_Resultat));
 	while ($donnees=$requete->fetch())
 	{
@@ -134,7 +146,12 @@ $requete = $bdd->prepare("SELECT valeur FROM mesure INNER JOIN test ON (test.Id=
 
 function AfficherFrequenceCard($bdd,$Id_Resultat)
 {
-$requete = $bdd->prepare("SELECT valeur FROM mesure INNER JOIN test ON (test.Id=mesure.Test_Id AND test.Id=?) WHERE Capteur_Id=2");
+$requete = $bdd->prepare("
+	SELECT valeur 
+	FROM mesure 
+	INNER JOIN test ON test.Id=mesure.Test_Id 
+	INNER JOIN Capteur ON Capteur.Id= Mesure.Capteur_Id
+	WHERE test.Id=? AND TypeCapteur_Id=2");
 	$requete->execute(array($Id_Resultat));
 	$donnees=$requete->fetch();
 	echo round($donnees['valeur'],2.);
@@ -142,7 +159,12 @@ $requete = $bdd->prepare("SELECT valeur FROM mesure INNER JOIN test ON (test.Id=
 
 function AfficherTemperature($bdd,$Id_Resultat)
 {
-$requete = $bdd->prepare("SELECT valeur FROM mesure INNER JOIN test ON (test.Id=mesure.Test_Id AND test.Id=?) WHERE Capteur_Id=3");
+$requete = $bdd->prepare("
+	SELECT valeur 
+	FROM mesure 
+	INNER JOIN test ON test.Id=mesure.Test_Id 
+	INNER JOIN Capteur ON Capteur.Id= Mesure.Capteur_Id
+	WHERE test.Id=? AND TypeCapteur_Id=3");
 	$requete->execute(array($Id_Resultat));
 	$donnees=$requete->fetch();
 	echo round($donnees['valeur'],2);
@@ -150,7 +172,12 @@ $requete = $bdd->prepare("SELECT valeur FROM mesure INNER JOIN test ON (test.Id=
 
 function AfficherTonalite($bdd,$Id_Resultat)
 {
-$requete = $bdd->prepare("SELECT valeur FROM mesure INNER JOIN test ON (test.Id=mesure.Test_Id AND test.Id=?) WHERE Capteur_Id=4");
+$requete = $bdd->prepare("
+	SELECT valeur 
+	FROM mesure 
+	INNER JOIN test ON test.Id=mesure.Test_Id 
+	INNER JOIN Capteur ON Capteur.Id= Mesure.Capteur_Id
+	WHERE test.Id=? AND TypeCapteur_Id=4");
 	$requete->execute(array($Id_Resultat));
 	$donnees=$requete->fetch();
 	echo round($donnees['valeur'],2);
