@@ -2,11 +2,13 @@
 
 function BonneCombinaison(PDO $bdd, string $NIR, string $mdp) : bool
 {
-	$requete = $bdd->prepare("SELECT * FROM Personne WHERE NIR = ? AND MotDePasse = ? ");
-	$requete->execute(array($NIR,$mdp));
+	$requete = $bdd->prepare("SELECT * FROM Personne WHERE NIR = ?");
+	$requete->execute(array($NIR));
 	$count = $requete->rowCount();
 	if($count!=0) {
-		return true;
+		$resultat = $requete->fetch();
+		$hash = $resultat['MotDePasse'];
+		return password_verify ($mdp, $hash);
 	}
 	else {
 		return false;

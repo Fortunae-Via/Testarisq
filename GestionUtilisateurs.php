@@ -68,7 +68,8 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 		$mdp[$i]=$caract[$nbr];
 	}
 	$mdp=implode($mdp);
-	$DonneesUtilisateur['mdp']=$mdp;
+	$mdphashe= password_hash($mdp, PASSWORD_DEFAULT);
+	$DonneesUtilisateur['mdp']=$mdphashe;
 
 	// Pour l'adresse, on regarde si un des champs est rempli
 	if( (!(empty($_POST['numeroRue']))) OR (!(empty($_POST['rue']))) OR (!(empty($_POST['ville']))) OR (!(empty($_POST['code']))) OR (!(empty($_POST['region']))) OR (!(empty($_POST['pays']))) ){
