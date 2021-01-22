@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^([a-zA-Z]+)$ $1.php
+
+RewriteRule ^FAQ-page([0-9]+)$ FAQ.php?page=$1
