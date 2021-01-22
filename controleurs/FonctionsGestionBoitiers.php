@@ -3,9 +3,9 @@
 require('modele/RequetesGestionBoitiers.php');
 
 
-function RechercheBoitiers(PDO $bdd, string $regex){
+function RechercheBoitiers(PDO $bdd, string $regex, int $page){
 
-	$ListeBoitiers = RechercherBoitierBDD($bdd, $regex);
+	$ListeBoitiers = RechercherBoitierBDD($bdd, $regex, $page);
 
 	foreach ($ListeBoitiers as $Boitier) {
 		echo'<tr><td>'. $Boitier['IdBoitier'] . '</td><td id="NomAutRes'. $Boitier['IdBoitier'] .'">' . $Boitier['NomAutoriteResponsable'] . '</td>';

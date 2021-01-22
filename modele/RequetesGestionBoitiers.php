@@ -23,7 +23,8 @@ function SuppBoitier(PDO $bdd, string $IdBoitier) {
 	$delete->execute(array($IdBoitier));
 }
 
-function RechercherBoitierBDD(PDO $bdd, string $regex) : array {
+function RechercherBoitierBDD(PDO $bdd, string $regex, int $page) : array {
+	$offset = $page * 10 - 10;
 	/**
 	La requête SQL permet d'aller récuperer dans la base de donnée
 	les informations concernant des utilisateurs en fonction de la
@@ -34,10 +35,14 @@ function RechercherBoitierBDD(PDO $bdd, string $regex) : array {
 		FROM Boitier as B 
 		LEFT JOIN AutoriteResponsable as AR
 		ON B.AutoriteResponsable_Id=AR.Id
-		WHERE B.Id LIKE ? OR AR.Nom LIKE ?
+		WHERE B.Id LIKE :regex OR AR.Nom LIKE :regex
 		ORDER BY B.Id ASC
+		LIMIT 10 OFFSET :offset
 	');
-	$search->execute(array($regex,$regex));
+	//Le offset doit être interprété comme un int donc on précise les paramètres de cette manière
+	$search->bindValue(':regex', $regex);
+	$search->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+	$search->execute();
 	return $search->fetchAll();
 }
 

@@ -57,6 +57,18 @@ else{
 		$regex = "%%";
 	}
 
+	require 'controleurs/FonctionsPagination.php';
+	$PageMaximum = PageMaximum($bdd,'Boitier');
+
+	if (isset($_GET['page'])) {
+		$PageDemandee = $_GET['page'];
+		$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
+		$Recherche=true;
+	}
+	else {
+		$PageAffichage = 1;
+	}
+
 	// Affichage de la page
 	require("vues/GestionBoitiers.php");
 

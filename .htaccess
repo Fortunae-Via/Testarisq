@@ -5,9 +5,8 @@ RewriteRule ^([a-zA-Z]+)$ $1.php
 RewriteRule ^FAQ-page([0-9]+)$ FAQ.php?page=$1
 RewriteRule ^GestionFAQ-page([0-9]+)$ GestionFAQ.php?page=$1
 
-
 RewriteRule ^ModifierUtilisateur-NIR([0-9]+)$ ModifierUtilisateur.php?NIR=$1
-
 RewriteRule ^controleurs/SupprimerUtilisateur-NIR([0-9]+)$ controleurs/SupprimerUtilisateur.php?NIR=$1
-
 RewriteRule ^controleurs/SupprimerCompte-NIR([0-9]+)$ controleurs/SupprimerCompte.php?NIR=$1
+
+RewriteRule ^GestionBoitiers-page([0-9]+)$ GestionBoitiers.php?page=$1

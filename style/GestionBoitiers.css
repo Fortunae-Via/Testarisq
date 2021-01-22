@@ -278,6 +278,7 @@ select {
 	border-spacing: 0;
 	font-size: 0.7rem;
 	width: 100%;
+    margin-bottom: 2rem;
 }
 
 #recherche th{
@@ -328,3 +329,42 @@ select {
     padding: 0.25rem;
     font-weight: 600;
 }
+
+/* ===== Pagination ===== */
+#recherche .nav_pages{
+    padding: 0.25rem; 
+    width: fit-content;
+    margin: auto;
+}
+
+#recherche .nav_pages a {
+    border: 1px solid #00A3B8;
+    border-radius: 2px;
+    text-decoration: None;
+    color: black;
+    font-size: 1rem;
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    margin: 0 0.25rem;
+}
+
+#recherche .nav_pages a.active {
+    background-color: #006B83;
+    color: white;
+} 
+
+#recherche .nav_pages a:hover:not(.active) {
+    background-color: #9FD1DB;
+} 
+
+#recherche .nav_pages a.desac {
+    color: #D1D1D1;
+    border-color: #9FD1DB;
+}
+
+#recherche .nav_pages a.desac:hover {
+    background-color: white;
+}
+
+/* ===== Pagination ===== */
+

@@ -25,6 +25,10 @@
 		<th>Autorité Responsable</th>
 		<th>Options</th>
 
-		<?php RechercheBoitiers($bdd, $regex); ?>
+		<?php RechercheBoitiers($bdd, $regex, $PageAffichage); ?>
 	</tr>
 </table>
+
+<div class="nav_pages">
+    <?php AffichageNavigationPages ('GestionBoitiers', $PageAffichage, $PageMaximum);?>
+</div>
