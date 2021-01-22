@@ -13,7 +13,7 @@ function Region($bdd){
 	$region->closeCursor();
 }
 
-function AjouterAdresse(PDO $bdd, array $InfosAdresse): integer {
+function AjouterAdresse(PDO $bdd, array $InfosAdresse): int {
 	$add_adresse = $bdd->prepare('
 		INSERT INTO adresse (NumeroRue, Rue, CodePostal, Ville, Region, Pays) 
 		VALUES (:numeroRue, :rue, :code, :ville, :region, :pays)');
