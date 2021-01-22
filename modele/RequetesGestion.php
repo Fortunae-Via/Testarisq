@@ -145,7 +145,31 @@ function ModifierAutResCompte(PDO $bdd, string $NIR, string $TypeCompte, string 
 }
 
 
+function SupprimerUtilisateur($bdd, $NIR){
+	/**
+	Suppression de l'utilisateur où l'identifiant unique correspond avec la valeur
+	du $_GET['NIR']
+	Puis
+	Suppression des données correspondantes dans la table adresse lié à 
+	la table personne par une clé étagère.
+	**/
+	$supprimer = $bdd->prepare('DELETE FROM personne WHERE NIR=?');
+	$supprimer->execute(array($NIR));
+	$supprimer = $bdd->prepare('DELETE FROM adresse WHERE NIR=?');
+	$supprimer->execute(array($NIR));
+	$supprimer->closeCursor();
+}
 
-
-
+function SupprimerCompte($bdd, $NIR){
+	/**
+	Suppression d'un compte où l'identifiant unique correspond avec la valeur
+	du $_GET['NIR']
+	Puis
+	Suppression des données correspondantes dans la table adresse lié à 
+	la table personne par une clé étagère.
+	**/
+	$supprimer = $bdd->prepare('DELETE FROM compte WHERE Personne_NIR=? AND TypeCompte_Type!="CIT"');
+	$supprimer->execute(array($NIR));
+	$supprimer->closeCursor();
+}
 

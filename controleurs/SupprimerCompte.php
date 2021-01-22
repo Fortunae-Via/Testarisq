@@ -14,7 +14,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 if(isset($_GET['NIR'])){
 	// Appel  de la base de donnée
 	require("../modele/connexionbdd.php");
-
+	require("../modele/RequetesGestion.php");
 
 	/**
 	Suppression d'un compte où l'identifiant unique correspond avec la valeur
@@ -23,9 +23,7 @@ if(isset($_GET['NIR'])){
 	Suppression des données correspondantes dans la table adresse lié à 
 	la table personne par une clé étagère.
 	**/
-	$supprimer = $bdd->prepare('DELETE FROM compte WHERE Personne_NIR=? AND TypeCompte_Type!="CIT"');
-	$supprimer->execute(array($_GET['NIR']));
-	$supprimer->closeCursor();
+	SupprimerCompte($bdd, $_GET['NIR']);
 
 	sleep(1);
 	if('1'){
