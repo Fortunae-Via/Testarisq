@@ -3,3 +3,4 @@ RewriteEngine On
 RewriteRule ^([a-zA-Z]+)$ $1.php
 
 RewriteRule ^FAQ-page([0-9]+)$ FAQ.php?page=$1
+RewriteRule ^GestionFAQ-page([0-9]+)$ GestionFAQ.php?page=$1

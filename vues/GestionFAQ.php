@@ -71,6 +71,10 @@
 
         </div>
 
+        <div class="nav_pages">
+            <?php AffichageNavigationPages ('GestionFAQ', $PageAffichage, $PageMaximum);?>
+        </div>
+
     </div>
 
     <script type="text/javascript" src="js/fonctions_generiques.js"></script>
