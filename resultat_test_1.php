@@ -44,7 +44,7 @@ if (!(isset($_SESSION['NIR']))) {
 
 		<footer>
             <p>Vous avez une question ?</p>
-            <p>Posez là directement à un administrateur via <a href="PoserQuestion.php">ce formulaire</a>.</p>
+            <p>Posez là directement à un administrateur via <a href="PoserQuestion">ce formulaire</a>.</p>
         </footer>
 
     </div>

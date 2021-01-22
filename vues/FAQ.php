@@ -27,13 +27,13 @@
         </div>
 
         <div class="nav_pages">
-            <?php AffichageNavigationPages ('FAQ.php', $PageAffichage, $PageMaximum);?>
+            <?php AffichageNavigationPages ('FAQ', $PageAffichage, $PageMaximum);?>
         </div>
 
         <footer>
             <p1>Vous ne trouvez pas de réponse à votre question?</p1>
             <br>
-            <p1>Posez là directement à un administrateur via <a href="PoserQuestion.php"><p2>ce formulaire</p2></a>.</p1>
+            <p1>Posez là directement à un administrateur via <a href="PoserQuestion"><p2>ce formulaire</p2></a>.</p1>
         </footer>
 
     </div>

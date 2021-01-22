@@ -39,7 +39,7 @@ function AffichageNavigationPages (string $LienPage, int $PageActuelle, int $Pag
 		echo '<a class="desac">&#60; Précédent</a>';
 	}
 	else {
-		echo '<a href="'.$LienPage.'?page='.($PageActuelle-1).'">&#60; Précédent</a>';
+		echo '<a href="'.$LienPage.'?-page'.($PageActuelle-1).'">&#60; Précédent</a>';
 	}
 	
 	foreach ($ListePages as $page) {
@@ -47,14 +47,14 @@ function AffichageNavigationPages (string $LienPage, int $PageActuelle, int $Pag
 			echo '<a class="active">'.$page.'</a>';
 		}
 		else {
-			echo '<a href="'.$LienPage.'?page='.($page).'">'.$page.'</a>' ;
+			echo '<a href="'.$LienPage.'-page'.($page).'">'.$page.'</a>' ;
 		}   
 	}
 	if ($PageActuelle == $PageMaximum) {
 		echo '<a class="desac">Suivant &#62;</a>';
 	}
 	else {
-		echo '<a href="'.$LienPage.'?page='.($PageActuelle+1).'">Suivant &#62;</a>';
+		echo '<a href="'.$LienPage.'-page'.($PageActuelle+1).'">Suivant &#62;</a>';
 	}
 	
 }

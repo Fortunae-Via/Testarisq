@@ -34,7 +34,7 @@ if (!(isset($_SESSION['NIR']))) {
             <p>Cet accord est un accord juridique entre vous et notre entreprise (ci-après dénommée «Infinite Measures»). Cet accord stipule que vous utilisez les produits d'Infinite Measures et / ou des concédants de licence tiers (y compris les affiliés de Infinite Measures) et leurs affiliés respectifs (collectivement dénommés «fournisseurs tiers») (avec le site web fourni par Infinite Measures Droits et obligations découlant des mises à niveau et des mises à jour, documents imprimés, documents en ligne ou autres documents électroniques générés pour le site web et autres fichiers de données créés en exécutant ce produit (ci-après collectivement dénommés «le produit»).</p>
             <p>Nonobstant les dispositions ci-dessus, s'il existe un autre contrat de licence utilisateur final pour tout site web de ce produit (y compris, mais sans s'y limiter, le contrat de licence publique générale GNU et le contrat de licence publique générale Wide / Library), il sera soumis aux exigences du contrat de licence utilisateur final supplémentaire. Dans ce cadre, ce contrat de licence utilisateur final remplace les termes de cet accord (ci-après dénommé site web exclu»).</p>
             
-            <p class="liens">Vous pouvez trouver des informations sur les entreprises responsables de la création et de la gestion de ce site web <a href="QuiSommesNous.php">ici</a> et les mentions légales <a href="MentionsLegales.php">ici</a>.</p> 
+            <p class="liens">Vous pouvez trouver des informations sur les entreprises responsables de la création et de la gestion de ce site web <a href="QuiSommesNous">ici</a> et les mentions légales <a href="MentionsLegales">ici</a>.</p> 
         </div>
     </div>
 </body>
