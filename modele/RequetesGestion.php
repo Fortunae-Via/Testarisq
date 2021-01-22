@@ -122,9 +122,15 @@ function MiseAJour_personne($bdd, $nom, $nom_usage, $prenom, $prenom_2, $prenom_
 
 function MiseAJour_adresse($bdd, $numeroRue, $rue, $code, $ville, $pays, $region, $id){
 	// Mise à Jour de la table "adresse"
-	$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=?, Region=? WHERE Id=?');
-	$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $region, $id));
-	$update->closeCursor();
+	if(!empty($region)){
+		$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=?, Region=? WHERE Id=?');
+		$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $region, $id));
+		$update->closeCursor();
+	}else{
+		$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=? WHERE Id=?');
+		$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $id));
+		$update->closeCursor();
+	}
 }
 
 function ModifierAutResCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutRes){
