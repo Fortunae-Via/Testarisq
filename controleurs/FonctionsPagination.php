@@ -5,6 +5,21 @@ function PageMaximum (PDO $bdd, string $Table) : int {
 	return (ceil($TailleTable/10));
 } 
 
+function DeterminerPageAfffichage ($PageDemandee, int $PageMaximum) : int {
+	//Si on demande bien un nombre et pas n'importe quoi
+	if (is_numeric ($PageDemandee) && intval($PageDemandee)>0) {
+		if ($PageDemandee <= $PageMaximum){
+			return intval($PageDemandee);
+		} 
+		else {
+			return 1;
+		}
+	}
+	else {
+		return 1;
+	}
+} 
+
 function AffichageNavigationPages (string $LienPage, int $PageActuelle, int $PageMaximum) {
 	
 	//On crée la liste des pages à afficher

@@ -17,18 +17,7 @@ $PageMaximum = PageMaximum($bdd,'ElementFAQ');
 
 if (isset($_GET['page'])) {
 	$PageDemandee = $_GET['page'];
-	//Si on demande bien un nombre et pas n'importe quoi
-	if (is_numeric ($PageDemandee) && intval($PageDemandee)>0) {
-		if ($PageDemandee <= PageMaximum($bdd,'ElementFAQ')){
-			$PageAffichage = $PageDemandee;
-		} 
-		else {
-			$PageAffichage = 1;
-		}
-	}
-	else {
-		$PageAffichage = 1;
-	}  
+	$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
 }
 else {
 	$PageAffichage = 1;
