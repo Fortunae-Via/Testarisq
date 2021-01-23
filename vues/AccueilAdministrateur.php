@@ -26,7 +26,7 @@
             <div><a href="GestionFAQ">Gestion de la F.A.Q.</a></div>
             <div><a href="GestionBoitiers">Gestion des boîtiers Testarisq</a></div>
             <div><a href="GestionAutoritesResponsables">Gestion des autorités responsables</a></div>
-            <div><a href="#">Test de Contrôle</a></div>
+            <div><a href="TestControle">Test de Contrôle</a></div>
         </div>
 
     </div>
