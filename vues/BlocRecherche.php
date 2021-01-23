@@ -32,11 +32,14 @@
 			<select name="region">
 				<option selected value="">Région</option>
 				<?php
-				/**
-				Appel à la fonction Region() provenant de modele/RequêteRecherche.php
-				permettant l'affichage des régions sélectionnables.
-				**/
-				Region($bdd);
+				foreach ($ListeRegionFR as $Region) {
+					if (isset($ListeFiltres['region']) AND $Region['Region'] == $ListeFiltres['region']) {
+						echo"<option value=\"". $Region['Region'] ."\" selected>" . $Region['Region'] . "</option>";
+					}
+					else {
+						echo"<option value=\"". $Region['Region'] ."\">" . $Region['Region'] . "</option>";
+					}
+				}
 				?>
 			</select>
 

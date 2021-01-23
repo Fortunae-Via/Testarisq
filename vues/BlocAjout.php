@@ -160,7 +160,11 @@
     		<input maxlength="25" id="code" name="code" placeholder="Code Postal" />
     		<select name="region">
     			<option value="">Région</option>
-    			<?php Region($bdd); ?>
+    			<?php
+				foreach ($ListeRegionFR as $Region) {
+					echo"<option value=\"". $Region['Region'] ."\">" . $Region['Region'] . "</option>";
+				}
+				?>
     		</select>
     		<input maxlength="25" id="pays" name="pays" placeholder="Pays"/>
     	</div>

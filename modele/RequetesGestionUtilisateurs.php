@@ -1,18 +1,5 @@
 <?php
 
-function Region($bdd){
-	/**
-	On affiche les différentes régions dans notre <select> en tant que <option>,
-	ainsi ils peuvent être selectionnés et envoyer par formulaire
-	sous $_POST['region'].
-	**/
-	$region = $bdd->query('SELECT Region FROM RegionFR ORDER BY Region');
-	while($display = $region->fetch()){
-		echo'<option value="'. $display['Region'] .'">'. $display['Region'] .'</option>';
-	}
-	$region->closeCursor();
-}
-
 function AjouterAdresse(PDO $bdd, array $InfosAdresse): int {
 	$add_adresse = $bdd->prepare('
 		INSERT INTO adresse (NumeroRue, Rue, CodePostal, Ville, Region, Pays) 

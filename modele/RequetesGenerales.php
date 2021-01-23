@@ -64,3 +64,9 @@ function ListeAutoritesResponsables(PDO $bdd, string $Type): array {
 	$query->execute(array($Type));
 	return $query->fetchAll();
 }
+
+function ListeRegionsFR(PDO $bdd): array {
+	$query = $bdd->prepare("SELECT Region FROM RegionFR ORDER BY Region");
+	$query->execute();
+	return $query->fetchAll();
+}

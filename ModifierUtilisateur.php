@@ -68,7 +68,9 @@ if(isset($_GET['NIR'])){
 			$ListeAutoritesResponsables = ListeAutoritesResponsables($bdd,'POL');
 			$AutResUser = AutResCompte($bdd, $NIR, 'POL');
 			$_SESSION['TypeCompteUserModifEnCours']='POL';
-		} 
+		}
+
+		$ListeRegionFR = ListeRegionsFR($bdd);
 
 		$MoisFR=array('Jan.','Fév.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov','Déc.');
 		$Annee=substr($InfosPersosUser['DateNaissance'], 0, 4); 

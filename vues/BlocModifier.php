@@ -176,7 +176,16 @@
 							<input maxlength="25" id="code" name="code" <?=$PreRemp['CodePostal']?> />
 							<select name="region">
 								<option value="">Région</option>
-								<?php Region($bdd); ?>
+								<?php
+								foreach ($ListeRegionFR as $Region) {
+									if ($Region['Region'] == $AdresseUser['Region']) {
+										echo"<option value=\"". $Region['Region'] ."\" selected>" . $Region['Region'] . "</option>";
+									}
+									else {
+										echo"<option value=\"". $Region['Region'] ."\">" . $Region['Region'] . "</option>";
+									}
+								}
+								?>
 							</select>
 							<!--<input maxlength="12" id="region" name="region" value=<?php echo $Region; ?> />-->
 							<input maxlength="25" id="pays" name="pays" <?=$PreRemp['Pays']?> />
