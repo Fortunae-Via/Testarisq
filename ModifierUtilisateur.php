@@ -13,7 +13,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 // Appel à la base de donnée
 require("modele/connexionbdd.php");
 // Appel des fonctions
-require("modele/RequetesGestion.php");
+require("modele/RequetesGestionUtilisateurs.php");
 
 // On effectue la modification du profil utilisateur d'identifiant $_GET['NIR']$NIR
 if(isset($_GET['NIR'])){

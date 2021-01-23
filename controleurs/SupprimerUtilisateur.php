@@ -14,7 +14,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 if(isset($_GET['NIR'])){
 	// Appel  de la base de donnée
 	require("../modele/connexionbdd.php");
-	require("../modele/RequetesGestion.php");
+	require("../modele/RequetesGestionUtilisateurs.php");
 
 	/**
 	Suppression de l'utilisateur où l'identifiant unique correspond avec la valeur
