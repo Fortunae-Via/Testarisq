@@ -118,6 +118,21 @@ function ModifierAutResCompte(PDO $bdd, string $NIR, string $TypeCompte, string 
 	}
 }
 
+//
+function ListeAdresses1Personne(PDO $bdd) {
+	$select  = bdd->prepare('
+	SELECT Adresse.Id as Id, COUNT(Personne.NIR) as NombreUtilisation
+	FROM `Adresse` 
+	JOIN Personne on Personne.Adresse_Id=Adresse.Id
+	GROUP BY (Adresse.Id)
+	HAVING NombreUtilisation=1');
+	$select->execute();
+	$ListeAdresses =array();
+	while ($adresse = $select->fetch()) {
+		array_push($ListeAdresses, $adresse['Id'])
+	}
+	return $ListeAdresses
+
 
 function SupprimerUtilisateur($bdd, $NIR){
 	/**
@@ -127,11 +142,22 @@ function SupprimerUtilisateur($bdd, $NIR){
 	Suppression des données correspondantes dans la table adresse lié à 
 	la table personne par une clé étagère.
 	**/
-	$supprimer = $bdd->prepare('DELETE FROM personne WHERE NIR=?');
-	$supprimer->execute(array($NIR));
-	$supprimer = $bdd->prepare('DELETE FROM adresse WHERE NIR=?');
-	$supprimer->execute(array($NIR));
-	$supprimer->closeCursor();
+	$supprimerpersonne = $bdd->prepare('DELETE FROM Personne WHERE NIR=?');
+	$supprimerpersonne->execute(array($NIR));
+
+	$requete = $bdd->prepare("SELECT Adresse_Id FROM Personne WHERE NIR = ? ");
+	$requete->execute(array($NIR));
+	$AdressePersonne = $requete->fetch()['Adresse_Id'];
+
+	//Si ce n'est pas l'adresse 0 qu'on attribue à tout ceux qui ne remplisse pas les champs adresse
+	if ($AdressePersonne != 0){
+		$ListeAdresses1Personne = ListeAdresses1Personne($bdd);
+		//Si l'adresse n'appartient qu'à cette personne, on peut la supprimer
+		if (in_array($AdressePersonne, $ListeAdresses1Personne)) {
+			$supprimer = $bdd->prepare('DELETE FROM Adresse WHERE Id=?');
+			$supprimer->execute(array($AdressePersonne));
+		}
+	}
 }
 
 function SupprimerCompte($bdd, $NIR){
