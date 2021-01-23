@@ -3,11 +3,11 @@
 session_start(); 
 // Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
 if (!(isset($_SESSION['NIR']))) {
-	header('Location: Accueil.php');
+	header('Location: Accueil');
 }
 //S'il est connecté mais qu'il charge des pages non autorisées pour son type de compte on le renvoie à l'accueil
 else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {	
-	header('Location: Accueil.php');
+	header('Location: Accueil');
 }
 
 // Appel de la base de donnée bdd_testarisq

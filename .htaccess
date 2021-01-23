@@ -1,19 +1,23 @@
 RewriteEngine On
 
+#Préfixe .php à enlever
 RewriteRule ^([a-zA-Z]+)$ $1.php
 
+#Pagination pour FAQ et GestionFAQ
 RewriteRule ^FAQ-p([0-9]+)$ FAQ.php?page=$1
 RewriteRule ^GestionFAQ-p([0-9]+)$ GestionFAQ.php?page=$1
 
-#Si on a Recherche (-r motrecherché)oupas -p numeropage et d'autres paramètres on détaille r et p et on laisse les autres
+#RechercheUtilisateur / GestionUtilisateurs avec paramètre id_name facultatif, nombre de page obligatoire puis paramètres suivants laissés
 RewriteRule ^RechercheUtilisateur(-r(.+))?-p([0-9]+)(.*)$ RechercheUtilisateur.php?id_name=$2&page=$3$4
-
 RewriteRule ^GestionUtilisateurs(-r(.+))?-p([0-9]+)(.*)$ GestionUtilisateurs.php?id_name=$2&page=$3$4
 
+#Pareil pour GestionBoitiers sans paramètres supplémentaires
 RewriteRule ^GestionBoitiers(-r(.+))?-p([0-9]+)$ GestionBoitiers.php?id_name=$2&page=$3
 
+#NIR pour Modifier/Supprimer Utilisateur et SupprimerCompte
 RewriteRule ^ModifierUtilisateur-NIR([0-9]+)$ ModifierUtilisateur.php?NIR=$1
 RewriteRule ^controleurs/SupprimerUtilisateur-NIR([0-9]+)$ controleurs/SupprimerUtilisateur.php?NIR=$1
 RewriteRule ^controleurs/SupprimerCompte-NIR([0-9]+)$ controleurs/SupprimerCompte.php?NIR=$1
 
-RewriteRule ^GestionBoitiers-p([0-9]+)$ GestionBoitiers.php?page=$1
+#IdBoitier pour Supprimer Boitier
+RewriteRule ^controleurs/SupprimerBoitier-IdB([0-9]+)$ controleurs/SupprimerBoitier.php?IdBoitier=$1

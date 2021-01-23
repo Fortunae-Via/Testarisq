@@ -3,7 +3,7 @@
 session_start(); 
 // Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
 if (!(isset($_SESSION['NIR']))) {
-    header('Location: Accueil.php');
+    header('Location: Accueil');
 }
 
 //On prépare la FAQ

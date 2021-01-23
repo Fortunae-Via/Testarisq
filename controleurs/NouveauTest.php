@@ -25,20 +25,20 @@ if ($BonNIRConducteur AND $BonBoitier) {
 	$_SESSION['IdBoitier'] = $IdBoitier;
 	$_SESSION['NumeroTest'] = 1 ;
 	$_SESSION['EtapeTest'] = 1 ;
-	header('Location: ../Test.php');
+	header('Location: ../Test');
 }
 
 else if ($BonBoitier) {
 	$_SESSION['ErreurLancementTest'] = "Le NIR du conducteur est incorrect.";
-	header('Location: ../Accueil.php');
+	header('Location: ../Accueil');
 }
 
 else if ($BonNIRConducteur) {
 	$_SESSION['ErreurLancementTest'] = "Le numéro du boîtier est incorrect.";
-	header('Location: ../Accueil.php');
+	header('Location: ../Accueil');
 }
 
 else {
 	$_SESSION['ErreurLancementTest'] = "Le NIR du conducteur et le numéro du boîtier sont incorrects.";
-	header('Location: ../Accueil.php');
+	header('Location: ../Accueil');
 }

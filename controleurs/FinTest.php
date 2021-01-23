@@ -9,4 +9,4 @@ unset($_SESSION['MesureEnCours']);
 
 //Calculer le "score" total et l'ajouter dans la bdd
 
-header('Location: ../Accueil.php');
+header('Location: ../Accueil');

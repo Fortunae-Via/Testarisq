@@ -10,6 +10,7 @@ function TransformerChamp(id) {
 	//On crée le formulaire
 	var Form = document.createElement("form");
 	Form.setAttribute ("method","post");
+	Form.setAttribute ("action","GestionFAQ");
 
 	//On crée un input pour la question
 	var InputQuestion = document.createElement("input");

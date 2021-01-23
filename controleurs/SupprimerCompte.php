@@ -3,11 +3,11 @@
 session_start(); 
 // Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
 if (!(isset($_SESSION['NIR']))) {
-	header('Location: Accueil.php');
+	header('Location: Accueil');
 }
 //S'il est connecté mais qu'il charge des pages non autorisées pour son type de compte on le renvoie à l'accueil
 else if ( $_SESSION['TypeCompte']!='ADM' ) {	
-	header('Location: Accueil.php');
+	header('Location: Accueil');
 }
 
 // Si on a bien récupérer l'identifiant d'un utilisateur à la page précédente Alors :
@@ -33,7 +33,7 @@ if(isset($_GET['NIR'])){
 		**/
 		$_SESSION['MessageModifsUtilisateur'] = "Le compte \"pro\" de l'utilisateur a bien été supprimé.";
 		$_SESSION['RechercheEnCours'] = true;
-		header('Location: ../GestionUtilisateurs.php');
+		header('Location: ../GestionUtilisateurs');
 	}
 }
 ?>

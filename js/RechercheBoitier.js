@@ -8,6 +8,7 @@ function TransformerChamp(id) {
 	//On crée le formulaire
 	var Form = document.createElement("form");
 	Form.setAttribute ("method","post");
+	Form.setAttribute ("action","GestionBoitiers");
 	var NomForm="form_modif_aut_res"+id;
 	Form.setAttribute ("id",NomForm);
 

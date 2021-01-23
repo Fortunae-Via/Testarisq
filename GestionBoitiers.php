@@ -3,16 +3,16 @@
 session_start(); 
 // Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
 if (!(isset($_SESSION['NIR']))) {
-	header('Location: Accueil.php');
+	header('Location: Accueil');
 }
 //S'il est connecté mais qu'il charge des pages non autorisées pour son type de compte on le renvoie à l'accueil
 else if ( $_SESSION['TypeCompte']!='ADM' ) {	
-	header('Location: Accueil.php');
+	header('Location: Accueil');
 }
 
 // Appel de la base de donnée bdd_testarisq
 require("modele/connexionbdd.php");
-$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
+//$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
 // Definition des fonctions de requête SQL
 require('controleurs/FonctionsGestionBoitiers.php');
 
@@ -24,7 +24,7 @@ if( (isset($_POST['aut_res'])) ){
 
 	sleep(1);
 	$_SESSION['MessageModifBoitiers'] = "Le boîtier n°". $IdBoitier ." a bien été ajouté." ;
-	header('Location: GestionBoitiers.php');
+	header('Location: GestionBoitiers');
 }
 
 //Traitement de la modification de boitier
@@ -34,7 +34,7 @@ else if( (isset($_POST['modif_aut_res'],$_POST['id_boitier'])) ){
 
 	sleep(1);
 	$_SESSION['MessageModifBoitiers'] = "L'autorité responsable du boîtier a bien été modifiée." ;
-	header('Location: GestionBoitiers.php');
+	header('Location: GestionBoitiers');
 }
 
 //Partie affichage simple
