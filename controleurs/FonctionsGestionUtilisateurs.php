@@ -26,7 +26,9 @@ function CreatePreRemp(array $InfosPersosUser, array $AdresseUser) {
 function AfficherRechercheUtilisateurs(array $ListeUtilisateurs){
 
 	foreach ($ListeUtilisateurs as $Utilisateur) {
-		echo'<tr><td>'. $Utilisateur['NIR'] . '</td><td>' . $Utilisateur['NomDeFamille'] . '</td><td>'. $Utilisateur['Prenom1'] . ' '. $Utilisateur['Prenom2'] . ' '. $Utilisateur['Prenom3'] . '</td><td>'. $Utilisateur['DateNaissance'] . '</td><td>'. $Utilisateur['Sexe'] . '</td><td>'. $Utilisateur['NbTest'] . '</td>';
+		$ListePrenoms=implode(", ", (array_filter(array($Utilisateur['Prenom1'], $Utilisateur['Prenom2'], $Utilisateur['Prenom3']))));
+		$NomPrenoms='<strong>'.$Utilisateur['NomDeFamille'] . '</strong> ' . $ListePrenoms;
+		echo'<tr><td>' . $NomPrenoms . '</td><td>'. $Utilisateur['NIR'] . '</td><td>'. $Utilisateur['Sexe'] . '</td><td>'. $Utilisateur['DateNaissance'] . '</td><td>'. $Utilisateur['NbTest'] . '</td>';
 		/**
 		Affiche les boutons permettant la modification ou la suppression de l'utilisateur de la ligne correspondante
 		à partir d'un $_GET où l'on récupère le Identifiant (NIR) de l'utilisateur.

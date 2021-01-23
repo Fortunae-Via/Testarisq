@@ -17,18 +17,7 @@ if (!(empty($InfosUser['Adresse_Id']))) {
 	$Adresse = $PartiesAdresse['NumeroRue'] .' '. $PartiesAdresse['Rue'] .', '. $PartiesAdresse['CodePostal'] .' '. $PartiesAdresse['Ville'] .', '. $PartiesAdresse['Region'] .', '. $PartiesAdresse['Pays'];
 }
 
-if (empty($InfosUser['Prenom3'])) {
-	if (empty($InfosUser['Prenom2'])) {
-		$Prenoms = $InfosUser['Prenom1'];
-	}
-	else {
-		$Prenoms = $InfosUser['Prenom1'] .', '. $InfosUser['Prenom2'];
-	} 
-}
-else {
-	$Prenoms = $InfosUser['Prenom1'] .', '. $InfosUser['Prenom2'] .', '. $InfosUser['Prenom3'];
-}
-
+$Prenoms=implode(", ", (array_filter(array($InfosUser['Prenom1'], $InfosUser['Prenom2'], $InfosUser['Prenom3']))));
 
 //On affiche la page
 require 'vues/MonCompte.php'; 

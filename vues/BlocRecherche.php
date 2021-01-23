@@ -101,11 +101,10 @@
 <table>
 	<tr>
 		<!-- Nom des colonnes -->
+		<th>Utilisateur</th>
 		<th>NIR</th>
-		<th>Nom de famille</th>
-		<th>Prénom(s)</th>
-		<th>Date de naissance</th>
 		<th>Sexe</th>
+		<th>Date de naissance</th>
 		<th>Nombre de test<span style="font-size:11px;">(s)</span> passé<span style="font-size:11px;">(s)</span></th>
 		<?php
 		/**

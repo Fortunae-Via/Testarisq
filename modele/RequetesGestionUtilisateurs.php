@@ -71,7 +71,7 @@ function RechercherUtilisateur(PDO $bdd, int $page, string $regex = '%%', string
 	les informations concernant des utilisateurs en fonction de la
 	recherche demandée
 	**/
-	$requete = 'SELECT NIR, Prenom1, Prenom2, Prenom3, NomDeFamille, Sexe, DateNaissance, COUNT(Test.Id) AS NbTest FROM Personne JOIN Adresse ON Personne.Adresse_Id=Adresse.Id LEFT JOIN Test ON Test.Personne_NIR = Personne.NIR WHERE (Personne.NIR LIKE :regex OR Personne.NomDeFamille LIKE :regex) ' . $conditionsfiltres . 'GROUP BY NIR ' . $conditionsfiltrenbtests . 'ORDER BY Personne.NomDeFamille, Personne.NIR ASC LIMIT 10 OFFSET :offset' ;
+	$requete = 'SELECT NIR, Prenom1, Prenom2, Prenom3, NomDeFamille, Sexe, DATE_FORMAT(DateNaissance, "%d/%m/%Y") AS DateNaissance , COUNT(Test.Id) AS NbTest FROM Personne JOIN Adresse ON Personne.Adresse_Id=Adresse.Id LEFT JOIN Test ON Test.Personne_NIR = Personne.NIR WHERE (Personne.NIR LIKE :regex OR Personne.NomDeFamille LIKE :regex) ' . $conditionsfiltres . 'GROUP BY NIR ' . $conditionsfiltrenbtests . 'ORDER BY Personne.NomDeFamille, Personne.NIR ASC LIMIT 10 OFFSET :offset' ;
 	$search = $bdd->prepare($requete);
 	//Le offset doit être interprété comme un int donc on précise les paramètres de cette manière
 	$search->bindValue(':regex', $regex);

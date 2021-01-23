@@ -8,7 +8,7 @@ function TailleTable(PDO $bdd, string $Table) : int {
 
 function InfosPersonne(PDO $bdd, string $NIR): array
 {
-	$requete = $bdd->prepare("SELECT * FROM Personne WHERE NIR = ? ");
+	$requete = $bdd->prepare("SELECT NIR, Prenom1, Prenom2, Prenom3, NomDeFamille, NomDUsage, Sexe, DATE_FORMAT(DateNaissance, '%d/%m/%Y') AS DateNaissance, Courriel, Portable, Adresse_Id FROM Personne WHERE NIR = ? ");
 	$requete->execute(array($NIR));
 	$InfosPersonne = $requete->fetch();
 	return $InfosPersonne;
