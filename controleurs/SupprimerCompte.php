@@ -25,15 +25,12 @@ if(isset($_GET['NIR'])){
 	**/
 	SupprimerCompte($bdd, $_GET['NIR']);
 
-	sleep(1);
-	if('1'){
-		/**
-		L'utilisateur est redirigé vers la page de recherche.
-		(Retour à la page précédente)
-		**/
-		$_SESSION['MessageModifsUtilisateur'] = "Le compte \"pro\" de l'utilisateur a bien été supprimé.";
-		$_SESSION['RechercheEnCours'] = true;
-		header('Location: ../GestionUtilisateurs');
-	}
+	/**
+	L'utilisateur est redirigé vers la page de recherche.
+	(Retour à la page précédente)
+	**/
+	$_SESSION['MessageModifsUtilisateur'] = "Le compte \"pro\" de l'utilisateur a bien été supprimé.";
+	$_SESSION['RechercheEnCours'] = true;
+	header('Location: ../GestionUtilisateurs');
 }
 ?>

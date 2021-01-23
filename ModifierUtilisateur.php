@@ -41,7 +41,6 @@ if(isset($_GET['NIR'])){
 			}
 		}
 
-		sleep(true);
 		$_SESSION['MessageModifsUtilisateur'] = "Les données de l'utilisateur ont bien été modifiées.";
 		$_SESSION['RechercheEnCours'] = true;
 		header('Location: GestionUtilisateurs');
