@@ -26,7 +26,7 @@ function CreatePreRemp(array $InfosPersosUser, array $AdresseUser) {
 function AfficherRechercheUtilisateurs(array $ListeUtilisateurs){
 
 	foreach ($ListeUtilisateurs as $Utilisateur) {
-		echo'<tr><td>'. $Utilisateur['NIR'] . '</td><td>' . $Utilisateur['NomDeFamille'] . '</td><td>'. $Utilisateur['Prenom1'] . ' '. $Utilisateur['Prenom2'] . ' '. $Utilisateur['Prenom3'] . '</td><td>'. $Utilisateur['DateNaissance'] . '</td><td>'. $Utilisateur['Sexe'] . '</td><td>'. ' ' . '</td>';
+		echo'<tr><td>'. $Utilisateur['NIR'] . '</td><td>' . $Utilisateur['NomDeFamille'] . '</td><td>'. $Utilisateur['Prenom1'] . ' '. $Utilisateur['Prenom2'] . ' '. $Utilisateur['Prenom3'] . '</td><td>'. $Utilisateur['DateNaissance'] . '</td><td>'. $Utilisateur['Sexe'] . '</td><td>'. $Utilisateur['NbTest'] . '</td>';
 		/**
 		Affiche les boutons permettant la modification ou la suppression de l'utilisateur de la ligne correspondante
 		à partir d'un $_GET où l'on récupère le Identifiant (NIR) de l'utilisateur.
@@ -46,6 +46,7 @@ function GestionFiltres() {
 	$ListeNomsFiltres = array('sexe', 'region', 'year', 'test_number');
 	$ListeFiltres = array();
 	$ConditionsSQL = "";
+	$ConditionsSQLNbTests = "";
 	$ListeRaccourcisSexe = array('Homme'=>'H', 'Femme'=>'F', 'Autre'=>'A', 'Non-précisé'=>'N');
 	$lien = "";
 
@@ -73,13 +74,11 @@ function GestionFiltres() {
 			$ConditionsSQL .= "AND Personne.DateNaissance LIKE '" . $ListeFiltres['year'] . "%' ";
 			$lien .= "&year=" . $ListeFiltres['year'];
 		}
-		/* QUAND NB TEST MARCHE
 		if (isset($ListeFiltres['test_number'])) {
-			$ConditionsSQL .= "AND Personne.NbTest =" . $ListeFiltres['test_number'] . " "; 
+			$ConditionsSQLNbTests .= "HAVING NbTest >=" . $ListeFiltres['test_number'] . " "; 
 		}
-		*/
 	}
 
-	return array($ListeFiltres,$ConditionsSQL,$lien);
+	return array($ListeFiltres,$ConditionsSQL,$ConditionsSQLNbTests,$lien);
 
 }

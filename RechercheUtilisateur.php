@@ -39,10 +39,11 @@ if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 	$GestionFiltres = GestionFiltres();
 	$ListeFiltres = $GestionFiltres[0];
 	$ConditionsSQLFiltres = $GestionFiltres[1];
-	$lienSQLFiltres = $GestionFiltres[2];
+	$ConditionsSQLNbTests = $GestionFiltres[2];
+	$lienSQLFiltres = $GestionFiltres[3];
 
 	//On regarde en amont le nombre de résultats de la recherche
-	$TailleRecherche = TailleRechercheUtilisateur($bdd, $regex, $ConditionsSQLFiltres);
+	$TailleRecherche = TailleRechercheUtilisateur($bdd, $regex, $ConditionsSQLFiltres, $ConditionsSQLNbTests);
 	$PageMaximum = ceil($TailleRecherche/10);
 
 	if (isset($_GET['page'])) {
@@ -54,7 +55,7 @@ if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 	}
 
 	//Recherche
-	$ResultatsRecherche = RechercherUtilisateur($bdd, $PageAffichage, $regex, $ConditionsSQLFiltres);
+	$ResultatsRecherche = RechercherUtilisateur($bdd, $PageAffichage, $regex, $ConditionsSQLFiltres, $ConditionsSQLNbTests);
 }
 
 else{
@@ -78,5 +79,7 @@ else{
 	//Recherche
 	$ResultatsRecherche = RechercherUtilisateur($bdd, $PageAffichage);
 }
+$ListeRegionFR = ListeRegionsFR($bdd);
+$ListeSexes = array('Homme','Femme','Autre','Non-précisé');
 // Affichage de la structure HTML
 require("vues/RechercheUtilisateur.php");

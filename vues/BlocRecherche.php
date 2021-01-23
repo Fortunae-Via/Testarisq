@@ -73,14 +73,20 @@
 			<!-- Filtre par nombre de test passés -->
 			<select name="test_number">
 				<option selected value="">Nombre de tests passés</option>
-				<option value="0">Au moins 1 test</option>
 				<?php
-				for($NbTests=2; $NbTests<=20; $NbTests++){
-					if (isset($ListeFiltres['test_number']) AND $NbTest == $ListeFiltres['test_number']) {
-						echo"<option value=\"". $$NbTest ."\" selected>Au moins " . $$NbTest . " tests</option>";
+				if (isset($ListeFiltres['test_number']) AND $ListeFiltres['test_number'] == 1) {
+						echo"<option value=\"1\" selected>Au moins 1 test</option>";;
 					}
 					else {
-						echo"<option value=\"". $$NbTest ."\">Au moins " . $$NbTest . " tests</option>";
+						echo"<option value=\"1\">Au moins 1 test</option>";
+					}
+
+				for($NbTests=2; $NbTests<=20; $NbTests++){
+					if (isset($ListeFiltres['test_number']) AND $NbTests == $ListeFiltres['test_number']) {
+						echo"<option value=\"". $NbTests ."\" selected>Au moins " . $NbTests . " tests</option>";
+					}
+					else {
+						echo"<option value=\"". $NbTests ."\">Au moins " . $NbTests . " tests</option>";
 					}
 				}
 				?>

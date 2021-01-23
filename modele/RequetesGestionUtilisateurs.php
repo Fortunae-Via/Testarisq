@@ -49,23 +49,21 @@ function AjouterCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutR
 	}
 }
 
-function TailleRechercheUtilisateur(PDO $bdd, string $regex = '%%', string $conditionsfiltres="") : int {
-	$requete = 'SELECT COUNT(NIR) AS TailleRecherche FROM Personne INNER JOIN Adresse ON Personne.Adresse_Id=Adresse.Id WHERE (Personne.NIR LIKE :regex OR Personne.NomDeFamille LIKE :regex)' . $conditionsfiltres ;
+function TailleRechercheUtilisateur(PDO $bdd, string $regex = '%%', string $conditionsfiltres="", string $conditionsfiltrenbtests="") : int {
+	$requete = 'SELECT COUNT(Test.Id) AS NbTest FROM Personne JOIN Adresse ON Personne.Adresse_Id=Adresse.Id LEFT JOIN Test ON Test.Personne_NIR = Personne.NIR WHERE (Personne.NIR LIKE :regex OR Personne.NomDeFamille LIKE :regex) ' . $conditionsfiltres . 'GROUP BY NIR '. $conditionsfiltrenbtests ;
 	$search = $bdd->prepare($requete);
 	//Le offset doit être interprété comme un int donc on précise les paramètres de cette manière
 	$search->bindValue(':regex', $regex);
 	$search->execute();
-	$result=$search->fetch();
-	return $result['TailleRecherche'];
+	$count = $search->rowCount();
+	return $count;
 }
 
-function RechercherUtilisateur(PDO $bdd, int $page, string $regex = '%%', string $conditionsfiltres="") : array {
+function RechercherUtilisateur(PDO $bdd, int $page, string $regex = '%%', string $conditionsfiltres="", string $conditionsfiltrenbtests="") : array {
 	/**
 	La requête SQL permet d'aller récuperer dans la base de donnée
 	les informations concernant des utilisateurs en fonction des différents
 	choix fait dans le formulaire (et donc les filtres).
-					
-	A faire : Nombre de tests, tester si il y a une adresse ou pas, ET/OU
 	**/
 	$offset = $page * 10 - 10;
 	/**
@@ -73,7 +71,7 @@ function RechercherUtilisateur(PDO $bdd, int $page, string $regex = '%%', string
 	les informations concernant des utilisateurs en fonction de la
 	recherche demandée
 	**/
-	$requete = 'SELECT NIR, Prenom1, Prenom2, Prenom3, NomDeFamille, Sexe, DateNaissance FROM Personne INNER JOIN Adresse ON Personne.Adresse_Id=Adresse.Id WHERE (Personne.NIR LIKE :regex OR Personne.NomDeFamille LIKE :regex)' . $conditionsfiltres . 'ORDER BY Personne.NomDeFamille, Personne.NIR ASC LIMIT 10 OFFSET :offset' ;
+	$requete = 'SELECT NIR, Prenom1, Prenom2, Prenom3, NomDeFamille, Sexe, DateNaissance, COUNT(Test.Id) AS NbTest FROM Personne JOIN Adresse ON Personne.Adresse_Id=Adresse.Id LEFT JOIN Test ON Test.Personne_NIR = Personne.NIR WHERE (Personne.NIR LIKE :regex OR Personne.NomDeFamille LIKE :regex) ' . $conditionsfiltres . 'GROUP BY NIR ' . $conditionsfiltrenbtests . 'ORDER BY Personne.NomDeFamille, Personne.NIR ASC LIMIT 10 OFFSET :offset' ;
 	$search = $bdd->prepare($requete);
 	//Le offset doit être interprété comme un int donc on précise les paramètres de cette manière
 	$search->bindValue(':regex', $regex);
