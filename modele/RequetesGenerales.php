@@ -2,7 +2,9 @@
 
 function TailleTable(PDO $bdd, string $Table) : int {
 	$query = 'SELECT COUNT(*) as Taille FROM ' . $Table;
-	$result = $bdd->query($query)->fetch();
+	$search = $bdd->prepare($query);
+	$search->execute();
+	$result = $search->fetch();
 	return $result['Taille'];
 }
 
