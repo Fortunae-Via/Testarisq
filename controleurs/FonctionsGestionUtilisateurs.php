@@ -22,3 +22,64 @@ function CreatePreRemp(array $InfosPersosUser, array $AdresseUser) {
 
 	return $PreRemp;
 }
+
+function AfficherRechercheUtilisateurs(array $ListeUtilisateurs){
+
+	foreach ($ListeUtilisateurs as $Utilisateur) {
+		echo'<tr><td>'. $Utilisateur['NIR'] . '</td><td>' . $Utilisateur['NomDeFamille'] . '</td><td>'. $Utilisateur['Prenom1'] . ' '. $Utilisateur['Prenom2'] . ' '. $Utilisateur['Prenom3'] . '</td><td>'. $Utilisateur['DateNaissance'] . '</td><td>'. $Utilisateur['Sexe'] . '</td><td>'. ' ' . '</td>';
+		/**
+		Affiche les boutons permettant la modification ou la suppression de l'utilisateur de la ligne correspondante
+		à partir d'un $_GET où l'on récupère le Identifiant (NIR) de l'utilisateur.
+		Cette partie est seulement accèssible aux administrateurs.
+		**/
+		if(isset($_SESSION['TypeCompte'])){
+			if($_SESSION['TypeCompte']=='ADM'){
+				echo'<td><a href="ModifierUtilisateur-NIR'. $Utilisateur['NIR'] .'"><img src="vues/img/edit-user.png" title="Modifier l\'utilisateur"/></a><a href="controleurs/SupprimerUtilisateur-NIR'. $Utilisateur['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/remove-user.png" title="Supprimer l\'utilisateur"/></a><a href="controleurs/SupprimerCompte-NIR'. $Utilisateur['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/remove-account.png" title="Supprimer le compte pro de l\'utilisateur"/></a></td></tr>';
+			}
+		}
+	}
+}
+
+
+function GestionFiltres() {
+
+	$ListeNomsFiltres = array('sexe', 'region', 'year', 'test_number');
+	$ListeFiltres = array();
+	$ConditionsSQL = "";
+	$ListeRaccourcisSexe = array('Homme'=>'H', 'Femme'=>'F', 'Autre'=>'A', 'Non-précisé'=>'N');
+	$lien = "";
+
+	foreach ($ListeNomsFiltres as $filtre) {
+		//Si on a effectivement une valeur pour filtrer pour ce filtre en particulier, on la note
+		if (isset($_POST[$filtre]) && (!(empty($_POST[$filtre]))) ) {
+			$ListeFiltres[$filtre] = $_POST[$filtre];
+		}
+		else if (isset($_GET[$filtre]) && (!(empty($_GET[$filtre]))) ) {
+			$ListeFiltres[$filtre] = $_GET[$filtre];
+		}
+	}
+	//On sort avec $ListeFiltres soit vide, soit rempli d'autant qu'il y a de filtre sélectionnés
+
+	if (count($ListeFiltres)!=0) {
+		if (isset($ListeFiltres['sexe'])) {
+			$ConditionsSQL .= "AND Personne.Sexe='" . $ListeFiltres['sexe'] . "' ";
+			$lien .= "&sexe=" . $ListeRaccourcisSexe[$ListeFiltres['sexe']]; 
+		}
+		if (isset($ListeFiltres['region'])) {
+			$ConditionsSQL .= "AND Adresse.Region='" . $ListeFiltres['region'] . "' "; 
+			$lien .= "&region=" . $ListeFiltres['region'];
+		}
+		if (isset($ListeFiltres['year'])) {
+			$ConditionsSQL .= "AND Personne.DateNaissance LIKE '" . $ListeFiltres['year'] . "%' ";
+			$lien .= "&year=" . $ListeFiltres['year'];
+		}
+		/* QUAND NB TEST MARCHE
+		if (isset($ListeFiltres['test_number'])) {
+			$ConditionsSQL .= "AND Personne.NbTest =" . $ListeFiltres['test_number'] . " "; 
+		}
+		*/
+	}
+
+	return array($ListeFiltres,$ConditionsSQL,$lien);
+
+}

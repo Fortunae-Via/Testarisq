@@ -73,9 +73,14 @@
 				else {
 					echo("<div id=\"dropdown2\" class=\"dropdown-content\" style=\"display: none;\">");
 				}
-				
-				require 'vues/BlocRecherche.php'; 
 			?>
+				<form method="post" action="GestionUtilisateurs">
+			<?php
+				require 'vues/BlocRecherche.php';
+			?>
+				<div class="nav_pages">
+				    <?php AffichageNavigationPages ('GestionUtilisateurs', $PageAffichage, $PageMaximum, $ChampRecherche, $lienSQLFiltres);?>
+				</div>
 			</div>
 
 		</div>

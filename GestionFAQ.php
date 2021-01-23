@@ -21,7 +21,7 @@ if (isset($_POST['question']) && isset($_POST['reponse'])){
 	header('Location: GestionFAQ.php');
 }
 
-//Partie traitant
+//Partie traitement de la modification de question
 else if (isset($_POST['id_question'])){
 		
 	require 'modele/connexionbdd.php';
@@ -44,7 +44,6 @@ else {
 	//On prépare la FAQ
 	require 'modele/connexionbdd.php';
 	require 'modele/RequetesFAQ.php';
-	require 'modele/RequetesGenerales.php';
 	require 'controleurs/FonctionsPagination.php';
 
 	$PageMaximum = PageMaximum($bdd,'ElementFAQ');

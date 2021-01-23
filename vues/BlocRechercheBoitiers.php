@@ -1,10 +1,10 @@
-<form method="post">
+<form method="post" action="GestionBoitiers">
 	<!-- Barre de recherche par nom ou identifiant -->
 	<h3>Numéro du boitier ou nom de l'autorité responsable :</h3>
 	<div class="barre_recherche">
 		<?php
-			if(isset($_POST['id_name'])){
-				echo "<input id=\"id_name\" name=\"id_name\" value=\"". $_POST['id_name'] ."\"/>";
+			if(!(empty($ChampRecherche))){
+				echo "<input id=\"id_name\" name=\"id_name\" value=\"". $ChampRecherche ."\"/>";
 			}
 			else {
 				echo "<input id=\"id_name\" name=\"id_name\"/>";
@@ -25,10 +25,10 @@
 		<th>Autorité Responsable</th>
 		<th>Options</th>
 
-		<?php RechercheBoitiers($bdd, $regex, $PageAffichage); ?>
+		<?php AfficherRechercheBoitiers($ResultatsRecherche); ?>
 	</tr>
 </table>
 
 <div class="nav_pages">
-    <?php AffichageNavigationPages ('GestionBoitiers', $PageAffichage, $PageMaximum);?>
+    <?php AffichageNavigationPages ('GestionBoitiers', $PageAffichage, $PageMaximum, $ChampRecherche);?>
 </div>

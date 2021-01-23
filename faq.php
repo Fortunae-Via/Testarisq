@@ -10,7 +10,6 @@ if (!(isset($_SESSION['NIR']))) {
 require 'modele/connexionbdd.php';
 //$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
 require 'modele/RequetesFAQ.php';
-require 'modele/RequetesGenerales.php';
 require 'controleurs/FonctionsPagination.php';
 
 $PageMaximum = PageMaximum($bdd,'ElementFAQ');

@@ -1,10 +1,10 @@
-<form method="post">
+
 	<!-- Barre de recherche par nom ou identifiant -->
 	<h3>Identifiant ou nom du conducteur :</h3>
 	<div class="barre_recherche">
 		<?php
-			if(isset($_POST['id_name'])){
-				echo "<input id=\"id_name\" name=\"id_name\" value=\"". $_POST['id_name'] ."\"/>";
+			if(!(empty($ChampRecherche))){
+				echo "<input id=\"id_name\" name=\"id_name\" value=\"". $ChampRecherche ."\"/>";
 			}
 			else {
 				echo "<input id=\"id_name\" name=\"id_name\"/>";
@@ -21,7 +21,7 @@
 		<div class="div_select_filtres">
 			<!-- Filtrer par sexe -->
 			<select name="sexe" size="1">
-				<option selected value="?">Sexe</option>
+				<option selected value="">Sexe</option>
 				<option value="Homme">Homme</option>
 				<option value="Femme">Femme</option>
 				<option value="Autre">Autre</option>
@@ -30,7 +30,7 @@
 
 			<!-- Filtrer par region -->
 			<select name="region">
-				<option selected value="?">Région</option>
+				<option selected value="">Région</option>
 				<?php
 				/**
 				Appel à la fonction Region() provenant de modele/RequêteRecherche.php
@@ -48,7 +48,7 @@
 			de citoyens.
 			-->
 			<select name="year">
-				<option selected value="?">Année de naissance</option>
+				<option selected value="">Année de naissance</option>
 				<?php
 				for($i=date("Y"); $i>=1900; $i--){
 					echo'<option value="'. $i .'">'. $i .'</option>';
@@ -58,7 +58,7 @@
 
 			<!-- Filtre par nombre de test passés -->
 			<select name="test_number">
-				<option selected value="?">Nombre de tests passés</option>
+				<option selected value="">Nombre de tests passés</option>
 				<option value="0">Au moins 1 test</option>
 				<?php
 				for($i=2; $i<=20; $i++){
@@ -78,13 +78,9 @@
 		<!-- Nom des colonnes -->
 		<th>NIR</th>
 		<th>Nom de famille</th>
-		<th>Nom d'usage</th>
 		<th>Prénom(s)</th>
 		<th>Date de naissance</th>
 		<th>Sexe</th>
-		<th>Courriel</th>
-		<th>Téléphone</th>
-		<th>Adresse</th>
 		<th>Nombre de test<span style="font-size:11px;">(s)</span> passé<span style="font-size:11px;">(s)</span></th>
 		<?php
 		/**
@@ -100,23 +96,11 @@
 			}
 		}
 
-		//On teste si des filtres sont sélectionnés ou si un utilisateur est recherché.
-		if(isset($_POST['id_name'])){
-
-			// Dans ce cas on laisse le formulaire affiché de manière à pouvoir refaire une recherche
-
-			// Definition du regex pour le nom recherché
-			$regex = '"%' . $_POST['id_name'] . '%"';
-			
-			/**
-			Appel de la fonction Recherche permettant d'effectuer une recherche
-			selon le nom ou identifiant entré ou les filtres sélectionnés
-			**/
-			Rechercher($bdd, $filtres['sexe'], $filtres['year'], $regex, $filtres['region']);
-			// Fin du tableau et de la section d'affichage des résultats
-		}else{
-			Afficher($bdd);
-		}
+		/**
+		Appel de la fonction permettant d'effectuer une recherche
+		selon le nom ou identifiant entré ou les filtres sélectionnés
+		**/
+		AfficherRechercheUtilisateurs($ResultatsRecherche);
 		?>
 	</tr>
 </table>

@@ -14,10 +14,9 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 require("modele/connexionbdd.php");
 $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
 // Definition des fonctions de requête SQL
-require('modele/RequetesGenerales.php');
 require('controleurs/FonctionsGestionBoitiers.php');
 
-//Si on a posté le formulaire, on ajoute le boitier à la BDD
+//Traitement de l'ajout de boitier
 if( (isset($_POST['aut_res'])) ){
 
 	$Aut_Res = $_POST['aut_res'];
@@ -28,6 +27,7 @@ if( (isset($_POST['aut_res'])) ){
 	header('Location: GestionBoitiers.php');
 }
 
+//Traitement de la modification de boitier
 else if( (isset($_POST['modif_aut_res'],$_POST['id_boitier'])) ){
 
 	ModifierAutResBoitier($bdd, $_POST['id_boitier'], $_POST['modif_aut_res']);
@@ -37,42 +37,85 @@ else if( (isset($_POST['modif_aut_res'],$_POST['id_boitier'])) ){
 	header('Location: GestionBoitiers.php');
 }
 
+//Partie affichage simple
 else{
 
-	//Préparation pour l'ajout
+	require 'controleurs/FonctionsPagination.php';
+
+	//Préparation pour la partie ajout
 	$ListeAutoritesResponsablesAUE = ListeAutoritesResponsables($bdd,'AUE');
 	$ListeAutoritesResponsablesPOL = ListeAutoritesResponsables($bdd,'POL');
 	$ListeCapteurs = ListeTypesCapteurs($bdd);
 
-		
-	//Préparation pour la recherche
-	if(isset($_POST['id_name'])){
+
+	//Si un utilisateur est recherché
+	if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
+
 		// Definition du regex pour le nom recherché
+		if (isset($_POST['id_name'])) {
+			$ChampRecherche = $_POST['id_name'];
+			$regex = '%' . $ChampRecherche . '%';
+		}
+		else if (isset($_GET['id_name'])) {
+			$ChampRecherche = $_GET['id_name'];
+			$regex = '%' . $ChampRecherche . '%';
+		}
+		else {
+			$ChampRecherche ="";
+		}
+
+		//On regarde en amont le nombre de résultats de la recherche
+		$TailleRecherche = TailleRechercheBoitier($bdd, $regex);
+		$PageMaximum = ceil($TailleRecherche/10);
+
+		if (isset($_GET['page'])) {
+			$PageDemandee = $_GET['page'];
+			$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
+		}
+		else {
+			$PageAffichage = 1;
+		}
+
+		//Recherche
+		$ResultatsRecherche = RechercherBoitierBDD($bdd, $PageAffichage, $regex);
+
+		$ListeAutoritesResponsablesAUE = ListeAutoritesResponsables($bdd,'AUE');
+		$ListeAutoritesResponsablesPOL = ListeAutoritesResponsables($bdd,'POL');
+
+		//affichage de la page
 		$Recherche=true;
-		$regex = '%' . $_POST['id_name'] . '%';
+		require("vues/GestionBoitiers.php");
 	}
+
 	else {
-		//Affichage de tous les résultats
-		$Recherche=false;
-		$regex = "%%";
-	}
+		$Recherche = false;
 
-	require 'controleurs/FonctionsPagination.php';
-	$PageMaximum = PageMaximum($bdd,'Boitier');
+		//On regarde en amont le nombre d'entrées de la table
+		$PageMaximum = PageMaximum($bdd, 'Boitier');
+		$ChampRecherche= "";
+		$lienSQLFiltres = "";
 
-	if (isset($_GET['page'])) {
-		$PageDemandee = $_GET['page'];
-		$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
-		$Recherche=true;
-	}
-	else {
-		$PageAffichage = 1;
-	}
+		if (isset($_GET['page'])) {
+			$PageDemandee = $_GET['page'];
+			$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
+			$Recherche=true;
+		}
+		else {
+			$PageAffichage = 1;
+		}
 
-	// Affichage de la page
-	require("vues/GestionBoitiers.php");
+		//Recherche
+		$ResultatsRecherche = RechercherBoitierBDD($bdd, $PageAffichage);
 
-	if (isset($_SESSION['MessageModifBoitiers'])) {
+		$ListeAutoritesResponsablesAUE = ListeAutoritesResponsables($bdd,'AUE');
+		$ListeAutoritesResponsablesPOL = ListeAutoritesResponsables($bdd,'POL');
+
+		// Affichage de la page
+		require("vues/GestionBoitiers.php");
+
+		//Dans le cas ou on revient d'un ajout modif ou suppression, on supprime le message pour les prochaines fois
+		if (isset($_SESSION['MessageModifBoitiers'])) {
 		unset($_SESSION['MessageModifBoitiers']);
+		}
 	}
 }

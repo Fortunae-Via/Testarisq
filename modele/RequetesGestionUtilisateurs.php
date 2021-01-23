@@ -62,7 +62,17 @@ function AjouterCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutR
 	}
 }
 
-function Rechercher($bdd, $sexe, $year, $regex, $region){
+function TailleRechercheUtilisateur(PDO $bdd, string $regex = '%%', string $conditionsfiltres="") : int {
+	$requete = 'SELECT COUNT(NIR) AS TailleRecherche FROM Personne INNER JOIN Adresse ON Personne.Adresse_Id=Adresse.Id WHERE (Personne.NIR LIKE :regex OR Personne.NomDeFamille LIKE :regex)' . $conditionsfiltres ;
+	$search = $bdd->prepare($requete);
+	//Le offset doit être interprété comme un int donc on précise les paramètres de cette manière
+	$search->bindValue(':regex', $regex);
+	$search->execute();
+	$result=$search->fetch();
+	return $result['TailleRecherche'];
+}
+
+function RechercherUtilisateur(PDO $bdd, int $page, string $regex = '%%', string $conditionsfiltres="") : array {
 	/**
 	La requête SQL permet d'aller récuperer dans la base de donnée
 	les informations concernant des utilisateurs en fonction des différents
@@ -70,46 +80,19 @@ function Rechercher($bdd, $sexe, $year, $regex, $region){
 					
 	A faire : Nombre de tests, tester si il y a une adresse ou pas, ET/OU
 	**/
-	$recherche = $bdd->query('SELECT * FROM personne INNER JOIN adresse ON personne.Adresse_Id=adresse.Id WHERE personne.Sexe="'. $sexe .'" OR personne.DateNaissance LIKE "'. $year .'%" OR personne.NIR LIKE '. $regex .' OR personne.NomDeFamille LIKE '. $regex .' OR adresse.Region="'. $region .'"');
-	/*$recherche = $bdd->query('SELECT *, COUNT(*) AS count_test FROM personne INNER JOIN adresse ON personne.Adresse_Id=adresse.Id INNER JOIN test ON personne.NIR=test.Personne_NIR WHERE personne.Sexe="'. $_POST['sexe'] .'" OR personne.DateNaissance LIKE "'. $_POST['year'] .'%" OR personne.NIR LIKE '. $regex .' OR personne.NomDeFamille LIKE '. $regex .' OR adresse.Region="'. $_POST['region'] .'"');*/
-
+	$offset = $page * 10 - 10;
 	/**
-	Affichage des résultats d'une recherche.
-	On affiche les informations concernant un utilisateur
-	selon les filtres utilisés et donc la requête SQL executée
-	quelques lignes au-dessus.
+	La requête SQL permet d'aller récuperer dans la base de donnée
+	les informations concernant des utilisateurs en fonction de la
+	recherche demandée
 	**/
-	while($display = $recherche->fetch()){
-		echo'<tr><td>'. $display['NIR'] . '</td><td>' . $display['NomDeFamille'] . '</td><td>' . $display["NomDUsage"] . '</td><td>'. $display['Prenom1'] . ' '. $display['Prenom2'] . ' '. $display['Prenom3'] . '</td><td>'. $display['DateNaissance'] . '</td><td>'. $display['Sexe'] . '</td><td>'. $display['Courriel'] . '</td><td>'. $display['Portable'] . '</td><td>' . $display['NumeroRue'] . ' ' . $display['Rue'] . ' ' . $display['CodePostal'] . ' ' . $display['Ville'] . ' ' . $display['Region'] . ' ' . $display['Pays'] . '</td><td>'. ' ' . '</td>';
-		/**
-		Affiche les boutons permettant la modification ou la suppression de l'utilisateur de la ligne correspondante
-		à partir d'un $_GET où l'on récupère le Identifiant (NIR) de l'utilisateur.
-		Cette partie est seulement accèssible aux administrateurs.
-		**/
-		if(isset($_SESSION['TypeCompte'])){
-			if($_SESSION['TypeCompte']=='ADM'){
-				echo'<td><a href="ModifierUtilisateur-NIR'. $display['NIR'] .'"><img src="vues/img/edit-user.png" title="Modifier l\'utilisateur"/></a><a href="controleurs/SupprimerUtilisateur-NIR'. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/remove-user.png" title="Supprimer l\'utilisateur"/></a><a href="controleurs/SupprimerCompte-NIR'. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/remove-account.png" title="Supprimer le compte pro de l\'utilisateur"/></a></td></tr>';
-			}
-		}
-	}
-	//Fermeture de la requête SQL
-	$recherche->closeCursor();
-}
-
-function Afficher($bdd){
-	$recherche = $bdd->query('SELECT * FROM personne INNER JOIN adresse ON personne.Adresse_Id=adresse.Id');
-
-	while($display = $recherche->fetch()){
-		echo'<tr><td>'. $display['NIR'] . '</td><td>' . $display['NomDeFamille'] . '</td><td>' . $display["NomDUsage"] . '</td><td>'. $display['Prenom1'] . ' '. $display['Prenom2'] . ' '. $display['Prenom3'] . '</td><td>'. $display['DateNaissance'] . '</td><td>'. $display['Sexe'] . '</td><td>'. $display['Courriel'] . '</td><td>'. $display['Portable'] . '</td><td>' . $display['NumeroRue'] . ' ' . $display['Rue'] . ' ' . $display['CodePostal'] . ' ' . $display['Ville'] . ' ' . $display['Region'] . ' ' . $display['Pays'] . '</td><td>'. ' ' . '</td>';
-
-		if(isset($_SESSION['TypeCompte'])){
-			if($_SESSION['TypeCompte']=='ADM'){
-				echo'<td><a href="ModifierUtilisateur-NIR'. $display['NIR'] .'"><img src="vues/img/edit-user.png" title="Modifier l\'utilisateur"/></a><a href="controleurs/SupprimerUtilisateur-NIR'. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/remove-user.png" title="Supprimer l\'utilisateur"/></a><a href="controleurs/SupprimerCompte-NIR'. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/remove-account.png" title="Supprimer le compte pro de l\'utilisateur"/></a></td></tr>';
-			}
-		}
-	}
-	//Fermeture de la requête SQL
-	$recherche->closeCursor();
+	$requete = 'SELECT NIR, Prenom1, Prenom2, Prenom3, NomDeFamille, Sexe, DateNaissance FROM Personne INNER JOIN Adresse ON Personne.Adresse_Id=Adresse.Id WHERE (Personne.NIR LIKE :regex OR Personne.NomDeFamille LIKE :regex)' . $conditionsfiltres . 'ORDER BY Personne.NomDeFamille, Personne.NIR ASC LIMIT 10 OFFSET :offset' ;
+	$search = $bdd->prepare($requete);
+	//Le offset doit être interprété comme un int donc on précise les paramètres de cette manière
+	$search->bindValue(':regex', $regex);
+	$search->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+	$search->execute();
+	return $search->fetchAll();
 }
 
 function MiseAJour_personne($bdd, $nom, $nom_usage, $prenom, $prenom_2, $prenom_3, $sexe, $mail, $telephone, $DateNaissance, $NIR){

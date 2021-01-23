@@ -2,11 +2,18 @@ RewriteEngine On
 
 RewriteRule ^([a-zA-Z]+)$ $1.php
 
-RewriteRule ^FAQ-page([0-9]+)$ FAQ.php?page=$1
-RewriteRule ^GestionFAQ-page([0-9]+)$ GestionFAQ.php?page=$1
+RewriteRule ^FAQ-p([0-9]+)$ FAQ.php?page=$1
+RewriteRule ^GestionFAQ-p([0-9]+)$ GestionFAQ.php?page=$1
+
+#Si on a Recherche (-r motrecherché)oupas -p numeropage et d'autres paramètres on détaille r et p et on laisse les autres
+RewriteRule ^RechercheUtilisateur(-r(.+))?-p([0-9]+)(.*)$ RechercheUtilisateur.php?id_name=$2&page=$3$4
+
+RewriteRule ^GestionUtilisateurs(-r(.+))?-p([0-9]+)(.*)$ GestionUtilisateurs.php?id_name=$2&page=$3$4
+
+RewriteRule ^GestionBoitiers(-r(.+))?-p([0-9]+)$ GestionBoitiers.php?id_name=$2&page=$3
 
 RewriteRule ^ModifierUtilisateur-NIR([0-9]+)$ ModifierUtilisateur.php?NIR=$1
 RewriteRule ^controleurs/SupprimerUtilisateur-NIR([0-9]+)$ controleurs/SupprimerUtilisateur.php?NIR=$1
 RewriteRule ^controleurs/SupprimerCompte-NIR([0-9]+)$ controleurs/SupprimerCompte.php?NIR=$1
 
-RewriteRule ^GestionBoitiers-page([0-9]+)$ GestionBoitiers.php?page=$1
+RewriteRule ^GestionBoitiers-p([0-9]+)$ GestionBoitiers.php?page=$1

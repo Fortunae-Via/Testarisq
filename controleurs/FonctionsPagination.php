@@ -1,5 +1,7 @@
 <?php
 
+require('modele/RequetesGenerales.php');
+
 function PageMaximum (PDO $bdd, string $Table) : int {
 	$TailleTable = TailleTable($bdd, $Table);
 	return (ceil($TailleTable/10));
@@ -20,7 +22,7 @@ function DeterminerPageAfffichage ($PageDemandee, int $PageMaximum) : int {
 	}
 } 
 
-function AffichageNavigationPages (string $LienPage, int $PageActuelle, int $PageMaximum) {
+function AffichageNavigationPages (string $LienPage, int $PageActuelle, int $PageMaximum, string $Recherche ="", string $lien="") {
 	
 	//On crée la liste des pages à afficher
 	$ListePages = array();
@@ -54,7 +56,13 @@ function AffichageNavigationPages (string $LienPage, int $PageActuelle, int $Pag
 		echo '<a class="desac">&#60; Précédent</a>';
 	}
 	else {
-		echo '<a href="'.$LienPage.'?-page'.($PageActuelle-1).'">&#60; Précédent</a>';
+		if(empty($Recherche)) {
+			echo '<a href="'.$LienPage.'-p'.($PageActuelle-1).$lien.'">&#60; Précédent</a>';
+		}
+		else {
+			echo '<a href="'.$LienPage.'-r'.$Recherche.'-p'.($PageActuelle-1).$lien.'">&#60; Précédent</a>';
+		}
+		
 	}
 	
 	foreach ($ListePages as $page) {
@@ -62,14 +70,24 @@ function AffichageNavigationPages (string $LienPage, int $PageActuelle, int $Pag
 			echo '<a class="active">'.$page.'</a>';
 		}
 		else {
-			echo '<a href="'.$LienPage.'-page'.($page).'">'.$page.'</a>' ;
+			if(empty($Recherche)) {
+				echo '<a href="'.$LienPage.'-p'.($page).$lien.'">'.$page.'</a>';
+			}
+			else {
+				echo '<a href="'.$LienPage.'-r'.$Recherche.'-p'.($page).$lien.'">'.$page.'</a>';
+			}
 		}   
 	}
 	if ($PageActuelle == $PageMaximum) {
 		echo '<a class="desac">Suivant &#62;</a>';
 	}
 	else {
-		echo '<a href="'.$LienPage.'-page'.($PageActuelle+1).'">Suivant &#62;</a>';
+		if(empty($Recherche)) {
+			echo '<a href="'.$LienPage.'-p'.($PageActuelle+1).$lien.'">Suivant &#62;</a>';
+		}
+		else {
+			echo '<a href="'.$LienPage.'-r'.$Recherche.'-p'.($PageActuelle+1).$lien.'">Suivant &#62;</a>';
+		}
 	}
 	
 }

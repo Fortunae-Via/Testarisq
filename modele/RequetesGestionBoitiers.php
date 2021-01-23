@@ -23,13 +23,22 @@ function SuppBoitier(PDO $bdd, string $IdBoitier) {
 	$delete->execute(array($IdBoitier));
 }
 
-function RechercherBoitierBDD(PDO $bdd, string $regex, int $page) : array {
+function TailleRechercheBoitier(PDO $bdd, string $regex ="%%") : int {
+	$search = $bdd->prepare('
+		SELECT COUNT(B.Id) as TailleRecherche
+		FROM Boitier as B 
+		LEFT JOIN AutoriteResponsable as AR
+		ON B.AutoriteResponsable_Id=AR.Id
+		WHERE B.Id LIKE :regex OR AR.Nom LIKE :regex
+	');
+	$search->bindValue(':regex', $regex);
+	$search->execute();
+	$result=$search->fetch();
+	return $result['TailleRecherche'];
+}
+
+function RechercherBoitierBDD(PDO $bdd, int $page, string $regex ="%%") : array {
 	$offset = $page * 10 - 10;
-	/**
-	La requête SQL permet d'aller récuperer dans la base de donnée
-	les informations concernant des utilisateurs en fonction de la
-	recherche demandée
-	**/
 	$search = $bdd->prepare('
 		SELECT B.Id as IdBoitier, AR.Nom as NomAutoriteResponsable
 		FROM Boitier as B 

@@ -14,40 +14,69 @@ else if ( $_SESSION['TypeCompte']!='AUE' AND $_SESSION['TypeCompte']!='POL' ) {
 require("modele/connexionbdd.php");
 //$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
 // Definition des fonctions de requête SQL
-require('modele/RequetesGestion.php');
+require('modele/RequetesGestionUtilisateurs.php');
+require 'controleurs/FonctionsGestionUtilisateurs.php';
+require 'controleurs/FonctionsPagination.php';
 
 
-//On teste si des filtres sont sélectionnés ou si un utilisateur est recherché.
-if(isset($_POST['id_name'])){
-
-	$filtres=array();
-
-	//On remplit par des "" si on vient de l'accueil et que l'on n'a pas posté de filtre
-	$liste=array('sexe','region','year','test_number');
-	foreach ($liste as $filtre) {
-		if (isset($_POST[$filtre])) {
-			$filtres[$filtre]=$_POST[$filtre];
-		}
-		else {
-			$filtres[$filtre]="";
-		}
-	}
-
-	// Dans ce cas on laisse le formulaire affiché de manière à pouvoir refaire une recherche
+//Si un utilisateur est recherché
+if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 
 	// Definition du regex pour le nom recherché
-	$regex = '"%' . $_POST['id_name'] . '%"';
+	if (isset($_POST['id_name'])) {
+		$ChampRecherche = $_POST['id_name'];
+		$regex = '%' . $ChampRecherche . '%';
+	}
+	else if (isset($_GET['id_name'])) {
+		$ChampRecherche = $_GET['id_name'];
+		$regex = '%' . $ChampRecherche . '%';
+	}
+	else {
+		$ChampRecherche ="";
+	}
 
-	// Affichage de la structure HTML
-	include("vues/RechercheUtilisateur.php");
+	//Création de la condition SQL pour tous les filtres, soit "" soit AND x=y
+	$GestionFiltres = GestionFiltres();
+	$ListeFiltres = $GestionFiltres[0];
+	$ConditionsSQLFiltres = $GestionFiltres[1];
+	$lienSQLFiltres = $GestionFiltres[2];
 
-}else{
+	//On regarde en amont le nombre de résultats de la recherche
+	$TailleRecherche = TailleRechercheUtilisateur($bdd, $regex, $ConditionsSQLFiltres);
+	$PageMaximum = ceil($TailleRecherche/10);
+
+	if (isset($_GET['page'])) {
+		$PageDemandee = $_GET['page'];
+		$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
+	}
+	else {
+		$PageAffichage = 1;
+	}
+
+	//Recherche
+	$ResultatsRecherche = RechercherUtilisateur($bdd, $PageAffichage, $regex, $ConditionsSQLFiltres);
+}
+
+else{
 	/**
-	Cas où aucun des filtres n'a été utilisé et qu'aucun utilisateur n'a été 
-	recherché (cas par défaut, ie. arrivé sur la page)
+	Cas par défaut, ie. arrivée sur la page, donc on affiche toutes les personnes
 	**/
 
-	// Affichage de la structure HTML
-	include("vues/RechercheUtilisateur.php");
+	//On regarde en amont le nombre d'entrées de la table
+	$PageMaximum = PageMaximum($bdd, 'Personne');
+	$ChampRecherche= "";
+	$lienSQLFiltres = "";
+
+	if (isset($_GET['page'])) {
+		$PageDemandee = $_GET['page'];
+		$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
+	}
+	else {
+		$PageAffichage = 1;
+	}
+
+	//Recherche
+	$ResultatsRecherche = RechercherUtilisateur($bdd, $PageAffichage);
 }
-?>
+// Affichage de la structure HTML
+require("vues/RechercheUtilisateur.php");

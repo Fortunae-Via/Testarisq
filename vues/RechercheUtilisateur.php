@@ -27,7 +27,11 @@
         </header>
 
 		<div id="recherche" class="bloc">
+			<form method="post" action="RechercheUtilisateur">
 			<?php include("vues/BlocRecherche.php"); ?>
+			<div class="nav_pages">
+			    <?php AffichageNavigationPages ('RechercheUtilisateur', $PageAffichage, $PageMaximum, $ChampRecherche, $lienSQLFiltres);?>
+			</div>
 		</div>
 	</div>
 
