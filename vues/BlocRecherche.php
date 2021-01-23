@@ -22,10 +22,16 @@
 			<!-- Filtrer par sexe -->
 			<select name="sexe" size="1">
 				<option selected value="">Sexe</option>
-				<option value="Homme">Homme</option>
-				<option value="Femme">Femme</option>
-				<option value="Autre">Autre</option>
-				<option value="Non-précisé">Non-précisé</option>
+				<?php
+				foreach ($ListeSexes as $Sexe) {
+					if (isset($ListeFiltres['sexe']) AND $Sexe == $ListeFiltres['sexe']) {
+						echo"<option value=\"". $Sexe ."\" selected>" . $Sexe . "</option>";
+					}
+					else {
+						echo"<option value=\"". $Sexe ."\">" . $Sexe . "</option>";
+					}
+				}
+				?>
 			</select>
 
 			<!-- Filtrer par region -->
@@ -53,8 +59,13 @@
 			<select name="year">
 				<option selected value="">Année de naissance</option>
 				<?php
-				for($i=date("Y"); $i>=1900; $i--){
-					echo'<option value="'. $i .'">'. $i .'</option>';
+				for($Annee=date("Y"); $Annee>=1900; $Annee--){
+					if (isset($ListeFiltres['year']) AND $Annee == $ListeFiltres['year']) {
+						echo"<option value=\"". $Annee ."\" selected>" . $Annee . "</option>";
+					}
+					else {
+						echo"<option value=\"". $Annee ."\">" . $Annee . "</option>";
+					}
 				}
 				?>
 			</select>
@@ -64,8 +75,13 @@
 				<option selected value="">Nombre de tests passés</option>
 				<option value="0">Au moins 1 test</option>
 				<?php
-				for($i=2; $i<=20; $i++){
-					echo"<option value=\"". $i ."\">Au moins " . $i . " tests</option>";
+				for($NbTests=2; $NbTests<=20; $NbTests++){
+					if (isset($ListeFiltres['test_number']) AND $NbTest == $ListeFiltres['test_number']) {
+						echo"<option value=\"". $$NbTest ."\" selected>Au moins " . $$NbTest . " tests</option>";
+					}
+					else {
+						echo"<option value=\"". $$NbTest ."\">Au moins " . $$NbTest . " tests</option>";
+					}
 				}
 				?>
 			</select>

@@ -57,6 +57,7 @@ if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 	$ResultatsRecherche = RechercherUtilisateur($bdd, $PageAffichage, $regex, $ConditionsSQLFiltres);
 
 	$ListeRegionFR = ListeRegionsFR($bdd);
+	$ListeSexes = array('Homme','Femme','Autre','Non-précisé');
 	$ListeAutoritesResponsablesAUE = ListeAutoritesResponsables($bdd,'AUE');
 	$ListeAutoritesResponsablesPOL = ListeAutoritesResponsables($bdd,'POL');
 
@@ -163,6 +164,7 @@ else{
 	$ResultatsRecherche = RechercherUtilisateur($bdd, $PageAffichage);
 
 	$ListeRegionFR = ListeRegionsFR($bdd);
+	$ListeSexes = array('Homme','Femme','Autre','Non-précisé');
 	$ListeAutoritesResponsablesAUE = ListeAutoritesResponsables($bdd,'AUE');
 	$ListeAutoritesResponsablesPOL = ListeAutoritesResponsables($bdd,'POL');
 
