@@ -143,6 +143,68 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 	header('Location: GestionUtilisateurs');
 }
 
+else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) ){
+
+	// On récupère toutes les données du POST dans $DonneesUtilisateur
+	$TypeCompte = $_POST['type_compte'];
+
+	$liste_donnees_utilisateur=array('id');
+	foreach ($liste_donnees_utilisateur as $champ) {
+		$DonneesUtilisateur[$champ]=$_POST[$champ];
+	}
+
+	//Si compte déjà existant update
+	//Sinon crée compte
+	if(CompteExistant($bdd, $DonneesUtilisateur['id'])){
+
+		if ($TypeCompte=='AUE') {
+			if ( isset($_POST['aut_resAUE']) && (!(empty($_POST['aut_resAUE']))) ) {
+				UpdateCompte($bdd, $DonneesUtilisateur['id'], 'AUE', $_POST['aut_resAUE']);
+			}
+			else {
+				UpdateCompte($bdd, $DonneesUtilisateur['id'], 'AUE');
+			}
+		}
+		else if ($TypeCompte=='POL') {
+			if ( isset($_POST['aut_resPOL']) && (!(empty($_POST['aut_resPOL']))) ) {
+				UpdateCompte($bdd, $DonneesUtilisateur['id'], 'POL', $_POST['aut_resPOL']);
+			}
+			else {
+				UpdateCompte($bdd, $DonneesUtilisateur['id'], 'POL');
+			}
+		}
+		else if ($TypeCompte=='ADM') {
+			UpdateCompte($bdd, $DonneesUtilisateur['id'], 'ADM');
+		}
+		$_SESSION['MessageModifsUtilisateur'] = "Le compte a bien été mis à jour et associé à l'utilisateur ".$DonneesUtilisateur['id']." .";
+	}
+	else{
+
+		if ($TypeCompte=='AUE') {
+			if ( isset($_POST['aut_resAUE']) && (!(empty($_POST['aut_resAUE']))) ) {
+				AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE', $_POST['aut_resAUE']);
+			}
+			else {
+				AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE');
+			}
+		}
+		else if ($TypeCompte=='POL') {
+			if ( isset($_POST['aut_resPOL']) && (!(empty($_POST['aut_resPOL']))) ) {
+				AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL', $_POST['aut_resPOL']);
+			}
+			else {
+				AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL');
+			}
+		}
+		else if ($TypeCompte=='ADM') {
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'ADM');
+		}
+		$_SESSION['MessageModifsUtilisateur'] = "Le compte a bien été ajouté à l'utilisateur ".$DonneesUtilisateur['id']." .";
+	}
+
+	header('Location: GestionUtilisateurs');
+}
+
 else{
 
 	if (isset($_SESSION['RechercheEnCours'])) {

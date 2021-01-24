@@ -54,6 +54,31 @@
 			</div>
 		</div>
 
+		<div id="compte-pro" class="bloc">
+			<button class="bandeau" onClick=" BasculerAffichage('dropdown3'); BasculerClasse('fleche3','fleche_expand','fleche_expand_down') ">
+				<h3>Ajouter un compte</h3>
+				<?php 
+					if ($Recherche==true) {
+						echo("<img id=\"fleche3\" class=\"fleche_expand\" src=\"vues/img/expand.png\" alt=\"fleche_expand\"/>");
+					}
+					else {
+						echo("<img id=\"fleche3\" class=\"fleche_expand_down\" src=\"vues/img/expand.png\" alt=\"fleche_expand\"/>");
+					}
+				?>
+			</button>
+			<?php 
+				if ($Recherche==true) {
+					echo("<div id=\"dropdown3\" class=\"dropdown-content\" style=\"display: none;\">");
+				}
+				else {
+					echo("<div id=\"dropdown3\" class=\"dropdown-content\" style=\"display: block;\">");
+				}
+				require 'vues/BlocAjoutCompte.php'; 
+			?>
+			</div>
+
+		</div>
+
 		<div id="recherche" class="bloc">
 			<button class="bandeau" onClick=" BasculerAffichage('dropdown2'); BasculerClasse('fleche2','fleche_expand','fleche_expand_down') ">
 				<h3>Rechercher un utilisateur</h3>

@@ -49,6 +49,28 @@ function AjouterCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutR
 	}
 }
 
+function UpdateCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutRes = null){
+	if (empty($IdAutRes)) {
+		$update_compte = $bdd->prepare('UPDATE compte SET Id=?, TypeCompte_Type=? WHERE Personne_NIR=?');
+		$update_compte->execute(array($NIR.$TypeCompte, $TypeCompte, $NIR));
+	}
+	else {
+		$update_compte = $bdd->prepare('UPDATE compte SET Id=?, TypeCompte_Type=? AutoriteResponsable_Id=? WHERE Personne_NIR=?');
+		$update_compte->execute(array($NIR.$TypeCompte, $TypeCompte, $IdAutRes, $NIR));
+	}
+}
+
+function CompteExistant(PDO $bdd, string $NIR){
+	$exist_compte = $bdd->prepare('SELECT * FROM compte WHERE Personne_NIR=?');
+	$exist_compte->execute(array($NIR));
+	$exist=$exist_compte->fetch();
+	if($exist!=null){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 function TailleRechercheUtilisateur(PDO $bdd, string $regex = '%%', string $conditionsfiltres="", string $conditionsfiltrenbtests="") : int {
 	$requete = 'SELECT COUNT(Test.Id) AS NbTest FROM Personne JOIN Adresse ON Personne.Adresse_Id=Adresse.Id LEFT JOIN Test ON Test.Personne_NIR = Personne.NIR WHERE (Personne.NIR LIKE :regex OR Personne.NomDeFamille LIKE :regex) ' . $conditionsfiltres . 'GROUP BY NIR '. $conditionsfiltrenbtests ;
 	$search = $bdd->prepare($requete);
