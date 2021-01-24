@@ -333,8 +333,8 @@ select {
 /* ===== Pagination ===== */
 #recherche .nav_pages{
     padding: 0.25rem; 
-    width: fit-content;
-    margin: auto;
+    display: flex;
+    justify-content: center;
 }
 
 #recherche .nav_pages a {

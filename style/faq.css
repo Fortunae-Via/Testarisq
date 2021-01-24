@@ -84,8 +84,8 @@ button:active {
 /* ===== Pagination ===== */
 .nav_pages{
     padding: 0.25rem; 
-    width: fit-content;
-    margin: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .nav_pages a {
