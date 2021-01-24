@@ -97,34 +97,42 @@
 
 <!-- Affichage des résultats d'une recherche -->
 <h3>Utilisateurs :</h3>
-<!-- L'Affichage des résultats se trouve sous forme de tableaux -->
-<table>
-	<tr>
-		<!-- Nom des colonnes -->
-		<th>Utilisateur</th>
-		<th>NIR</th>
-		<th>Sexe</th>
-		<th>Date de naissance</th>
-		<th>Nombre de test<span style="font-size:11px;">(s)</span> passé<span style="font-size:11px;">(s)</span></th>
-		<?php
-		/**
-		Affichage des options de modification ou de suppression
-		d'un compte en fonction du type de compte de
-		la session de l'utilisateur.
-		C'est-à-dire que lorsqu'un administrateur est connecté,
-		il a accès aux options alors qu'un officier ou une auto-école non.
-		**/
-		if(isset($_SESSION['TypeCompte'])){
-			if($_SESSION['TypeCompte']=='ADM'){
-				echo'<th>Options</th>';
+<?php if ($Vide == false) { ?>
+	<!-- L'Affichage des résultats se trouve sous forme de tableaux -->
+	<table>
+		<tr>
+			<!-- Nom des colonnes -->
+			<th>Utilisateur</th>
+			<th>NIR</th>
+			<th>Sexe</th>
+			<th>Date de naissance</th>
+			<th>Nombre de test<span style="font-size:11px;">(s)</span> passé<span style="font-size:11px;">(s)</span></th>
+			<?php
+			/**
+			Affichage des options de modification ou de suppression
+			d'un compte en fonction du type de compte de
+			la session de l'utilisateur.
+			C'est-à-dire que lorsqu'un administrateur est connecté,
+			il a accès aux options alors qu'un officier ou une auto-école non.
+			**/
+			if(isset($_SESSION['TypeCompte'])){
+				if($_SESSION['TypeCompte']=='ADM'){
+					echo'<th>Options</th>';
+				}
 			}
-		}
 
-		/**
-		Appel de la fonction permettant d'effectuer une recherche
-		selon le nom ou identifiant entré ou les filtres sélectionnés
-		**/
-		AfficherRechercheUtilisateurs($ResultatsRecherche);
-		?>
-	</tr>
-</table>
+			/**
+			Appel de la fonction permettant d'effectuer une recherche
+			selon le nom ou identifiant entré ou les filtres sélectionnés
+			**/
+			AfficherRechercheUtilisateurs($ResultatsRecherche);
+			?>
+		</tr>
+	</table>
+<?php 
+}
+else {
+	echo('<p style="text-align:center;">Aucun résultat.</p>');
+}
+
+?>

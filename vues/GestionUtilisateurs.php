@@ -77,10 +77,13 @@
 				<form method="post" action="GestionUtilisateurs">
 			<?php
 				require 'vues/BlocRecherche.php';
-			?>
-				<div class="nav_pages">
-				    <?php AffichageNavigationPages ('GestionUtilisateurs', $PageAffichage, $PageMaximum, $ChampRecherche, $lienSQLFiltres);?>
-				</div>
+
+				if ($PageMaximum > 1) {
+					echo ('<div class="nav_pages">');
+					    AffichageNavigationPages ('GestionUtilisateurs', $PageAffichage, $PageMaximum, $ChampRecherche, $lienSQLFiltres);
+					echo('</div>');
+				}
+				?>
 			</div>
 
 		</div>

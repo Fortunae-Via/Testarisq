@@ -46,8 +46,10 @@ if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 	$TailleRecherche = TailleRechercheUtilisateur($bdd, $regex, $ConditionsSQLFiltres, $ConditionsSQLNbTests);
 	if($TailleRecherche!=0){
 		$PageMaximum = ceil($TailleRecherche/10);
+		$Vide=false;
 	}else{
 		$PageMaximum=1;
+		$Vide=true;
 	}
 
 	if (isset($_GET['page'])) {
@@ -153,6 +155,13 @@ else{
 
 	//On regarde en amont le nombre d'entrées de la table
 	$PageMaximum = PageMaximum($bdd, 'Personne');
+	if ($PageMaximum==0){
+		$Vide=true;
+	}
+	else{
+		$Vide=false;
+	}
+
 	$ChampRecherche= "";
 	$lienSQLFiltres = "";
 
@@ -163,6 +172,7 @@ else{
 	else {
 		$PageAffichage = 1;
 	}
+
 
 	//Recherche
 	$ResultatsRecherche = RechercherUtilisateur($bdd, $PageAffichage);

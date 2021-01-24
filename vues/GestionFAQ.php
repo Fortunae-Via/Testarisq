@@ -71,9 +71,13 @@
 
         </div>
 
-        <div class="nav_pages">
-            <?php AffichageNavigationPages ('GestionFAQ', $PageAffichage, $PageMaximum);?>
-        </div>
+        <?php
+        if ($PageMaximum > 1) {
+            echo ('<div class="nav_pages">');
+                AffichageNavigationPages ('FAQ', $PageAffichage, $PageMaximum);
+            echo('</div>');
+        }
+        ?>
 
     </div>
 

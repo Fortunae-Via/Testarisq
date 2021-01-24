@@ -13,6 +13,12 @@ require 'modele/RequetesFAQ.php';
 require 'controleurs/FonctionsPagination.php';
 
 $PageMaximum = PageMaximum($bdd,'ElementFAQ');
+if ($PageMaximum==0){
+	$Vide=true;
+}
+else{
+	$Vide=false;
+}
 
 if (isset($_GET['page'])) {
 	$PageDemandee = $_GET['page'];
