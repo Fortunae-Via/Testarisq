@@ -120,7 +120,7 @@ function ModifierAutResCompte(PDO $bdd, string $NIR, string $TypeCompte, string 
 
 //
 function ListeAdresses1Personne(PDO $bdd) {
-	$select  = bdd->prepare('
+	$select  = $bdd->prepare('
 	SELECT Adresse.Id as Id, COUNT(Personne.NIR) as NombreUtilisation
 	FROM `Adresse` 
 	JOIN Personne on Personne.Adresse_Id=Adresse.Id
@@ -129,10 +129,10 @@ function ListeAdresses1Personne(PDO $bdd) {
 	$select->execute();
 	$ListeAdresses =array();
 	while ($adresse = $select->fetch()) {
-		array_push($ListeAdresses, $adresse['Id'])
+		array_push($ListeAdresses, $adresse['Id']);
 	}
-	return $ListeAdresses
-
+	return $ListeAdresses;
+}
 
 function SupprimerUtilisateur($bdd, $NIR){
 	/**
