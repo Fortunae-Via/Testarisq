@@ -50,6 +50,7 @@ function GestionFiltres() {
 	$ConditionsSQL = "";
 	$ConditionsSQLNbTests = "";
 	$ListeRaccourcisSexe = array('Homme'=>'H', 'Femme'=>'F', 'Autre'=>'A', 'Non-précisé'=>'N');
+	$InvListeRaccourcisSexe = array_flip($ListeRaccourcisSexe);
 	$lien = "";
 
 	foreach ($ListeNomsFiltres as $filtre) {
@@ -58,7 +59,13 @@ function GestionFiltres() {
 			$ListeFiltres[$filtre] = $_POST[$filtre];
 		}
 		else if (isset($_GET[$filtre]) && (!(empty($_GET[$filtre]))) ) {
-			$ListeFiltres[$filtre] = $_GET[$filtre];
+			//Dans le cas ou est sur un lien avec raccourci pour le sexe
+			if ($filtre=='sexe') {
+				$ListeFiltres[$filtre] = $InvListeRaccourcisSexe[$_GET[$filtre]];
+			}
+			else {
+				$ListeFiltres[$filtre] = $_GET[$filtre];
+			}
 		}
 	}
 	//On sort avec $ListeFiltres soit vide, soit rempli d'autant qu'il y a de filtre sélectionnés
