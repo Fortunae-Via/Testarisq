@@ -1,5 +1,19 @@
 <?php
 
+//Copie de la fonction dans requetes test
+function NIRExiste(PDO $bdd, string $NIR) : bool
+{
+	$requete = $bdd->prepare("SELECT * FROM Personne WHERE NIR = ? ");
+	$requete->execute(array($NIR));
+	$count = $requete->rowCount();
+	if($count!=0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 function AjouterAdresse(PDO $bdd, array $InfosAdresse): int {
 	$add_adresse = $bdd->prepare('
 		INSERT INTO adresse (NumeroRue, Rue, CodePostal, Ville, Region, Pays) 
@@ -55,13 +69,13 @@ function UpdateCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutRe
 		$update_compte->execute(array($NIR.$TypeCompte, $TypeCompte, $NIR));
 	}
 	else {
-		$update_compte = $bdd->prepare('UPDATE compte SET Id=?, TypeCompte_Type=? AutoriteResponsable_Id=? WHERE Personne_NIR=?');
+		$update_compte = $bdd->prepare('UPDATE compte SET Id=?, TypeCompte_Type=?, AutoriteResponsable_Id=? WHERE Personne_NIR=?');
 		$update_compte->execute(array($NIR.$TypeCompte, $TypeCompte, $IdAutRes, $NIR));
 	}
 }
 
-function CompteExistant(PDO $bdd, string $NIR){
-	$exist_compte = $bdd->prepare('SELECT * FROM compte WHERE Personne_NIR=?');
+function CompteProExistant(PDO $bdd, string $NIR){
+	$exist_compte = $bdd->prepare('SELECT * FROM compte WHERE Personne_NIR=? AND TypeCompte_Type!="CIT"');
 	$exist_compte->execute(array($NIR));
 	$exist=$exist_compte->fetch();
 	if($exist!=null){

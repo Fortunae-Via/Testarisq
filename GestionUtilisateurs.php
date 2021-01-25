@@ -69,7 +69,7 @@ if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 	$ListeAutoritesResponsablesPOL = ListeAutoritesResponsables($bdd,'POL');
 
 	//affichage de la page
-	$Recherche=true;
+	$Mode=3;
 	require("vues/GestionUtilisateurs.php");
 }
 
@@ -120,16 +120,16 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 	AjouterPersonne($bdd, $DonneesUtilisateur);
 
 	if ($TypeCompte=='AUE') {
-		if ( isset($_POST['aut_resAUE']) && (!(empty($_POST['aut_resAUE']))) ) {
-			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE', $_POST['aut_resAUE']);
+		if ( isset($_POST['aut_resAUE1']) && (!(empty($_POST['aut_resAUE1']))) ) {
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE', $_POST['aut_resAUE1']);
 		}
 		else {
 			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE');
 		}
 	}
 	else if ($TypeCompte=='POL') {
-		if ( isset($_POST['aut_resPOL']) && (!(empty($_POST['aut_resPOL']))) ) {
-			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL', $_POST['aut_resPOL']);
+		if ( isset($_POST['aut_resPOL1']) && (!(empty($_POST['aut_resPOL1']))) ) {
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL', $_POST['aut_resPOL1']);
 		}
 		else {
 			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL');
@@ -143,63 +143,66 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 	header('Location: GestionUtilisateurs');
 }
 
-else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) ){
+else if( (!(empty($_POST['type_ajout_compte']))) && (!(empty($_POST['nir2']))) ){
 
 	// On récupère toutes les données du POST dans $DonneesUtilisateur
-	$TypeCompte = $_POST['type_compte'];
+	$TypeCompte = $_POST['type_ajout_compte'];
+	$NIR = $_POST['nir2'];
 
-	$liste_donnees_utilisateur=array('id');
-	foreach ($liste_donnees_utilisateur as $champ) {
-		$DonneesUtilisateur[$champ]=$_POST[$champ];
+	//Si le NIR rentré est correct
+	if (NIRExiste($bdd, $NIR)) {
+		//Si compte pro déjà existant update
+		//Sinon crée compte
+		if(CompteProExistant($bdd, $NIR)){
+
+			if ($TypeCompte=='AUE') {
+				if ( isset($_POST['aut_resAUE2']) && (!(empty($_POST['aut_resAUE2']))) ) {
+					UpdateCompte($bdd, $NIR, 'AUE', $_POST['aut_resAUE2']);
+				}
+				else {
+					UpdateCompte($bdd, $NIR, 'AUE');
+				}
+			}
+			else if ($TypeCompte=='POL') {
+				if ( isset($_POST['aut_resPOL2']) && (!(empty($_POST['aut_resPOL2']))) ) {
+					UpdateCompte($bdd, $NIR, 'POL', $_POST['aut_resPOL2']);
+				}
+				else {
+					UpdateCompte($bdd, $NIR, 'POL');
+				}
+			}
+			else if ($TypeCompte=='ADM') {
+				UpdateCompte($bdd, $NIR, 'ADM');
+			}
+			$_SESSION['MessageModifsUtilisateur'] = "Le compte a bien été mis à jour et associé à l'utilisateur ".$NIR." .";
+		}
+		else{
+
+			if ($TypeCompte=='AUE') {
+				if ( isset($_POST['aut_resAUE2']) && (!(empty($_POST['aut_resAUE2']))) ) {
+					AjouterCompte($bdd, $NIR, 'AUE', $_POST['aut_resAUE2']);
+				}
+				else {
+					AjouterCompte($bdd, $NIR, 'AUE');
+				}
+			}
+			else if ($TypeCompte=='POL') {
+				if ( isset($_POST['aut_resPOL2']) && (!(empty($_POST['aut_resPOL2']))) ) {
+					AjouterCompte($bdd, $NIR, 'POL', $_POST['aut_resPOL2']);
+				}
+				else {
+					AjouterCompte($bdd, $NIR, 'POL');
+				}
+			}
+			else if ($TypeCompte=='ADM') {
+				AjouterCompte($bdd, $NIR, 'ADM');
+			}
+			$_SESSION['MessageModifsUtilisateur'] = "Le compte a bien été ajouté à l'utilisateur ".$NIR." .";
+		}
 	}
-
-	//Si compte déjà existant update
-	//Sinon crée compte
-	if(CompteExistant($bdd, $DonneesUtilisateur['id'])){
-
-		if ($TypeCompte=='AUE') {
-			if ( isset($_POST['aut_resAUE']) && (!(empty($_POST['aut_resAUE']))) ) {
-				UpdateCompte($bdd, $DonneesUtilisateur['id'], 'AUE', $_POST['aut_resAUE']);
-			}
-			else {
-				UpdateCompte($bdd, $DonneesUtilisateur['id'], 'AUE');
-			}
-		}
-		else if ($TypeCompte=='POL') {
-			if ( isset($_POST['aut_resPOL']) && (!(empty($_POST['aut_resPOL']))) ) {
-				UpdateCompte($bdd, $DonneesUtilisateur['id'], 'POL', $_POST['aut_resPOL']);
-			}
-			else {
-				UpdateCompte($bdd, $DonneesUtilisateur['id'], 'POL');
-			}
-		}
-		else if ($TypeCompte=='ADM') {
-			UpdateCompte($bdd, $DonneesUtilisateur['id'], 'ADM');
-		}
-		$_SESSION['MessageModifsUtilisateur'] = "Le compte a bien été mis à jour et associé à l'utilisateur ".$DonneesUtilisateur['id']." .";
-	}
-	else{
-
-		if ($TypeCompte=='AUE') {
-			if ( isset($_POST['aut_resAUE']) && (!(empty($_POST['aut_resAUE']))) ) {
-				AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE', $_POST['aut_resAUE']);
-			}
-			else {
-				AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE');
-			}
-		}
-		else if ($TypeCompte=='POL') {
-			if ( isset($_POST['aut_resPOL']) && (!(empty($_POST['aut_resPOL']))) ) {
-				AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL', $_POST['aut_resPOL']);
-			}
-			else {
-				AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL');
-			}
-		}
-		else if ($TypeCompte=='ADM') {
-			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'ADM');
-		}
-		$_SESSION['MessageModifsUtilisateur'] = "Le compte a bien été ajouté à l'utilisateur ".$DonneesUtilisateur['id']." .";
+	else {
+		$_SESSION['MessageModifsUtilisateur'] = "Erreur : le NIR saisi n'appartient à aucun utilisateur.";
+		$_SESSION['AjoutCompteEnCours'] = true;
 	}
 
 	header('Location: GestionUtilisateurs');
@@ -208,11 +211,15 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) ){
 else{
 
 	if (isset($_SESSION['RechercheEnCours'])) {
-		$Recherche=true;
+		$Mode=3;
 		unset($_SESSION['RechercheEnCours']);
 	}
+	else if (isset($_SESSION['AjoutCompteEnCours'])) {
+		$Mode=2;
+		unset($_SESSION['AjoutCompteEnCours']);
+	}
 	else {
-		$Recherche = false;
+		$Mode = 1;
 	}
 
 	//On regarde en amont le nombre d'entrées de la table

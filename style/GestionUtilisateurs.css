@@ -95,51 +95,51 @@ select {
 
 /* ================= PARTIE AJOUT ================= */
 
-#ajout .indication {
+.ajout .indication {
 	margin: 0;
 	margin-bottom: 1rem;
 	font-size: 1rem;
 }
 
-#ajout .ligne {
+.ajout .ligne {
 	display: flex;
 	align-items: center;
 	margin-top: 0.5rem;
 	margin-bottom: 0.5rem;
 }
 
-#ajout .ligne p {
+.ajout .ligne p {
 	margin: 0;
 }
 
-#ajout .ligne.boutons {
+.ajout .ligne.boutons {
 	margin: 0 /*Le margin est appliqué aux boutons plutôt qu'à la ligne pour qu'ils ne soient pas collés lorsqu'ils sont sur deux lignes*/
 }
 
-#ajout .info{
+.ajout .info{
 	display:block;
 	float:left;
 	width:14rem;
 	margin-right: 0.5rem;
 }
 
-#ajout .info strong{
+.ajout .info strong{
 	font-size:12px;
 	font-weight:normal;
 	color: red;
 }
 
-#ajout .bloc_boutons {
+.ajout .bloc_boutons {
 	width:100%;
 }
 
-#ajout .bloc_boutons input[type="radio"] {
+.ajout .bloc_boutons input[type="radio"] {
   opacity: 0;
   position: fixed;
   width: 0;
 }
 
-#ajout .bloc_boutons label {
+.ajout .bloc_boutons label {
 	display: inline-block;
     background-color: white;
     font-size: 1rem;
@@ -152,18 +152,18 @@ select {
 	padding: 0.25rem;
 }
 
-#ajout .bloc_boutons input[type="radio"]:checked + label {
+.ajout .bloc_boutons input[type="radio"]:checked + label {
     color: white;
     background-color: black;
     border-color: black;
 }
 
-#ajout .bloc_boutons button:hover, .bloc_boutons button:active {
+.ajout .bloc_boutons button:hover, .bloc_boutons button:active {
 	color: white;
 	background-color: black ;
 }
 
-#ajout input, #ajout select {
+.ajout input, .ajout select {
 	box-sizing:border-box;
 	padding:0.5rem;
 	border:none;
@@ -174,44 +174,44 @@ select {
 	font-size: 0.9rem;
 }
 
-#ajout input {
+.ajout input {
 	width: 100%;
 }
 
-#ajout select{
+.ajout select{
 	padding-right: 1.75rem;
 }
 
-#ajout .special_size_inputs  {
+.ajout .special_size_inputs  {
 	width: 100%;
 }
 
-#ajout .special_size_inputs input[maxlength='4'] {
+.ajout .special_size_inputs input[maxlength='4'] {
 	width: 3rem;
 }
-#ajout .special_size_inputs input[maxlength='6'] {
+.ajout .special_size_inputs input[maxlength='6'] {
 	width: 4rem;
 }
-#ajout .special_size_inputs input[maxlength='25'] {
+.ajout .special_size_inputs input[maxlength='25'] {
 	width: 6rem;
 }
-#ajout .special_size_inputs input[maxlength='30'] {
+.ajout .special_size_inputs input[maxlength='30'] {
 	width: 15rem;
 }
-#ajout .special_size_inputs input[maxlength='60'] {
+.ajout .special_size_inputs input[maxlength='60'] {
 	width: 8rem;
 }
-#ajout .special_size_inputs input[maxlength='100'] {
+.ajout .special_size_inputs input[maxlength='100'] {
 	width: 15rem;
 }
 
-#ajout .bloc_add {
+.ajout .bloc_add {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 1rem;
 }
 
-#ajout #add{
+.ajout #add{
 	font-size: 0.9rem;
 	font-weight: 700;
 	text-transform: uppercase;
