@@ -1,5 +1,19 @@
 <?php
 
+//Copie de la fonction dans requetes test
+function NIRExiste(PDO $bdd, string $NIR) : bool
+{
+	$requete = $bdd->prepare("SELECT * FROM Personne WHERE NIR = ? ");
+	$requete->execute(array($NIR));
+	$count = $requete->rowCount();
+	if($count!=0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 function AjouterAdresse(PDO $bdd, array $InfosAdresse): int {
 	$add_adresse = $bdd->prepare('
 		INSERT INTO adresse (NumeroRue, Rue, CodePostal, Ville, Region, Pays) 
@@ -49,6 +63,28 @@ function AjouterCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutR
 	}
 }
 
+function UpdateCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutRes = null){
+	if (empty($IdAutRes)) {
+		$update_compte = $bdd->prepare('UPDATE compte SET Id=?, TypeCompte_Type=? WHERE Personne_NIR=?');
+		$update_compte->execute(array($NIR.$TypeCompte, $TypeCompte, $NIR));
+	}
+	else {
+		$update_compte = $bdd->prepare('UPDATE compte SET Id=?, TypeCompte_Type=?, AutoriteResponsable_Id=? WHERE Personne_NIR=?');
+		$update_compte->execute(array($NIR.$TypeCompte, $TypeCompte, $IdAutRes, $NIR));
+	}
+}
+
+function CompteProExistant(PDO $bdd, string $NIR){
+	$exist_compte = $bdd->prepare('SELECT * FROM compte WHERE Personne_NIR=? AND TypeCompte_Type!="CIT"');
+	$exist_compte->execute(array($NIR));
+	$exist=$exist_compte->fetch();
+	if($exist!=null){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 function TailleRechercheUtilisateur(PDO $bdd, string $regex = '%%', string $conditionsfiltres="", string $conditionsfiltrenbtests="") : int {
 	$requete = 'SELECT COUNT(Test.Id) AS NbTest FROM Personne JOIN Adresse ON Personne.Adresse_Id=Adresse.Id LEFT JOIN Test ON Test.Personne_NIR = Personne.NIR WHERE (Personne.NIR LIKE :regex OR Personne.NomDeFamille LIKE :regex) ' . $conditionsfiltres . 'GROUP BY NIR '. $conditionsfiltrenbtests ;
 	$search = $bdd->prepare($requete);
@@ -88,18 +124,36 @@ function MiseAJour_personne($bdd, $nom, $nom_usage, $prenom, $prenom_2, $prenom_
 	$update->closeCursor();
 }
 
-function MiseAJour_adresse($bdd, $numeroRue, $rue, $code, $ville, $pays, $region, $id){
+function MiseAJour_adresse($bdd, $numeroRue, $rue, $code, $ville, $pays, $region, $id, $NIR){
 	// Mise à Jour de la table "adresse"
-	if(!empty($region)){
-		$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=?, Region=? WHERE Id=?');
-		$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $region, $id));
-		$update->closeCursor();
+	if($id!=0){
+		if(!empty($region)){
+			$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=?, Region=? WHERE Id=?');
+			$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $region, $id));
+		}else{
+			$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=? WHERE Id=?');
+			$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $id));
+		}
 	}else{
-		$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=? WHERE Id=?');
-		$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $id));
-		$update->closeCursor();
+		$InfosAdresse = array($numeroRue, $rue, $code, $ville, $region, $pays);
+		$Id_Adresse=AjouterAdresse($bdd, $InfosAdresse);
+
+		$update = $bdd->prepare('UPDATE personne SET Adresse_Id=? WHERE NIR=?');
+		$update->execute(array($Id_Adresse, $NIR));
 	}
+	$update->closeCursor();
 }
+
+/**function AdresseExistante($bdd, $id){
+	$adresse=$bdd->prepare('SELECT * FROM adresse WHERE Id=?');
+	$adresse->execute(array($id));
+	$IsZero=$adresse->fetch();
+	if($IsZero['Id']!=0){
+		return true;
+	}else{
+		return false;
+	}
+}**/
 
 function ModifierAutResCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutRes){
 	if (empty($IdAutRes)) {
@@ -120,7 +174,7 @@ function ModifierAutResCompte(PDO $bdd, string $NIR, string $TypeCompte, string 
 
 //
 function ListeAdresses1Personne(PDO $bdd) {
-	$select  = bdd->prepare('
+	$select  = $bdd->prepare('
 	SELECT Adresse.Id as Id, COUNT(Personne.NIR) as NombreUtilisation
 	FROM `Adresse` 
 	JOIN Personne on Personne.Adresse_Id=Adresse.Id
@@ -129,10 +183,10 @@ function ListeAdresses1Personne(PDO $bdd) {
 	$select->execute();
 	$ListeAdresses =array();
 	while ($adresse = $select->fetch()) {
-		array_push($ListeAdresses, $adresse['Id'])
+		array_push($ListeAdresses, $adresse['Id']);
 	}
-	return $ListeAdresses
-
+	return $ListeAdresses;
+}
 
 function SupprimerUtilisateur($bdd, $NIR){
 	/**

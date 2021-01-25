@@ -1,6 +1,6 @@
 <?php
 
-function TailleTable(PDO $bdd, string $Table) : int {
+function TailleTable(PDO $bdd, string $Table) : string {
 	$query = 'SELECT COUNT(*) as Taille FROM ' . $Table;
 	$search = $bdd->prepare($query);
 	$search->execute();

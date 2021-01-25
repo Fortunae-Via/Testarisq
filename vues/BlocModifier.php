@@ -29,7 +29,7 @@
 		    	<h2>Modifier l'utilisateur <?=($InfosPersosUser['Prenom1']  ." ". $InfosPersosUser['NomDeFamille'])?> (NIR : <?=$InfosPersosUser['NIR']?>) :</h2>
 			</header>
 
-			<div id="ajout" class="bloc">
+			<div id="ajout" class="bloc ajout">
 				<form method="post">
 					<p class="indication">Les champs indiqués d'une étoile sont obligatoires.</p>
 

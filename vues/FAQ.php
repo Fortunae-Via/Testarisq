@@ -26,10 +26,14 @@
             ?>
         </div>
 
-        <div class="nav_pages">
-            <?php AffichageNavigationPages ('FAQ', $PageAffichage, $PageMaximum);?>
-        </div>
-
+        <?php
+        if ($PageMaximum > 1) {
+            echo ('<div class="nav_pages">');
+                AffichageNavigationPages ('FAQ', $PageAffichage, $PageMaximum);
+            echo('</div>');
+        }
+        ?>
+        
         <footer>
             <p1>Vous ne trouvez pas de réponse à votre question?</p1>
             <br>

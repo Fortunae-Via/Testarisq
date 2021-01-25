@@ -28,10 +28,14 @@
 
 		<div id="recherche" class="bloc">
 			<form method="post" action="RechercheUtilisateur">
-			<?php include("vues/BlocRecherche.php"); ?>
-			<div class="nav_pages">
-			    <?php AffichageNavigationPages ('RechercheUtilisateur', $PageAffichage, $PageMaximum, $ChampRecherche, $lienSQLFiltres);?>
-			</div>
+			<?php include("vues/BlocRecherche.php"); 
+
+			if ($PageMaximum > 1) {
+				echo ('<div class="nav_pages">');
+				    AffichageNavigationPages ('RechercheUtilisateur', $PageAffichage, $PageMaximum, $ChampRecherche, $lienSQLFiltres);
+				echo('</div>');
+			}
+			?>
 		</div>
 	</div>
 
