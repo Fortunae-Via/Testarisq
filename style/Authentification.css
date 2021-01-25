@@ -40,7 +40,11 @@ button:active {
     padding: 0.75rem 1.25rem;
 }
 
-#formulaire {
+.div_page button:hover {
+    color: #00A3B8;
+}
+
+#connexion {
     margin-top: 10rem;
     margin-bottom: 15rem;
     width: 20rem;
@@ -49,7 +53,7 @@ button:active {
     border-radius:1rem;
 }
 
-#formulaire h3{
+#connexion h3{
     font-size: 1rem;
     font-weight: 700;
     text-align: center;
@@ -57,15 +61,15 @@ button:active {
     color: #006B83;
 }
 
-#formulaire form {
+#connexion form {
     margin-top: 1rem;
 }
 
-#formulaire label {
+#connexion label {
     font-weight: 600;
 }
 
-#formulaire input {
+#connexion input {
     border: none;
     border-radius: 0.25rem;
     background-color: #DDD;
@@ -76,9 +80,9 @@ button:active {
     font-size: 1.25rem;
 }
 
-#formulaire button {
+#connexion button {
     margin-top: 1rem;    
-    background-color: #B8B8B8;
+    background-color: #00A3B8;
     border-radius: 0.5rem;
     font-size: 0.8rem;
     display: block;
