@@ -110,18 +110,36 @@ function MiseAJour_personne($bdd, $nom, $nom_usage, $prenom, $prenom_2, $prenom_
 	$update->closeCursor();
 }
 
-function MiseAJour_adresse($bdd, $numeroRue, $rue, $code, $ville, $pays, $region, $id){
+function MiseAJour_adresse($bdd, $numeroRue, $rue, $code, $ville, $pays, $region, $id, $NIR){
 	// Mise à Jour de la table "adresse"
-	if(!empty($region)){
-		$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=?, Region=? WHERE Id=?');
-		$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $region, $id));
-		$update->closeCursor();
+	if($id!=0){
+		if(!empty($region)){
+			$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=?, Region=? WHERE Id=?');
+			$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $region, $id));
+		}else{
+			$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=? WHERE Id=?');
+			$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $id));
+		}
 	}else{
-		$update = $bdd->prepare('UPDATE adresse SET NumeroRue=? , Rue=? , CodePostal=? , Ville=? , Pays=? WHERE Id=?');
-		$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $id));
-		$update->closeCursor();
+		$InfosAdresse = array($numeroRue, $rue, $code, $ville, $region, $pays);
+		$Id_Adresse=AjouterAdresse($bdd, $InfosAdresse);
+
+		$update = $bdd->prepare('UPDATE personne SET Adresse_Id=? WHERE NIR=?');
+		$update->execute(array($Id_Adresse, $NIR));
 	}
+	$update->closeCursor();
 }
+
+/**function AdresseExistante($bdd, $id){
+	$adresse=$bdd->prepare('SELECT * FROM adresse WHERE Id=?');
+	$adresse->execute(array($id));
+	$IsZero=$adresse->fetch();
+	if($IsZero['Id']!=0){
+		return true;
+	}else{
+		return false;
+	}
+}**/
 
 function ModifierAutResCompte(PDO $bdd, string $NIR, string $TypeCompte, string $IdAutRes){
 	if (empty($IdAutRes)) {

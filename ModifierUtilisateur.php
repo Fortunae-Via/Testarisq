@@ -29,7 +29,7 @@ if(isset($_GET['NIR'])){
 		require("modele/RequetesGenerales.php");
 		$Id_Adresse=InfosPersonne($bdd, $NIR)['Adresse_Id'];
 
-		MiseAJour_adresse($bdd, $_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['pays'], $_POST['region'], $Id_Adresse);
+		MiseAJour_adresse($bdd, $_POST['numeroRue'], $_POST['rue'], $_POST['code'], $_POST['ville'], $_POST['pays'], $_POST['region'], $Id_Adresse, $NIR);
 
 		//Pour les changements de type de compte
 		if (isset($_POST['aut_res'],$_SESSION['TypeCompteUserModifEnCours'])) {
