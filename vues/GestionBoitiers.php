@@ -6,13 +6,6 @@
 	<link rel="stylesheet" href="style/style_commun.css" />
     <link rel="stylesheet" href="style/header.css" />
     <link rel="stylesheet" href="style/GestionBoitiers.css" />
-    <?php
-    $u_agent = $_SERVER['HTTP_USER_AGENT'];
-    if(preg_match('/Safari/i',$u_agent)) {
-    	echo '<link rel="stylesheet" href="style/GestionUtilisateursSafari.css"/>';
-	} 
-	?>
-    <link rel="stylesheet" href="style/BlocRecherche.css" />
 </head>
 
 <body>

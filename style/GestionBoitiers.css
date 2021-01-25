@@ -152,7 +152,7 @@ select {
     font-weight: 300;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
-    border: 1px solid black;
+    border: 1px solid #00242C;
     border-radius: 0.5rem;
     box-sizing: border-box;
     padding: 0.25rem;
@@ -160,13 +160,13 @@ select {
 
 #ajout .bloc_boutons input[type="radio"]:checked + label {
     color: white;
-    background-color: black;
-    border-color: black;
+    background-color: #00242C;
+    border-color: #00242C;
 }
 
 #ajout .bloc_boutons button:hover, .bloc_boutons button:active {
     color: white;
-    background-color: black ;
+    background-color: #00242C ;
 }
 
 #ajout .bloc_add {
@@ -181,7 +181,7 @@ select {
     text-transform: uppercase;
     border: none;
     border-radius: 0.25rem;
-    background-color: #B8B8B8;
+    background-color: #00A3B8;
     box-sizing: border-box;
     padding: 0.5rem 1.75rem;
 }
@@ -349,7 +349,7 @@ select {
 }
 
 #recherche .nav_pages a.active {
-    background-color: #006B83;
+    background-color: #00A3B8;
     color: white;
 } 
 

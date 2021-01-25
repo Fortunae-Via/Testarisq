@@ -46,8 +46,10 @@ if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 	$TailleRecherche = TailleRechercheUtilisateur($bdd, $regex, $ConditionsSQLFiltres, $ConditionsSQLNbTests);
 	if($TailleRecherche!=0){
 		$PageMaximum = ceil($TailleRecherche/10);
+		$Vide=false;
 	}else{
 		$PageMaximum=1;
+		$Vide=true;
 	}
 
 	if (isset($_GET['page'])) {

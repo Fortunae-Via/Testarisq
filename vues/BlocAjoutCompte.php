@@ -1,6 +1,7 @@
 <form method="post" action="GestionUtilisateurs">
 
-	<p class="indication">Les champs indiqués d'une étoile sont obligatoires.</p>
+	<p class="indication">Les champs indiqués d'une étoile sont obligatoires.<br>
+		<strong>Attention !</strong> Si vous ajoutez un compte à un utilisateur possédant déjà un compte professionnel, le nouveau compte créé remplacera définitivement l'ancien.</p>
 
 	<div class="ligne">
 		<div class="info">

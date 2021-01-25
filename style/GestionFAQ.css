@@ -63,7 +63,7 @@ textarea{
 	text-transform: uppercase;
 	border: none;
 	border-radius: 0.25rem;
-	background-color: #B8B8B8;
+	background-color: #00A3B8;
 	box-sizing: border-box;
 	padding: 0.5rem 1.75rem;
 }
@@ -89,13 +89,13 @@ textarea{
     text-transform: uppercase;
     border: none;
     border-radius: 0.25rem;
-    background-color: #B8B8B8;
+    background-color: #00A3B8;
     box-sizing: border-box;
     padding: 0.5rem 1.75rem;
 }
 
 .bloc_boutons #boutonsupp {
-	background-color: #FF9E9E;
+	background-color: #7BC1CF;
 }
 
 /* ===== Pagination ===== */
@@ -107,6 +107,7 @@ textarea{
 }
 
 .nav_pages a {
+    border: 1px solid white;
     border-radius: 2px;
     background-color: white;
     text-decoration: None;
@@ -118,11 +119,13 @@ textarea{
 }
 
 .nav_pages a.active {
+    border: 1px solid #00A3B8;
     background-color: #00A3B8;
     color: white;
 } 
 
 .nav_pages a:hover:not(.active) {
+    border: 1px solid #9FD1DB;
     background-color: #9FD1DB;
 } 
 

@@ -136,12 +136,12 @@
 }
 
 #recherche .nav_pages a.active {
-    background-color: #006B83;
+    background-color: #00A3B8;
     color: white;
 } 
 
 #recherche .nav_pages a:hover:not(.active) {
-    background-color: #9FD1DB;
+    background-color: #00A3B8;
 } 
 
 #recherche .nav_pages a.desac {

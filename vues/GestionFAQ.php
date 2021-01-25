@@ -74,7 +74,7 @@
         <?php
         if ($PageMaximum > 1) {
             echo ('<div class="nav_pages">');
-                AffichageNavigationPages ('FAQ', $PageAffichage, $PageMaximum);
+                AffichageNavigationPages ('GestionFAQ', $PageAffichage, $PageMaximum);
             echo('</div>');
         }
         ?>
