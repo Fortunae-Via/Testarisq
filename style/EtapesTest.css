@@ -50,6 +50,10 @@
 	margin: 1.2rem 0;
 }
 
+.header_corps.etapesuivantes h1{
+	text-align: right;
+}
+
 
 .div_page h3{
 	font-size: 2rem;
@@ -86,7 +90,7 @@ button {
     text-align: center;
 }
 button:hover,button:focus {
-    background: #B8B8B8;;
+    background: #00A3B8;;
     outline: none
 }
 button:active {
@@ -96,7 +100,7 @@ button:active {
 
 form button {
     margin-top: 1rem;    
-    background-color: #B8B8B8;
+    background-color: #00A3B8;
     border-radius: 0.5rem;
     font-size: 0.8rem;
     display: block;
