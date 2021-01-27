@@ -1,4 +1,5 @@
 <?php
+require 'controleurs/FonctionsGenerales.php';
 
 session_start(); 
 // Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
@@ -24,11 +25,11 @@ if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 
 	// Definition du regex pour le nom recherché
 	if (isset($_POST['id_name'])) {
-		$ChampRecherche = $_POST['id_name'];
+		$ChampRecherche = securisation_totale($_POST['id_name']);
 		$regex = '%' . $ChampRecherche . '%';
 	}
 	else if (isset($_GET['id_name'])) {
-		$ChampRecherche = $_GET['id_name'];
+		$ChampRecherche = securisation_totale($_GET['id_name']);
 		$regex = '%' . $ChampRecherche . '%';
 	}
 	else {
@@ -81,7 +82,7 @@ else{
 	$lienSQLFiltres = "";
 
 	if (isset($_GET['page'])) {
-		$PageDemandee = $_GET['page'];
+		$PageDemandee = securisation_totale($_GET['page']);
 		$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
 	}
 	else {

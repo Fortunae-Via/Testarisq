@@ -1,4 +1,5 @@
 <?php 
+require 'controleurs/FonctionsGenerales.php';
 
 session_start(); 
 // Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
@@ -18,8 +19,8 @@ require('controleurs/FonctionsGestionBoitiers.php');
 
 //Traitement de l'ajout de boitier
 if( (isset($_POST['aut_res'])) ){
-
-	$Aut_Res = $_POST['aut_res'];
+	
+	$Aut_Res = securisation_totale($_POST['aut_res']);
 	$IdBoitier = AjouterBoitierCapteurs($bdd, $Aut_Res);
 
 	$_SESSION['MessageModifBoitiers'] = "Le boîtier n°". $IdBoitier ." a bien été ajouté." ;
@@ -29,7 +30,7 @@ if( (isset($_POST['aut_res'])) ){
 //Traitement de la modification de boitier
 else if( (isset($_POST['modif_aut_res'],$_POST['id_boitier'])) ){
 
-	ModifierAutResBoitier($bdd, $_POST['id_boitier'], $_POST['modif_aut_res']);
+	ModifierAutResBoitier($bdd, securisation_totale($_POST['id_boitier']), securisation_totale($_POST['modif_aut_res']));
 
 	$_SESSION['MessageModifBoitiers'] = "L'autorité responsable du boîtier a bien été modifiée." ;
 	header('Location: GestionBoitiers');
@@ -51,11 +52,11 @@ else{
 
 		// Definition du regex pour le nom recherché
 		if (isset($_POST['id_name'])) {
-			$ChampRecherche = $_POST['id_name'];
+			$ChampRecherche = securisation_totale($_POST['id_name']);
 			$regex = '%' . $ChampRecherche . '%';
 		}
 		else if (isset($_GET['id_name'])) {
-			$ChampRecherche = $_GET['id_name'];
+			$ChampRecherche = securisation_totale($_GET['id_name']);
 			$regex = '%' . $ChampRecherche . '%';
 		}
 		else {
@@ -73,7 +74,7 @@ else{
 		}
 
 		if (isset($_GET['page'])) {
-			$PageDemandee = $_GET['page'];
+			$PageDemandee = securisation_totale($_GET['page']);
 			$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
 		}
 		else {
@@ -106,7 +107,7 @@ else{
 		$lienSQLFiltres = "";
 
 		if (isset($_GET['page'])) {
-			$PageDemandee = $_GET['page'];
+			$PageDemandee = securisation_totale($_GET['page']);
 			$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
 			$Recherche=true;
 		}

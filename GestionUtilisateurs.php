@@ -17,18 +17,18 @@ require("modele/connexionbdd.php");
 require('modele/RequetesGestionUtilisateurs.php');
 require 'controleurs/FonctionsGestionUtilisateurs.php';
 require 'controleurs/FonctionsPagination.php';
-
+require 'controleurs/FonctionsGenerales.php';
 
 //Si un utilisateur est recherché
 if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 
 	// Definition du regex pour le nom recherché
 	if (isset($_POST['id_name'])) {
-		$ChampRecherche = $_POST['id_name'];
+		$ChampRecherche = securisation_totale($_POST['id_name']);
 		$regex = '%' . $ChampRecherche . '%';
 	}
 	else if (isset($_GET['id_name'])) {
-		$ChampRecherche = $_GET['id_name'];
+		$ChampRecherche = securisation_totale($_GET['id_name']);
 		$regex = '%' . $ChampRecherche . '%';
 	}
 	else {
@@ -53,7 +53,7 @@ if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 	}
 
 	if (isset($_GET['page'])) {
-		$PageDemandee = $_GET['page'];
+		$PageDemandee = securisation_totale($_GET['page']);
 		$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
 	}
 	else {
@@ -75,11 +75,12 @@ if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 
 //Si les informations minimales sont rentrées, un ajout à la bdd est possible
 else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(empty($_POST['nom']))) && (!(empty($_POST['prenom']))) && (!(empty($_POST['jour']))) && (!(empty($_POST['mois']))) && (!(empty($_POST['annee']))) && (!(empty($_POST['sexe']))) && (!(empty($_POST['mail']))) ){
-
+	require 'controleurs/FonctionsGenerales.php';
+	
 	// On récupère toutes les données du POST dans $DonneesUtilisateur
-	$TypeCompte = $_POST['type_compte'];
+	$TypeCompte = securisation_totale($_POST['type_compte']);
 	$DonneesUtilisateur = array(
-		'datenaissance' => $_POST['annee']."-".$_POST['mois']."-".$_POST['jour']);
+		'datenaissance' => securisation_totale($_POST['annee'])."-".securisation_totale($_POST['mois'])."-".securisation_totale($_POST['jour']));
 
 	$liste_donnees_utilisateur=array('id','nom','nom_usage','prenom','prenom_2','prenom_3','sexe','mail','telephone');
 	foreach ($liste_donnees_utilisateur as $champ) {
@@ -102,7 +103,7 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 
 		$liste_donnees_adresse=array('numeroRue','rue','ville','code','region','pays');
 		foreach ($liste_donnees_adresse as $champ_adresse) {
-			$InfosAdresse[$champ_adresse]=$_POST[$champ_adresse];
+			$InfosAdresse[$champ_adresse]=securisation_totale($_POST[$champ_adresse]);
 		}
 
 		if(empty($InfosAdresse['region'])) {
@@ -121,7 +122,7 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 
 	if ($TypeCompte=='AUE') {
 		if ( isset($_POST['aut_resAUE1']) && (!(empty($_POST['aut_resAUE1']))) ) {
-			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE', $_POST['aut_resAUE1']);
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE', securisation_totale($_POST['aut_resAUE1']));
 		}
 		else {
 			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE');
@@ -129,7 +130,7 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 	}
 	else if ($TypeCompte=='POL') {
 		if ( isset($_POST['aut_resPOL1']) && (!(empty($_POST['aut_resPOL1']))) ) {
-			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL', $_POST['aut_resPOL1']);
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL', securisation_totale($_POST['aut_resPOL1']));
 		}
 		else {
 			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL');
@@ -146,8 +147,8 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 else if( (!(empty($_POST['type_ajout_compte']))) && (!(empty($_POST['nir2']))) ){
 
 	// On récupère toutes les données du POST dans $DonneesUtilisateur
-	$TypeCompte = $_POST['type_ajout_compte'];
-	$NIR = $_POST['nir2'];
+	$TypeCompte = securisation_totale($_POST['type_ajout_compte']);
+	$NIR = securisation_totale($_POST['nir2']);
 
 	//Si le NIR rentré est correct
 	if (NIRExiste($bdd, $NIR)) {
@@ -157,7 +158,7 @@ else if( (!(empty($_POST['type_ajout_compte']))) && (!(empty($_POST['nir2']))) )
 
 			if ($TypeCompte=='AUE') {
 				if ( isset($_POST['aut_resAUE2']) && (!(empty($_POST['aut_resAUE2']))) ) {
-					UpdateCompte($bdd, $NIR, 'AUE', $_POST['aut_resAUE2']);
+					UpdateCompte($bdd, $NIR, 'AUE', securisation_totale($_POST['aut_resAUE2']));
 				}
 				else {
 					UpdateCompte($bdd, $NIR, 'AUE');
@@ -165,7 +166,7 @@ else if( (!(empty($_POST['type_ajout_compte']))) && (!(empty($_POST['nir2']))) )
 			}
 			else if ($TypeCompte=='POL') {
 				if ( isset($_POST['aut_resPOL2']) && (!(empty($_POST['aut_resPOL2']))) ) {
-					UpdateCompte($bdd, $NIR, 'POL', $_POST['aut_resPOL2']);
+					UpdateCompte($bdd, $NIR, 'POL', securisation_totale($_POST['aut_resPOL2']));
 				}
 				else {
 					UpdateCompte($bdd, $NIR, 'POL');
@@ -180,7 +181,7 @@ else if( (!(empty($_POST['type_ajout_compte']))) && (!(empty($_POST['nir2']))) )
 
 			if ($TypeCompte=='AUE') {
 				if ( isset($_POST['aut_resAUE2']) && (!(empty($_POST['aut_resAUE2']))) ) {
-					AjouterCompte($bdd, $NIR, 'AUE', $_POST['aut_resAUE2']);
+					AjouterCompte($bdd, $NIR, 'AUE', securisation_totale($_POST['aut_resAUE2']));
 				}
 				else {
 					AjouterCompte($bdd, $NIR, 'AUE');
@@ -188,7 +189,7 @@ else if( (!(empty($_POST['type_ajout_compte']))) && (!(empty($_POST['nir2']))) )
 			}
 			else if ($TypeCompte=='POL') {
 				if ( isset($_POST['aut_resPOL2']) && (!(empty($_POST['aut_resPOL2']))) ) {
-					AjouterCompte($bdd, $NIR, 'POL', $_POST['aut_resPOL2']);
+					AjouterCompte($bdd, $NIR, 'POL', securisation_totale($_POST['aut_resPOL2']));
 				}
 				else {
 					AjouterCompte($bdd, $NIR, 'POL');
@@ -235,7 +236,7 @@ else{
 	$lienSQLFiltres = "";
 
 	if (isset($_GET['page'])) {
-		$PageDemandee = $_GET['page'];
+		$PageDemandee = securisation_totale($_GET['page']);
 		$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
 	}
 	else {
