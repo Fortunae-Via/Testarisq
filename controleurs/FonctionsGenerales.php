@@ -15,6 +15,7 @@ function TypeComptePersonneFR(string $Abreviation) : string {
 		case 'ADM':		//Admin
 			return 'Administrateur'; 
 	}
+}
             
 function securisation_totale($donnees){
     $donnees=trim($donnees);
@@ -29,7 +30,3 @@ function securisation_partielle($donnees){
     return $donnees;
 }
 
-
-
-
-}
