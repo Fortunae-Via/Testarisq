@@ -73,9 +73,9 @@ if(isset($_GET['NIR'])){
 		$ListeRegionFR = ListeRegionsFR($bdd);
 
 		$MoisFR=array('Jan.','Fév.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov','Déc.');
-		$Annee=substr($InfosPersosUser['DateNaissance'], 0, 4); 
-		$Mois=intval(substr($InfosPersosUser['DateNaissance'], 5, 2)); //On récupère le mois et on convertit en int pour enlever l'éventuel 0 devant
-		$Jour=intval(substr($InfosPersosUser['DateNaissance'], 8, 2)); //pareil
+		$Annee=substr($InfosPersosUser['DateNaissance'], 6, 4); 
+		$Mois=intval(substr($InfosPersosUser['DateNaissance'], 3, 2)); //On récupère le mois et on convertit en int pour enlever l'éventuel 0 devant
+		$Jour=intval(substr($InfosPersosUser['DateNaissance'], 0, 2)); //pareil
 		
 		$PreRemp = CreatePreRemp($InfosPersosUser,$AdresseUser);
 
