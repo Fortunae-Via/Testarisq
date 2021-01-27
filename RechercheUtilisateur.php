@@ -1,5 +1,4 @@
 <?php
-require 'controleurs/FonctionsGenerales.php';
 
 session_start(); 
 // Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
@@ -18,6 +17,7 @@ require("modele/connexionbdd.php");
 require('modele/RequetesGestionUtilisateurs.php');
 require 'controleurs/FonctionsGestionUtilisateurs.php';
 require 'controleurs/FonctionsPagination.php';
+require 'controleurs/FonctionsGenerales.php';
 
 
 //Si un utilisateur est recherché
