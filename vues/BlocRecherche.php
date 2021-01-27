@@ -117,6 +117,7 @@
 			**/
 			if(isset($_SESSION['TypeCompte'])){
 				if($_SESSION['TypeCompte']=='ADM'){
+					echo'<th>Type de compte</th>';
 					echo'<th>Options</th>';
 				}
 			}

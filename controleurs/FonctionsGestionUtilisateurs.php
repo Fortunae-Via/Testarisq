@@ -23,6 +23,10 @@ function CreatePreRemp(array $InfosPersosUser, array $AdresseUser) {
 	return $PreRemp;
 }
 
+
+ 
+//Besoin de modele/RequetesGenerales.php et controleurs/FonctionsGenerales.php
+
 function AfficherRechercheUtilisateurs(array $ListeUtilisateurs){
 
 	foreach ($ListeUtilisateurs as $Utilisateur) {
@@ -33,12 +37,26 @@ function AfficherRechercheUtilisateurs(array $ListeUtilisateurs){
 		Affiche les boutons permettant la modification ou la suppression de l'utilisateur de la ligne correspondante
 		à partir d'un $_GET où l'on récupère le Identifiant (NIR) de l'utilisateur.
 		Cette partie est seulement accèssible aux administrateurs.
+		On affiche également le type de compte de l'utilisateur, et un bouton pour supprimer son compte pro s'il en a un.
 		**/
-		if(isset($_SESSION['TypeCompte'])){
-			if($_SESSION['TypeCompte']=='ADM'){
-				echo'<td><a href="ModifierUtilisateur-NIR'. $Utilisateur['NIR'] .'"><img src="vues/img/edit-user.png" title="Modifier l\'utilisateur"/></a><a href="controleurs/SupprimerUtilisateur-NIR'. $Utilisateur['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/remove-user.png" title="Supprimer l\'utilisateur"/></a><a href="controleurs/SupprimerCompte-NIR'. $Utilisateur['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/remove-account.png" title="Supprimer le compte pro de l\'utilisateur"/></a></td></tr>';
+		if(isset($_SESSION['TypeCompte']) && $_SESSION['TypeCompte']=='ADM') {
+			require("modele/connexionbdd.php");
+			$TypeAbr = TypeComptePersonne($bdd, $Utilisateur['NIR']);
+			$Type = TypeComptePersonneFR($TypeAbr);
+
+			echo'<td>'.$Type.'</td><td><a href="ModifierUtilisateur-NIR'. $Utilisateur['NIR'] .'"><img src="vues/img/edit-user.png" title="Modifier l\'utilisateur"/></a><a href="controleurs/SupprimerUtilisateur-NIR'. $Utilisateur['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/remove-user.png" title="Supprimer l\'utilisateur"/></a>';
+
+			//S'il a un compte pro on affiche le bouton pour le supprimer
+			if ($TypeAbr == 'CIT') {
+				echo '</td></tr>';
+			}
+			else {
+				echo '<a href="controleurs/SupprimerCompte-NIR'. $Utilisateur['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte "pro" de cet utilisateur ?\');"><img src="vues/img/remove-account.png" title="Supprimer le compte pro de l\'utilisateur"/></a></td></tr>';
 			}
 		}
+		else {
+			echo '</tr>';
+		}  
 	}
 }
 
