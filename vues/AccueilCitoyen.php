@@ -18,6 +18,12 @@
             <?php echo 'Bienvenue ' . $Prenom1 . ' !'; ?>
         </h2>
 
+        <p><?php 
+        echo TestVide($bdd,$_SESSION['NIR']); 
+        if ($requete->fetch())
+        { ?>
+        </p>
+
         <section>
             <header>
                 <h3 class='DerniersResultats'>Vos derniers résultats :</h3>
@@ -45,6 +51,13 @@
             </div>
         </section>
     </div>
+
+    <?php
+    }
+    else
+    {
+        echo 'Veuillez vous rapprochez d\'une auto-école pour passer un test.';
+    }?>
 
 </body>
 </html>
