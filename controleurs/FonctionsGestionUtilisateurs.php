@@ -1,4 +1,20 @@
 <?php
+function verifstring($string){
+	if(!empty($string)){
+		return (strlen($string) != strspn($string,"abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWYXZ- "));
+	}else{
+		return false;
+	}
+}
+
+function verifnum($string){
+	if(!empty($string)){
+		return (strlen($string) != strspn($string,"1234567890"));
+	}else{
+		return false;
+	}
+}
+
 
 function CreatePreRemp(array $InfosPersosUser, array $AdresseUser) {
 	//Liste des placeholders pour les champs potentiellement vides
