@@ -12,7 +12,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 
 // Appel de la base de donnée bdd_testarisq
 require("modele/connexionbdd.php");
-$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
+//$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
 // Definition des fonctions de requête SQL
 require('modele/RequetesGestionAutorites.php');
 require 'controleurs/FonctionsGestionAutorites.php';

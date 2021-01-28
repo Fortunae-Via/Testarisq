@@ -11,11 +11,11 @@
 	
 	<div class="ligne boutons">
 		<div class="info">
-			<label for="type">Type de compte<strong>*</strong> :</label>
+			<label for="type">Type<strong>*</strong> :</label>
 		</div>
 		<div class="bloc_boutons">
 			<input type="radio" id="police" name="type" value="POL" required/>
-			<label for="police">Agent de Police</label>
+			<label for="police">Unité de Police</label>
 			<input type="radio" id="school" name="type" value="AUE" required/>
 			<label for="school">Auto-école</label>
 		</div>

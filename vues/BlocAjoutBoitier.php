@@ -30,7 +30,7 @@
 						<input type="radio" id="none" name="type_aut" checked/>
 						<label for="none">Aucun</label>
 						<input type="radio" id="police" name="type_aut" />
-						<label for="police">Agent de Police</label>
+						<label for="police">Unité de Police</label>
 						<input type="radio" id="school" name="type_aut" />
 						<label for="school">Auto-école</label>
 					</div>
