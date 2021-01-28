@@ -7,21 +7,21 @@
 			<label for="type_compte">Type de compte<strong>*</strong> :</label>
 		</div>
 		<div class="bloc_boutons">
-			<input type="radio" id="citizen" name="type_compte" value="CIT" required/>
-			<label for="citizen">Citoyen</label>
-			<input type="radio" id="police" name="type_compte" value="POL" required/>
-			<label for="police">Agent de Police</label>
-			<input type="radio" id="school" name="type_compte" value="AUE" required/>
-			<label for="school">Auto-école</label>
-			<input type="radio" id="admin" name="type_compte" value="ADM" required/>
-			<label for="admin">Administrateur</label>
+			<input type="radio" id="citizen1" name="type_compte" value="CIT" required/>
+			<label for="citizen1">Citoyen</label>
+			<input type="radio" id="police1" name="type_compte" value="POL" required/>
+			<label for="police1">Agent de Police</label>
+			<input type="radio" id="school1" name="type_compte" value="AUE" required/>
+			<label for="school1">Auto-école</label>
+			<input type="radio" id="admin1" name="type_compte" value="ADM" required/>
+			<label for="admin1">Administrateur</label>
 		</div>
 	</div>
 
 	<div>
-		<div class="ligne" id="ligneAutResAUE" style="display:none">
+		<div class="ligne" id="ligneAutResAUE1" style="display:none">
 			<div class="info">
-				<label for="aut_resAUE">Nom de l'autorité responsable :</label>
+				<label for="aut_resAUE1">Nom de l'autorité responsable :</label>
 			</div>
 			<div class="special_size_inputs">
 				<select name="aut_resAUE">
@@ -35,7 +35,7 @@
 			</div>
 		</div>
 
-		<div class="ligne" id="ligneAutResPOL" style="display:none">
+		<div class="ligne" id="ligneAutResPOL1" style="display:none">
 			<div class="info">
 				<label for="aut_resPOL">Nom de l'autorité responsable :</label>
 			</div>
@@ -160,7 +160,11 @@
     		<input maxlength="25" id="code" name="code" placeholder="Code Postal" />
     		<select name="region">
     			<option value="">Région</option>
-    			<?php Region($bdd); ?>
+    			<?php
+				foreach ($ListeRegionFR as $Region) {
+					echo"<option value=\"". $Region['Region'] ."\">" . $Region['Region'] . "</option>";
+				}
+				?>
     		</select>
     		<input maxlength="25" id="pays" name="pays" placeholder="Pays"/>
     	</div>

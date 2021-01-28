@@ -1,0 +1,68 @@
+.div_page{
+	width: 80%;
+	margin : auto;
+}
+
+.div_page header h2 {
+    margin: 2rem;
+    text-align: center;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.test {
+	width: 21rem;
+	padding: 2rem 2rem 0rem 2rem ;
+	background-color: white;
+	border-radius: 1rem;
+	margin: 2rem auto ;
+}
+
+.test form label {
+	font-weight: 600;
+	font-size: 1.1rem;
+	display : inline-block;
+	margin-bottom: 0.25rem;
+}
+
+.test form input[type="text"] {
+	font-size: 1rem;
+	box-sizing: border-box;
+	padding: 0.5rem;
+	border: none;
+	border-radius: 0.25rem;
+	background-color: #DDD;
+	width: 100%;
+	margin-bottom:0.5rem;
+}
+
+.champ input {
+	margin-bottom:0.5rem;
+}
+
+.bouton{
+	text-align: center;
+}
+
+.test form input[type="submit"] {
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 1.1rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	border: none;
+	border-radius: 0.25rem;
+	background-color: #00A3B8;
+	box-sizing: border-box;
+	padding: 0.5rem 2rem;
+	margin: 1.5rem 0;
+	cursor: pointer;
+}
+
+#bloctest h3{
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    color: #006B83;
+}
+

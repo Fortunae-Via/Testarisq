@@ -96,22 +96,6 @@ function Rechercher($bdd, $sexe, $year, $regex, $region){
 	$recherche->closeCursor();
 }
 
-function Afficher($bdd){
-	$recherche = $bdd->query('SELECT * FROM personne INNER JOIN adresse ON personne.Adresse_Id=adresse.Id');
-
-	while($display = $recherche->fetch()){
-		echo'<tr><td>'. $display['NIR'] . '</td><td>' . $display['NomDeFamille'] . '</td><td>' . $display["NomDUsage"] . '</td><td>'. $display['Prenom1'] . ' '. $display['Prenom2'] . ' '. $display['Prenom3'] . '</td><td>'. $display['DateNaissance'] . '</td><td>'. $display['Sexe'] . '</td><td>'. $display['Courriel'] . '</td><td>'. $display['Portable'] . '</td><td>' . $display['NumeroRue'] . ' ' . $display['Rue'] . ' ' . $display['CodePostal'] . ' ' . $display['Ville'] . ' ' . $display['Region'] . ' ' . $display['Pays'] . '</td><td>'. ' ' . '</td>';
-
-		if(isset($_SESSION['TypeCompte'])){
-			if($_SESSION['TypeCompte']=='ADM'){
-				echo'<td><a href="ModifierUtilisateur.php?NIR='. $display['NIR'] .'"><img src="vues/img/modif.png"/></a><a href="controleurs/SupprimerUtilisateur.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer cet utilisateur ?\');"><img src="vues/img/suppr.png"/></a><a href="controleurs/SupprimerCompte.php?NIR='. $display['NIR'] .'" onclick="return confirm(\'Voulez-vous vraiment supprimer le compte de cet utilisateur ?\');"><img src="vues/img/supprC.png"/></a></td></tr>';
-			}
-		}
-	}
-	//Fermeture de la requête SQL
-	$recherche->closeCursor();
-}
-
 function MiseAJour_personne($bdd, $nom, $nom_usage, $prenom, $prenom_2, $prenom_3, $sexe, $mail, $telephone, $DateNaissance, $NIR){
 	// La base de donnée est Mise à Jour (UPDATE) avec les informations du formulaire
 	// Mise à Jour de la table "personne"

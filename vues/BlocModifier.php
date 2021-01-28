@@ -29,7 +29,7 @@
 		    	<h2>Modifier l'utilisateur <?=($InfosPersosUser['Prenom1']  ." ". $InfosPersosUser['NomDeFamille'])?> (NIR : <?=$InfosPersosUser['NIR']?>) :</h2>
 			</header>
 
-			<div id="ajout" class="bloc">
+			<div id="ajout" class="bloc ajout">
 				<form method="post">
 					<p class="indication">Les champs indiqués d'une étoile sont obligatoires.</p>
 
@@ -176,7 +176,16 @@
 							<input maxlength="25" id="code" name="code" <?=$PreRemp['CodePostal']?> />
 							<select name="region">
 								<option value="">Région</option>
-								<?php Region($bdd); ?>
+								<?php
+								foreach ($ListeRegionFR as $Region) {
+									if ($Region['Region'] == $AdresseUser['Region']) {
+										echo"<option value=\"". $Region['Region'] ."\" selected>" . $Region['Region'] . "</option>";
+									}
+									else {
+										echo"<option value=\"". $Region['Region'] ."\">" . $Region['Region'] . "</option>";
+									}
+								}
+								?>
 							</select>
 							<!--<input maxlength="12" id="region" name="region" value=<?php echo $Region; ?> />-->
 							<input maxlength="25" id="pays" name="pays" <?=$PreRemp['Pays']?> />

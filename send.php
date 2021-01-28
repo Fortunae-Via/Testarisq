@@ -10,10 +10,12 @@ $mail = new PHPMailer(true);
 
 $alert = '';
 
+require 'controleurs/FonctionsGenerales.php';
+
 if(isset($_POST['submit'])){
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $message = $_POST['message'];
+  $name = securisation_totale($_POST['name']);
+  $email = securisation_totale($_POST['email']);
+  $message = securisation_partielle($_POST['message']);
 
   try{
     $mail->CharSet ="UTF-8";

@@ -4,7 +4,7 @@
 session_start();
 
 require 'controleurs/FonctionAffichageAccueil.php'; 
-
+ 
 //Si on est déja connectés
 if (isset($_SESSION['TypeCompte'])) {
 
@@ -24,10 +24,10 @@ else if (isset($_POST['identifiant'],$_POST['mdp'])) {
 
 	if (strlen($_POST['identifiant'])>3 AND strlen($_POST['identifiant'])<17 AND $_POST['mdp'] !== "") {
 
-		require 'securisation_input.php'; 
+		require 'controleurs/FonctionsGenerales.php'; 
 		//On récupère l'identifiant et le mdp donné
-		$IDCompte = securisation($_POST['identifiant']);
-		$MDP = securisation($_POST['mdp']);
+		$IDCompte = securisation_totale($_POST['identifiant']);
+		$MDP = securisation_totale($_POST['mdp']);
 		$NIR = substr($IDCompte, 0, -3); //On enlève les trois caractères à la fin indiquant le type de compte
 		$TypeCompteDemande = substr($IDCompte, -3);
 		

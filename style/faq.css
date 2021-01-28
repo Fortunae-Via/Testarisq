@@ -50,7 +50,7 @@ button:active {
     margin:0;
 }
 
-.bandeau_question h3:hover {
+.bandeau_question:hover h3{
     color: #00A3B8;
 }
 
@@ -84,11 +84,12 @@ button:active {
 /* ===== Pagination ===== */
 .nav_pages{
     padding: 0.25rem; 
-    width: fit-content;
-    margin: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .nav_pages a {
+    border: 1px solid white;
     border-radius: 2px;
     background-color: white;
     text-decoration: None;
@@ -100,11 +101,13 @@ button:active {
 }
 
 .nav_pages a.active {
+    border: 1px solid #00A3B8;
     background-color: #00A3B8;
     color: white;
 } 
 
 .nav_pages a:hover:not(.active) {
+    border: 1px solid #9FD1DB;
     background-color: #9FD1DB;
 } 
 

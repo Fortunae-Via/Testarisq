@@ -1,14 +1,16 @@
 <?php
 
-function TailleTable(PDO $bdd, string $Table) : int {
+function TailleTable(PDO $bdd, string $Table) : string {
 	$query = 'SELECT COUNT(*) as Taille FROM ' . $Table;
-	$result = $bdd->query($query)->fetch();
+	$search = $bdd->prepare($query);
+	$search->execute();
+	$result = $search->fetch();
 	return $result['Taille'];
 }
 
 function InfosPersonne(PDO $bdd, string $NIR): array
 {
-	$requete = $bdd->prepare("SELECT * FROM Personne WHERE NIR = ? ");
+	$requete = $bdd->prepare("SELECT NIR, Prenom1, Prenom2, Prenom3, NomDeFamille, NomDUsage, Sexe, DATE_FORMAT(DateNaissance, '%d/%m/%Y') AS DateNaissance, Courriel, Portable, Adresse_Id FROM Personne WHERE NIR = ? ");
 	$requete->execute(array($NIR));
 	$InfosPersonne = $requete->fetch();
 	return $InfosPersonne;
@@ -62,5 +64,11 @@ function AutResCompte(PDO $bdd, string $NIR, string $TypeCompte) : string
 function ListeAutoritesResponsables(PDO $bdd, string $Type): array {
 	$query = $bdd->prepare("SELECT id, nom FROM AutoriteResponsable WHERE Type = ? ORDER BY nom");
 	$query->execute(array($Type));
+	return $query->fetchAll();
+}
+
+function ListeRegionsFR(PDO $bdd): array {
+	$query = $bdd->prepare("SELECT Region FROM RegionFR ORDER BY Region");
+	$query->execute();
 	return $query->fetchAll();
 }

@@ -3,57 +3,84 @@
 session_start(); 
 // Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
 if (!(isset($_SESSION['NIR']))) {
-	header('Location: Accueil.php');
+	header('Location: Accueil');
 }
 //S'il est connecté mais qu'il charge des pages non autorisées pour son type de compte on le renvoie à l'accueil
 else if ( $_SESSION['TypeCompte']!='ADM' ) {	
-	header('Location: Accueil.php');
+	header('Location: Accueil');
 }
 
 // Appel de la base de donnée bdd_testarisq
 require("modele/connexionbdd.php");
 //$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Pour voir les erreurs SQL
 // Definition des fonctions de requête SQL
-require('modele/RequetesGenerales.php');
-require('modele/RequetesGestion.php');
+require('modele/RequetesGestionUtilisateurs.php');
+require 'controleurs/FonctionsGestionUtilisateurs.php';
+require 'controleurs/FonctionsPagination.php';
+require 'controleurs/FonctionsGenerales.php';
 
-
-//Si on fait une recherche
-if(isset($_POST['id_name'])){
-
-	$filtres=array();
-
-	//On remplit par des "" si on vient de l'accueil et que l'on n'a pas posté de filtre
-	$liste=array('sexe','region','year','test_number');
-	foreach ($liste as $filtre) {
-		if (isset($_POST[$filtre])) {
-			$filtres[$filtre]=$_POST[$filtre];
-		}
-		else {
-			$filtres[$filtre]="";
-		}
-	}
-
-	// Dans ce cas on laisse le formulaire affiché de manière à pouvoir refaire une recherche
+//Si un utilisateur est recherché
+if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 
 	// Definition du regex pour le nom recherché
-	$regex = '"%' . $_POST['id_name'] . '%"';
+	if (isset($_POST['id_name'])) {
+		$ChampRecherche = securisation_totale($_POST['id_name']);
+		$regex = '%' . $ChampRecherche . '%';
+	}
+	else if (isset($_GET['id_name'])) {
+		$ChampRecherche = securisation_totale($_GET['id_name']);
+		$regex = '%' . $ChampRecherche . '%';
+	}
+	else {
+		$ChampRecherche ="";
+	}
 
+	//Création de la condition SQL pour tous les filtres, soit "" soit AND x=y
+	$GestionFiltres = GestionFiltres();
+	$ListeFiltres = $GestionFiltres[0];
+	$ConditionsSQLFiltres = $GestionFiltres[1];
+	$ConditionsSQLNbTests = $GestionFiltres[2];
+	$lienSQLFiltres = $GestionFiltres[3];
+
+	//On regarde en amont le nombre de résultats de la recherche
+	$TailleRecherche = TailleRechercheUtilisateur($bdd, $regex, $ConditionsSQLFiltres, $ConditionsSQLNbTests);
+	if($TailleRecherche!=0){
+		$PageMaximum = ceil($TailleRecherche/10);
+		$Vide=false;
+	}else{
+		$PageMaximum=1;
+		$Vide=true;
+	}
+
+	if (isset($_GET['page'])) {
+		$PageDemandee = securisation_totale($_GET['page']);
+		$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
+	}
+	else {
+		$PageAffichage = 1;
+	}
+
+	//Recherche
+	$ResultatsRecherche = RechercherUtilisateur($bdd, $PageAffichage, $regex, $ConditionsSQLFiltres, $ConditionsSQLNbTests);
+
+	$ListeRegionFR = ListeRegionsFR($bdd);
+	$ListeSexes = array('Homme','Femme','Autre','Non-précisé');
 	$ListeAutoritesResponsablesAUE = ListeAutoritesResponsables($bdd,'AUE');
 	$ListeAutoritesResponsablesPOL = ListeAutoritesResponsables($bdd,'POL');
 
 	//affichage de la page
-	$Recherche=true;
+	$Mode=3;
 	require("vues/GestionUtilisateurs.php");
 }
 
 //Si les informations minimales sont rentrées, un ajout à la bdd est possible
 else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(empty($_POST['nom']))) && (!(empty($_POST['prenom']))) && (!(empty($_POST['jour']))) && (!(empty($_POST['mois']))) && (!(empty($_POST['annee']))) && (!(empty($_POST['sexe']))) && (!(empty($_POST['mail']))) ){
-
+	require 'controleurs/FonctionsGenerales.php';
+	
 	// On récupère toutes les données du POST dans $DonneesUtilisateur
-	$TypeCompte = $_POST['type_compte'];
+	$TypeCompte = securisation_totale($_POST['type_compte']);
 	$DonneesUtilisateur = array(
-		'datenaissance' => $_POST['annee']."-".$_POST['mois']."-".$_POST['jour']);
+		'datenaissance' => securisation_totale($_POST['annee'])."-".securisation_totale($_POST['mois'])."-".securisation_totale($_POST['jour']));
 
 	$liste_donnees_utilisateur=array('id','nom','nom_usage','prenom','prenom_2','prenom_3','sexe','mail','telephone');
 	foreach ($liste_donnees_utilisateur as $champ) {
@@ -76,7 +103,7 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 
 		$liste_donnees_adresse=array('numeroRue','rue','ville','code','region','pays');
 		foreach ($liste_donnees_adresse as $champ_adresse) {
-			$InfosAdresse[$champ_adresse]=$_POST[$champ_adresse];
+			$InfosAdresse[$champ_adresse]=securisation_totale($_POST[$champ_adresse]);
 		}
 
 		if(empty($InfosAdresse['region'])) {
@@ -94,16 +121,16 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 	AjouterPersonne($bdd, $DonneesUtilisateur);
 
 	if ($TypeCompte=='AUE') {
-		if ( isset($_POST['aut_resAUE']) && (!(empty($_POST['aut_resAUE']))) ) {
-			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE', $_POST['aut_resAUE']);
+		if ( isset($_POST['aut_resAUE1']) && (!(empty($_POST['aut_resAUE1']))) ) {
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE', securisation_totale($_POST['aut_resAUE1']));
 		}
 		else {
 			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'AUE');
 		}
 	}
 	else if ($TypeCompte=='POL') {
-		if ( isset($_POST['aut_resPOL']) && (!(empty($_POST['aut_resPOL']))) ) {
-			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL', $_POST['aut_resPOL']);
+		if ( isset($_POST['aut_resPOL1']) && (!(empty($_POST['aut_resPOL1']))) ) {
+			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL', securisation_totale($_POST['aut_resPOL1']));
 		}
 		else {
 			AjouterCompte($bdd, $DonneesUtilisateur['id'], 'POL');
@@ -113,21 +140,115 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 		AjouterCompte($bdd, $DonneesUtilisateur['id'], 'ADM');
 	}
 
-	sleep(1);
 	$_SESSION['MessageModifsUtilisateur'] = "L'utilisateur a bien été ajouté. Son mot de passe est ".$mdp." .";
-	header('Location: GestionUtilisateurs.php');
+	header('Location: GestionUtilisateurs');
+}
+
+else if( (!(empty($_POST['type_ajout_compte']))) && (!(empty($_POST['nir2']))) ){
+
+	// On récupère toutes les données du POST dans $DonneesUtilisateur
+	$TypeCompte = securisation_totale($_POST['type_ajout_compte']);
+	$NIR = securisation_totale($_POST['nir2']);
+
+	//Si le NIR rentré est correct
+	if (NIRExiste($bdd, $NIR)) {
+		//Si compte pro déjà existant update
+		//Sinon crée compte
+		if(CompteProExistant($bdd, $NIR)){
+
+			if ($TypeCompte=='AUE') {
+				if ( isset($_POST['aut_resAUE2']) && (!(empty($_POST['aut_resAUE2']))) ) {
+					UpdateCompte($bdd, $NIR, 'AUE', securisation_totale($_POST['aut_resAUE2']));
+				}
+				else {
+					UpdateCompte($bdd, $NIR, 'AUE');
+				}
+			}
+			else if ($TypeCompte=='POL') {
+				if ( isset($_POST['aut_resPOL2']) && (!(empty($_POST['aut_resPOL2']))) ) {
+					UpdateCompte($bdd, $NIR, 'POL', securisation_totale($_POST['aut_resPOL2']));
+				}
+				else {
+					UpdateCompte($bdd, $NIR, 'POL');
+				}
+			}
+			else if ($TypeCompte=='ADM') {
+				UpdateCompte($bdd, $NIR, 'ADM');
+			}
+			$_SESSION['MessageModifsUtilisateur'] = "Le compte a bien été mis à jour et associé à l'utilisateur ".$NIR." .";
+		}
+		else{
+
+			if ($TypeCompte=='AUE') {
+				if ( isset($_POST['aut_resAUE2']) && (!(empty($_POST['aut_resAUE2']))) ) {
+					AjouterCompte($bdd, $NIR, 'AUE', securisation_totale($_POST['aut_resAUE2']));
+				}
+				else {
+					AjouterCompte($bdd, $NIR, 'AUE');
+				}
+			}
+			else if ($TypeCompte=='POL') {
+				if ( isset($_POST['aut_resPOL2']) && (!(empty($_POST['aut_resPOL2']))) ) {
+					AjouterCompte($bdd, $NIR, 'POL', securisation_totale($_POST['aut_resPOL2']));
+				}
+				else {
+					AjouterCompte($bdd, $NIR, 'POL');
+				}
+			}
+			else if ($TypeCompte=='ADM') {
+				AjouterCompte($bdd, $NIR, 'ADM');
+			}
+			$_SESSION['MessageModifsUtilisateur'] = "Le compte a bien été ajouté à l'utilisateur ".$NIR." .";
+		}
+	}
+	else {
+		$_SESSION['MessageModifsUtilisateur'] = "Erreur : le NIR saisi n'appartient à aucun utilisateur.";
+		$_SESSION['AjoutCompteEnCours'] = true;
+	}
+
+	header('Location: GestionUtilisateurs');
 }
 
 else{
 
 	if (isset($_SESSION['RechercheEnCours'])) {
-		$Recherche=true;
+		$Mode=3;
 		unset($_SESSION['RechercheEnCours']);
 	}
+	else if (isset($_SESSION['AjoutCompteEnCours'])) {
+		$Mode=2;
+		unset($_SESSION['AjoutCompteEnCours']);
+	}
 	else {
-		$Recherche = false;
+		$Mode = 1;
 	}
 
+	//On regarde en amont le nombre d'entrées de la table
+	$PageMaximum = PageMaximum($bdd, 'Personne');
+	if ($PageMaximum==0){
+		$Vide=true;
+	}
+	else{
+		$Vide=false;
+	}
+
+	$ChampRecherche= "";
+	$lienSQLFiltres = "";
+
+	if (isset($_GET['page'])) {
+		$PageDemandee = securisation_totale($_GET['page']);
+		$PageAffichage = DeterminerPageAfffichage ($PageDemandee, $PageMaximum);
+	}
+	else {
+		$PageAffichage = 1;
+	}
+
+
+	//Recherche
+	$ResultatsRecherche = RechercherUtilisateur($bdd, $PageAffichage);
+
+	$ListeRegionFR = ListeRegionsFR($bdd);
+	$ListeSexes = array('Homme','Femme','Autre','Non-précisé');
 	$ListeAutoritesResponsablesAUE = ListeAutoritesResponsables($bdd,'AUE');
 	$ListeAutoritesResponsablesPOL = ListeAutoritesResponsables($bdd,'POL');
 
@@ -140,4 +261,3 @@ else{
 	}
 
 }
-?>

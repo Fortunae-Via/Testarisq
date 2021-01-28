@@ -5,7 +5,7 @@ session_start();
 require 'modele/connexionbdd.php';
 include('modele/RequetesTest.php');
 if (!(isset($_SESSION['NIR']))) {
-	header('Location: Accueil.php');
+	header('Location: Accueil');
 }
 ?>
 

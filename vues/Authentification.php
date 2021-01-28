@@ -10,8 +10,8 @@
     <body>
         <div class="div_page">
             <img src="vues/img/logo_testarisq_circle.png" alt="logo_testarisq_circle"/>
-            <button onclick="window.location.href='#formulaire'">Authentification</button>
-            <div id="formulaire">
+            <button onclick="window.location.href='#connexion'">Authentification</button>
+            <div id="connexion">
                 <?php
                     if ($mdp_incorrect==true) {
                 ?>

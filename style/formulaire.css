@@ -54,7 +54,7 @@ button[type="submit"]{
     border: none;
     outline: none;
     border-radius: 0.25rem;
-    background-color: #B8B8B8;
+    background-color: #00A3B8;
     box-sizing: border-box;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -63,9 +63,7 @@ button[type="submit"]{
     cursor: pointer;
     transition: .3s ease background-color;
 }
-button[type="submit"]:hover{
-    background-color: #00A3B8;
-}
+
 #status{
     width: 90%;
     max-width: 500px;

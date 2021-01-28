@@ -82,7 +82,7 @@
 					<button onClick="BasculerMode()">Mode Recherche<img class="switch_button" src="vues/img/switch_button.png" alt="switch_button"/></button>
 				</header>
 
-				<form method="post" action="RechercheUtilisateur.php"> 
+				<form method="post" action="RechercheUtilisateur"> 
 					<div class="champ">
 						<label for="id_name">NIR ou nom du conducteur :</label><br>
 						<input type="text" id="recherche" name="id_name" required><br>

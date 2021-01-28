@@ -16,3 +16,17 @@ function TypeComptePersonneFR(string $Abreviation) : string {
 			return 'Administrateur'; 
 	}
 }
+            
+function securisation_totale($donnees){
+    $donnees=trim($donnees);
+    $donnees=stripslashes($donnees);
+    $donnees=strip_tags($donnees);
+    return $donnees;
+}
+       
+function securisation_partielle($donnees){
+    $donnees=stripslashes($donnees);
+    $donnees=strip_tags($donnees);
+    return $donnees;
+}
+

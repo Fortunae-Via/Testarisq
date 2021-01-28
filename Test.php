@@ -2,6 +2,11 @@
 
 session_start(); 
 
+// Si l'utilisateur n'est pas connecté on le renvoie à l'accueil
+if (!(isset($_SESSION['NIR']))) {
+	header('Location: Accueil');
+}
+
 //On récupère les données de la session
 $IdTest = $_SESSION['IdTest'];
 $IdBoitier = $_SESSION['IdBoitier'];

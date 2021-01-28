@@ -1,10 +1,10 @@
-<form method="post">
+<form method="post" action="GestionBoitiers">
 	<!-- Barre de recherche par nom ou identifiant -->
 	<h3>Numéro du boitier ou nom de l'autorité responsable :</h3>
 	<div class="barre_recherche">
 		<?php
-			if(isset($_POST['id_name'])){
-				echo "<input id=\"id_name\" name=\"id_name\" value=\"". $_POST['id_name'] ."\"/>";
+			if(!(empty($ChampRecherche))){
+				echo "<input id=\"id_name\" name=\"id_name\" value=\"". $ChampRecherche ."\"/>";
 			}
 			else {
 				echo "<input id=\"id_name\" name=\"id_name\"/>";
@@ -17,18 +17,28 @@
 
 <!-- Affichage des résultats d'une recherche -->
 <h3>Boitiers :</h3>
-<!-- L'Affichage des résultats se trouve sous forme de tableaux -->
-<table>
-	<tr>
-		<!-- Nom des colonnes -->
-		<th>N° de boitier</th>
-		<th>Autorité Responsable</th>
-		<th>Options</th>
 
-		<?php RechercheBoitiers($bdd, $regex, $PageAffichage); ?>
-	</tr>
-</table>
+<?php if ($Vide == false) { ?>
+	<!-- L'Affichage des résultats se trouve sous forme de tableaux -->
+	<table>
+		<tr>
+			<!-- Nom des colonnes -->
+			<th>N° de boitier</th>
+			<th>Autorité Responsable</th>
+			<th>Options</th>
 
-<div class="nav_pages">
-    <?php AffichageNavigationPages ('GestionBoitiers', $PageAffichage, $PageMaximum);?>
-</div>
+			<?php AfficherRechercheBoitiers($ResultatsRecherche); ?>
+		</tr>
+	</table>
+<?php 
+}
+else {
+	echo('<p style="text-align:center;">Aucun résultat.</p>');
+}
+
+if ($PageMaximum > 1) {
+	echo ('<div class="nav_pages">');
+	    AffichageNavigationPages ('GestionBoitiers', $PageAffichage, $PageMaximum, $ChampRecherche);
+	echo('</div>');
+}
+?>

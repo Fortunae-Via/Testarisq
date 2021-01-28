@@ -3,8 +3,10 @@
 
 function RecupFAQ(PDO $bdd, int $page): array {
 	$offset = $page * 10 - 10;
-	$query = 'SELECT * FROM ElementFAQ LIMIT 10 OFFSET ' . $offset;
-	return $bdd->query($query)->fetchAll();
+	$query = $bdd->prepare('SELECT * FROM ElementFAQ LIMIT 10 OFFSET :offset');
+	$query->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+	$query->execute();
+	return $query->fetchAll();
 }
 
 function AjouterQuestion(PDO $bdd, string $Question, string $Reponse) {
