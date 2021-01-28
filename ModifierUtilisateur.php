@@ -23,7 +23,7 @@ if(isset($_GET['NIR'])){
 	// Si l'une (et une seule suffit) des données du profil est modifié Alors :
 	if(isset($_POST['nom']) || isset($_POST['nom_usage']) || isset($_POST['prenom']) || isset($_POST['prenom_2']) || isset($_POST['prenom_3']) || isset($_POST['sexe']) || isset($_POST['mail']) || isset($_POST['telephone']) || isset($_POST['numeroRue']) ||isset($_POST['rue']) || isset($_POST['ville']) || isset($_POST['code']) || isset($_POST['region']) || isset($_POST['pays']) || isset($_POST['jour']) || isset($_POST['mois']) || isset($_POST['annee'])){
 
-		if(!verifstring($_POST['nom']) && !verifstring($_POST['prenom']) && !verifnum($_POST['telephone']) && !verifstring($_POST['prenom_2']) && !verifstring($_POST['prenom_3']) && !verifstring($_POST['nom_usage']) && !verifnum($_POST['numeroRue']) && !verifstring($_POST['rue']) && !verifstring($_POST['ville']) && !verifnum($_POST['code']) && !verifstring($_POST['pays']) && strlen($_POST['telephone'])==10 && strlen($_POST['code'])==5 && filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)){
+		if(!verifstring($_POST['nom']) && !verifstring($_POST['prenom']) && !verifnum($_POST['telephone'], 10) && !verifstring($_POST['prenom_2']) && !verifstring($_POST['prenom_3']) && !verifstring($_POST['nom_usage']) && !verifnum($_POST['numeroRue']) && !verifstring($_POST['rue']) && !verifstring($_POST['ville']) && !verifnum($_POST['code'], 5) && !verifstring($_POST['pays']) && filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)){
 
 			$DateNaissance = securisation_totale($_POST['annee'])."-".securisation_totale($_POST['mois'])."-".securisation_totale($_POST['jour']);
 
@@ -66,10 +66,10 @@ if(isset($_GET['NIR'])){
 			if(verifstring($_POST['nom']) || verifstring($_POST['prenom']) || verifstring($_POST['prenom_2']) || verifstring($_POST['prenom_3']) || verifstring($_POST['nom_usage'])){
 				$_SESSION['MessageErreur'] = "Erreur : le nom, nom d'usage et les prénoms ne peuvent contenir que des lettres.";
 			}
-			else if(verifnum($_POST['telephone']) || strlen($_POST['telephone'])!=10){
+			else if(verifnum($_POST['telephone'], 10)){
 				$_SESSION['MessageErreur'] = "Erreur : le numéro de telephone ne doit contenir que uniquement 10 chiffres.";
 			}
-			else if(verifnum($_POST['numeroRue']) || verifnum($_POST['code']) || strlen($_POST['code'])!=5){
+			else if(verifnum($_POST['numeroRue']) || verifnum($_POST['code'], 5)){
 				$_SESSION['MessageErreur'] = "Erreur : le numéro de rue et le code postal ne doit contenir que des chiffres (uniquement 5 pour le code postal).";
 			}
 			else if(verifstring($_POST['ville']) || verifstring($_POST['rue']) || verifstring($_POST['pays'])){

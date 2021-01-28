@@ -7,9 +7,13 @@ function verifstring($string){
 	}
 }
 
-function verifnum($string){
+function verifnum($string, $length=0){
 	if(!empty($string)){
-		return (strlen($string) != strspn($string,"1234567890"));
+		if(strlen($string)==$length){
+			return (strlen($string) != strspn($string,"1234567890"));
+		}else{
+			return false;
+		}
 	}else{
 		return false;
 	}
