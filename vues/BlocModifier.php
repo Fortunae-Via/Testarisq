@@ -30,7 +30,8 @@
 			</header>
 
 			<div id="ajout" class="bloc ajout">
-				<form method="post">
+				<script type="text/javascript" src="js/VerificationForm.js"></script>
+				<form method="post" name="form_modif" onsubmit="return validateFormModifier()">
 					<p class="indication">Les champs indiqués d'une étoile sont obligatoires.</p>
 
 					<div class="ligne">	
