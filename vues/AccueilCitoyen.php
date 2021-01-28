@@ -18,7 +18,7 @@
             <?php echo 'Bienvenue ' . $Prenom1 . ' !'; ?>
         </h2>
 
-        <p><?php 
+        <p class='PasTest'><?php 
         echo TestVide($bdd,$_SESSION['NIR']); 
         if ($requete->fetch())
         { ?>
