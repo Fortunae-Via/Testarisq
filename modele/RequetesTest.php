@@ -103,21 +103,15 @@ function RequeteDerniersTestsPersonne($bdd,$NIR) //Rends les 3 derniers tests de
 		WHERE personne.NIR = ? 
 		ORDER BY Id DESC 
 		LIMIT 0,3");
-    $requete->execute(array($NIR));  //Mettre la boucle dans le cas où y a pas de test  
-    return $requete;                    	
+    $requete->execute(array($NIR));
+	return $requete;                  	
 }
 
-/*
 function TestVide($bdd,$NIR)
 {
 	$requete = $bdd->prepare("SELECT Id from test where Personne_NIR=?");
 	$requete->execute(array());
-	if($requete==0)
-	{
-		echo 'non';
-	}
 }
-*/
 
 function DateTest($bdd,$NIR) //Affiche la date du test
 {
@@ -141,8 +135,6 @@ function Apte($bdd,$NIR) //si 1 -> apte à conduire, sinon non
 
 
 //Afficher les résultats en fonction du type de capteur
-
-
 function AfficherRéactivité($bdd,$Id_Resultat)
 {
 $requete = $bdd->prepare("

@@ -18,6 +18,12 @@
             <?php echo 'Bienvenue ' . $Prenom1 . ' !'; ?>
         </h2>
 
+        <p class='PasTest'><?php 
+        echo TestVide($bdd,$_SESSION['NIR']); 
+        if ($requete->fetch())
+        { ?>
+        </p>
+
         <section>
             <header>
                 <h3 class='DerniersResultats'>Vos derniers résultats :</h3>
@@ -27,7 +33,7 @@
                 <h4>Temps de réaction aux sons et lumières des derniers tests (en secondes)</h4>
                 <?php
 
-                echo "<img src='modele/graph.php?Id=".$_SESSION['NIR']."'>";
+                echo "<img src='controleurs/graph.php?Id=".$_SESSION['NIR']."'>";
                 ?> 
             </div>
 
@@ -45,6 +51,13 @@
             </div>
         </section>
     </div>
+
+    <?php
+    }
+    else
+    {
+        echo 'Veuillez vous rapprochez d\'une auto-école pour passer un test.';
+    }?>
 
 </body>
 </html>

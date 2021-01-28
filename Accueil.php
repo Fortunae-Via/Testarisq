@@ -22,7 +22,7 @@ if (isset($_SESSION['TypeCompte'])) {
 //Si on vient de soumettre le formulaire 
 else if (isset($_POST['identifiant'],$_POST['mdp'])) { 
 
-	if (strlen($_POST['identifiant'])>3 AND strlen($_POST['identifiant'])<17 AND $_POST['mdp'] !== "") {
+	if ( (strlen($_POST['identifiant'])>=13) AND (strlen($_POST['identifiant'])<=16) AND $_POST['mdp'] !== "") {
 
 		require 'controleurs/FonctionsGenerales.php'; 
 		//On récupère l'identifiant et le mdp donné
