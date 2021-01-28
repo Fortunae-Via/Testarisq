@@ -197,9 +197,6 @@ function SupprimerUtilisateur($bdd, $NIR){
 	Suppression des données correspondantes dans la table adresse lié à 
 	la table personne par une clé étagère.
 	**/
-	$supprimerpersonne = $bdd->prepare('DELETE FROM Personne WHERE NIR=?');
-	$supprimerpersonne->execute(array($NIR));
-
 	$requete = $bdd->prepare("SELECT Adresse_Id FROM Personne WHERE NIR = ? ");
 	$requete->execute(array($NIR));
 	$AdressePersonne = $requete->fetch()['Adresse_Id'];
@@ -213,6 +210,10 @@ function SupprimerUtilisateur($bdd, $NIR){
 			$supprimer->execute(array($AdressePersonne));
 		}
 	}
+
+	$supprimerpersonne = $bdd->prepare('DELETE FROM Personne WHERE NIR=?');
+	$supprimerpersonne->execute(array($NIR));
+
 }
 
 function SupprimerCompte($bdd, $NIR){
