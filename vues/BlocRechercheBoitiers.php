@@ -26,9 +26,8 @@
 			<th>N° de boitier</th>
 			<th>Autorité Responsable</th>
 			<th>Options</th>
-
-			<?php AfficherRechercheBoitiers($ResultatsRecherche); ?>
 		</tr>
+		<?php AfficherRechercheBoitiers($ResultatsRecherche); ?>
 	</table>
 <?php 
 }

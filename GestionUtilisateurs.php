@@ -85,7 +85,7 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 
 		$liste_donnees_utilisateur=array('id','nom','nom_usage','prenom','prenom_2','prenom_3','sexe','mail','telephone');
 		foreach ($liste_donnees_utilisateur as $champ) {
-			$DonneesUtilisateur[$champ]=$_POST[$champ];
+			$DonneesUtilisateur[$champ]=securisation_totale($_POST[$champ]);
 		}
 
 		// On crée le mot de passe de l'utilisateur
