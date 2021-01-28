@@ -107,6 +107,7 @@ function RequeteDerniersTestsPersonne($bdd,$NIR) //Rends les 3 derniers tests de
     return $requete;                    	
 }
 
+/*
 function TestVide($bdd,$NIR)
 {
 	$requete = $bdd->prepare("SELECT Id from test where Personne_NIR=?");
@@ -116,6 +117,7 @@ function TestVide($bdd,$NIR)
 		echo 'non';
 	}
 }
+*/
 
 function DateTest($bdd,$NIR) //Affiche la date du test
 {

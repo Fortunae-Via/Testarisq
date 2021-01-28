@@ -33,7 +33,7 @@
 			<h1 id="lieu">
 
 			<!--localisation par défaut, déterminée à partir de l'adresse ip-->
-			<!--	<?php echo $ville; ?>
+			<!--	<?php //echo $ville; ?>
 			La partie PHP fonctionnera sur un vrai serveur mais ne fonctionne pas en local-->
 
 			</h1>

@@ -15,10 +15,31 @@
 	margin-bottom: 2rem;
 }
 
-.DernierResultat{ 
+.DerniersResultats{ 
 	color: white;
 	margin:0;
 	font-weight: 300;
+}
+
+.graph {
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.graph h4{
+	text-align: center;
+	color: white;
+	font-weight: 100;
+	margin: 0;
+}
+
+.graph img{
+	display: block;
+	width: 80%;
+	margin:auto;
 }
 
 .bouton{                   /*Tests les moins récents*/
@@ -34,7 +55,10 @@
 	text-align: center;
 }
 
+.bouton:hover {
+	color: #00A3B8;
+} 
 
-.graph img{
-	text-align: center;
+.tests {
+	margin-bottom: 5rem;
 }
