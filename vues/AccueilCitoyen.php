@@ -10,10 +10,8 @@
 
 <body>
 
-<!--Header-->
-<?php 
-include("vues/Header.php");
- ?>
+    <!--Header-->
+    <?php include("vues/Header.php");?>
 
     <div class="div_page">
         <h2 class="bienvenue">
@@ -21,25 +19,32 @@ include("vues/Header.php");
         </h2>
 
         <section>
-            <div class="Test">
-                <header>
-                    <h3 class='DernierResultat'><?php echo 'Vos derniers résultats : '; ?></h3><br>
-                        
+            <header>
+                <h3 class='DerniersResultats'>Vos derniers résultats :</h3>
+             </header>
+                    
+            <div class="graph">
+                <h4>Temps de réaction aux sons et lumières des derniers tests (en secondes)</h4>
+                <?php
 
-                    <div class="graph">
-                        <?php
+                echo "<img src='modele/graph.php?Id=".$_SESSION['NIR']."'>";
+                ?> 
+            </div>
 
-                        echo "<img src='modele/graph.php?Id=".$_SESSION['NIR']."'>";
-                        ?> 
-                    </div>
+            <div class="tests">
 
-                        <!--<?php TestVide($bdd,$_SESSION['NIR']) ?>--->
+                <?php // TestVide($bdd,$_SESSION['NIR']) ?>
 
 
-                        <?php 
-                        while ($resultat = $requete->fetch())
-                        {
-                            echo '<p class="bouton"> Test du '.$resultat["DateDebut"].' : <a href="resultat_test_1.php?NIR='.$resultat["NIR"].'&Id_Resultat='.$resultat['Id'].'">Détail résultats </a></p></br></br></br>';
-                        }
-                        ?>
+                <?php 
+                while ($resultat = $requete->fetch())
+                {
+                    echo '<a class="bouton" href="resultat_test_1.php?NIR='.$resultat["NIR"].'&Id_Resultat='.$resultat['Id'].'">Test du '.$resultat["DateDebut"].'</a>';
+                }
+                ?>
+            </div>
+        </section>
+    </div>
+
 </body>
+</html>

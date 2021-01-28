@@ -25,8 +25,8 @@ $requete = $bdd->prepare("
 	}
 
 
-$largeur = 600;
-$hauteur = 300;
+$largeur = 1200;
+$hauteur = 600;
 
 // Initialisation du graphique
 $graphe = new Graph($largeur, $hauteur);
@@ -34,22 +34,37 @@ $graphe = new Graph($largeur, $hauteur);
 // Valeurs min et max seront determinees automatiquement
 $graphe->setScale("textlin");
 
+//Couleur de fond Testarisq
+$graphe->SetBackgroundGradient('#383838','#383838');
+
+//Marges (gauche, droite,haut,bas)
+$graphe->SetMargin(100,20,20,70);
+
 // Creation de l'histogramme
 $bplot = new BarPlot($TempsReac);
+
 // Ajout de l'histogramme au graphique
 $graphe->add($bplot);
 
-//Couleur des barres
-$bplot->SetFillColor('#3388BB');
+$graphe->ygrid->SetFill(false);
 
-// Ajout du titre du graphique
-$graphe->title->set("Temps de réactions aux sons et lumières des derniers tests");
+//Couleur des barres
+$bplot->SetFillColor('#00A3B8');
 
 $graphe->xaxis->SetTickLabels($Test);
+$graphe->xaxis->SetColor("white");
+$graphe->xaxis->SetFont(FF_ARIAL,FS_NORMAL,20);
+$graphe->yaxis->SetColor("white");
+$graphe->yaxis->SetFont(FF_ARIAL,FS_NORMAL,20);
 
 //Donner des titres aux axes
 $graphe->xaxis->title->Set('Date des tests','middle');
+$graphe->xaxis->title->SetColor("white");
+$graphe->xaxis->title->SetFont(FF_ARIAL,FS_NORMAL,20);
 $graphe->yaxis->title->Set('Temps de réaction en secondes','middle');
+$graphe->yaxis->title->SetColor("white");
+$graphe->yaxis->title->SetFont(FF_ARIAL,FS_NORMAL,20);
+$graphe->yaxis->title->SetMargin(40);
 
 //Espace des titres
 //$graphe->xaxis->title->SetMargin(7);
