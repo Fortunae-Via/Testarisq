@@ -1,4 +1,5 @@
-<form method="post" action="GestionUtilisateurs">
+<script type="text/javascript" src="js/VerificationForm.js"></script>
+<form method="post" action="GestionUtilisateurs" name="form_compte" onsubmit="return validateFormCompte()">
 
 	<p class="indication">Les champs indiqués d'une étoile sont obligatoires.<br>
 		<strong>Attention !</strong> Si vous ajoutez un compte à un utilisateur possédant déjà un compte professionnel, le nouveau compte créé remplacera définitivement l'ancien.</p>

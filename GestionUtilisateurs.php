@@ -77,7 +77,7 @@ if(isset($_POST['id_name']) OR isset($_GET['id_name'])){
 else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(empty($_POST['nom']))) && (!(empty($_POST['prenom']))) && (!(empty($_POST['jour']))) && (!(empty($_POST['mois']))) && (!(empty($_POST['annee']))) && (!(empty($_POST['sexe']))) && (!(empty($_POST['mail']))) ){
 
 	$NIR=$_POST['id'];
-	if(NIRExiste($bdd, $NIR)==false && !verifstring($_POST['nom']) && !verifstring($_POST['prenom']) && !verifnum($_POST['id']) && !verifnum($_POST['telephone']) && !verifstring($_POST['prenom_2']) && !verifstring($_POST['prenom_3']) && !verifstring($_POST['nom_usage']) && !verifnum($_POST['numeroRue']) && !verifstring($_POST['rue']) && !verifstring($_POST['ville']) && !verifnum($_POST['code']) && !verifstring($_POST['pays'])){
+	if(NIRExiste($bdd, $NIR)==false && !verifstring($_POST['nom']) && !verifstring($_POST['prenom']) && !verifnum($_POST['id']) && !verifnum($_POST['telephone']) && !verifstring($_POST['prenom_2']) && !verifstring($_POST['prenom_3']) && !verifstring($_POST['nom_usage']) && !verifnum($_POST['numeroRue']) && !verifstring($_POST['rue']) && !verifstring($_POST['ville']) && !verifnum($_POST['code']) && !verifstring($_POST['pays']) && strlen($_POST['id'])==13 && strlen($_POST['telephone'])==10){
 		// On récupère toutes les données du POST dans $DonneesUtilisateur
 		$TypeCompte = securisation_totale($_POST['type_compte']);
 		$DonneesUtilisateur = array(
@@ -89,7 +89,7 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 		}
 
 		// On crée le mot de passe de l'utilisateur
-		$caract="abcdefghijklmnopqrstuvwyxz0123456789@!:;,$/?*=+";
+		$caract="abcdefghijklmnopqrstuvwyxzABCDEFGHIJKLMNOPQRSTUVWYXZ0123456789@!:;,$/?*=+";
 		for($i=1; $i<=12; $i++){
 			$nbr=strlen($caract);
 			$nbr=mt_rand(0, ($nbr-1));
@@ -149,11 +149,11 @@ else if( (!(empty($_POST['type_compte']))) && (!(empty($_POST['id']))) && (!(emp
 		if(verifstring($_POST['nom']) || verifstring($_POST['prenom']) || verifstring($_POST['prenom_2']) || verifstring($_POST['prenom_3']) || verifstring($_POST['nom_usage'])){
 			$_SESSION['MessageErreur'] = "Erreur : le nom, nom d'usage et les prénoms ne peuvent contenir que des lettres.";
 		}
-		else if(verifnum($_POST['id'])){
-			$_SESSION['MessageErreur'] = "Erreur : le NIR ne doit contenir que des chiffres.";
+		else if(verifnum($_POST['id']) || strlen($_POST['id'])!=13){
+			$_SESSION['MessageErreur'] = "Erreur : le NIR ne doit contenir que uniquement 13 chiffres.";
 		}
-		else if(verifnum($_POST['telephone'])){
-			$_SESSION['MessageErreur'] = "Erreur : le numéro de telephone ne doit contenir que des chiffres.";
+		else if(verifnum($_POST['telephone']) || strlen($_POST['telephone'])!=10){
+			$_SESSION['MessageErreur'] = "Erreur : le numéro de telephone ne doit contenir que uniquement 10 chiffres.";
 		}
 		else if(verifnum($_POST['numeroRue']) || verifnum($_POST['code'])){
 			$_SESSION['MessageErreur'] = "Erreur : le numéro de rue et le code postal ne doit contenir que des chiffres.";
@@ -172,7 +172,7 @@ else if( (!(empty($_POST['type_ajout_compte']))) && (!(empty($_POST['nir2']))) )
 	$NIR = securisation_totale($_POST['nir2']);
 
 	//Si le NIR rentré est correct
-	if (NIRExiste($bdd, $NIR)) {
+	if (NIRExiste($bdd, $NIR) && !verifnum($_POST['nir2'])) {
 		//Si compte pro déjà existant update
 		//Sinon crée compte
 		if(CompteProExistant($bdd, $NIR)){
@@ -224,6 +224,9 @@ else if( (!(empty($_POST['type_ajout_compte']))) && (!(empty($_POST['nir2']))) )
 	}
 	else {
 		$_SESSION['MessageModifsUtilisateur'] = "Erreur : le NIR saisi n'appartient à aucun utilisateur.";
+		if(verifnum($_POST['nir2'])){
+			$_SESSION['MessageModifsUtilisateur'] = "Erreur : le NIR ne doit contenir que des chiffres.";
+		}
 		$_SESSION['AjoutCompteEnCours'] = true;
 	}
 

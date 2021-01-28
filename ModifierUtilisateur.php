@@ -14,7 +14,7 @@ else if ( $_SESSION['TypeCompte']!='ADM' ) {
 require("modele/connexionbdd.php");
 // Appel des fonctions
 require("modele/RequetesGestionUtilisateurs.php");
-
+require 'controleurs/FonctionsGestionUtilisateurs.php';
 require 'controleurs/FonctionsGenerales.php';
 // On effectue la modification du profil utilisateur d'identifiant $_GET['NIR']$NIR
 if(isset($_GET['NIR'])){
@@ -23,49 +23,64 @@ if(isset($_GET['NIR'])){
 	// Si l'une (et une seule suffit) des données du profil est modifié Alors :
 	if(isset($_POST['nom']) || isset($_POST['nom_usage']) || isset($_POST['prenom']) || isset($_POST['prenom_2']) || isset($_POST['prenom_3']) || isset($_POST['sexe']) || isset($_POST['mail']) || isset($_POST['telephone']) || isset($_POST['numeroRue']) ||isset($_POST['rue']) || isset($_POST['ville']) || isset($_POST['code']) || isset($_POST['region']) || isset($_POST['pays']) || isset($_POST['jour']) || isset($_POST['mois']) || isset($_POST['annee'])){
 
-		$DateNaissance = securisation_totale($_POST['annee'])."-".securisation_totale($_POST['mois'])."-".securisation_totale($_POST['jour']);
+		if(!verifstring($_POST['nom']) && !verifstring($_POST['prenom']) && !verifnum($_POST['telephone']) && !verifstring($_POST['prenom_2']) && !verifstring($_POST['prenom_3']) && !verifstring($_POST['nom_usage']) && !verifnum($_POST['numeroRue']) && !verifstring($_POST['rue']) && !verifstring($_POST['ville']) && !verifnum($_POST['code']) && !verifstring($_POST['pays']) && strlen($_POST['telephone'])==10){
 
-		MiseAJour_personne($bdd, securisation_totale($_POST['nom']), securisation_totale($_POST['nom_usage']), securisation_totale($_POST['prenom']), securisation_totale($_POST['prenom_2']), securisation_totale($_POST['prenom_3']), securisation_totale($_POST['sexe']), securisation_totale($_POST['mail']), securisation_totale($_POST['telephone']), $DateNaissance, $NIR);
+			$DateNaissance = securisation_totale($_POST['annee'])."-".securisation_totale($_POST['mois'])."-".securisation_totale($_POST['jour']);
 
-		// Si un des champs adresse n'est pas vide
-		if( (!(empty($_POST['numeroRue']))) OR (!(empty($_POST['rue']))) OR (!(empty($_POST['ville']))) OR (!(empty($_POST['code']))) OR (!(empty($_POST['region']))) OR (!(empty($_POST['pays']))) ){
+			MiseAJour_personne($bdd, securisation_totale($_POST['nom']), securisation_totale($_POST['nom_usage']), securisation_totale($_POST['prenom']), securisation_totale($_POST['prenom_2']), securisation_totale($_POST['prenom_3']), securisation_totale($_POST['sexe']), securisation_totale($_POST['mail']), securisation_totale($_POST['telephone']), $DateNaissance, $NIR);
 
-			$liste_donnees_adresse=array('numeroRue','rue','ville','code','region','pays');
-			foreach ($liste_donnees_adresse as $champ_adresse) {
-				$InfosAdresse[$champ_adresse]=securisation_totale($_POST[$champ_adresse]);
+			// Si un des champs adresse n'est pas vide
+			if( (!(empty($_POST['numeroRue']))) OR (!(empty($_POST['rue']))) OR (!(empty($_POST['ville']))) OR (!(empty($_POST['code']))) OR (!(empty($_POST['region']))) OR (!(empty($_POST['pays']))) ){
+
+				$liste_donnees_adresse=array('numeroRue','rue','ville','code','region','pays');
+				foreach ($liste_donnees_adresse as $champ_adresse) {
+					$InfosAdresse[$champ_adresse]=securisation_totale($_POST[$champ_adresse]);
+				}
+
+				if(empty($InfosAdresse['region'])) {
+					$InfosAdresse['region']=null;
+				}
+
+				require("modele/RequetesGenerales.php");
+				$Id_Adresse=InfosPersonne($bdd, $NIR)['Adresse_Id'];
+
+				MiseAJour_adresse($bdd, $InfosAdresse['numeroRue'], $InfosAdresse['rue'], $InfosAdresse['code'], $InfosAdresse['ville'], $InfosAdresse['pays'], $InfosAdresse['region'], $Id_Adresse, $NIR);
 			}
 
-			if(empty($InfosAdresse['region'])) {
-				$InfosAdresse['region']=null;
+			//Pour les changements d'aut res
+			if (isset($_POST['aut_res'],$_SESSION['TypeCompteUserModifEnCours'])) {
+				$TypeCompte=$_SESSION['TypeCompteUserModifEnCours'];
+				unset($_SESSION['TypeCompteUserModifEnCours']);
+
+				if ($TypeCompte=='AUE' OR $TypeCompte=='POL') {
+					ModifierAutResCompte($bdd, $NIR, $TypeCompte, securisation_totale($_POST['aut_res']));
+				}
 			}
 
-			require("modele/RequetesGenerales.php");
-			$Id_Adresse=InfosPersonne($bdd, $NIR)['Adresse_Id'];
-
-			MiseAJour_adresse($bdd, $InfosAdresse['numeroRue'], $InfosAdresse['rue'], $InfosAdresse['code'], $InfosAdresse['ville'], $InfosAdresse['pays'], $InfosAdresse['region'], $Id_Adresse, $NIR);
-		}
-
-		//Pour les changements d'aut res
-		if (isset($_POST['aut_res'],$_SESSION['TypeCompteUserModifEnCours'])) {
-			$TypeCompte=$_SESSION['TypeCompteUserModifEnCours'];
-			unset($_SESSION['TypeCompteUserModifEnCours']);
-
-			if ($TypeCompte=='AUE' OR $TypeCompte=='POL') {
-				ModifierAutResCompte($bdd, $NIR, $TypeCompte, securisation_totale($_POST['aut_res']));
-			}
-		}
-
-		$_SESSION['MessageModifsUtilisateur'] = "Les données de l'utilisateur ont bien été modifiées.";
-		$_SESSION['RechercheEnCours'] = true;
-		header('Location: GestionUtilisateurs');
+			$_SESSION['MessageModifsUtilisateur'] = "Les données de l'utilisateur ont bien été modifiées.";
+			$_SESSION['RechercheEnCours'] = true;
+			header('Location: GestionUtilisateurs');
 					
+		}
+		else{
+			if(verifstring($_POST['nom']) || verifstring($_POST['prenom']) || verifstring($_POST['prenom_2']) || verifstring($_POST['prenom_3']) || verifstring($_POST['nom_usage'])){
+				$_SESSION['MessageErreur'] = "Erreur : le nom, nom d'usage et les prénoms ne peuvent contenir que des lettres.";
+			}
+			else if(verifnum($_POST['telephone']) || strlen($_POST['telephone'])!=10){
+				$_SESSION['MessageErreur'] = "Erreur : le numéro de telephone ne doit contenir que uniquement 10 chiffres.";
+			}
+			else if(verifnum($_POST['numeroRue']) || verifnum($_POST['code'])){
+				$_SESSION['MessageErreur'] = "Erreur : le numéro de rue et le code postal ne doit contenir que des chiffres.";
+			}
+			else if(verifstring($_POST['ville']) || verifstring($_POST['rue']) || verifstring($_POST['pays'])){
+				$_SESSION['MessageErreur'] = "Erreur : la rue, le nom de la ville et le pays ne doit contenir que des lettres.";
+			}
+			header('Location: GestionUtilisateurs');
+		}
 	}
-
 	else{
 		// Récuperation des informations de l'utilisateur d'identifiant $NIR
 		require 'modele/RequetesGenerales.php';
-		require 'controleurs/FonctionsGestionUtilisateurs.php';
-		//require 'controleurs/FonctionsGenerales.php';
 
 		$InfosPersosUser = InfosPersonne($bdd, $NIR);
 		$AdresseUser = InfosAdresse($bdd, $InfosPersosUser['Adresse_Id']);
