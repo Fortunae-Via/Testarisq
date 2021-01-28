@@ -1,4 +1,5 @@
-<form method="post">
+<script type="text/javascript" src="js/VerificationForm.js"></script>
+<form method="post" name="form_ajout" onsubmit="return validateForm()">
 
 	<p class="indication">Les champs indiqués d'une étoile sont obligatoires.</p>
 	

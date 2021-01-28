@@ -26,6 +26,9 @@
 			if (isset($_SESSION['MessageModifsUtilisateur'])) {
 				echo ("<h4>".$_SESSION['MessageModifsUtilisateur']."</h4>");
 			}
+			if(isset($_SESSION['MessageErreur'])){
+				echo ("<h4>".$_SESSION['MessageErreur']."</h4>");
+			}
 		?>
 
 		<div id="ajout" class="bloc ajout">

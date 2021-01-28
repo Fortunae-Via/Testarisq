@@ -135,11 +135,12 @@ function MiseAJour_adresse($bdd, $numeroRue, $rue, $code, $ville, $pays, $region
 			$update->execute(array($numeroRue, $rue, $code, $ville, $pays, $id));
 		}
 	}else{
-		$InfosAdresse = array($numeroRue, $rue, $code, $ville, $region, $pays);
-		$Id_Adresse=AjouterAdresse($bdd, $InfosAdresse);
+		$add_adresse = $bdd->prepare('INSERT INTO adresse (NumeroRue, Rue, CodePostal, Ville, Region, Pays) VALUES (?,?,?,?,?,?)');
+		$add_adresse->execute($numeroRue, $rue, $code, $ville, $region, $pays);
+		$IdInsert = $bdd->lastInsertId();
 
 		$update = $bdd->prepare('UPDATE personne SET Adresse_Id=? WHERE NIR=?');
-		$update->execute(array($Id_Adresse, $NIR));
+		$update->execute(array($IdInsert, $NIR));
 	}
 	$update->closeCursor();
 }

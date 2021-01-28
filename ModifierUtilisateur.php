@@ -52,7 +52,7 @@ if(isset($_GET['NIR'])){
 		// Récuperation des informations de l'utilisateur d'identifiant $NIR
 		require 'modele/RequetesGenerales.php';
 		require 'controleurs/FonctionsGestionUtilisateurs.php';
-		require 'controleurs/FonctionsGenerales.php';
+		//require 'controleurs/FonctionsGenerales.php';
 
 		$InfosPersosUser = InfosPersonne($bdd, $NIR);
 		$AdresseUser = InfosAdresse($bdd, $InfosPersosUser['Adresse_Id']);
