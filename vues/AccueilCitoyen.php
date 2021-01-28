@@ -10,35 +10,36 @@
 
 <body>
 
-<?php
-
-require 'modele/connexionbdd.php';
-include('modele/RequetesTest.php');
+<!--Header-->
+<?php 
 include("vues/Header.php");
-    if (isset ($_SESSION['NIR']))
-    {
-?>
+ ?>
 
     <div class="div_page">
         <h2 class="bienvenue">
             <?php echo 'Bienvenue ' . $Prenom1 . ' !'; ?>
         </h2>
 
-        <div>
-            <header>
-                <h3 class='DernierResultat'>Vos derniers résultats :</h3>
-            </header>
-                
-            <?php 
-            $requete = RequeteDerniersTestsPersonne($bdd,$_SESSION['NIR']);
-            while ($resultat = $requete->fetch())
-            {
-                echo '<a class="bouton" href="resultat_test_1.php?NIR='.$resultat["NIR"].'&Id_Resultat='.$resultat['Id'].'">Test du '.$resultat["DateDebut"].'</a>';
-            }
-            ?>
-        </div>
-    </div>
-            
-    <?php }?>
+        <section>
+            <div class="Test">
+                <header>
+                    <h3 class='DernierResultat'><?php echo 'Vos derniers résultats : '; ?></h3><br>
+                        
+
+                    <div class="graph">
+                        <?php
+
+                        echo "<img src='graph.php?Id=".$_SESSION['NIR']."'>";
+                        ?> 
+                    </div>
+
+                        <!--<?php TestVide($bdd,$_SESSION['NIR']) ?>--->
+
+
+                        <?php 
+                        while ($resultat = $requete->fetch())
+                        {
+                            echo '<p class="bouton"> Test du '.$resultat["DateDebut"].' : <a href="resultat_test_1.php?NIR='.$resultat["NIR"].'&Id_Resultat='.$resultat['Id'].'">Détail résultats </a></p></br></br></br>';
+                        }
+                        ?>
 </body>
-</html>
