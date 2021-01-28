@@ -33,13 +33,13 @@ if (!(isset($_SESSION['NIR']))) {
 		<div class="resultat">
 
 			<p>Réactivité au son et aux lumières :<span class="resultat_test"></br>
-			<?php AfficherRéactivité($bdd,$_GET['Id_Resultat']); ?></span></p>
+			<?php AfficherRéactivité($bdd,$_GET['Id_Test']); ?></span></p>
 
-			<p>Fréquence cardiaque :<span class="resultat_test"><?php AfficherFrequenceCard($bdd,$_GET['Id_Resultat']); ?> bpm.</span></p>
+			<p>Fréquence cardiaque :<span class="resultat_test"><?php AfficherFrequenceCard($bdd,$_GET['Id_Test']); ?> bpm.</span></p>
 
-			<p>Température de la peau :<span class="resultat_test"><?php AfficherTemperature($bdd,$_GET['Id_Resultat']); ?> °C.</span></p>
+			<p>Température de la peau :<span class="resultat_test"><?php AfficherTemperature($bdd,$_GET['Id_Test']); ?> °C.</span></p>
 
-			<p>Reproduction sonore :<span class="resultat_test">reproduction juste à +/- <?php AfficherTonalite($bdd,$_GET['Id_Resultat']); ?> Hz.</span></p>
+			<p>Reproduction sonore :<span class="resultat_test">reproduction juste à +/- <?php AfficherTonalite($bdd,$_GET['Id_Test']); ?> Hz.</span></p>
 		</div>
 
 		<footer>

@@ -3,6 +3,9 @@ RewriteEngine On
 #Préfixe .php à enlever
 RewriteRule ^([a-zA-Z]+)$ $1.php
 
+#GET de l'id test pour ResultatTest
+RewriteRule ^ResultatTest-t([0-9]+)$ ResultatTest.php?Id_Test=$1
+
 #Pagination pour FAQ et GestionFAQ
 RewriteRule ^FAQ-p([0-9]+)$ FAQ.php?page=$1
 RewriteRule ^GestionFAQ-p([0-9]+)$ GestionFAQ.php?page=$1

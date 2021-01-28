@@ -37,9 +37,9 @@
 
 
                 <?php 
-                while ($resultat = $requete->fetch())
+                while ($Test = $requete->fetch())
                 {
-                    echo '<a class="bouton" href="resultat_test_1.php?NIR='.$resultat["NIR"].'&Id_Resultat='.$resultat['Id'].'">Test du '.$resultat["DateDebut"].'</a>';
+                    echo '<a class="bouton" href="ResultatTest-t'.$Test['Id'].'">Test du '.$Test["DateDebut"].'</a>';
                 }
                 ?>
             </div>
