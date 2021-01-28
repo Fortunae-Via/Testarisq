@@ -29,7 +29,7 @@ include("vues/Header.php");
                     <div class="graph">
                         <?php
 
-                        echo "<img src='graph.php?Id=".$_SESSION['NIR']."'>";
+                        echo "<img src='modele/graph.php?Id=".$_SESSION['NIR']."'>";
                         ?> 
                     </div>
 

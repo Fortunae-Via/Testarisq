@@ -1,12 +1,12 @@
 <?php
 
 
-require_once("include_path_inc.php");
+require_once("../include_path_inc.php");
 require_once("jpgraph.php");
 require_once("jpgraph_line.php");
 require_once("jpgraph_bar.php");
 
-include ('modele/connexionbdd.php');
+include ('connexionbdd.php');
 
 
 $requete = $bdd->prepare("
