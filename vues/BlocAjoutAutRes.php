@@ -4,19 +4,19 @@
 
 	<div class="ligne">
 		<div class="info">
-			<label for="Nom">Nom <strong>*</strong>  :</label>
+			<label for="nom">Nom<strong>*</strong>  :</label>
 		</div>
-		<input name="Nom" placeholder="Nom" required/>
+		<input name="nom" placeholder="Nom" required/>
 	</div>
 	
 	<div class="ligne boutons">
 		<div class="info">
-			<label for="Type">Type de compte<strong>*</strong> :</label>
+			<label for="type">Type de compte<strong>*</strong> :</label>
 		</div>
 		<div class="bloc_boutons">
-			<input type="radio" id="police" name="Type" value="POL" required/>
+			<input type="radio" id="police" name="type" value="POL" required/>
 			<label for="police">Agent de Police</label>
-			<input type="radio" id="school" name="Type" value="AUE" required/>
+			<input type="radio" id="school" name="type" value="AUE" required/>
 			<label for="school">Auto-école</label>
 		</div>
 	</div>
@@ -32,7 +32,11 @@
     		<input maxlength="25" id="code" name="code" placeholder="Code Postal" />
     		<select name="region">
     			<option value="">Région</option>
-    			<?php Region($bdd); ?>
+    			<?php
+				foreach ($ListeRegionFR as $Region) {
+					echo"<option value=\"". $Region['Region'] ."\">" . $Region['Region'] . "</option>";
+				}
+				?>
     		</select>
     		<input maxlength="25" id="pays" name="pays" placeholder="Pays"/>
     	</div>
@@ -40,7 +44,5 @@
     <div class="bloc_add">
     	<button id="add" type="submit">Ajouter Autorité</button>
     </div>
-		
 
-	
 </form>

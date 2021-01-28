@@ -14,6 +14,9 @@ RewriteRule ^GestionFAQ-p([0-9]+)$ GestionFAQ.php?page=$1
 RewriteRule ^RechercheUtilisateur(-r(.+))?-p([0-9]+)(.*)$ RechercheUtilisateur.php?id_name=$2&page=$3$4
 RewriteRule ^GestionUtilisateurs(-r(.+))?-p([0-9]+)(.*)$ GestionUtilisateurs.php?id_name=$2&page=$3$4
 
+#Pareil pour GestionAutoritesResponsables avecparamètres suivants laissés
+RewriteRule ^GestionAutoritesResponsables(-r(.+))?-p([0-9]+)(.*)$ GestionAutoritesResponsables.php?id_name=$2&page=$3$4
+
 #Pareil pour GestionBoitiers sans paramètres supplémentaires
 RewriteRule ^GestionBoitiers(-r(.+))?-p([0-9]+)$ GestionBoitiers.php?id_name=$2&page=$3
 

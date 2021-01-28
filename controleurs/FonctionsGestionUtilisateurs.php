@@ -118,7 +118,8 @@ function GestionFiltres() {
 			$lien .= "&year=" . $ListeFiltres['year'];
 		}
 		if (isset($ListeFiltres['test_number'])) {
-			$ConditionsSQLNbTests .= "HAVING NbTest >=" . $ListeFiltres['test_number'] . " "; 
+			$ConditionsSQLNbTests .= "HAVING NbTest >=" . $ListeFiltres['test_number'] . " ";
+			$lien .= "&test_number=" . $ListeFiltres['test_number']; 
 		}
 	}
 
