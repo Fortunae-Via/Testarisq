@@ -33,7 +33,7 @@
                 <h4>Temps de réaction aux sons et lumières des derniers tests (en secondes)</h4>
                 <?php
 
-                echo "<img src='modele/graph.php?Id=".$_SESSION['NIR']."'>";
+                echo "<img src='controleurs/graph.php?Id=".$_SESSION['NIR']."'>";
                 ?> 
             </div>
 
