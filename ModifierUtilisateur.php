@@ -27,12 +27,25 @@ if(isset($_GET['NIR'])){
 
 		MiseAJour_personne($bdd, securisation_totale($_POST['nom']), securisation_totale($_POST['nom_usage']), securisation_totale($_POST['prenom']), securisation_totale($_POST['prenom_2']), securisation_totale($_POST['prenom_3']), securisation_totale($_POST['sexe']), securisation_totale($_POST['mail']), securisation_totale($_POST['telephone']), $DateNaissance, $NIR);
 
-		require("modele/RequetesGenerales.php");
-		$Id_Adresse=InfosPersonne($bdd, $NIR)['Adresse_Id'];
+		// Si un des champs adresse n'est pas vide
+		if( (!(empty($_POST['numeroRue']))) OR (!(empty($_POST['rue']))) OR (!(empty($_POST['ville']))) OR (!(empty($_POST['code']))) OR (!(empty($_POST['region']))) OR (!(empty($_POST['pays']))) ){
 
-		MiseAJour_adresse($bdd, securisation_totale($_POST['numeroRue']), securisation_totale($_POST['rue']), securisation_totale($_POST['code']), securisation_totale($_POST['ville']), securisation_totale($_POST['pays']), securisation_totale($_POST['region']), $Id_Adresse, $NIR);
+			$liste_donnees_adresse=array('numeroRue','rue','ville','code','region','pays');
+			foreach ($liste_donnees_adresse as $champ_adresse) {
+				$InfosAdresse[$champ_adresse]=securisation_totale($_POST[$champ_adresse]);
+			}
 
-		//Pour les changements de type de compte
+			if(empty($InfosAdresse['region'])) {
+				$InfosAdresse['region']=null;
+			}
+
+			require("modele/RequetesGenerales.php");
+			$Id_Adresse=InfosPersonne($bdd, $NIR)['Adresse_Id'];
+
+			MiseAJour_adresse($bdd, $InfosAdresse['numeroRue'], $InfosAdresse['rue'], $InfosAdresse['code'], $InfosAdresse['ville'], $InfosAdresse['pays'], $InfosAdresse['region'], $Id_Adresse, $NIR);
+		}
+
+		//Pour les changements d'aut res
 		if (isset($_POST['aut_res'],$_SESSION['TypeCompteUserModifEnCours'])) {
 			$TypeCompte=$_SESSION['TypeCompteUserModifEnCours'];
 			unset($_SESSION['TypeCompteUserModifEnCours']);
