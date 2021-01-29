@@ -93,7 +93,7 @@ function ValeurRentree($bdd,$IdMesure)
 
 }
 
-function RequeteDerniersTestsPersonne($bdd,$NIR) //Rends les 3 derniers tests de la bdd
+function TroisDerniersTestsPersonne($bdd,$NIR) //Rends les 3 derniers tests de la bdd
 {
 	$requete = $bdd->prepare("
 		SELECT DATE_FORMAT(DateDebut, '%d/%m/%Y') AS DateDebut, test.Id, personne.NIR 
@@ -104,7 +104,7 @@ function RequeteDerniersTestsPersonne($bdd,$NIR) //Rends les 3 derniers tests de
 		ORDER BY Id DESC 
 		LIMIT 0,3");
     $requete->execute(array($NIR));
-	return $requete;                  	
+	return $requete->fetchAll();                  	
 }
 
 function TestVide($bdd,$NIR)

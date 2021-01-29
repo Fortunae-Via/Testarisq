@@ -18,46 +18,41 @@
             <?php echo 'Bienvenue ' . $Prenom1 . ' !'; ?>
         </h2>
 
-        <p class='PasTest'><?php 
-        echo TestVide($bdd,$_SESSION['NIR']); 
-        if ($requete->fetch())
-        { ?>
-        </p>
+        <?php 
 
-        <section>
-            <header>
-                <h3 class='DerniersResultats'>Vos derniers résultats :</h3>
-             </header>
-                    
-            <div class="graph">
-                <h4>Temps de réaction aux sons et lumières des derniers tests (en secondes)</h4>
-                <?php
+        if ($ZeroTest == true) { ?>
+             <p class='PasTest'>Veuillez vous rapprocher d'une auto-école pour passer un test.</p>
+        <?php
+        }
 
-                echo "<img src='controleurs/graph.php?Id=".$_SESSION['NIR']."'>";
-                ?> 
-            </div>
+        else {  ?>
 
-            <div class="tests">
+            <section>
+                <header>
+                    <h3 class='DerniersResultats'>Vos derniers résultats :</h3>
+                 </header>
+                        
+                <div class="graph">
+                    <h4>Temps de réaction aux sons et lumières des derniers tests (en secondes)</h4>
+                    <?php
 
-                <?php // TestVide($bdd,$_SESSION['NIR']) ?>
+                    echo "<img src='controleurs/graph.php?Id=".$_SESSION['NIR']."'>";
+                    ?> 
+                </div>
 
+                <div class="tests">
 
-                <?php 
-                while ($Test = $requete->fetch())
-                {
-                    echo '<a class="bouton" href="ResultatTest-t'.$Test['Id'].'">Test du '.$Test["DateDebut"].'</a>';
-                }
-                ?>
-            </div>
-        </section>
+                    <?php 
+                    foreach ($TroisDerniersTests as $Test) {
+                        echo '<a class="bouton" href="ResultatTest-t'.$Test['Id'].'">Test du '.$Test["DateDebut"].'</a>';
+                    }
+                    ?>
+                </div>
+            </section>
+
+        <?php
+        } ?>
     </div>
-
-    <?php
-    }
-    else
-    {
-        echo 'Veuillez vous rapprochez d\'une auto-école pour passer un test.';
-    }?>
 
 </body>
 </html>
