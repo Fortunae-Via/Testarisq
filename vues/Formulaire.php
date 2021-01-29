@@ -23,7 +23,7 @@
           <?php echo $alert; ?>
         <section>
             <div class="container">
-                <form class="contact-form" action="controleurs/sendmail.php" method="post">
+                <form class="contact-form" action="send.php" method="post">
                     <div class="form-group">
                         <label for="name">Prénom et Nom : *</label>
                         <input type="text" id="name" name="name" required="required">
