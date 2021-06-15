@@ -4,17 +4,8 @@ function GetLogsForObject(string $object) : array
 {
 	# On récupère les logs depuis le serveur
 	$url = "http://projets-tomcat.isep.fr:8080/appService?ACTION=GETLOG&TEAM=" . $object;
-	$ch = curl_init();
-	$options = array(
-	    CURLOPT_URL            => $url,
-	    CURLOPT_RETURNTRANSFER => true,
-	    CURLOPT_HEADER         => false,
-	    CURLOPT_FOLLOWLOCATION => true,
-	);
-	curl_setopt_array( $ch, $options );
-	$data = curl_exec($ch);
-	curl_close($ch);
-
+	$data = file_get_contents($url);
+	
 	# On met en forme en tableau
 	$data_tab = str_split($data,33);
 	array_pop($data_tab);
