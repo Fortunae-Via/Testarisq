@@ -11,6 +11,10 @@ $Longitude = $_POST['LongitudeTest'];
 require '../modele/connexionbdd.php';
 require '../modele/RequetesTest.php';
 
+if ($IdBoitier == "G5A-"){
+	$IdBoitier = 1;
+}
+
 $BonNIRConducteur = NIRExiste($bdd,$NIRConducteur);
 $BonBoitier = BoitierExiste($bdd,$IdBoitier);
 
