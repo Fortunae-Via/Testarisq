@@ -10,4 +10,8 @@ function EtapeSuivante($NumeroTest,$EtapeTest)
 	}
 }
 
-
+function GetLastLogIndexForObject(string $object): int
+{
+	$data_tab = GetLogsForObject($object);
+	return count($data_tab)-1;
+}

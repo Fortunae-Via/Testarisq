@@ -11,19 +11,17 @@ $Longitude = $_POST['LongitudeTest'];
 require '../modele/connexionbdd.php';
 require '../modele/RequetesTest.php';
 
-if ($IdBoitier == "G5A-"){
-	$IdBoitier = 1;
-}
 
 $BonNIRConducteur = NIRExiste($bdd,$NIRConducteur);
-$BonBoitier = BoitierExiste($bdd,$IdBoitier);
+$IdBoitierBDD = ($IdBoitier == "G5A-") ? 1 : $IdBoitier;
+$BonBoitier = BoitierExiste($bdd,$IdBoitierBDD);
 
 if ($BonNIRConducteur AND $BonBoitier) {
 
 	$Coordonnees = $Latitude . ';' . $Longitude;
 
 	// On crée une nouvelle entrée dans la table Test et on récupère l'id du test créé
-	$IdTest = NouveauTest($bdd,$Coordonnees,$NIRConducteur,$IdBoitier);
+	$IdTest = NouveauTest($bdd, $Coordonnees, $NIRConducteur, $IdBoitierBDD);
 
 	$_SESSION['IdTest'] = $IdTest;
 	$_SESSION['IdBoitier'] = $IdBoitier;

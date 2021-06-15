@@ -50,13 +50,14 @@ function IdCapteur(PDO $bdd, int $IdBoitier, int $IdTypeCapteur) : int
 	return $IdCapteur['Id'];
 }
 
-function NouvelleMesure(PDO $bdd, int $IdTest, int $IdCapteur) : int 
+function NouvelleMesure(PDO $bdd, int $IdTest, int $IdCapteur, int $Valeur) : int 
 {
 	$requete = $bdd->prepare("
-	INSERT INTO Mesure (DateHeure, Test_Id, Capteur_Id) 
-	VALUES (NOW(), :test_id, :capteur_id) 
+	INSERT INTO Mesure (DateHeure, Valeur, Test_Id, Capteur_Id) 
+	VALUES (NOW(), :valeur, :test_id, :capteur_id) 
 	");
 	$requete->execute(array(
+		'valeur' => $Valeur,
 		'test_id' => $IdTest, 
 		'capteur_id' => $IdCapteur
 	));
@@ -64,32 +65,11 @@ function NouvelleMesure(PDO $bdd, int $IdTest, int $IdCapteur) : int
 	return ($IdInsert);
 }
 
-function ResultatMesure($bdd,$IdMesure) {
-	$requete = $bdd->prepare("
-		SELECT M.Valeur, T.UniteMesure 
-		FROM Mesure as M
-		INNER JOIN Capteur as C ON M.Capteur_Id = C.Id  
-		INNER JOIN TypeCapteur AS T ON C.TypeCapteur_Id = T.Id
-		WHERE M.Id = ? ");
-	$requete->execute(array($IdMesure));
+function UniteMesure($bdd, $TypeCapteur) {
+	$requete = $bdd->prepare("SELECT UniteMesure FROM TypeCapteur WHERE Id = ? ");
+	$requete->execute(array($TypeCapteur));
 	$donnees = $requete->fetch();
-	$ResultatFR = round($donnees['Valeur'],6) . $donnees['UniteMesure'];
-	return $ResultatFR;
-
-}
-
-function ValeurRentree($bdd,$IdMesure)
-{
-
-	$requete = $bdd->prepare("SELECT Valeur FROM Mesure WHERE Id = ? ");
-	$requete->execute(array($IdMesure));
-	$resultat = $requete->fetch();
-	if(is_null($resultat['Valeur'])) {
-		return false;
-	}
-	else {
-		return true;
-	}
+	return $donnees["UniteMesure"];
 
 }
 

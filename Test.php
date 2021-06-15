@@ -18,6 +18,7 @@ require 'modele/RequetesGenerales.php';
 require 'modele/RequetesTest.php';
 
 require 'controleurs/FonctionsTest.php'; 
+require 'controleurs/FonctionsLogs.php'; 
 
 
 //Si on a fini le test
@@ -30,48 +31,76 @@ if ($NumeroTest > 5) { // On a donc fini le test complet
 //Sinon
 else {
 
-	//Si c'est la première étape d'un test on crée la mesure dans la bdd
-	if ($EtapeTest==1) {
+	switch ($EtapeTest){
 
-		if (in_array($NumeroTest,array(1,2))) {
-			$IdTypeCapteur = 1; //capteur de réactivité
-		}
-		else if ($NumeroTest == 3) {
-			$IdTypeCapteur = 2; //capteur de fréquence cardiaque
-		}
-		else if ($NumeroTest == 4) {
-			$IdTypeCapteur = 3; //capteur de température
-		}
-		else if ($NumeroTest == 5) {
-			$IdTypeCapteur = 4; //capteur de précision de tonalité
-		}
+		// Si c'est la première étape d'un test on note le type de capteur en session
+		case 1:
 
-		//On identifie le capteur unique contenu dans le boitier qui va faire la mesure
-		$IdCapteur = IdCapteur($bdd,$IdBoitier,$IdTypeCapteur);
-		//On crée une nouvelle mesure nulle pour l'instant et on note son ID
-		$IdMesure = NouvelleMesure($bdd,$IdTest,$IdCapteur);
-		$_SESSION['MesureEnCours'] = $IdMesure;
-	}
+			if ($NumeroTest == 1 OR $NumeroTest == 2) {
+				$TypeCapteur = 1; //capteur de réactivité
+			}
+			else if ($NumeroTest == 3 OR $NumeroTest == 4 OR $NumeroTest == 5) {
+				$TypeCapteur = $NumeroTest - 1;
+				//capteur de fréquence cardiaque, température et précision de tonalité
+			}
 
-	//Sinon on récupère l'id de celle notée en session
-	else {
-		 $IdMesure = $_SESSION['MesureEnCours'] ;
-	}
+			$_SESSION['TypeCapteur'] = $TypeCapteur;
+
+			break;
 
 
-	//Si l'utilisateur a appuyé sur valeur rentrée on vérifie que ce soit en effet le cas pour savoir si on affiche effectivement la page suivante ou non
-	if ($EtapeTest==3) {
+		// On vient de cliquer sur lancer le test
+		case 2:
+			// On enregistre le numéro de la dernière trame enregistrée sur le serveur
+			$IdDerniereTrameLog = GetLastLogIndexForObject($IdBoitier);
+			$_SESSION['DerniereTrameLog'] = $IdDerniereTrameLog;
 
-		if (ValeurRentree($bdd,$IdMesure)) {
-			$ResultatMesure = ResultatMesure($bdd,$_SESSION['MesureEnCours']);
-		}
+			// On envoie la trame à la passerelle pour lancer le test
+			$TypeCapteur = $_SESSION['TypeCapteur'];
+			// $IdBoitier déjà déclaré (="G5A-");
+			// $NumeroTest aussi;
 
-		else {
-			$EtapeTest = 2 ;
-			$_SESSION['EtapeTest'] = 2 ;
-			$MessageErreurValeurRentree = true;
-		}
-		
+
+		// Si l'utilisateur a appuyé sur valeur rentrée on vérifie que ce soit en effet le cas 
+		// On ajoute alors la valeur à la BDD et on affiche la page suivante
+		case 3:
+
+			// Si on a effectué une mesure, on a rajouté une nouvelle ligne au fichier log
+			$IdNouvelleDerniereTrameLog = GetLastLogIndexForObject($IdBoitier);
+			if ($IdNouvelleDerniereTrameLog > $_SESSION['DerniereTrameLog']) {
+
+				// On récupère la trame et ses informations
+				$Logs = GetLogsForObject($IdBoitier);
+				$NouvelleTrame = end($Logs);
+				$InfosTrame = DecodeLogLine($NouvelleTrame);
+
+				// On identifie le capteur unique contenu dans le boitier qui va faire la mesure
+				$IdBoitierBDD = ($IdBoitier == "G5A-") ? 1 : $IdBoitier;
+				$TypeCapteur = $_SESSION['TypeCapteur'];
+				$IdCapteur = IdCapteur($bdd, $IdBoitierBDD, $TypeCapteur);
+				
+				// On récupère la valeur et on la convertit bien en chiffres
+				if ($TypeCapteur == 3){
+					$ValeurTest = floatval($InfosTrame["Valeur"]) / 10;
+				}
+				else {
+					$ValeurTest = floatval($InfosTrame["Valeur"]);
+				}
+				
+				// On ajoute la mesure à la BDD
+				NouvelleMesure($bdd, $IdTest, $IdCapteur, $ValeurTest);
+
+				$Resultat = $ValeurTest . ' ' .UniteMesure($bdd, $TypeCapteur); 
+			}
+
+			else {
+				$EtapeTest = 2 ;
+				$_SESSION['EtapeTest'] = 2 ;
+				$MessageErreurValeurRentree = true;
+			}
+
+			break;
+
 	}
 
 	//On affiche
