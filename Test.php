@@ -69,28 +69,38 @@ else {
 			$IdNouvelleDerniereTrameLog = GetLastLogIndexForObject($IdBoitier);
 			if ($IdNouvelleDerniereTrameLog > $_SESSION['DerniereTrameLog']) {
 
-				// On récupère la trame et ses informations
-				$Logs = GetLogsForObject($IdBoitier);
-				$NouvelleTrame = end($Logs);
-				$InfosTrame = DecodeLogLine($NouvelleTrame);
+				if (!(isset($_SESSION['ResultatMesure']))) {
+					// On récupère la trame et ses informations
+					$Logs = GetLogsForObject($IdBoitier);
+					$NouvelleTrame = end($Logs);
+					$InfosTrame = DecodeLogLine($NouvelleTrame);
 
-				// On identifie le capteur unique contenu dans le boitier qui va faire la mesure
-				$IdBoitierBDD = ($IdBoitier == "G5A-") ? 1 : $IdBoitier;
-				$TypeCapteur = $_SESSION['TypeCapteur'];
-				$IdCapteur = IdCapteur($bdd, $IdBoitierBDD, $TypeCapteur);
-				
-				// On récupère la valeur et on la convertit bien en chiffres
-				if ($TypeCapteur == 3){
-					$ValeurTest = floatval($InfosTrame["Valeur"]) / 10;
+					// On identifie le capteur unique contenu dans le boitier qui va faire la mesure
+					$IdBoitierBDD = ($IdBoitier == "G5A-") ? 1 : $IdBoitier;
+					$TypeCapteur = $_SESSION['TypeCapteur'];
+					$IdCapteur = IdCapteur($bdd, $IdBoitierBDD, $TypeCapteur);
+					
+					// On récupère la valeur et on la convertit bien en chiffres
+					if ($TypeCapteur == 2 OR $TypeCapteur == 3){    // BPM ou température avec précision au dixième
+						$ValeurTest = floatval($InfosTrame["Valeur"]) / 10;
+					}
+					else {
+						$ValeurTest = floatval($InfosTrame["Valeur"]);
+					}
+					
+					// On ajoute la mesure à la BDD
+					NouvelleMesure($bdd, $IdTest, $IdCapteur, $ValeurTest);
+
+					$Resultat = $ValeurTest . ' ' . UniteMesure($bdd, $TypeCapteur);
+					$_SESSION['ResultatMesure'] = $Resultat; 
 				}
+
 				else {
-					$ValeurTest = floatval($InfosTrame["Valeur"]);
+					$Resultat = $_SESSION['ResultatMesure'];
 				}
-				
-				// On ajoute la mesure à la BDD
-				NouvelleMesure($bdd, $IdTest, $IdCapteur, $ValeurTest);
 
-				$Resultat = $ValeurTest . ' ' .UniteMesure($bdd, $TypeCapteur); 
+				
+
 			}
 
 			else {

@@ -52,7 +52,7 @@
                 echo ("<h3>Mesure effectuée.</h3>\r");
 
                 echo ("<div class='infostest'>\r");
-                echo ("<p>La mesure est de ". $Resultat .".</p>\r");
+                echo ("<p>Le résultat est de ". $Resultat .".</p>\r");
                 echo ("</div>\r");
                 break;
 

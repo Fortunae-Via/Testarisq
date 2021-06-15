@@ -16,6 +16,8 @@ $EtapeTestSuivante = $EtapeSuivante[1];
 $_SESSION['NumeroTest'] = $NumeroTestSuivant ;
 $_SESSION['EtapeTest'] = $EtapeTestSuivante ;
 
+unset($_SESSION['ResultatMesure']);
+
 header('Location: ../Test');
 
 
