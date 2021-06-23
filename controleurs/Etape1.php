@@ -9,7 +9,9 @@ switch($NumeroTest) {
 		$NumeroTestFR = ('Premier test');
 		$infostest= <<<EOD
 			<p>Ce premier test constitue une mesure de votre sensibilité sonore.</br>
-			Pour cela, nous allons diffuser un son ...</p>
+			Pour cela, nous allons vous faire écouter un son à un moment aléatoire une fois le test commencé.
+			Lorsque vous entendrez le son, il vous suffira d'appuyer le plus rapidement possible sur le bouton.
+			Nous pourrons alors mesurer votre temps de réaction.</p>
 			EOD;
 		require 'vues/EtapesTest.php';
 		break;
@@ -19,7 +21,9 @@ switch($NumeroTest) {
 		$NumeroTestFR = ('Second test');
 		$infostest= <<<EOD
 			<p>Ce second test constitue une mesure de votre sensibilité visuelle.</br>
-			Pour cela, nous allons allumer une lumière ...</p>
+			Pour cela, nous allons allumer une lumière à un moment aléatoire.
+			Lorsque vous verrez la lumière, appuyez sur le bouton le plus rapidement possible.
+			Nous pourrons alors mesurer votre temps de réaction.</p>
 			EOD;
 		require 'vues/EtapesTest.php';
 		break;
@@ -29,7 +33,9 @@ switch($NumeroTest) {
 		$NumeroTestFR = ('Troisième test');
 		$infostest= <<<EOD
 			<p>Ce troisième test est une mesure de votre fréquence cardique.</br>
-			Pour cela, nous utilisons un appareil ...</p>
+			Pour cela, nous utilisons un capteur de fréquence. Il vous suffit de placer votre index entre
+			la lumière et le phototransistor (avec l'ongle de préférance côté transistor).
+			Nous pourrons alors mesurer efficacement votre fréquence cardiaque.</p>
 			EOD;
 		require 'vues/EtapesTest.php';
 		break;
@@ -39,7 +45,8 @@ switch($NumeroTest) {
 		$NumeroTestFR = ('Quatrième test');
 		$infostest= <<<EOD
 			<p>Ce quatrième test est une mesure de la température superficielle de votre peau.</br>
-			Pour cela, nous allons ...</p>
+			Il vous suffit d'être au contact du capteur thermique afin que nous puissions mesurer votre temperature superficielle, 
+			et en déterminer à l'aide du test précédent votre niveau de stress.</p>
 			EOD;
 		require 'vues/EtapesTest.php';
 		break;
@@ -49,7 +56,8 @@ switch($NumeroTest) {
 		$NumeroTestFR = ('Cinquième test');
 		$infostest= <<<EOD
 			<p>Ce dernier test constitue une estimation de la qualité de votre reconnaissance de tonalité.</br>
-			Pour cela, nous allons diffuser un son ...</p>
+			Pour cela, nous allons diffuser un son correspondant à une note précise entre 130 et 4000 hertz.
+			Essayer de reproduire le son de la manière la plus exacte possible.</p>
 			EOD;
 		require 'vues/EtapesTest.php';
 		break;

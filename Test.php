@@ -130,6 +130,6 @@ else {
 
 	}
 
-
+	Score($NumeroTest, $ValeurTest);
 }
 
