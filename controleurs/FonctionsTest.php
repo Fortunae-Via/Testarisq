@@ -25,12 +25,13 @@ function Score($NumeroTest, $ResultatMesure)
 			$e = ($ResultatMesure - 70)/70; // incertitude mathématique
 			$e = 10; // incertitude cas réel
 			// 70 pour adulte
-			if($ResultatMesure == 70 + $e || $ResultatMesure == 70 - $e){
-				$score -= abs($ResultatMesure - 70) % 2;
+			if($ResultatMesure >= 70 + $e || $ResultatMesure <= 70 - $e){
+				$score -= abs($ResultatMesure - 70) / 2;
 			}
 			break;
 		case 4:
 			if($ResultatMesure < 36.1 || $ResultatMesure > 37.8){
+				$score -= abs($ResultatMesure - 37) ;
 			}
 			break;
 		case 5:
@@ -38,7 +39,7 @@ function Score($NumeroTest, $ResultatMesure)
 			break;
 		default: // test 1 et 2
 			if($ResultatMesure > 75){
-				$score -= $ResultatMesure % 60;
+				$score -= $ResultatMesure / 60;
 			}
 			break;
 	}
