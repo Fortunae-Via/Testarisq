@@ -31,7 +31,6 @@ function Score($NumeroTest, $ResultatMesure)
 			break;
 		case 4:
 			if($ResultatMesure < 36.1 || $ResultatMesure > 37.8){
-				$score -= (abs($ResultatMesure - (36.1 + 37.8)/2) % 2;
 			}
 			break;
 		case 5:

@@ -35,11 +35,11 @@ if (!(isset($_SESSION['NIR']))) {
 			<p>Réactivité au son et aux lumières :<span class="resultat_test"></br>
 			<?php AfficherRéactivité($bdd,$_GET['Id_Test']); ?></span></p>
 
-			<p>Fréquence cardiaque :<span class="resultat_test"><?php AfficherFrequenceCard($bdd,$_GET['Id_Test']); ?> bpm.</span></p>
+			<p>Fréquence cardiaque :<span class="resultat_test"><?php AfficherFrequenceCard($bdd,$_GET['Id_Test']); ?> BPM.</span></p>
 
 			<p>Température de la peau :<span class="resultat_test"><?php AfficherTemperature($bdd,$_GET['Id_Test']); ?> °C.</span></p>
 
-			<p>Reproduction sonore :<span class="resultat_test">reproduction juste à +/- <?php AfficherTonalite($bdd,$_GET['Id_Test']); ?> Hz.</span></p>
+			<p>Reproduction sonore :<span class="resultat_test"> score : <?php AfficherTonalite($bdd,$_GET['Id_Test']); ?> / 20.</span></p>
 		</div>
 
 		<footer>

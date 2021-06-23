@@ -56,9 +56,10 @@ else {
 			$_SESSION['DerniereTrameLog'] = $IdDerniereTrameLog;
 
 			// On envoie la trame à la passerelle pour lancer le test
+			SendCommand($IdBoitier, $NumeroTest);
 			$TypeCapteur = $_SESSION['TypeCapteur'];
-			// $IdBoitier déjà déclaré (="G5A-");
-			// $NumeroTest aussi;
+			// $IdBoitier ="G5A-";
+			// $NumeroTest = 1 à 5;
 
 
 		// Si l'utilisateur a appuyé sur valeur rentrée on vérifie que ce soit en effet le cas 
@@ -81,17 +82,24 @@ else {
 					$IdCapteur = IdCapteur($bdd, $IdBoitierBDD, $TypeCapteur);
 					
 					// On récupère la valeur et on la convertit bien en chiffres
-					if ($TypeCapteur == 2 OR $TypeCapteur == 3){    // BPM ou température avec précision au dixième
+					if ($TypeCapteur == 2 OR $TypeCapteur == 3 OR $TypeCapteur == 4){    // BPM, température ou reco avec précision au dixième
 						$ValeurTest = floatval($InfosTrame["Valeur"]) / 10;
 					}
 					else {
 						$ValeurTest = floatval($InfosTrame["Valeur"]);
 					}
+
+					$score = Score($NumeroTest, $ValeurTest);
 					
 					// On ajoute la mesure à la BDD
 					NouvelleMesure($bdd, $IdTest, $IdCapteur, $ValeurTest);
 
-					$Resultat = $ValeurTest . ' ' . UniteMesure($bdd, $TypeCapteur);
+					if ($TypeCapteur == 4){
+						$Resultat = $ValeurTest . ' ' . UniteMesure($bdd, $TypeCapteur);
+					}
+					else {
+						$Resultat = $ValeurTest . ' ' . UniteMesure($bdd, $TypeCapteur) . ". Votre score est : " . $score;
+					}
 					$_SESSION['ResultatMesure'] = $Resultat; 
 				}
 
@@ -129,7 +137,5 @@ else {
 			break;
 
 	}
-
-	Score($NumeroTest, $ValeurTest);
 }
 

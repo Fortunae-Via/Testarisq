@@ -50,7 +50,7 @@ function IdCapteur(PDO $bdd, int $IdBoitier, int $IdTypeCapteur) : int
 	return $IdCapteur['Id'];
 }
 
-function NouvelleMesure(PDO $bdd, int $IdTest, int $IdCapteur, int $Valeur) : int 
+function NouvelleMesure(PDO $bdd, int $IdTest, int $IdCapteur, float $Valeur) : int
 {
 	$requete = $bdd->prepare("
 	INSERT INTO Mesure (DateHeure, Valeur, Test_Id, Capteur_Id) 
@@ -126,7 +126,7 @@ $requete = $bdd->prepare("
 	$requete->execute(array($Id_Resultat));
 	while ($donnees=$requete->fetch())
 	{
-		echo round($donnees['Valeur'],2).' seconde(s). </br>';
+		echo round($donnees['Valeur'],2).' ms. </br>';
 	}
 	
 }
